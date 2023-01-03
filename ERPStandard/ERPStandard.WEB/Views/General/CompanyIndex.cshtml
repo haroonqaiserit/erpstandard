@@ -1,0 +1,145 @@
+﻿@{
+    ViewBag.Title = "General Forms";
+}
+
+<div class="page-title">
+    <div class="row">
+        <div class="col-12 col-md-6 order-md-1 order-last">
+            <h3>@ViewBag.Title</h3>
+            @*<p class="text-subtitle text-muted"><a href="index.html">Create New</a></p>*@
+            <button type="button" id="Create" onclick="onCreate()">Create New</button>
+            <button type="button" id="btnList" onclick="onLoad()">List</button>
+        </div>
+        <div class="col-12 col-md-6 order-md-2 order-first">
+            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@ViewBag.SubTitle</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<section id="multiple-column-form">
+    <div class="row match-height">
+        <div class="col-12">
+            <div class="card">
+
+                <div Id="FormProcess">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+
+    $(document).ready(function () {
+        onLoad();
+    });
+
+    function onLoad(){
+        $.ajax({
+            url: '@Url.Action("CompanyList", "General")',
+        })
+            .done(function (response) {
+                //  $("#NotMatchedRequests").css("background-color", "#1c79bc");
+                //  $("#NotMatchedRequests").css("color", "white");
+                $("#FormProcess").html(response);
+        })
+        .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+        	alert("FAIL");
+        });
+    }
+
+    function onCreate() {
+        $.ajax({
+            url: '@Url.Action("CompanyCreate", "General")'
+        })
+                .done(function (response) {
+                    //debugger;
+                    $("#FormProcess").html(response);
+                    //var search = $("#searchInput");
+                    //search.focus();
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    //alert("FAIL");
+                });
+    };
+
+    function onSave(data) {
+
+        var Company_Name = $("#Company_Name").val();
+        var company_desc = $("#company_desc").val();
+        var Company_address = $("#Company_address").val();
+        var Company_phones = $("#Company_phones").val();
+        var Company_email = $("#Company_email").val();
+        var Company_fax = $("#Company_fax").val();
+        var CityName = $("#CityName").val();
+        var PostCode = $("#PostCode").val();
+        var STaxRegNo = $("#STaxRegNo").val();
+        var NationalTaxNo = $("#NationalTaxNo").val();
+
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("CompanyCreate", "General")',
+            data: {
+                Company_Name: Company_Name,
+                company_desc: company_desc,
+                Company_address: Company_address,
+                Company_phones: Company_phones,
+                Company_email: Company_email,
+                Company_fax: Company_fax,
+                CityName: CityName,
+                PostCode: PostCode,
+                STaxRegNo: STaxRegNo,
+                NationalTaxNo: NationalTaxNo
+            },
+            beforeSend: function () {
+                $("#CustomSearchLoader").show();
+            },
+            complete: function () {
+                $("#CustomSearchLoader").hide();
+            },
+            success: function (result) {
+                //alert("result received");
+                $("#FormProcess").html(result);
+            }
+        })
+
+
+        @*$.ajax({
+            type: "POST",
+            url: '@Url.Action("CompanyCreate", "General")',
+            dataType: "json",
+            data: {
+                Company_Name: Company_Name,
+                company_desc: company_desc,
+                Company_address: Company_address,
+                Company_phones: Company_phones,
+                Company_email: Company_email,
+                Company_fax: Company_fax,
+                CityName: CityName,
+                PostCode: PostCode,
+                STaxRegNo: STaxRegNo,
+                NationalTaxNo: NationalTaxNo
+            },
+        })
+                .done(function (response) {
+                    //debugger;
+                    alert(response);
+                    $("#FormProcess").html(response);
+                    //var search = $("#searchInput");
+                    //search.focus();
+                })
+                .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("FAIL");
+                });*@
+    };
+
+
+</script>

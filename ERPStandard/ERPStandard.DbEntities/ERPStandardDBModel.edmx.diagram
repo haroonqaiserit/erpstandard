@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8d1d3a606cf94bd78f5326557eefaa11" Name="Diagram1">
+        <EntityTypeShape EntityType="SairaIndModel.AccountInfo" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Account" Width="1.5" PointX="7.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.AccountsBackUp" Width="1.5" PointX="14.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.AccountsOpeningBalance" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.AdjustmentSaleAcnt" Width="1.5" PointX="16.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.AdjustmentSaleAcntDetail" Width="1.5" PointX="18.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.AdvanceAgainstBonu" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.AdvanceAgainstSalary" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.AdvanceToPurchaser" Width="1.5" PointX="7.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.AdvanceToPurchaserDetail" Width="1.5" PointX="18.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.AllSupplier" Width="1.5" PointX="18.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.BackupDataTransfer" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Bank" Width="1.5" PointX="19.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.BankChequeBook" Width="1.5" PointX="14.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.BankChequeCanelation" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.BonusSetup" Width="1.5" PointX="20.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Branch" Width="1.5" PointX="20.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.City" Width="1.5" PointX="20.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Company1" Width="1.5" PointX="21.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Contact" Width="1.5" PointX="16.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.CostCenterNew" Width="1.5" PointX="22.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Country" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.CRM_Customers" Width="1.5" PointX="9.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.CRM_DealDetail" Width="1.5" PointX="11.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.CRM_Deals" Width="1.5" PointX="22.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.CRM_DealStage" Width="1.5" PointX="0.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.CRM_SaleQuotation" Width="1.5" PointX="22.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.CRM_SaleQuotationDetail" Width="1.5" PointX="23.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Customer" Width="1.5" PointX="7.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.CustomerDetail" Width="1.5" PointX="18.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.CustomerDtre" Width="1.5" PointX="24.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.DebitNoteStax" Width="1.5" PointX="24.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.DebitNoteStaxDetail" Width="1.5" PointX="13.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.DelChallan" Width="1.5" PointX="24.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.DelChallanDetail" Width="1.5" PointX="20.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Department" Width="1.5" PointX="24.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Designation" Width="1.5" PointX="25.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.District" Width="1.5" PointX="22.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.dtproperty" Width="1.5" PointX="24.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.EmployeePersonalInfo" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.EmpPersonalInfo1" Width="1.5" PointX="26.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.EmpStatu" Width="1.5" PointX="26.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.EOBISetup" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Expense" Width="1.5" PointX="26.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.ExpenseDetail" Width="1.5" PointX="5.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.FGOpeningBalance" Width="1.5" PointX="26.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.FGRecieptNote" Width="1.5" PointX="27.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.FGRecieptNoteDetail" Width="1.5" PointX="15.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Fgreturn" Width="1.5" PointX="17.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.FgReturnDetail" Width="1.5" PointX="28.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.FinishedGood" Width="1.5" PointX="7.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.FinYear" Width="1.5" PointX="28.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.FontsTable" Width="1.5" PointX="9.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.GodownType" Width="1.5" PointX="28.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.GRN" Width="1.5" PointX="28.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.GroupChange" Width="1.5" PointX="28.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Holiday" Width="1.5" PointX="28.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.IncDetail" Width="1.5" PointX="19.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.IncomeTaxSetup" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Increment" Width="1.5" PointX="29.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Invoice_detail" Width="1.5" PointX="21.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Invoice_Info" Width="1.5" PointX="23.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.InvoicePrintingCount" Width="1.5" PointX="25.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.InvoiceReceipt" Width="1.5" PointX="14.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.InvoiceReceiptDetail" Width="1.5" PointX="17" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.InvoiceTerm" Width="1.5" PointX="30.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.InvPayment" Width="1.5" PointX="30.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.InvPaymentDetail" Width="1.5" PointX="11.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.ItemsStock" Width="1.5" PointX="30.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.JournalDetail" Width="1.5" PointX="30.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.JournalDetail2" Width="1.5" PointX="30.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Journal" Width="1.5" PointX="27.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Journals2" Width="1.5" PointX="13.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LCBond" Width="1.5" PointX="31.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LeaveEntitlement" Width="1.5" PointX="15.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LoanAdjuststment" Width="1.5" PointX="5.25" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LoanTaken" Width="1.5" PointX="3" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LocalPurchaseInvDetail" Width="1.5" PointX="29.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LocalPurchaseInvoice" Width="1.5" PointX="31.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LocalSupplier" Width="1.5" PointX="32.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.OtherPurchaseInvDetail" Width="1.5" PointX="7.75" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.OtherPurchaseInvoice" Width="1.5" PointX="32.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Party" Width="1.5" PointX="32.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Payment" Width="1.5" PointX="32.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.PaymentDetail" Width="1.5" PointX="32.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.PaymentType" Width="1.5" PointX="33.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.PReturn" Width="1.5" PointX="33.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.PReturnDetail" Width="1.5" PointX="33.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.PriceList" Width="1.5" PointX="34.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.PurAdvance" Width="1.5" PointX="9.75" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Purchaser" Width="1.5" PointX="34.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.PurchaseRequest" Width="1.5" PointX="34.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.PurchaseRequestDetail" Width="1.5" PointX="23.75" PointY="34.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.PurchaseRequisitionOrder" Width="1.5" PointX="34.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.PurchaseRequisitionOrderDetail" Width="1.5" PointX="35.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.PurDeliveryChallDetail" Width="1.5" PointX="0.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.PurDellChallanMaster" Width="1.5" PointX="15.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.RawMaterial" Width="1.5" PointX="17.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.ReceiptBounce" Width="1.5" PointX="19.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.ReceiptsCommission" Width="1.5" PointX="25.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Recieved" Width="1.5" PointX="35.75" PointY="28.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.RecievedDetail" Width="1.5" PointX="35.75" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.RmGrn" Width="1.5" PointX="2.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.RmGrnDetail" Width="1.5" PointX="4.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.RmGrnReturnP" Width="1.5" PointX="36.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.RmGrnReturnPDetail" Width="1.5" PointX="36.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.RMreturnp" Width="1.5" PointX="11.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.RmReturnPDetail" Width="1.5" PointX="36.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Salary" Width="1.5" PointX="36.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SalaryDetail" Width="1.5" PointX="5.25" PointY="31.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SalaryMaster" Width="1.5" PointX="3" PointY="31.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SalarySetup" Width="1.5" PointX="35.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SaleAdvance" Width="1.5" PointX="12.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SaleAdvanceAdjustment" Width="1.5" PointX="12.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SaleAdvanceAdjustmentDetail" Width="1.5" PointX="14.5" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SaleAgingReport" Width="1.5" PointX="37.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SaleAgingTest" Width="1.5" PointX="37.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SaleDebitNote" Width="1.5" PointX="37.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SaleInvoice" Width="1.5" PointX="10" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SaleInvoiceDetail" Width="1.5" PointX="12.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SaleInvoiceWeb" Width="1.5" PointX="38.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SalesCommReport" Width="1.5" PointX="6.75" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SalesMan" Width="1.5" PointX="38.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SaleTax" Width="1.5" PointX="38.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SaleTaxSumup" Width="1.5" PointX="38.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.tblItemStockOpeningBalance" Width="1.5" PointX="31.75" PointY="38.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Title" Width="1.5" PointX="39.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.ToolsAndSpare" Width="1.5" PointX="13.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Type" Width="1.5" PointX="15.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.VoucherType" Width="1.5" PointX="17.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Account_Head_New" Width="1.5" PointX="19.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Advancesalpara" Width="1.5" PointX="25.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.AgencyLeager" Width="1.5" PointX="39.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.AllPara" Width="1.5" PointX="27.75" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.AllRepPara" Width="1.5" PointX="39.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Attendence" Width="1.5" PointX="39.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.AttendRep" Width="1.5" PointX="40.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.BankChequeBookDetail" Width="1.5" PointX="8.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.BankPaymentBookSummary" Width="1.5" PointX="10.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Bonu" Width="1.5" PointX="40.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Brand" Width="1.5" PointX="40.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Carlease" Width="1.5" PointX="21.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Carleasedetail" Width="1.5" PointX="41.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.CashPaymentBook" Width="1.5" PointX="41.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Catagory" Width="1.5" PointX="41.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.ColorOfChoice" Width="1.5" PointX="33.75" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.ColorOfChoice2" Width="1.5" PointX="41.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Company" Width="1.5" PointX="39.75" PointY="41.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.ControlAcnt" Width="1.5" PointX="41.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.CorrBank" Width="1.5" PointX="0.75" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Country1" Width="1.5" PointX="42.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.CustomerDtreDetail" Width="1.5" PointX="42.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Deduction_of_tax" Width="1.5" PointX="42.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.DelliveryChallanReportTable" Width="1.5" PointX="42.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.DeptChangeRep" Width="1.5" PointX="43.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.EmpDeduction" Width="1.5" PointX="2.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.EmployeeOfficialInfo" Width="1.5" PointX="12.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.EmployeePermAddress" Width="1.5" PointX="14.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.EmplyeePresAddress" Width="1.5" PointX="16.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.EmpSalary" Width="1.5" PointX="18.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.EOBIDetail" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.ExpenseInv" Width="1.5" PointX="43.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.ExpenseInvDetail" Width="1.5" PointX="23.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.ExpenseTitle" Width="1.5" PointX="25.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Fine" Width="1.5" PointX="43.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.FinYearPDetail" Width="1.5" PointX="27.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.ForeignSupplier" Width="1.5" PointX="29.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Group1" Width="1.5" PointX="43.75" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.GroupAssign" Width="1.5" PointX="43.75" PointY="36.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Halfday" Width="1.5" PointX="43.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.ImpGLInt" Width="1.5" PointX="44.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.IncomeTaxDetail" Width="1.5" PointX="5.25" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.InsurancePolicy" Width="1.5" PointX="44.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.ItemFinishGoodRegister" Width="1.5" PointX="44.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.ItemRawMaterialRegister" Width="1.5" PointX="41.75" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.ItemTransferToGodown" Width="1.5" PointX="44.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LcCont" Width="1.5" PointX="43.75" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LcContDetail" Width="1.5" PointX="45.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.lcContract" Width="1.5" PointX="4.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LCExBond" Width="1.5" PointX="6.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LCExBondDetail" Width="1.5" PointX="8.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LCInBond" Width="1.5" PointX="45.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LCType" Width="1.5" PointX="45.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LeaveApplication" Width="1.5" PointX="45.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LeaveBal" Width="1.5" PointX="45.75" PointY="40.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LeaveType" Width="1.5" PointX="45.75" PointY="44.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Loan" Width="1.5" PointX="46.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LoanAdjust" Width="1.5" PointX="46.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LoanTransDetail" Width="1.5" PointX="46.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.LogHistory" Width="1.5" PointX="31.75" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.MainAcnt" Width="1.5" PointX="46.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Medical" Width="1.5" PointX="33.75" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.MedicalEntitlement" Width="1.5" PointX="35.75" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.MedicalTran" Width="1.5" PointX="37.75" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.MedRec" Width="1.5" PointX="47.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Next" Width="1.5" PointX="18.75" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Oiltype" Width="1.5" PointX="20.75" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.OverTime" Width="1.5" PointX="22.75" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Owner" Width="1.5" PointX="47.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Password" Width="1.5" PointX="24.75" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Pendingdayavail" Width="1.5" PointX="26.75" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.pendingdayoff" Width="1.5" PointX="28.75" PointY="47.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Petrolcredit" Width="1.5" PointX="47.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Promotion" Width="1.5" PointX="47.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.prompara" Width="1.5" PointX="47.75" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.PurchaseAgingTest" Width="1.5" PointX="47.75" PointY="46.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.PurchaseOrder" Width="1.5" PointX="48.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.PurchaseOrderDetail" Width="1.5" PointX="48.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.ReceiptBookSummary" Width="1.5" PointX="14.75" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.ReductionTax" Width="1.5" PointX="48.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Resign" Width="1.5" PointX="0.75" PointY="49.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.RestDay" Width="1.5" PointX="49.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.RestDayHistory" Width="1.5" PointX="2.75" PointY="49.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.RMIssueP" Width="1.5" PointX="8.75" PointY="49.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.RMIssuePdetail" Width="1.5" PointX="49.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.RMItemTransferToUnit" Width="1.5" PointX="49.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.RMItemTransferToUnitMaster" Width="1.5" PointX="49.75" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SalCalc" Width="1.5" PointX="49.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SaleTaxDetail" Width="1.5" PointX="49.75" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SControlAcnt" Width="1.5" PointX="50.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SMainAcnt" Width="1.5" PointX="50.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SReturn" Width="1.5" PointX="50.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.SReturnDetail" Width="1.5" PointX="10.75" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.TaxIdentity" Width="1.5" PointX="50.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.TaxRate" Width="1.5" PointX="39.75" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.tblGLAssetAccount" Width="1.5" PointX="49.75" PointY="50.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.tblGLBalanceSheetAccount" Width="1.5" PointX="51.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.tblGLBalanceSheetAccountSum" Width="1.5" PointX="4.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.tblGLProfitLossAccount" Width="1.5" PointX="51.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.tblGLProfitLossAccountSum" Width="1.5" PointX="51.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.tblStoreUnit" Width="1.5" PointX="51.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.tblSupplierBuyer" Width="1.5" PointX="26.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.TempAtt" Width="1.5" PointX="28.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Test" Width="1.5" PointX="51.75" PointY="29.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.TimeReport" Width="1.5" PointX="30.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Transfer" Width="1.5" PointX="32.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.UserRight" Width="1.5" PointX="51.75" PointY="33.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.User" Width="1.5" PointX="34.75" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.Visite" Width="1.5" PointX="36.75" PointY="51.75" IsExpanded="true" />
+        <AssociationConnector Association="SairaIndModel.FK_AdvanceAgainstBonus_EmployeePersonalInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="SairaIndModel.FK_AdvanceAgainstSalary_EmployeePersonalInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="SairaIndModel.FK_SaleInvoice_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="SairaIndModel.FK_IncomeTaxSetup_EmployeePersonalInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="SairaIndModel.FK_LoanAdjust_EmployeePersonalInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="SairaIndModel.FK_LoanTaken_EmployeePersonalInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="SairaIndModel.FK_SalaryMaster_EmployeePersonalInfo" ManuallyRouted="false" />
+        <AssociationConnector Association="SairaIndModel.FK_EOBIDetail_EOBISetup" ManuallyRouted="false" />
+        <AssociationConnector Association="SairaIndModel.FK_IncomeTaxDetail_IncomeTaxSetup" ManuallyRouted="false" />
+        <AssociationConnector Association="SairaIndModel.FK_InvoiceReceiptDetail_InvoiceReceipt" ManuallyRouted="false" />
+        <AssociationConnector Association="SairaIndModel.FK_LoanAdjuststment_LoanTaken" ManuallyRouted="false" />
+        <AssociationConnector Association="SairaIndModel.FK_SalaryDetail_SalaryMaster" ManuallyRouted="false" />
+        <AssociationConnector Association="SairaIndModel.FK_SaleAdvanceAdjustmentDetail_SaleAdvance" ManuallyRouted="false" />
+        <AssociationConnector Association="SairaIndModel.FK_SaleAdvanceAdjustment_SaleInvoice" ManuallyRouted="false" />
+        <AssociationConnector Association="SairaIndModel.FK_SaleAdvanceAdjustmentDetail_SaleAdvanceAdjustment" ManuallyRouted="false" />
+        <AssociationConnector Association="SairaIndModel.FK_SaleInvoiceDetail_SaleInvoice" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

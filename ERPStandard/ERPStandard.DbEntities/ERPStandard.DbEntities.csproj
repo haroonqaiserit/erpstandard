@@ -1,0 +1,825 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0215232E-F1F2-451A-83F9-2E60B50931A0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ERPStandard.DbEntities</RootNamespace>
+    <AssemblyName>ERPStandard.DbEntities</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AccountInfo.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AccountsBackUp.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AccountsOpeningBalance.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Account_Head_New.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdjustmentSaleAcnt.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdjustmentSaleAcntDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdvanceAgainstBonu.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdvanceAgainstSalary.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Advancesalpara.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdvanceToPurchaser.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AdvanceToPurchaserDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AgencyLeager.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AllPara.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AllRepPara.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AllSupplier.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Attendence.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AttendRep.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BackupDataTransfer.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bank.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BankChequeBook.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BankChequeBookDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BankChequeCanelation.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BankPaymentBookSummary.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bonu.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BonusSetup.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Branch.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Brand.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Carlease.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Carleasedetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CashPaymentBook.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Catagory.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="City.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ColorOfChoice.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ColorOfChoice2.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Company.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Company1.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Contact.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ControlAcnt.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CorrBank.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CostCenterNew.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Country.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Country1.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CRM_Customers.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CRM_DealDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CRM_Deals.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CRM_DealStage.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CRM_SaleQuotation.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CRM_SaleQuotationDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Customer.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerDtre.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomerDtreDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DebitNoteStax.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DebitNoteStaxDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Deduction_of_tax.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DelChallan.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DelChallanDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DelliveryChallanReportTable.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Department.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DeptChangeRep.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Designation.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="District.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="dtproperty.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmpDeduction.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeOfficialInfo.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePermAddress.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeePersonalInfo.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmplyeePresAddress.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmpPersonalInfo1.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmpSalary.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmpStatu.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EOBIDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EOBISetup.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERPStandardDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ERPStandardDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERPStandardDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ERPStandardDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ERPStandardDBModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Expense.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExpenseDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExpenseInv.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExpenseInvDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ExpenseTitle.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FGOpeningBalance.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FGRecieptNote.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FGRecieptNoteDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Fgreturn.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FgReturnDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Fine.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FinishedGood.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FinYear.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FinYearPDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FontsTable.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ForeignSupplier.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GodownType.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GRN.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Group1.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GroupAssign.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GroupChange.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Halfday.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Holiday.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ImpGLInt.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IncDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IncomeTaxDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IncomeTaxSetup.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Increment.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsurancePolicy.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoicePrintingCount.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceReceipt.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceReceiptDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceTerm.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Invoice_detail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Invoice_Info.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvPayment.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvPaymentDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ItemFinishGoodRegister.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ItemRawMaterialRegister.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ItemsStock.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ItemTransferToGodown.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Journal.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JournalDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="JournalDetail2.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Journals2.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LCBond.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LcCont.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LcContDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="lcContract.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LCExBond.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LCExBondDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LCInBond.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LCType.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LeaveApplication.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LeaveBal.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LeaveEntitlement.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LeaveType.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Loan.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoanAdjust.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoanAdjuststment.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoanTaken.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoanTransDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LocalPurchaseInvDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LocalPurchaseInvoice.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LocalSupplier.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LogHistory.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MainAcnt.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Medical.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalEntitlement.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalTran.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MedRec.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Next.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Oiltype.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OtherPurchaseInvDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OtherPurchaseInvoice.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OverTime.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Owner.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Party.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Password.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Payment.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentType.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Pendingdayavail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pendingdayoff.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Petrolcredit.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PReturn.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PReturnDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PriceList.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Promotion.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="prompara.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurAdvance.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseAgingTest.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseOrder.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseOrderDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Purchaser.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseRequest.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseRequestDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseRequisitionOrder.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PurchaseRequisitionOrderDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PurDeliveryChallDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PurDellChallanMaster.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RawMaterial.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiptBookSummary.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiptBounce.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReceiptsCommission.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Recieved.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RecievedDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReductionTax.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Resign.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RestDay.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RestDayHistory.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RmGrn.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RmGrnDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RmGrnReturnP.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RmGrnReturnPDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RMIssueP.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RMIssuePdetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RMItemTransferToUnit.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RMItemTransferToUnitMaster.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RMreturnp.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RmReturnPDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Salary.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SalaryDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SalaryMaster.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SalarySetup.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SalCalc.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleAdvance.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleAdvanceAdjustment.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleAdvanceAdjustmentDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleAgingReport.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleAgingTest.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleDebitNote.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleInvoice.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleInvoiceDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleInvoiceWeb.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SalesCommReport.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SalesMan.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleTax.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleTaxDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SaleTaxSumup.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SControlAcnt.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SMainAcnt.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SReturn.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SReturnDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaxIdentity.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TaxRate.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblGLAssetAccount.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblGLBalanceSheetAccount.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblGLBalanceSheetAccountSum.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblGLProfitLossAccount.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblGLProfitLossAccountSum.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblItemStockOpeningBalance.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblStoreUnit.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblSupplierBuyer.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TempAtt.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Test.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TimeReport.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Title.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ToolsAndSpare.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transfer.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Type.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserRight.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Visite.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VoucherType.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="ERPStandardDBModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ERPStandardDBModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ERPStandardDBModel.edmx.diagram">
+      <DependentUpon>ERPStandardDBModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ERPStandardDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ERPStandardDBModel.edmx</DependentUpon>
+      <LastGenOutput>ERPStandardDBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ERPStandardDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ERPStandardDBModel.edmx</DependentUpon>
+      <LastGenOutput>ERPStandardDBModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

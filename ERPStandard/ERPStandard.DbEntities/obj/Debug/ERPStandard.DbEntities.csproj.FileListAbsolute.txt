@@ -1,0 +1,12 @@
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.DbEntities\bin\Debug\ERPStandard.DbEntities.dll.config
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.DbEntities\bin\Debug\ERPStandard.DbEntities.dll
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.DbEntities\bin\Debug\ERPStandard.DbEntities.pdb
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.DbEntities\bin\Debug\EntityFramework.dll
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.DbEntities\bin\Debug\EntityFramework.SqlServer.dll
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.DbEntities\bin\Debug\EntityFramework.xml
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.DbEntities\bin\Debug\EntityFramework.SqlServer.xml
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.DbEntities\obj\Debug\ERPStandard.DbEntities.csproj.AssemblyReference.cache
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.DbEntities\obj\Debug\ERPStandard.DbEntities.csproj.CoreCompileInputs.cache
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.DbEntities\obj\Debug\ERPStandard.DbEntities.csproj.CopyComplete
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.DbEntities\obj\Debug\ERPStandard.DbEntities.dll
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.DbEntities\obj\Debug\ERPStandard.DbEntities.pdb
