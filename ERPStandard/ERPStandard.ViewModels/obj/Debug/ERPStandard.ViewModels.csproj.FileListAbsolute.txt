@@ -1,0 +1,12 @@
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.ViewModels\bin\Debug\ERPStandard.ViewModels.dll
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.ViewModels\bin\Debug\ERPStandard.ViewModels.pdb
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.ViewModels\bin\Debug\ERPStandard.DbEntities.dll
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.ViewModels\bin\Debug\EntityFramework.dll
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.ViewModels\bin\Debug\ERPStandard.DbEntities.pdb
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.ViewModels\bin\Debug\ERPStandard.DbEntities.dll.config
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.ViewModels\bin\Debug\EntityFramework.xml
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.ViewModels\obj\Debug\ERPStandard.ViewModels.csproj.AssemblyReference.cache
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.ViewModels\obj\Debug\ERPStandard.ViewModels.csproj.CoreCompileInputs.cache
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.ViewModels\obj\Debug\ERPStandard.ViewModels.csproj.CopyComplete
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.ViewModels\obj\Debug\ERPStandard.ViewModels.dll
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.ViewModels\obj\Debug\ERPStandard.ViewModels.pdb

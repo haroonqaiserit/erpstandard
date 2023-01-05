@@ -14,7 +14,7 @@ namespace ERPStandard.Services
         {
             using (var context = new SairaIndEntities())
             {
-                account.AcntId = context.Accounts.Where(x => x.CompNo == standard.CompNo && x.Status == standard.BranchNo && x.).Select(x => x.AcntId).Max();
+                account.AcntId = context.Accounts.Where(x => x.CompNo == standard.CompNo && x.Status == standard.BranchNo).Select(x => x.AcntId).Max();
 
                 double newacntid = double.Parse(account.AcntId.Substring(account.AcntId.Length - 4));
                 

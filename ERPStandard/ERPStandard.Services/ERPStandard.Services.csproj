@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountsServices.cs" />
+    <Compile Include="Company1Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StandardVariables.cs" />
   </ItemGroup>
@@ -68,6 +69,10 @@
     <ProjectReference Include="..\ERPStandard.DbEntities\ERPStandard.DbEntities.csproj">
       <Project>{0215232E-F1F2-451A-83F9-2E60B50931A0}</Project>
       <Name>ERPStandard.DbEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ERPStandard.ViewModels\ERPStandard.ViewModels.csproj">
+      <Project>{28A3EB11-4CD2-4A1D-B82C-EFCAF9DF6EBE}</Project>
+      <Name>ERPStandard.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

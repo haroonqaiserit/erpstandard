@@ -4,7 +4,7 @@ ViewBag.SubTitle = "Company";
 }
 
 <div class="card-header">
-    @*<h4 class="card-title">@ViewBag.SubTitle</h4>*@
+    <h4 class="card-title">@ViewBag.SubTitle</h4>
 </div>
 <div class="card-content">
     <div class="card-body">
@@ -13,7 +13,7 @@ ViewBag.SubTitle = "Company";
                 <div class="col-md-6 col-12">
                     <div class="form-group">
                         <label for="Company_Name">Name</label>
-                        <input type="text" id="Company_Name" class="form-control" placeholder="Company Name" name="Company_Name">
+                        <input type="text" id="Company_Name"  minlength="3" maxlength="10" required class="form-control" placeholder="Company Name" name="Company_Name">
                     </div>
                 </div>
                 <div class="col-md-6 col-12">
@@ -72,7 +72,7 @@ ViewBag.SubTitle = "Company";
                 </div>
 
                 <div class="col-12 d-flex justify-content-end">
-                    <button type="button" id="btnSave" class="btn btn-primary me-1 mb-1" onclick="onSave(FormData)">Submit</button>
+                    <button type="button" id="btnSave" class="btn btn-primary me-1 mb-1" onclick="onSave()">Submit</button>
                     <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                 </div>
             </div>

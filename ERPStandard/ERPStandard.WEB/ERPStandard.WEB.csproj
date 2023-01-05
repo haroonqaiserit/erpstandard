@@ -1910,6 +1910,7 @@
     <Content Include="Views\General\CompanyCreate.cshtml" />
     <Content Include="Views\General\CompanyIndex.cshtml" />
     <Content Include="Views\General\CompanyList.cshtml" />
+    <Content Include="Views\General\CompanyEditView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1937,6 +1938,14 @@
     <ProjectReference Include="..\ERPStandard.DbEntities\ERPStandard.DbEntities.csproj">
       <Project>{0215232E-F1F2-451A-83F9-2E60B50931A0}</Project>
       <Name>ERPStandard.DbEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ERPStandard.Services\ERPStandard.Services.csproj">
+      <Project>{7BE94AF5-4936-4720-A09E-6A6879EB43E2}</Project>
+      <Name>ERPStandard.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ERPStandard.ViewModels\ERPStandard.ViewModels.csproj">
+      <Project>{28a3eb11-4cd2-4a1d-b82c-efcaf9df6ebe}</Project>
+      <Name>ERPStandard.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
