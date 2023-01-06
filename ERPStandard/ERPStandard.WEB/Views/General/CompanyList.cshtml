@@ -14,17 +14,17 @@
             </div>
         </div>
         <div class="dataTable-container">
-            <table class="table table-striped dataTable-table" id="table1">
+            <table class="table table-striped dataTable-table" id="tblCompany">
                 <thead>
                     <tr>
-                        <th data-sortable="" class="asc"><a href="" onclick="DataTableOrder(1)" class="dataTable-sorter">Name</a></th>
-                        <th data-sortable=""><a href=""  onclick="DataTableOrder(2)" class="dataTable-sorter">Address</a></th>
-                        <th data-sortable=""><a href="#" class="dataTable-sorter">Email</a></th>
-                        <th data-sortable="" class=""><a href="#" class="dataTable-sorter">Phone</a></th>
-                        <th data-sortable=""><a href="#" class="dataTable-sorter">STaxRegNo</a></th>
-                        <th data-sortable=""><a href="#" class="dataTable-sorter">NTN No</a></th>
-                        <th data-sortable=""><a href="#" class="dataTable-sorter">Status</a></th>
-                        <th data-sortable=""><a href="#" class="dataTable-sorter">Action</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 1 ? "asc" : "")><a href="javascript:;" onclick="DataTableOrder(1)" class="dataTable-sorter">Name</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 2 ? "asc" : "")><a href="javascript:;" onclick="DataTableOrder(2)"  class="dataTable-sorter">Address</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 3 ? "asc" : "")><a href="javascript:;" onclick="DataTableOrder(3)"  class="dataTable-sorter">Email</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 4 ? "asc" : "")><a href="javascript:;" onclick="DataTableOrder(4)"  class="dataTable-sorter">Phone</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 5 ? "asc" : "")><a href="javascript:;" onclick="DataTableOrder(5)"  class="dataTable-sorter">STaxRegNo</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 6 ? "asc" : "")><a href="javascript:;" onclick="DataTableOrder(6)"  class="dataTable-sorter">NTN No</a></th>
+                        <th data-sortable=""><a href="javascript:;" class="dataTable-sorter">Status</a></th>
+                        <th data-sortable=""><a href="javascript:;" class="dataTable-sorter">Action</a></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -126,7 +126,7 @@
 </div>
 <script>
     // Simple Datatable
-    let table1 = document.querySelector('#table1');
-    let dataTable = new simpleDatatables.DataTable(table1);
+    let tblCompany = document.querySelector('#tblCompany');
+    let dataTable = new simpleDatatables.DataTable(tblCompany);
 </script>
 <!--Try new table look-->

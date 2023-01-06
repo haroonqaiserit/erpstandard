@@ -44,7 +44,26 @@ namespace ERPStandard.Services
                 if (clmNameOrder == 1){
                     comp = comp.OrderBy(x => x.Company_Name);
                 }
-                else{
+                else if (clmNameOrder == 2){
+                    comp = comp.OrderBy(x => x.Company_address);
+                }
+                else if (clmNameOrder == 3){
+                    comp = comp.OrderBy(x => x.Company_email);
+                }
+                else if (clmNameOrder == 4)
+                {
+                    comp = comp.OrderBy(x => x.Company_phones);
+                }
+                else if (clmNameOrder == 5)
+                {
+                    comp = comp.OrderBy(x => x.STaxRegNo);
+                }
+                else if (clmNameOrder == 6)
+                {
+                    comp = comp.OrderBy(x => x.NationalTaxNo);
+                }
+                else
+                {
                     comp = comp.OrderBy(x => x.CompNo);
                 }
 
@@ -55,6 +74,54 @@ namespace ERPStandard.Services
             }
             return viewModel;
         }
+        public Company1ViewModel Report(string dtSearch = "", int clmNameOrder = 0)
+        {
+            var viewModel = new Company1ViewModel();
+            using (var context = new SairaIndEntities())
+            {
+                var comp = context.Company1.Where(x => x.Company_Name.Contains(dtSearch)
+                        || x.company_desc.Contains(dtSearch)
+                        || x.Company_address.Contains(dtSearch)
+                        || x.Company_email.Contains(dtSearch)
+                        || x.Company_phones.Contains(dtSearch)
+                        );
+
+                int totalpage = comp.Select(x => x.CompNo).Count();
+                if (clmNameOrder == 1)
+                {
+                    comp = comp.OrderBy(x => x.Company_Name);
+                }
+                else if (clmNameOrder == 2)
+                {
+                    comp = comp.OrderBy(x => x.Company_address);
+                }
+                else if (clmNameOrder == 3)
+                {
+                    comp = comp.OrderBy(x => x.Company_email);
+                }
+                else if (clmNameOrder == 4)
+                {
+                    comp = comp.OrderBy(x => x.Company_phones);
+                }
+                else if (clmNameOrder == 5)
+                {
+                    comp = comp.OrderBy(x => x.STaxRegNo);
+                }
+                else if (clmNameOrder == 6)
+                {
+                    comp = comp.OrderBy(x => x.NationalTaxNo);
+                }
+                else
+                {
+                    comp = comp.OrderBy(x => x.CompNo);
+                }
+                viewModel.Company = comp.ToList();
+                viewModel.dtSearch = dtSearch;
+                viewModel.clmNameOrder = clmNameOrder;
+            }
+            return viewModel;
+        }
+
         public Company1 Single(int Id)
         {
             var viewModel = new Company1();

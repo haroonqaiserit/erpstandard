@@ -18,6 +18,11 @@
     <link rel="shortcut icon" href="~/assets/images/favicon.svg" type="image/x-icon">
     <link href="~/assets/vendors/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
     <script type="text/javascript" src="~/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+
+    <!-- EDIT: For now, add this line between the libraries -->
+    <!-- The reason being that jspdf includes a version of requirejs which -->
+    <!-- jspdf-autotable currently is not expecting. You can also use version < 2.0.21 -->
+
     @Scripts.Render("~/bundles/jquery")
 </head>
 <body>

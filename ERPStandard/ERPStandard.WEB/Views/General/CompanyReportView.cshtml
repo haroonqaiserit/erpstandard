@@ -1,0 +1,41 @@
+﻿@model  ERPStandard.ViewModels.Company1ViewModel
+<link rel="stylesheet" href="~/assets/vendors/simple-datatables/style.css">
+<script src="~/assets/vendors/simple-datatables/simple-datatables.js"></script>
+
+<table hidden class="table table-striped dataTable-table" id="tblCompanyReport">
+    <thead>
+        <tr>
+            <th><a href="javascript:;" class="dataTable-sorter">Name</a></th>
+            <th><a href="javascript:;" class="dataTable-sorter">Address</a></th>
+            <th><a href="javascript:;" class="dataTable-sorter">Email</a></th>
+            <th><a href="javascript:;" class="dataTable-sorter">Phone</a></th>
+            <th><a href="javascript:;" class="dataTable-sorter">STaxRegNo</a></th>
+            <th><a href="javascript:;" class="dataTable-sorter">NTN No</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model != null)
+            {
+                foreach (var comp in Model.Company)
+                {
+                    <tr>
+                        <td>@comp.Company_Name</td>
+                        <td>@comp.Company_address</td>
+                        <td>@comp.Company_email</td>
+                        <td>@comp.Company_phones</td>
+                        <td>@comp.STaxRegNo</td>
+                        <td>@comp.NationalTaxNo</td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+
+<script>
+    // Simple Datatable
+    let tblCompanyReport = document.querySelector('#tblCompanyReport');
+    let dataTable = new simpleDatatables.DataTable(tblCompanyReport);
+</script>
+<!--Try new table look-->

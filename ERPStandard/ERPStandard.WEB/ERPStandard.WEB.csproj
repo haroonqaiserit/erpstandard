@@ -223,6 +223,26 @@
     <Content Include="assets\js\extensions\rater-js.js" />
     <Content Include="assets\js\extensions\sweetalert2.js" />
     <Content Include="assets\js\extensions\toastify.js" />
+    <Content Include="assets\js\jsPDF\jspdf.min.js" />
+    <Content Include="assets\js\jsPDF\jspdf.plugin.autotable.min.js" />
+    <Content Include="assets\js\jsPDF\plugins\acroform.js" />
+    <Content Include="assets\js\jsPDF\plugins\addhtml.js" />
+    <Content Include="assets\js\jsPDF\plugins\addimage.js" />
+    <Content Include="assets\js\jsPDF\plugins\annotations.js" />
+    <Content Include="assets\js\jsPDF\plugins\autoprint.js" />
+    <Content Include="assets\js\jsPDF\plugins\canvas.js" />
+    <Content Include="assets\js\jsPDF\plugins\cell.js" />
+    <Content Include="assets\js\jsPDF\plugins\context2d.js" />
+    <Content Include="assets\js\jsPDF\plugins\from_html.js" />
+    <Content Include="assets\js\jsPDF\plugins\javascript.js" />
+    <Content Include="assets\js\jsPDF\plugins\outline.js" />
+    <Content Include="assets\js\jsPDF\plugins\png_support.js" />
+    <Content Include="assets\js\jsPDF\plugins\prevent_scale_to_fit.js" />
+    <Content Include="assets\js\jsPDF\plugins\split_text_to_size.js" />
+    <Content Include="assets\js\jsPDF\plugins\standard_fonts_metrics.js" />
+    <Content Include="assets\js\jsPDF\plugins\svg.js" />
+    <Content Include="assets\js\jsPDF\plugins\total_pages.js" />
+    <Content Include="assets\js\jsPDF\plugins\xmp_metadata.js" />
     <Content Include="assets\js\main.js" />
     <Content Include="assets\js\pages\dashboard.js" />
     <Content Include="assets\js\pages\form-editor.js" />
@@ -1911,6 +1931,7 @@
     <Content Include="Views\General\CompanyIndex.cshtml" />
     <Content Include="Views\General\CompanyList.cshtml" />
     <Content Include="Views\General\CompanyEditView.cshtml" />
+    <Content Include="Views\General\CompanyReportView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

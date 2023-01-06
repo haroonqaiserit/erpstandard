@@ -33,6 +33,11 @@ namespace ERPStandard.WEB.Controllers
             var company1ViewModel = CompanyListLoad(pageno.Value, pageSize, dtSearch, clmNameOrder);
             return PartialView("CompanyList", company1ViewModel);
         }
+        public ActionResult CompanyReportView(string dtSearch = "", int clmNameOrder = 0)
+        {
+            var company1ViewModel = Company1Service.Instance.Report(dtSearch, clmNameOrder);
+            return PartialView("CompanyReportView", company1ViewModel);
+        }
 
         [HttpGet]
         public ActionResult CompanyEdit(string Id)
