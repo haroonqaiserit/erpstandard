@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Title = "General Setup";
+    ViewBag.SubTitle = "Branch";
+}
+<style>
+    .select2-container .select2-selection--single {
+        height: 34px !important;
+    }
+
+    .select2-container--default .select2-selection--single {
+        border: 1px solid #ccc !important;
+        border-radius: 0px !important;
+    }
+</style>
+
+<div class="card-header">
+    <h4 class="card-title">@ViewBag.SubTitle</h4>
+</div>
+<div class="card-content">
+    <div class="card-body">
+        <form name="branchForm" class="form" method="post">
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label for="BranchName">Name</label>
+                        <input type="text" id="BranchName" minlength="3" maxlength="50" required class="form-control" placeholder="Branch Name" name="BranchName">
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label for="Dscr">Descritption</label>
+                        <input type="text" id="Dscr" minlength="3" maxlength="100" required class="form-control" placeholder="Branch Description" name="Dscr">
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label for="BranchAddress">Address</label>
+                        <input type="text" id="BranchAddress" minlength="3" maxlength="150" required class="form-control" placeholder="Address" name="BranchAddress">
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label for="AcntId">Account Code</label>
+                        <select class="choices form-select  select2" id="AcntCode" name="AcntId" onchange="getval(this);" required>
+                            <option value='' selected disabled> --Select Account--</option>
+                        </select>
+                    </div>
+                </div>
+    
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label for="CompNo">Company</label>
+                        <select class="form-select  select2" id="CompanyId" name="CompNo" required>
+                            <option value='' selected disabled> --Select Company--</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-end">
+                    <button type="button" id="btnSave" class="btn btn-primary me-1 mb-1" onclick="onSave()">Submit</button>
+                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                </div>
+            </div>
+
+        </form>
+      
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        AccountComboFill();
+        CompanyComboFill();
+    });
+
+    function AccountComboFill() {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("AccountDropdown", "Combofill")',
+            dataType: "json",
+            beforeSend: function () {
+                $("#CustomSearchLoader").show();
+            },
+            complete: function () {
+                $("#CustomSearchLoader").hide();
+            },
+            success: function (result) {
+                //$('#AcntCode').html('');
+                //var rows1 = "<option value='' selected disabled > --Select Account--</option >";
+                //$('#AcntCode').append(rows1);
+
+                $.each(result, function (i, item) {
+                    var rows;
+                    rows = "<option value='" + item.AcntId + "'>" + item.Dscr + "</option>";
+                    $('#AcntCode').append(rows);
+                });
+            }
+        });
+    };
+
+    function CompanyComboFill() {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("CompanyDropdown", "Combofill")',
+            dataType: "json",
+            beforeSend: function () {
+                $("#CustomSearchLoader").show();
+            },
+            complete: function () {
+                $("#CustomSearchLoader").hide();
+            },
+            success: function (result) {
+                //$('#AcntCode').html('');
+                //var rows1 = "<option value='' selected disabled > --Select Account--</option >";
+                //$('#AcntCode').append(rows1);
+
+                $.each(result, function (i, item) {
+                    var rows;
+                    //console.log(i);
+                    if (i == 0) {
+                        rows = "<option selected value='" + item.CompNo + "'>" + item.Company_Name + "</option>";
+                    }
+                    else {
+                        rows = "<option value='" + item.CompNo + "'>" + item.Company_Name + "</option>";
+                    }
+                    $('#CompanyId').append(rows);
+                });
+            }
+        });
+    };
+
+
+       function getval(sel) {
+        var ReceiverId = $(sel).val();
+
+           console.log(ReceiverId);
+        @*$.ajax({
+            type: "POST",
+            url: "/DeviceManagement/DeviceIsExist?ReceiverId=" + ReceiverId,
+            success: function (res) {
+                if (res.result == true) {
+                    window.location.href ="@Url.Action("EditDeviceM", "DeviceManagement")";
+                }
+            },
+            error: function (exception) {
+                alert('Exeption:');
+            }
+        });*@
+    };
+
+
+</script>
+
+
+
+
+<script>
+    $('.select2').select2();
+</script>

@@ -17,13 +17,28 @@
     <link rel="stylesheet" href="~/assets/css/app.css">
     <link rel="shortcut icon" href="~/assets/images/favicon.svg" type="image/x-icon">
     <link href="~/assets/vendors/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/Scripts/jquery.validate.min.js"></script>
+    <!-- EDIT: For now, add this line between the libraries -->
+
     <script type="text/javascript" src="~/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 
-    <!-- EDIT: For now, add this line between the libraries -->
+    @*<script type="text/javascript" src="~/Scripts/dropdown/select2-custom.js"></script>*@
+
+    @*<link href="~/Scripts/dropdown/css/select2.min.css" rel="stylesheet" />
+        <script src="~/Scripts/dropdown/js/select2.full.min.js"></script>*@
+
+
+    <!-- END SELECT 2 SCRIPT AND STYLESHEET -->
     <!-- The reason being that jspdf includes a version of requirejs which -->
     <!-- jspdf-autotable currently is not expecting. You can also use version < 2.0.21 -->
 
     @Scripts.Render("~/bundles/jquery")
+
+
+    <!-- SELECT 2 SCRIPT AND STYLESHEET -->
+    <link href="~/Scripts/dropdown/css/select2.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="~/Scripts/dropdown/js/select2.full.min.js"></script>
+
 </head>
 <body>
     <div id="app">
@@ -32,7 +47,7 @@
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="index.html"><img src="assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                            <a href="index.html"><img src="~/assets/images/logo/logo.png" alt="Logo" srcset=""></a>
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
@@ -41,347 +56,394 @@
                 </div>
                 <div class="sidebar-menu">
                     <ul class="menu">
-                        <li class="sidebar-title">Menu</li>
-
-                        <li class="sidebar-item  ">
-                            <a href="index.html" class="sidebar-link">
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-
+                        <li class="sidebar-title">Setup Forms</li>
                         <li class="sidebar-item  has-sub">
                             <a href="#" class="sidebar-link">
                                 <i class="bi bi-stack"></i>
-                                <span>Components</span>
+                                <span>General</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="component-alert.html">Alert</a>
+                                    <a href='@Url.Action("CompanyIndex", "General")'>Company</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-badge.html">Badge</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Branch</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-breadcrumb.html">Breadcrumb</a>
+                                    <a href='@Url.Action("CompanyIndex", "General")'>Country</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="component-button.html">Button</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-card.html">Card</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-carousel.html">Carousel</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-dropdown.html">Dropdown</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-list-group.html">List Group</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-modal.html">Modal</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-navs.html">Navs</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-pagination.html">Pagination</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-progress.html">Progress</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-spinner.html">Spinner</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="component-tooltip.html">Tooltip</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>City</a>
                                 </li>
                             </ul>
                         </li>
-
                         <li class="sidebar-item  has-sub">
                             <a href="#" class="sidebar-link">
-                                <i class="bi bi-collection-fill"></i>
-                                <span>Extra Components</span>
+                                <i class="bi bi-stack"></i>
+                                <span>Accounts</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="extra-component-avatar.html">Avatar</a>
+                                    <a href='@Url.Action("CompanyIndex", "General")'>Voucher Types</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="extra-component-sweetalert.html">Sweet Alert</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Chart of Accounts</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="extra-component-toastify.html">Toastify</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Accounts Information</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="extra-component-rating.html">Rating</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Financial Year</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="extra-component-divider.html">Divider</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Check Book</a>
                                 </li>
                             </ul>
                         </li>
-
-                        <li class="sidebar-item active has-sub">
-                            <a href="#" class="sidebar-link">
-                                <i class="bi bi-grid-1x2-fill"></i>
-                                <span>Layouts</span>
-                            </a>
-                            <ul class="submenu active">
-                                <li class="submenu-item ">
-                                    <a href="layout-default.html">Default Layout</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="layout-vertical-1-column.html">1 Column</a>
-                                </li>
-                                <li class="submenu-item active">
-                                    <a href="layout-vertical-navbar.html">Vertical with Navbar</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="layout-horizontal.html">Horizontal Menu</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="sidebar-title">Forms &amp; Tables</li>
-
                         <li class="sidebar-item  has-sub">
                             <a href="#" class="sidebar-link">
-                                <i class="bi bi-hexagon-fill"></i>
-                                <span>Form Elements</span>
+                                <i class="bi bi-stack"></i>
+                                <span>Sales</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="form-element-input.html">Input</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Sales Tax</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-element-input-group.html">Input Group</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Sales Man</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-element-select.html">Select</a>
+                                    <a href='@Url.Action("CompanyIndex", "General")'>Cusomers</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-element-radio.html">Radio</a>
+                                    <a href='@Url.Action("CompanyIndex", "General")'>CRM Cusomers</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-element-checkbox.html">Checkbox</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-element-textarea.html">Textarea</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Invoice Terms</a>
                                 </li>
                             </ul>
                         </li>
-
-                        <li class="sidebar-item  ">
-                            <a href="form-layout.html" class="sidebar-link">
-                                <i class="bi bi-file-earmark-medical-fill"></i>
-                                <span>Form Layout</span>
-                            </a>
-                        </li>
-
                         <li class="sidebar-item  has-sub">
                             <a href="#" class="sidebar-link">
-                                <i class="bi bi-pen-fill"></i>
-                                <span>Form Editor</span>
+                                <i class="bi bi-stack"></i>
+                                <span>Purchase</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="form-editor-quill.html">Quill</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Purchaser</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="form-editor-ckeditor.html">CKEditor</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-editor-summernote.html">Summernote</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="form-editor-tinymce.html">TinyMCE</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Supplier</a>
                                 </li>
                             </ul>
                         </li>
-
-                        <li class="sidebar-item  ">
-                            <a href="table.html" class="sidebar-link">
-                                <i class="bi bi-grid-1x2-fill"></i>
-                                <span>Table</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item  ">
-                            <a href="table-datatable.html" class="sidebar-link">
-                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                <span>Datatable</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-title">Extra UI</li>
-
                         <li class="sidebar-item  has-sub">
                             <a href="#" class="sidebar-link">
-                                <i class="bi bi-pentagon-fill"></i>
-                                <span>Widgets</span>
+                                <i class="bi bi-stack"></i>
+                                <span>Inventory</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="ui-widgets-chatbox.html">Chatbox</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Godown</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="ui-widgets-pricing.html">Pricing</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Cost Centre</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="ui-widgets-todolist.html">To-do List</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Item Brand</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Items</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Item Rate</a>
                                 </li>
                             </ul>
                         </li>
+                    </ul>
 
+                    <ul class="menu">
+                        <li class="sidebar-title">Transaction</li>
                         <li class="sidebar-item  has-sub">
                             <a href="#" class="sidebar-link">
-                                <i class="bi bi-egg-fill"></i>
-                                <span>Icons</span>
+                                <i class="bi bi-stack"></i>
+                                <span>Accounts</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="ui-icons-bootstrap-icons.html">Bootstrap Icons </a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Advance to Purchaser</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="ui-icons-fontawesome.html">Fontawesome</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Purchase Payment</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="ui-icons-dripicons.html">Dripicons</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Purchase Debit Note</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Purchase Credit Note</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Sale Payment</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Sale Debit Note</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Sale Credit Note</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Voucher Entry</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Tax Return File</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Voucher Post/Un-Post</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Asset Depreciation</a>
                                 </li>
                             </ul>
                         </li>
-
                         <li class="sidebar-item  has-sub">
                             <a href="#" class="sidebar-link">
-                                <i class="bi bi-bar-chart-fill"></i>
-                                <span>Charts</span>
+                                <i class="bi bi-stack"></i>
+                                <span>Sales</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="ui-chart-chartjs.html">ChartJS</a>
+                                    <a href='@Url.Action("CompanyIndex", "General")'>Sale Order</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="ui-chart-apexcharts.html">Apexcharts</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Delivery Order</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Sales Invoice</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Sales Return</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Direct/Counter Sale</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Asset Sale</a>
                                 </li>
                             </ul>
                         </li>
-
-                        <li class="sidebar-item  ">
-                            <a href="ui-file-uploader.html" class="sidebar-link">
-                                <i class="bi bi-cloud-arrow-up-fill"></i>
-                                <span>File Uploader</span>
-                            </a>
-                        </li>
-
                         <li class="sidebar-item  has-sub">
                             <a href="#" class="sidebar-link">
-                                <i class="bi bi-map-fill"></i>
-                                <span>Maps</span>
+                                <i class="bi bi-stack"></i>
+                                <span>Purchase</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="ui-map-google-map.html">Google Map</a>
+                                    <a href='@Url.Action("CompanyIndex", "General")'>Purchase Demand</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="ui-map-jsvectormap.html">JS Vector Map</a>
+                                    <a href='@Url.Action("CompanyIndex", "General")'>Purchase Requisition</a>
                                 </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Purchase Order</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Purchase Invoice</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Purchase Return</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Cash Purchase/ Expense</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Asset Purchase</a>
+                                </li>
+
                             </ul>
                         </li>
-
-                        <li class="sidebar-title">Pages</li>
-
-                        <li class="sidebar-item  ">
-                            <a href="application-email.html" class="sidebar-link">
-                                <i class="bi bi-envelope-fill"></i>
-                                <span>Email Application</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item  ">
-                            <a href="application-chat.html" class="sidebar-link">
-                                <i class="bi bi-chat-dots-fill"></i>
-                                <span>Chat Application</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item  ">
-                            <a href="application-gallery.html" class="sidebar-link">
-                                <i class="bi bi-image-fill"></i>
-                                <span>Photo Gallery</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item  ">
-                            <a href="application-checkout.html" class="sidebar-link">
-                                <i class="bi bi-basket-fill"></i>
-                                <span>Checkout Page</span>
-                            </a>
-                        </li>
-
                         <li class="sidebar-item  has-sub">
                             <a href="#" class="sidebar-link">
-                                <i class="bi bi-person-badge-fill"></i>
-                                <span>Authentication</span>
+                                <i class="bi bi-stack"></i>
+                                <span>Inventory</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="auth-login.html">Login</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Gate Inward Pass</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="auth-register.html">Register</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Gate Outward Pass</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="auth-forgot-password.html">Forgot Password</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Good Receipt Note</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Goods Return Note</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Goods Issue Note</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Goods Issue Return</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Bill of Material (BOM)</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Stock Transfer</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Asset Transfer</a>
                                 </li>
                             </ul>
                         </li>
-
                         <li class="sidebar-item  has-sub">
                             <a href="#" class="sidebar-link">
-                                <i class="bi bi-x-octagon-fill"></i>
-                                <span>Errors</span>
+                                <i class="bi bi-stack"></i>
+                                <span>Paryoll/ Attendance</span>
                             </a>
                             <ul class="submenu ">
                                 <li class="submenu-item ">
-                                    <a href="error-403.html">403</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>In/Out Entry</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="error-404.html">404</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Leaves Entitlement</a>
                                 </li>
                                 <li class="submenu-item ">
-                                    <a href="error-500.html">500</a>
+                                    <a href='@Url.Action("BranchIndex", "General")'>Advance to Employee</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Advance Deduction</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Salary Days</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Salary Calculation</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Daily Wages Salary</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>EOBI Payment</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Employee Tax Payment</a>
                                 </li>
                             </ul>
                         </li>
+                    </ul>
 
-                        <li class="sidebar-title">Raise Support</li>
-
-                        <li class="sidebar-item  ">
-                            <a href="https://zuramai.github.io/mazer/docs" class="sidebar-link">
-                                <i class="bi bi-life-preserver"></i>
-                                <span>Documentation</span>
+                    <ul class="menu">
+                        <li class="sidebar-title">Reports</li>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class="sidebar-link">
+                                <i class="bi bi-stack"></i>
+                                <span>Accounts</span>
                             </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Voucher Printing</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Debit Note Register</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Credit Note Register</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>General Leadger</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Trial Balance</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Profit/ Loss</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Balance Sheet</a>
+                                </li>
+                            </ul>
                         </li>
-
-                        <li class="sidebar-item  ">
-                            <a href="https://github.com/zuramai/mazer/blob/main/CONTRIBUTING.md" class="sidebar-link">
-                                <i class="bi bi-puzzle"></i>
-                                <span>Contribute</span>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class="sidebar-link">
+                                <i class="bi bi-stack"></i>
+                                <span>Sales</span>
                             </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Monthly Sales</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Sales Register</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Sales Receivable</a>
+                                </li>
+                            </ul>
                         </li>
-
-                        <li class="sidebar-item  ">
-                            <a href="https://github.com/zuramai/mazer#donate" class="sidebar-link">
-                                <i class="bi bi-cash"></i>
-                                <span>Donate</span>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class="sidebar-link">
+                                <i class="bi bi-stack"></i>
+                                <span>Purchase</span>
                             </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("CompanyIndex", "General")'>Monthly Purchase</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Purchase Register</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Purchase Payable</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class="sidebar-link">
+                                <i class="bi bi-stack"></i>
+                                <span>Inventory</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Stock Register</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Gate Register</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Stock Purchaseable</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class="sidebar-link">
+                                <i class="bi bi-stack"></i>
+                                <span>Paryoll/ Attendance</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Employee Attendance</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Leaves Entitlement</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Monthly Salary</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Daily Wages Salary</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>EOBI Payment Report</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a href='@Url.Action("BranchIndex", "General")'>Employee Tax Report</a>
+                                </li>
+                            </ul>
                         </li>
 
                     </ul>
+
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
                 <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; height: 722px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 286px;"></div></div>
@@ -432,7 +494,7 @@
                                         </div>
                                         <div class="user-img d-flex align-items-center">
                                             <div class="avatar avatar-md">
-                                                <img src="assets/images/faces/1.jpg">
+                                                <img src="~/assets/images/faces/1.jpg">
                                             </div>
                                         </div>
                                     </div>
@@ -496,6 +558,7 @@
     <script src="~/assets/vendors/apexcharts/apexcharts.js"></script>
     <script src="~/assets/js/pages/dashboard.js"></script>
     <script src="~/assets/js/main.js"></script>
+
 </body>
 
 

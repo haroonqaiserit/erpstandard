@@ -34,7 +34,7 @@
                 <div Id="FormProcess">
 
                 </div>
-                <div Id="OrderReport">
+                <div Id="EntityReportPreview">
                     
                 </div>
             </div>
@@ -128,12 +128,9 @@
 
     });
 
-
-
-
     function onLoad() {
         $.ajax({
-            url: '@Url.Action("CompanyList", "General")',
+            url: '@Url.Action("BranchList", "General")',
         })
             .done(function (response) {
                 $("#FormProcess").html(response);
@@ -145,7 +142,7 @@
 
     function onCreate() {
         $.ajax({
-            url: '@Url.Action("CompanyCreate", "General")'
+            url: '@Url.Action("BranchCreate", "General")'
         })
                 .done(function (response) {
                     //debugger;
@@ -166,7 +163,7 @@
         //alert(RecordMode);
         $.ajax({
             type: "POST",
-            url: '@Url.Action("CompanyList", "General")',
+            url: '@Url.Action("BranchList", "General")',
             data: {
                 pageno: pageno,
                 pageSize: pageSize,
@@ -193,7 +190,7 @@
 
         $.ajax({
             type: "POST",
-            url: '@Url.Action("CompanyCreate", "General")',
+            url: '@Url.Action("BranchCreate", "General")',
             data: {
                 Id: EditId
             },
@@ -217,7 +214,7 @@
 
         $.ajax({
             type: "Get",
-            url: '@Url.Action("CompanyEdit", "General")',
+            url: '@Url.Action("BranchEdit", "General")',
             data: {
                 Id: EditId
             },
@@ -235,34 +232,23 @@
     };
 
     function onEditSave() {
-         var CompNo = $("#CompNo").val();
-         var Company_Name = $("#Company_Name").val();
-         var company_desc = $("#company_desc").val();
-         var Company_address = $("#Company_address").val();
-         var Company_phones = $("#Company_phones").val();
-         var Company_email = $("#Company_email").val();
-         var Company_fax = $("#Company_fax").val();
-         var CityName = $("#CityName").val();
-         var PostCode = $("#PostCode").val();
-         var STaxRegNo = $("#STaxRegNo").val();
-         var NationalTaxNo = $("#NationalTaxNo").val();
-        //alert(EditId);
-
+        var Status = $("#Status").val();
+        var BranchName = $("#BranchName").val();
+        var Dscr = $("#Dscr").val();
+        var BranchAddress = $("#BranchAddress").val();
+        var CompNo = $("#CompanyId").val();
+        var AcntId = $("#AcntId").val();        //alert(EditId);
+        console.log(CompNo);
         $.ajax({
             type: "POST",
-            url: '@Url.Action("CompanyEdit", "General")',
+            url: '@Url.Action("BranchEdit", "General")',
             data: {
-                Company_Name: Company_Name,
-                company_desc: company_desc,
-                Company_address: Company_address,
-                Company_phones: Company_phones,
-                Company_email: Company_email,
-                Company_fax: Company_fax,
-                CityName: CityName,
-                PostCode: PostCode,
-                STaxRegNo: STaxRegNo,
-                NationalTaxNo: NationalTaxNo,
-                CompNo: CompNo
+                BranchName: BranchName,
+                Dscr: Dscr,
+                BranchAddress: BranchAddress,
+                CompNo: CompNo,
+                AcntId: AcntId,
+                Status: Status
             },
             beforeSend: function () {
                 $("#CustomSearchLoader").show();
@@ -278,44 +264,39 @@
     };
 
     function onSave() {
+        if (validateForm) {
+            console.log(validateForm);
+            var BranchName = $("#BranchName").val();
+            var Dscr = $("#Dscr").val();
+            var BranchAddress = $("#BranchAddress").val();
+            //var CompNo = $("#CompNo").val();
+            var AcntId = $("#AcntId").val();
+            var CompNo = $("#CompanyId").val();
+            var AcntId = $("#AcntCode").val();        //alert(EditId);
+            console.log(CompNo);
 
-        var Company_Name = $("#Company_Name").val();
-        var company_desc = $("#company_desc").val();
-        var Company_address = $("#Company_address").val();
-        var Company_phones = $("#Company_phones").val();
-        var Company_email = $("#Company_email").val();
-        var Company_fax = $("#Company_fax").val();
-        var CityName = $("#CityName").val();
-        var PostCode = $("#PostCode").val();
-        var STaxRegNo = $("#STaxRegNo").val();
-        var NationalTaxNo = $("#NationalTaxNo").val();
-
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("CompanyCreate", "General")',
-            data: {
-                Company_Name: Company_Name,
-                company_desc: company_desc,
-                Company_address: Company_address,
-                Company_phones: Company_phones,
-                Company_email: Company_email,
-                Company_fax: Company_fax,
-                CityName: CityName,
-                PostCode: PostCode,
-                STaxRegNo: STaxRegNo,
-                NationalTaxNo: NationalTaxNo
-            },
-            beforeSend: function () {
-                $("#CustomSearchLoader").show();
-            },
-            complete: function () {
-                $("#CustomSearchLoader").hide();
-            },
-            success: function (result) {
-                //alert("result received");
-                $("#FormProcess").html(result);
-            }
-        })
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("BranchCreate", "General")',
+                data: {
+                    BranchName: BranchName,
+                    Dscr: Dscr,
+                    BranchAddress: BranchAddress,
+                    CompNo: CompNo,
+                    AcntId: AcntId
+                },
+                beforeSend: function () {
+                    $("#CustomSearchLoader").show();
+                },
+                complete: function () {
+                    $("#CustomSearchLoader").hide();
+                },
+                success: function (result) {
+                    //alert("result received");
+                    $("#FormProcess").html(result);
+                }
+            })
+        }
     };
 
     function onDelete(data) {
@@ -336,7 +317,7 @@
                     var DeleteId = data;
                     $.ajax({
                         type: "POST",
-                        url: '@Url.Action("CompanyDelete", "General")',
+                        url: '@Url.Action("BranchDelete", "General")',
                         data: {
                             Id: DeleteId
                         },
@@ -370,7 +351,7 @@
             var dtSearch = document.getElementById("dtSearch").value;
             $.ajax({
                 type: "Get",
-                url: '@Url.Action("CompanyList", "General")',
+                url: '@Url.Action("BranchList", "General")',
                 data: {
                     pageSize: pageSize,
                     dtSearch: dtSearch
@@ -398,7 +379,7 @@
         console.log(pageSize);
         $.ajax({
             type: "Get",
-            url: '@Url.Action("CompanyList", "General")',
+            url: '@Url.Action("BranchList", "General")',
             data: {
                 pageSize: pageSize,
                 dtSearch: dtSearch
@@ -426,7 +407,7 @@
         console.log(pageSize);
         $.ajax({
             type: "Get",
-            url: '@Url.Action("CompanyList", "General")',
+            url: '@Url.Action("BranchList", "General")',
             data: {
                 pageSize: pageSize,
                 dtSearch: dtSearch,
@@ -452,7 +433,7 @@
         var reportpreviewcount = 0;
         $.ajax({
             type: "Get",
-            url: '@Url.Action("CompanyReportView", "General")',
+            url: '@Url.Action("BranchReportView", "General")',
             data: {
                 dtSearch: dtSearch,
                 clmNameOrder: clmNameOrder
@@ -465,14 +446,14 @@
             },
             success: function (result) {
                 //alert("result received");
-                $("#OrderReport").html(result);
+                $("#EntityReportPreview").html(result);
                 if (reportpreviewcount == 0) {
                 var doc = new jsPDF('p');
-                doc.text('Company Report ', 20, 10)
+                    doc.text('Branch Report ', 20, 10)
                 //doc.autoTable({ html: '#tblCompanyReport' },
                 //    {(20, 20)});
 
-                doc.autoTable({ html: '#tblCompanyReport' });
+                    doc.autoTable({ html: '#tblBranchReport' });
 
                 //doc.text("This is the default font.", 20, 20);
 
@@ -519,5 +500,13 @@
         }
     };
 
+
+    function validateForm() {
+        let x = document.forms["branchForm"]["BranchName"].value;
+        if (x == "") {
+            alert("Name must be filled out");
+            return false;
+        }
+    }
 
 </script>

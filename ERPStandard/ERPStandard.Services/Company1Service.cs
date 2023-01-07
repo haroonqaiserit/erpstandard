@@ -122,6 +122,17 @@ namespace ERPStandard.Services
             return viewModel;
         }
 
+        public List<Company1> All_List()
+        {
+            var viewModel = new List<Company1>();
+            using (var context = new SairaIndEntities())
+            {
+                viewModel = context.Company1.ToList();
+            }
+            return viewModel;
+        }
+
+
         public Company1 Single(int Id)
         {
             var viewModel = new Company1();
@@ -133,7 +144,6 @@ namespace ERPStandard.Services
             }
             return viewModel;
         }
-
         public int Add(Company1 company)
         {
             int compno=0;
@@ -149,7 +159,6 @@ namespace ERPStandard.Services
             }
             return compno;
         }
-
         public bool Update(Company1 company) 
         {
             bool flgCompany = false;
@@ -175,6 +184,5 @@ namespace ERPStandard.Services
             }
             return flgCompany;
         }
-
     }
 }

@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CombofillController.cs" />
     <Compile Include="Controllers\GeneralController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -1882,6 +1883,8 @@
     <Content Include="assets\vendors\tinymce\skins\ui\oxide\fonts\tinymce-mobile.woff" />
     <Content Include="assets\vendors\tinymce\tsconfig.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\dropdown\css\select2.min.css" />
+    <Content Include="Scripts\dropdown\js\select2.full.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
@@ -1892,6 +1895,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\dropdown\select2-custom.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1932,6 +1936,12 @@
     <Content Include="Views\General\CompanyList.cshtml" />
     <Content Include="Views\General\CompanyEditView.cshtml" />
     <Content Include="Views\General\CompanyReportView.cshtml" />
+    <Content Include="Views\General\BranchReportView.cshtml" />
+    <Content Include="Views\General\BranchCreate.cshtml" />
+    <Content Include="Views\General\BranchEditView.cshtml" />
+    <Content Include="Views\General\BranchIndex.cshtml" />
+    <Content Include="Views\General\BranchList.cshtml" />
+    <Content Include="Views\General\dropdownview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

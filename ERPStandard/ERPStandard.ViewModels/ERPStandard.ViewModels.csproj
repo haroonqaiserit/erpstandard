@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BranchViewModel.cs" />
+    <Compile Include="ChartOfAccountViewModel.cs" />
     <Compile Include="Company1ViewModel.cs" />
     <Compile Include="PaginationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
