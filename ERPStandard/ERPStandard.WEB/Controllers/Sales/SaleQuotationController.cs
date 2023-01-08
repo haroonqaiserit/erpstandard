@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace ERPStandard.WEB.Controllers
 {
-    public class SaleQuotationController : Controller
+    public class SalequotationController : Controller
     {
         // In the name of Allah, the most merciful
         // Created on 08-Jan-2022
@@ -45,7 +45,7 @@ namespace ERPStandard.WEB.Controllers
         [HttpGet]
         public ActionResult SaleQuotationEdit(string Id)
         {
-            var comp = SaleQuotationService.Instance.Single(int.Parse(Id));
+            var comp = SaleQuotationService.Instance.Single(Id);
             return PartialView("SaleQuotationEditView", comp);
         }
 
@@ -77,7 +77,7 @@ namespace ERPStandard.WEB.Controllers
         [HttpPost]
         public ActionResult SaleQuotationDelete(string Id)
         {
-            var flgComp = SaleQuotationService.Instance.Delete(int.Parse(Id));
+            var flgComp = SaleQuotationService.Instance.Delete(Id);
             if (flgComp == true)
             {
                 var SaleQuotationViewModel = SaleQuotationListLoad(1);

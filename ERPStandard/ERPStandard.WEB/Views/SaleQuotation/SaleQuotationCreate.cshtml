@@ -1,0 +1,257 @@
+﻿@{
+    ViewBag.Title = "Sales Transaction";
+    ViewBag.SubTitle = "Quotation";
+}
+<style>
+    .select2-container .select2-selection--single {
+        height: 34px !important;
+    }
+
+    .select2-container--default .select2-selection--single {
+        border: 1px solid #ccc !important;
+        border-radius: 0px !important;
+    }
+</style>
+
+<div class="card-header">
+    <h4 class="card-title">@ViewBag.SubTitle</h4>
+</div>
+<div class="card-content">
+    <div class="card-body">
+        <form name="branchForm" class="form" method="post">
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label for="QuoteDate">Quote Date</label>
+                        <input type="date" id="QuoteDate" required class="form-control" name="QuoteDate">
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label for="QuoteValidDate">Valid Date</label>
+                        <input type="date" id="Dscr" required class="form-control" name="QuoteValidDate">
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label for="Remarks">Remarks</label>
+                        <input type="text" id="Remarks" minlength="3" maxlength="150" required class="form-control" placeholder="Remarks" name="Remarks">
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label for="SalesManId">Sales Man</label>
+                        <select class="choices form-select  select2" id="SalesManId" name="SalesManId" required>
+                            <option value='' selected disabled> --Select SalesMan--</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label for="CustomerNo">Customer</label>
+                        <select class="form-select  select2" id="CustomerId" name="CustomerNo" required>
+                            <option value='' selected disabled> --Select Customer--</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-end">
+                    <button type="button" id="btnSave" class="btn btn-primary me-1 mb-1" onclick="onSave()">Submit</button>
+                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="form-group">
+                    <h1 danger>Quotation Details</h1>
+                </div>
+            </div>
+
+<!-- Table for Quotation Details -->
+
+        <div>
+            <table id="tblQuotationDetail">
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Qty</th>
+                        <th>Rate</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="tblRow">
+                        <td>
+                            <select class="form-select  select2" id="ItemID" name="ItemID" required>
+                                <option value='' selected disabled> --Select Item--</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="number" id="Qty" minlength="1" maxlength="9" required class="form-control" placeholder="Qty" name="Qty">
+                        </td>
+                        <td>
+                            <input type="number" id="Rate" minlength="1" maxlength="9" required class="form-control" placeholder="Rate" name="Rate">
+                        </td>
+                        <td>
+                            <button type="button" class="badge bg-success" onclick="onAddRow()">Add</button>
+                            <button type="button" class="badge bg-danger" onclick="onDeleteRow(this)">Delete</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+<!-- Table for Quotation Detail -->
+
+        </form>
+      
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        AccountComboFill();
+        CompanyComboFill();
+        ItemFill();
+    });
+
+    function onAddRow() {
+        console.log("Reached on Add Row");
+        //var table = document.getElementById('tblQuotationDetail');
+        //var row = document.getElementById('tblRow')
+        //console.log(row[row.length - 1]);
+        ////var row = table.getElementById('tblRow')
+        //var rowOuterHtml = row[row.length - 1].rowOuterHtml;
+        //var newRow = table.insertRow();
+        //newRow.innerHTML = rowOuterHtml;
+
+
+        var table = document.getElementById('tblQuotationDetail');
+        var row = document.getElementById('tblRow')
+        var clone = row.cloneNode(true); // copy children too
+        clone.id = "newID"; // change id or other attributes/contents
+        table.appendChild(clone); // add new row to end of table
+    };
+
+    function onDeleteRow(ev) {
+        var p = ev.parentNode.parentNode;
+        p.parentNode.removeChild(p);
+
+    }
+
+    function AccountComboFill() {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("AccountDropdown", "Combofill")',
+            dataType: "json",
+            beforeSend: function () {
+                $("#CustomSearchLoader").show();
+            },
+            complete: function () {
+                $("#CustomSearchLoader").hide();
+            },
+            success: function (result) {
+                //$('#AcntCode').html('');
+                //var rows1 = "<option value='' selected disabled > --Select Account--</option >";
+                //$('#AcntCode').append(rows1);
+
+                $.each(result, function (i, item) {
+                    var rows;
+                    rows = "<option value='" + item.AcntId + "'>" + item.Dscr + "</option>";
+                    $('#SalesManId').append(rows);
+                });
+            }
+        });
+    };
+
+    function CompanyComboFill() {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("CompanyDropdown", "Combofill")',
+            dataType: "json",
+            beforeSend: function () {
+                $("#CustomSearchLoader").show();
+            },
+            complete: function () {
+                $("#CustomSearchLoader").hide();
+            },
+            success: function (result) {
+                //$('#AcntCode').html('');
+                //var rows1 = "<option value='' selected disabled > --Select Account--</option >";
+                //$('#AcntCode').append(rows1);
+
+                $.each(result, function (i, item) {
+                    var rows;
+                    //console.log(i);
+                    if (i == 0) {
+                        rows = "<option selected value='" + item.CompNo + "'>" + item.Company_Name + "</option>";
+                    }
+                    else {
+                        rows = "<option value='" + item.CompNo + "'>" + item.Company_Name + "</option>";
+                    }
+                    $('#CustomerId').append(rows);
+                });
+            }
+        });
+    };
+    function ItemFill() {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("CompanyDropdown", "Combofill")',
+            dataType: "json",
+            beforeSend: function () {
+                $("#CustomSearchLoader").show();
+            },
+            complete: function () {
+                $("#CustomSearchLoader").hide();
+            },
+            success: function (result) {
+                //$('#AcntCode').html('');
+                //var rows1 = "<option value='' selected disabled > --Select Account--</option >";
+                //$('#AcntCode').append(rows1);
+
+                $.each(result, function (i, item) {
+                    var rows;
+                    //console.log(i);
+                    if (i == 0) {
+                        rows = "<option selected value='" + item.CompNo + "'>" + item.Company_Name + "</option>";
+                    }
+                    else {
+                        rows = "<option value='" + item.CompNo + "'>" + item.Company_Name + "</option>";
+                    }
+                    $('#ItemID').append(rows);
+                });
+            }
+        });
+    };
+
+
+       function getval(sel) {
+        var ReceiverId = $(sel).val();
+
+           console.log(ReceiverId);
+        @*$.ajax({
+            type: "POST",
+            url: "/DeviceManagement/DeviceIsExist?ReceiverId=" + ReceiverId,
+            success: function (res) {
+                if (res.result == true) {
+                    window.location.href ="@Url.Action("EditDeviceM", "DeviceManagement")";
+                }
+            },
+            error: function (exception) {
+                alert('Exeption:');
+            }
+        });*@
+    };
+
+
+</script>
+
+
+
+
+<script>
+    $('.select2').select2();
+</script>
