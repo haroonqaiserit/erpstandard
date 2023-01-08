@@ -1,0 +1,92 @@
+﻿using ERPStandard.DbEntities;
+using ERPStandard.Services;
+using ERPStandard.ViewModels;
+using ERPStandard.ViewModels.Sales;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace ERPStandard.WEB.Controllers
+{
+    public class SaleQuotationController : Controller
+    {
+        // In the name of Allah, the most merciful
+        // Created on 08-Jan-2022
+        // Created by Haroon
+        // Sales Order Master Detail Form
+
+        #region Sales - Order
+
+        public ActionResult SaleQuotationIndex()
+        {
+            return View();
+        }
+
+        public ActionResult SaleQuotationList(int? pageno, int pageSize = 10, string dtSearch = "", int clmNameOrder = 0)
+        {
+            pageno = pageno.HasValue ? pageno.Value : 1;
+            var SaleQuotationViewModel = SaleQuotationListLoad(pageno.Value, pageSize, dtSearch, clmNameOrder);
+            return PartialView("SaleQuotationList", SaleQuotationViewModel);
+        }
+        public SaleQuotationViewModel SaleQuotationListLoad(int pageno, int pageSize = 10, string dtSearch = "", int clmNameOrder = 0)
+        {
+            SaleQuotationViewModel SaleQuotationViewModel = new SaleQuotationViewModel();
+            SaleQuotationViewModel = SaleQuotationService.Instance.All(pageno, pageSize, dtSearch, clmNameOrder);
+            return SaleQuotationViewModel;
+        }
+        public ActionResult SaleQuotationReportView(string dtSearch = "", int clmNameOrder = 0)
+        {
+            var SaleQuotationViewModel = SaleQuotationService.Instance.Report(dtSearch, clmNameOrder);
+            return PartialView("SaleQuotationReportView", SaleQuotationViewModel);
+        }
+
+        [HttpGet]
+        public ActionResult SaleQuotationEdit(string Id)
+        {
+            var comp = SaleQuotationService.Instance.Single(int.Parse(Id));
+            return PartialView("SaleQuotationEditView", comp);
+        }
+
+        [HttpPost]
+        public ActionResult SaleQuotationEdit(CRM_SaleQuotation SaleQuotation)
+        {
+            var flgComp = SaleQuotationService.Instance.Update(SaleQuotation);
+            if (flgComp == true)
+            {
+                var SaleQuotationViewModel = SaleQuotationListLoad(1);
+                return PartialView("SaleQuotationList", SaleQuotationViewModel);
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult SaleQuotationCreate()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult SaleQuotationCreate(CRM_SaleQuotation SaleQuotation)
+        {
+            var compno = SaleQuotationService.Instance.Add(SaleQuotation);
+            SaleQuotationViewModel SaleQuotationViewModel = new SaleQuotationViewModel();
+            SaleQuotationViewModel = SaleQuotationService.Instance.All(1);
+            return PartialView("SaleQuotationList", SaleQuotationViewModel);
+        }
+        [HttpPost]
+        public ActionResult SaleQuotationDelete(string Id)
+        {
+            var flgComp = SaleQuotationService.Instance.Delete(int.Parse(Id));
+            if (flgComp == true)
+            {
+                var SaleQuotationViewModel = SaleQuotationListLoad(1);
+                return PartialView("SaleQuotationList", SaleQuotationViewModel);
+            }
+            return View();
+        }
+
+
+        #endregion
+    }
+}
