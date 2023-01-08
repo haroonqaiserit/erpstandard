@@ -46,8 +46,9 @@
     <Compile Include="Company1ViewModel.cs" />
     <Compile Include="PaginationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Sales\SaleQuotationDetailViewModel.cs" />
+    <Compile Include="Sales\CustomerViewModel.cs" />
     <Compile Include="Sales\SaleQuotationViewModel.cs" />
+    <Compile Include="Sales\SaleQuotationDetailViewModel.cs" />
     <Compile Include="Sales\SalesOrderViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

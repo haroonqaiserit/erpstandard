@@ -67,9 +67,9 @@ namespace ERPStandard.WEB.Controllers
             return PartialView();
         }
         [HttpPost]
-        public ActionResult SaleQuotationCreate(CRM_SaleQuotation SaleQuotation)
+        public ActionResult SaleQuotationCreate(CRM_SaleQuotation SaleQuotation, List<CRM_SaleQuotationDetail> SaleQuotationDetail)
         {
-            var compno = SaleQuotationService.Instance.Add(SaleQuotation);
+            var compno = SaleQuotationService.Instance.Add(SaleQuotation, SaleQuotationDetail);
             SaleQuotationViewModel SaleQuotationViewModel = new SaleQuotationViewModel();
             SaleQuotationViewModel = SaleQuotationService.Instance.All(1);
             return PartialView("SaleQuotationList", SaleQuotationViewModel);

@@ -196,36 +196,97 @@
     function onSave() {
         if (validateForm) {
             console.log(validateForm);
-            var BranchName = $("#BranchName").val();
-            var Dscr = $("#Dscr").val();
-            var BranchAddress = $("#BranchAddress").val();
-            //var CompNo = $("#CompNo").val();
-            var AcntId = $("#AcntId").val();
-            var CompNo = $("#CompanyId").val();
-            var AcntId = $("#AcntCode").val();        //alert(EditId);
-            console.log(CompNo);
+            var SaleQuotations = [];
+            var SaleQuotation = {};
+            var SaleQuotationDetails = [];
+            SaleQuotation.CustomerNo = $("#CustomerId").val();
 
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("SaleQuotationCreate", "Salequotation")',
-                data: {
-                    BranchName: BranchName,
-                    Dscr: Dscr,
-                    BranchAddress: BranchAddress,
-                    CompNo: CompNo,
-                    AcntId: AcntId
-                },
-                beforeSend: function () {
-                    $("#CustomSearchLoader").show();
-                },
-                complete: function () {
-                    $("#CustomSearchLoader").hide();
-                },
-                success: function (result) {
-                    //alert("result received");
-                    $("#FormProcess").html(result);
+            if (SaleQuotation.SalesManId == "" || SaleQuotation.CustomerNo == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Please select the required dropdowns!',
+                })
+                return;
+            }
+            SaleQuotation.QuoteDate = $("#QuoteDate").val();
+            SaleQuotation.QuoteValidDate = $("#QuoteValidDate").val();
+            SaleQuotation.Remarks = $("#Remarks").val();
+            SaleQuotation.SalesManId = $("#SalesManId").val();
+
+// Master Detail Record Save
+            SaleQuotations.push(SaleQuotation);
+            //console.log("SaleQuotation before loop preview");
+            //console.log(SaleQuotation);
+            var flgerr = false;
+            $('#tblQuotationDetail > tbody  > tr').each(function () {
+                var SaleQuotationDetail = {};
+                console.log("enter to read table combobox value");
+                console.log($('option:selected', $(this).find('td:eq(0) select')).val());
+
+                SaleQuotationDetail.ItemID = '1';// $(this).find("td:eq(0) input[type='text']").val();
+                if (SaleQuotationDetail.ItemID == "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: "Item selection is mandatory",
+                    })
+                    flgerr = true;
+                    return;
                 }
-            })
+                SaleQuotationDetail.Qty = $(this).find("td:eq(1) input[type='number']").val();
+                SaleQuotationDetail.Rate = $(this).find("td:eq(2) input[type='number']").val();
+                if (SaleQuotationDetail.Qty == "" || SaleQuotationDetail.Rate == "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: "Qty/Rate must required",
+                    })
+                    flgerr = true;
+                    return;
+                }
+                SaleQuotationDetail.SaleTaxRate = $(this).find("td:eq(3) input[type='number']").val();
+                SaleQuotationDetail.ASaleTaxRate = $(this).find("td:eq(4) input[type='number']").val();
+                SaleQuotationDetail.SExDutyRate = $(this).find("td:eq(5) input[type='number']").val();
+
+                SaleQuotationDetails.push(SaleQuotationDetail);
+
+                //console.log("SaleQuotation preview");
+                //console.log(SaleQuotation);
+                //console.log("SaleQuotation Detail");
+                //console.log(JSON.stringify(SaleQuotationDetails));
+            });
+            if (flgerr == false) {
+                $.ajax({
+                    url: '@Url.Action("SaleQuotationCreate", "Salequotation")',
+                    type: "POST",
+                    data: JSON.stringify(
+                         {
+                            SaleQuotation: SaleQuotation,
+                            SaleQuotationDetail: SaleQuotationDetails
+                        }
+                    ),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.result == false) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: '' + response.text + '',
+                            })
+                        } else {
+                            $("#FormProcess").html(response);
+                        }
+                    }
+                });
+            }
+
+
+
+// Master Detail Record Save
+
+
         }
     };
 

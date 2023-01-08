@@ -118,7 +118,7 @@ namespace ERPStandard.Services
             }
             return viewModel;
         }
-        public int Add(CRM_SaleQuotation SaleQuotation)
+        public int Add(CRM_SaleQuotation SaleQuotation, List<CRM_SaleQuotationDetail> SaleQuotationDetail)
         {
             int compno = 0;
             using (var context = new SairaIndEntities())

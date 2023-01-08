@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountsServices.cs" />
+    <Compile Include="CustomerService.cs" />
     <Compile Include="GlobalVariables.cs" />
     <Compile Include="SaleQuotationService.cs" />
     <Compile Include="BranchService.cs" />

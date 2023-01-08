@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace ERPStandard.ViewModels.Sales
 {
-    public class SaleQuotationViewModel
+    public class SaleQuotationDetailViewModel
     {
-        public List<CRM_SaleQuotation> SaleQuotation { get; set; }
+        public CRM_SaleQuotation SaleQuotation { get; set; }
+        public List<CRM_SaleQuotationDetail> SaleQuotationDetail { get; set; }
         public Pager Pager { get; set; }
         public string dtSearch { get; set; }
         public int clmNameOrder { get; set; }

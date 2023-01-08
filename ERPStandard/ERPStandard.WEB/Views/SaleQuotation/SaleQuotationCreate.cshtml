@@ -18,27 +18,29 @@
 </div>
 <div class="card-content">
     <div class="card-body">
-        <form name="branchForm" class="form" method="post">
+
+
+        <form name="branchForm" class="form form-horizontal">
             <div class="row">
-                <div class="col-md-6 col-12">
+                <div class="col-md-1">
                     <div class="form-group">
                         <label for="QuoteDate">Quote Date</label>
                         <input type="date" id="QuoteDate" required class="form-control" name="QuoteDate">
                     </div>
                 </div>
-                <div class="col-md-6 col-12">
+                <div class="col-md-1">
                     <div class="form-group">
                         <label for="QuoteValidDate">Valid Date</label>
-                        <input type="date" id="Dscr" required class="form-control" name="QuoteValidDate">
+                        <input type="date" id="QuoteValidDate" required class="form-control" name="QuoteValidDate">
                     </div>
                 </div>
-                <div class="col-md-6 col-12">
+                <div class="col-md-2">
                     <div class="form-group">
                         <label for="Remarks">Remarks</label>
                         <input type="text" id="Remarks" minlength="3" maxlength="150" required class="form-control" placeholder="Remarks" name="Remarks">
                     </div>
                 </div>
-                <div class="col-md-6 col-12">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="SalesManId">Sales Man</label>
                         <select class="choices form-select  select2" id="SalesManId" name="SalesManId" required>
@@ -47,7 +49,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-12">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="CustomerNo">Customer</label>
                         <select class="form-select  select2" id="CustomerId" name="CustomerNo" required>
@@ -56,56 +58,95 @@
 
                     </div>
                 </div>
-                <div class="col-12 d-flex justify-content-end">
+                <div class="col-sm-12 d-flex justify-content-end">
                     <button type="button" id="btnSave" class="btn btn-primary me-1 mb-1" onclick="onSave()">Submit</button>
                     <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
                 </div>
             </div>
-            <div class="col-md-6 col-12">
+            <div class="col-md-4">
                 <div class="form-group">
                     <h1 danger>Quotation Details</h1>
                 </div>
             </div>
 
-<!-- Table for Quotation Details -->
+            <!-- Table for Quotation Details -->
 
-        <div>
-            <table id="tblQuotationDetail">
-                <thead>
-                    <tr>
-                        <th>Item Name</th>
-                        <th>Qty</th>
-                        <th>Rate</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr id="tblRow">
-                        <td>
-                            <select class="form-select  select2" id="ItemID" name="ItemID" required>
-                                <option value='' selected disabled> --Select Item--</option>
-                            </select>
-                        </td>
-                        <td>
-                            <input type="number" id="Qty" minlength="1" maxlength="9" required class="form-control" placeholder="Qty" name="Qty">
-                        </td>
-                        <td>
-                            <input type="number" id="Rate" minlength="1" maxlength="9" required class="form-control" placeholder="Rate" name="Rate">
-                        </td>
-                        <td>
-                            <button type="button" class="badge bg-success" onclick="onAddRow()">Add</button>
-                            <button type="button" class="badge bg-danger" onclick="onDeleteRow(this)">Delete</button>
-                        </td>
-                    </tr>
+            <div>
+                <table id="tblQuotationDetail" class="table table-striped dataTable-table">
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Qty</th>
+                            <th>Rate</th>
+                            <th>STax</th>
+                            <th>VAT</th>
+                            <th>ExDuty</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tblRowBody">
+                        <tr id="tblRow">
+                            <td class="col-md-4">
+                                <select class="form-select" id="ItemID" name="ItemID" required>
+                                    <option value='' selected disabled> --Select Item--</option>
+                                </select>
+                            </td>
+                            <td class="col-md-1">
+                                <input type="number" id="Qty" minlength="1" maxlength="9" required class="form-control" placeholder="Qty" name="Qty">
+                            </td>
+                            <td class="col-md-1">
+                                <input type="number" id="Rate" minlength="1" maxlength="9" required class="form-control" placeholder="Rate" name="Rate">
+                            </td>
+                            <td class="col-md-1">
+                                <input type="number" id="SaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="STax" name="SaleTaxRate">
+                            </td>
+                            <td class="col-md-1">
+                                <input type="number" id="ASaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="AddTax" name="ASaleTaxRate">
+                            </td>
+                            <td class="col-md-1">
+                                <input type="number" id="SExDutyRate" minlength="1" maxlength="9" required class="form-control" placeholder="DutyRate" name="SExDutyRate">
+                            </td>
+                            <td>
+                                <button type="button" class="badge bg-success" onclick="onAddRow()">Add</button>
+                                <button type="button" class="badge bg-danger" onclick="onDeleteRow(this)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <table hidden>
+                <tr style="display: none" id="tblRowforCopy">
+                    <td class="col-md-4">
+                        <select class="form-select" id="ItemIDD" name="ItemID" required>
+                            <option value='' selected disabled> --Select Item--</option>
+                        </select>
+                    </td>
+                    <td class="col-md-1">
+                        <input type="number" id="Qty" minlength="1" maxlength="9" required class="form-control" placeholder="Qty" name="Qty">
+                    </td>
+                    <td class="col-md-1">
+                        <input type="number" id="Rate" minlength="1" maxlength="9" required class="form-control" placeholder="Rate" name="Rate">
+                    </td>
+                    <td class="col-md-1">
+                        <input type="number" id="SaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="STax" name="SaleTaxRate">
+                    </td>
+                    <td class="col-md-1">
+                        <input type="number" id="ASaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="AddTax" name="ASaleTaxRate">
+                    </td>
+                    <td class="col-md-1">
+                        <input type="number" id="SExDutyRate" minlength="1" maxlength="9" required class="form-control" placeholder="DutyRate" name="SExDutyRate">
+                    </td>
+                    <td>
+                        <button type="button" class="badge bg-success" onclick="onAddRow()">Add</button>
+                        <button type="button" class="badge bg-danger" onclick="onDeleteRow(this)">Delete</button>
+                    </td>
+                </tr>
 
-                </tbody>
             </table>
-        </div>
-
-<!-- Table for Quotation Detail -->
+            <!-- Table for Quotation Detail -->
 
         </form>
-      
+
     </div>
 </div>
 
@@ -127,18 +168,24 @@
         //var newRow = table.insertRow();
         //newRow.innerHTML = rowOuterHtml;
 
-
         var table = document.getElementById('tblQuotationDetail');
-        var row = document.getElementById('tblRow')
+        var row = document.getElementById('tblRowforCopy');
+        var tbody = document.getElementById('tblRowBody');
         var clone = row.cloneNode(true); // copy children too
         clone.id = "newID"; // change id or other attributes/contents
-        table.appendChild(clone); // add new row to end of table
+        clone.style.display = 'table-row'
+        //var result_style = document.getElementById('result_tr').style;
+        //result_style.display = 'table-row'
+
+        tbody.appendChild(clone); // add new row to end of table
+        //table.appendChild(clone); // add new row to end of table
     };
 
     function onDeleteRow(ev) {
         var p = ev.parentNode.parentNode;
-        p.parentNode.removeChild(p);
-
+        if (p.id != "tblRow") {
+            p.parentNode.removeChild(p);
+        }
     }
 
     function AccountComboFill() {
@@ -222,6 +269,7 @@
                         rows = "<option value='" + item.CompNo + "'>" + item.Company_Name + "</option>";
                     }
                     $('#ItemID').append(rows);
+                    $('#ItemIDD').append(rows);
                 });
             }
         });

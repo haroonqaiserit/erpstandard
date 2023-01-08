@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERPStandard.ViewModels.Sales
+namespace ERPStandard.ViewModels
 {
-    public class SaleQuotationViewModel
+    public class CustomerViewModel
     {
-        public List<CRM_SaleQuotation> SaleQuotation { get; set; }
+        public List<Customer> Customers { get; set; }
         public Pager Pager { get; set; }
         public string dtSearch { get; set; }
         public int clmNameOrder { get; set; }
