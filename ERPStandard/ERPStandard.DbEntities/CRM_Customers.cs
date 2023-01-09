@@ -17,17 +17,17 @@ namespace ERPStandard.DbEntities
         public string CustomerNo { get; set; }
         public int CustNum { get; set; }
         public bool PotentialCustomer { get; set; }
-        public string CompNo { get; set; }
-        public string BranchNo { get; set; }
-        public bool DeletionID { get; set; }
-        public System.DateTime SaveDate { get; set; }
-        public string CountryId { get; set; }
-        public string CityId { get; set; }
-        public string Address { get; set; }
         public string Name { get; set; }
+        public string Address { get; set; }
         public string ContactPerson { get; set; }
         public string Phone1 { get; set; }
         public string Phone2 { get; set; }
+        public int CompNo { get; set; }
+        public int BranchNo { get; set; }
+        public int DeletionID { get; set; }
+        public System.DateTime SaveDate { get; set; }
+        public string CountryId { get; set; }
+        public string CityId { get; set; }
         public string Email { get; set; }
         public string NationalTaxNo { get; set; }
         public string SaleTaxRegisterNo { get; set; }

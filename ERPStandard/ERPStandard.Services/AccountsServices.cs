@@ -9,12 +9,11 @@ namespace ERPStandard.Services
 {
     public class AccountsServices
     {
-        StandardVariables standard = new StandardVariables();
         public void SaveAccounts(Account account)
         {
             using (var context = new SairaIndEntities())
             {
-                account.AcntId = context.Accounts.Where(x => x.CompNo == standard.CompNo && x.Status == standard.BranchNo).Select(x => x.AcntId).Max();
+                account.AcntId = context.Accounts.Where(x => x.CompNo == StandardVariables.CompNo && x.Status == StandardVariables.BranchNo).Select(x => x.AcntId).Max();
 
                 double newacntid = double.Parse(account.AcntId.Substring(account.AcntId.Length - 4));
                 

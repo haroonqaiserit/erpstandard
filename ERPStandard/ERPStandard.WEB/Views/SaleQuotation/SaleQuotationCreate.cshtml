@@ -13,6 +13,36 @@
     }
 </style>
 
+
+<style>
+    .search-table {
+        padding: 1%;
+    }
+
+    .search-box {
+        background: #c1c1c1;
+        border: 1px solid #ababab;
+    }
+
+        .search-box input:focus {
+            box-shadow: none;
+            border: 2px solid #eeeeee;
+        }
+
+    #searchpartial {
+        position: absolute;
+        z-index: 10;
+    }
+
+    #CustomSearchLoader {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        z-index: 9999;
+    }
+</style>
+
+
 <div class="card-header">
     <h4 class="card-title">@ViewBag.SubTitle</h4>
 </div>
@@ -87,9 +117,19 @@
                     <tbody id="tblRowBody">
                         <tr id="tblRow">
                             <td class="col-md-4">
-                                <select class="form-select" id="ItemID" name="ItemID" required>
+                                @*<select class="form-select" id="ItemID" name="ItemID" required>
                                     <option value='' selected disabled> --Select Item--</option>
-                                </select>
+                                </select>*@
+
+                                <div class="col-md-5 offset-3">
+                                    <div class="search-box">
+                                        <input type="text" id="CustomSearch" class="form-control" placeholder="Search all...">
+                                    </div>
+                                    <div id="searchpartial">
+                                    </div>
+                                </div>
+
+
                             </td>
                             <td class="col-md-1">
                                 <input type="number" id="Qty" minlength="1" maxlength="9" required class="form-control" placeholder="Qty" name="Qty">
@@ -117,9 +157,20 @@
             <table hidden>
                 <tr style="display: none" id="tblRowforCopy">
                     <td class="col-md-4">
-                        <select class="form-select" id="ItemIDD" name="ItemID" required>
+                        @*<select class="form-select" id="ItemIDD" name="ItemID" required>
                             <option value='' selected disabled> --Select Item--</option>
-                        </select>
+                        </select>*@
+
+                        <div class="col-md-5 offset-3">
+                            <div class="search-box">
+                                <input type="text" id="CustomSearch" class="form-control" placeholder="Search all...">
+                            </div>
+                            <div id="searchpartial">
+                            </div>
+                        </div>
+
+
+
                     </td>
                     <td class="col-md-1">
                         <input type="number" id="Qty" minlength="1" maxlength="9" required class="form-control" placeholder="Qty" name="Qty">
@@ -155,7 +206,7 @@
     $(document).ready(function () {
         AccountComboFill();
         CompanyComboFill();
-        ItemFill();
+        //ItemFill();
     });
 
     function onAddRow() {
@@ -212,7 +263,6 @@
             }
         });
     };
-
     function CompanyComboFill() {
         $.ajax({
             type: "GET",
@@ -243,10 +293,59 @@
             }
         });
     };
-    function ItemFill() {
+     var searchflg = false;
+    $("#CustomSearch").keyup(function () {
+        searchflg = true;
+        console.log(searchflg);
+        SearchingLikeSendle();
+    });
+
+    function SearchingLikeSendle() {
+        console.log("reached in SearchingLikeSendle");
+        var val = $("#CustomSearch").val();
+
+        console.log(searchflg);
+        console.log(val);
+
+        $("#searchpartial").show();
+
+        if (val == "" || searchflg==false) {
+            $("#searchpartial").html("");
+            return false;
+        }
         $.ajax({
             type: "GET",
-            url: '@Url.Action("CompanyDropdown", "Combofill")',
+            url: '@Url.Action("ItemDropdown", "Combofill")',
+            data: {
+                Search: val
+            },
+            beforeSend: function () {
+               // $("#CustomSearchLoader").show();
+            },
+            complete: function () {
+                //$("#CustomSearchLoader").show();
+            },
+            success: function (data) {
+                console.log(data);
+                $("#searchpartial").html(data);
+            }
+        })
+    }
+
+    function selectitemval(itemval) {
+        searchflg = false;
+        $("#CustomSearch").val(itemval);
+        console.log(itemval);
+        $("#searchpartial").hide();
+    }
+
+    function ItemFill(search) {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("ItemDropdown", "Combofill")',
+            data: {
+                dtSearch: search
+            },
             dataType: "json",
             beforeSend: function () {
                 $("#CustomSearchLoader").show();
@@ -258,15 +357,15 @@
                 //$('#AcntCode').html('');
                 //var rows1 = "<option value='' selected disabled > --Select Account--</option >";
                 //$('#AcntCode').append(rows1);
-
+                console.log(result);
                 $.each(result, function (i, item) {
                     var rows;
                     //console.log(i);
                     if (i == 0) {
-                        rows = "<option selected value='" + item.CompNo + "'>" + item.Company_Name + "</option>";
+                        rows = "<option selected value='" + item.ItemID + "'>" + item.Dscr + "</option>";
                     }
                     else {
-                        rows = "<option value='" + item.CompNo + "'>" + item.Company_Name + "</option>";
+                        rows = "<option value='" + item.ItemID + "'>" + item.Dscr + "</option>";
                     }
                     $('#ItemID').append(rows);
                     $('#ItemIDD').append(rows);

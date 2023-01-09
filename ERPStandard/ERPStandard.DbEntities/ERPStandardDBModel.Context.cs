@@ -49,13 +49,11 @@ namespace ERPStandard.DbEntities
         public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<CostCenterNew> CostCenterNews { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
-        public virtual DbSet<CRM_Customers> CRM_Customers { get; set; }
         public virtual DbSet<CRM_DealDetail> CRM_DealDetail { get; set; }
         public virtual DbSet<CRM_Deals> CRM_Deals { get; set; }
         public virtual DbSet<CRM_DealStage> CRM_DealStage { get; set; }
         public virtual DbSet<CRM_SaleQuotation> CRM_SaleQuotation { get; set; }
         public virtual DbSet<CRM_SaleQuotationDetail> CRM_SaleQuotationDetail { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<CustomerDetail> CustomerDetails { get; set; }
         public virtual DbSet<CustomerDtre> CustomerDtres { get; set; }
         public virtual DbSet<DebitNoteStax> DebitNoteStaxes { get; set; }
@@ -268,6 +266,9 @@ namespace ERPStandard.DbEntities
         public virtual DbSet<Visite> Visites { get; set; }
         public virtual DbSet<SalesOrder> SalesOrders { get; set; }
         public virtual DbSet<SalesOrderDetail> SalesOrderDetails { get; set; }
+        public virtual DbSet<BonusCalculation> BonusCalculations { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<CRM_Customers> CRM_Customers { get; set; }
     
         public virtual int Sp_CurrentStock(string itemid, string compNo, string branchNo, string storeUnitId, string godownId, string toDate)
         {

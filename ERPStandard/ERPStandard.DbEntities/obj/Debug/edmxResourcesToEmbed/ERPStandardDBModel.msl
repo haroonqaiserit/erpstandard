@@ -443,30 +443,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="CRM_Customers">
-      <EntityTypeMapping TypeName="SairaIndModel.CRM_Customers">
-        <MappingFragment StoreEntitySet="CRM_Customers">
-          <ScalarProperty Name="CustomerNo" ColumnName="CustomerNo" />
-          <ScalarProperty Name="CustNum" ColumnName="CustNum" />
-          <ScalarProperty Name="PotentialCustomer" ColumnName="PotentialCustomer" />
-          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
-          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
-          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
-          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
-          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-          <ScalarProperty Name="CityId" ColumnName="CityId" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
-          <ScalarProperty Name="Phone1" ColumnName="Phone1" />
-          <ScalarProperty Name="Phone2" ColumnName="Phone2" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="NationalTaxNo" ColumnName="NationalTaxNo" />
-          <ScalarProperty Name="SaleTaxRegisterNo" ColumnName="SaleTaxRegisterNo" />
-          <ScalarProperty Name="WebPage" ColumnName="WebPage" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CRM_DealDetail">
       <EntityTypeMapping TypeName="SairaIndModel.CRM_DealDetail">
         <MappingFragment StoreEntitySet="CRM_DealDetail">
@@ -549,34 +525,6 @@
           <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
           <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
           <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Customers">
-      <EntityTypeMapping TypeName="SairaIndModel.Customer">
-        <MappingFragment StoreEntitySet="Customer">
-          <ScalarProperty Name="CustomerNo" ColumnName="CustomerNo" />
-          <ScalarProperty Name="CustNum" ColumnName="CustNum" />
-          <ScalarProperty Name="AcntId" ColumnName="AcntId" />
-          <ScalarProperty Name="Registered" ColumnName="Registered" />
-          <ScalarProperty Name="LFCustomer" ColumnName="LFCustomer" />
-          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
-          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
-          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
-          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
-          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
-          <ScalarProperty Name="DtreNo" ColumnName="DtreNo" />
-          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-          <ScalarProperty Name="CityId" ColumnName="CityId" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Phone1" ColumnName="Phone1" />
-          <ScalarProperty Name="Phone2" ColumnName="Phone2" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="NationalTaxNo" ColumnName="NationalTaxNo" />
-          <ScalarProperty Name="SaleTaxRegisterNo" ColumnName="SaleTaxRegisterNo" />
-          <ScalarProperty Name="WebPage" ColumnName="WebPage" />
-          <ScalarProperty Name="VendorCode" ColumnName="VendorCode" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -4843,5 +4791,115 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="Sp_CurrentStock" FunctionName="SairaIndModel.Store.Sp_CurrentStock" />
+    <EntitySetMapping Name="SalesOrders">
+      <EntityTypeMapping TypeName="SairaIndModel.SalesOrder">
+        <MappingFragment StoreEntitySet="SalesOrder">
+          <ScalarProperty Name="RefDocName" ColumnName="RefDocName" />
+          <ScalarProperty Name="RefDocId" ColumnName="RefDocId" />
+          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
+          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+          <ScalarProperty Name="SalesManId" ColumnName="SalesManId" />
+          <ScalarProperty Name="OrderValidDate" ColumnName="OrderValidDate" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="CustomerNo" ColumnName="CustomerNo" />
+          <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesOrderDetails">
+      <EntityTypeMapping TypeName="SairaIndModel.SalesOrderDetail">
+        <MappingFragment StoreEntitySet="SalesOrderDetail">
+          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
+          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+          <ScalarProperty Name="SExDutyRate" ColumnName="SExDutyRate" />
+          <ScalarProperty Name="ASaleTaxRate" ColumnName="ASaleTaxRate" />
+          <ScalarProperty Name="SaleTaxRate" ColumnName="SaleTaxRate" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Qty" ColumnName="Qty" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BonusCalculations">
+      <EntityTypeMapping TypeName="SairaIndModel.BonusCalculation">
+        <MappingFragment StoreEntitySet="BonusCalculation">
+          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
+          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+          <ScalarProperty Name="AdvAgainstBonus" ColumnName="AdvAgainstBonus" />
+          <ScalarProperty Name="BonusSalary" ColumnName="BonusSalary" />
+          <ScalarProperty Name="BasicPay" ColumnName="BasicPay" />
+          <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
+          <ScalarProperty Name="BonusID" ColumnName="BonusID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="SairaIndModel.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="VendorCode" ColumnName="VendorCode" />
+          <ScalarProperty Name="WebPage" ColumnName="WebPage" />
+          <ScalarProperty Name="SaleTaxRegisterNo" ColumnName="SaleTaxRegisterNo" />
+          <ScalarProperty Name="NationalTaxNo" ColumnName="NationalTaxNo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="DtreNo" ColumnName="DtreNo" />
+          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
+          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+          <ScalarProperty Name="LFCustomer" ColumnName="LFCustomer" />
+          <ScalarProperty Name="Registered" ColumnName="Registered" />
+          <ScalarProperty Name="AcntId" ColumnName="AcntId" />
+          <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+          <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CustomerType" ColumnName="CustomerType" />
+          <ScalarProperty Name="CustNum" ColumnName="CustNum" />
+          <ScalarProperty Name="CustomerNo" ColumnName="CustomerNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CRM_Customers">
+      <EntityTypeMapping TypeName="SairaIndModel.CRM_Customers">
+        <MappingFragment StoreEntitySet="CRM_Customers">
+          <ScalarProperty Name="WebPage" ColumnName="WebPage" />
+          <ScalarProperty Name="SaleTaxRegisterNo" ColumnName="SaleTaxRegisterNo" />
+          <ScalarProperty Name="NationalTaxNo" ColumnName="NationalTaxNo" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+          <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+          <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PotentialCustomer" ColumnName="PotentialCustomer" />
+          <ScalarProperty Name="CustNum" ColumnName="CustNum" />
+          <ScalarProperty Name="CustomerNo" ColumnName="CustomerNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

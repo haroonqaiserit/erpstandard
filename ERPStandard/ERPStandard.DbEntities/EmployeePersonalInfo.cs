@@ -23,6 +23,7 @@ namespace ERPStandard.DbEntities
             this.LoanAdjuststments = new HashSet<LoanAdjuststment>();
             this.LoanTakens = new HashSet<LoanTaken>();
             this.SalaryMasters = new HashSet<SalaryMaster>();
+            this.BonusCalculations = new HashSet<BonusCalculation>();
         }
     
         public string EmpNo { get; set; }
@@ -73,5 +74,7 @@ namespace ERPStandard.DbEntities
         public virtual ICollection<LoanTaken> LoanTakens { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalaryMaster> SalaryMasters { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BonusCalculation> BonusCalculations { get; set; }
     }
 }

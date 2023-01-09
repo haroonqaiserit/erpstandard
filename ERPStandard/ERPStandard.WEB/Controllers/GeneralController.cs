@@ -26,7 +26,7 @@ namespace ERPStandard.WEB.Controllers
         {
             pageno = pageno.HasValue ? pageno.Value : 1;
             var company1ViewModel = CompanyListLoad(pageno.Value, pageSize, dtSearch, clmNameOrder);
-            return PartialView("SalesOrderList", company1ViewModel);
+            return PartialView("CompanyList", company1ViewModel);
         }
         public Company1ViewModel CompanyListLoad(int pageno, int pageSize=10, string dtSearch="", int clmNameOrder=0)
         {
@@ -54,7 +54,7 @@ namespace ERPStandard.WEB.Controllers
             if (flgComp == true)
             {
                 var company1ViewModel = CompanyListLoad(1);
-                return PartialView("SalesOrderList", company1ViewModel);
+                return PartialView("CompanyList", company1ViewModel);
             }
             return View();
         }

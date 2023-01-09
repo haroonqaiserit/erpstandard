@@ -193,8 +193,8 @@ warning 6013: The table/view 'SairaInd.dbo.Advance' does not have a primary key 
           <Property Name="NetSal" Type="money" />
           <Property Name="AdvDate" Type="smalldatetime" />
           <Property Name="BalSal" Type="money" />
-          <Property Name="CompNo" Type="float" />
-          <Property Name="BranchNo" Type="float" />
+          <Property Name="CompNo" Type="int" />
+          <Property Name="BranchNo" Type="int" />
           <Property Name="LahTransferId" Type="float" />
           <Property Name="SaveDate" Type="smalldatetime" />
           <Property Name="DeletionID" Type="float" />
@@ -656,20 +656,22 @@ warning 6013: The table/view 'SairaInd.dbo.Bonus_Amount' does not have a primary
           <Property Name="SaveDate" Type="datetime" />
           <Property Name="DeletionID" Type="int" />
         </EntityType>-->
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'SairaInd.dbo.BonusCalculation' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="BonusCalculation">
-          <Property Name="BonusID" Type="varchar" MaxLength="50" />
-          <Property Name="EmpNo" Type="varchar" MaxLength="50" />
-          <Property Name="BasicPay" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="BonusSalary" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="AdvAgainstBonus" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="CompNo" Type="int" />
-          <Property Name="BranchNo" Type="int" />
-          <Property Name="LahTransferId" Type="int" />
-          <Property Name="SaveDate" Type="datetime" />
-          <Property Name="DeletionID" Type="int" />
-        </EntityType>-->
+  <EntityType Name="BonusCalculation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BonusID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EmpNo" Type="varchar" MaxLength="50" />
+    <Property Name="BasicPay" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="BonusSalary" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="AdvAgainstBonus" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="CompNo" Type="int" Nullable="false" />
+    <Property Name="BranchNo" Type="int" Nullable="false" />
+    <Property Name="LahTransferId" Type="int" Nullable="false" />
+    <Property Name="SaveDate" Type="datetime" Nullable="false" />
+    <Property Name="DeletionID" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="BonusSetup">
     <Key>
       <PropertyRef Name="BonusID" />
@@ -710,12 +712,12 @@ warning 6002: The table/view 'SairaInd.dbo.Brand' does not have a primary key de
       <PropertyRef Name="CompNo" />
     </Key>
     <Property Name="BrandId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="BrandNum" Type="int" />
     <Property Name="Dscr" Type="nvarchar" MaxLength="50" />
+    <Property Name="SaveDate" Type="datetime" />
     <Property Name="CompNo" Type="int" Nullable="false" />
     <Property Name="BranchNo" Type="int" />
-    <Property Name="BrandNum" Type="int" />
     <Property Name="LahTransferId" Type="int" />
-    <Property Name="SaveDate" Type="datetime" />
     <Property Name="DeletionID" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
@@ -1037,17 +1039,17 @@ warning 6002: The table/view 'SairaInd.dbo.Country1' does not have a primary key
     <Property Name="CustomerNo" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="CustNum" Type="int" Nullable="false" />
     <Property Name="PotentialCustomer" Type="bit" Nullable="false" />
-    <Property Name="CompNo" Type="varchar" MaxLength="15" Nullable="false" />
-    <Property Name="BranchNo" Type="varchar" MaxLength="15" Nullable="false" />
-    <Property Name="DeletionID" Type="bit" Nullable="false" />
-    <Property Name="SaveDate" Type="datetime" Nullable="false" />
-    <Property Name="CountryId" Type="varchar" MaxLength="15" Nullable="false" />
-    <Property Name="CityId" Type="varchar" MaxLength="15" Nullable="false" />
-    <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
     <Property Name="ContactPerson" Type="varchar" MaxLength="150" Nullable="false" />
     <Property Name="Phone1" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="Phone2" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="CompNo" Type="int" Nullable="false" />
+    <Property Name="BranchNo" Type="int" Nullable="false" />
+    <Property Name="DeletionID" Type="int" Nullable="false" />
+    <Property Name="SaveDate" Type="datetime" Nullable="false" />
+    <Property Name="CountryId" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="CityId" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="Email" Type="varchar" MaxLength="50" />
     <Property Name="NationalTaxNo" Type="varchar" MaxLength="15" />
     <Property Name="SaleTaxRegisterNo" Type="varchar" MaxLength="17" />
@@ -1139,21 +1141,23 @@ warning 6002: The table/view 'SairaInd.dbo.Country1' does not have a primary key
     </Key>
     <Property Name="CustomerNo" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="CustNum" Type="int" Nullable="false" />
+    <Property Name="CustomerType" Type="int" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="ContactPerson" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Phone1" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Phone2" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="AcntId" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Registered" Type="bit" Nullable="false" />
     <Property Name="LFCustomer" Type="bit" Nullable="false" />
-    <Property Name="CompNo" Type="varchar" MaxLength="15" Nullable="false" />
-    <Property Name="BranchNo" Type="varchar" MaxLength="15" Nullable="false" />
-    <Property Name="LahTransferId" Type="bit" Nullable="false" />
-    <Property Name="DeletionID" Type="bit" Nullable="false" />
+    <Property Name="CompNo" Type="int" Nullable="false" />
+    <Property Name="BranchNo" Type="int" Nullable="false" />
+    <Property Name="LahTransferId" Type="int" Nullable="false" />
+    <Property Name="DeletionID" Type="int" Nullable="false" />
     <Property Name="SaveDate" Type="datetime" Nullable="false" />
     <Property Name="DtreNo" Type="varchar" MaxLength="15" />
     <Property Name="CountryId" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="CityId" Type="varchar" MaxLength="15" Nullable="false" />
-    <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
-    <Property Name="Phone1" Type="varchar" MaxLength="15" Nullable="false" />
-    <Property Name="Phone2" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="Email" Type="varchar" MaxLength="50" />
     <Property Name="NationalTaxNo" Type="varchar" MaxLength="15" />
     <Property Name="SaleTaxRegisterNo" Type="varchar" MaxLength="17" />
@@ -4948,6 +4952,43 @@ warning 6002: The table/view 'SairaInd.dbo.SalCalc' does not have a primary key 
     <Property Name="SaveDate" Type="datetime" />
     <Property Name="DeletionID" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="SalesOrder">
+    <Key>
+      <PropertyRef Name="OrderId" />
+    </Key>
+    <Property Name="OrderId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="OrderNo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="CustomerNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Remarks" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="OrderDate" Type="datetime" Nullable="false" />
+    <Property Name="OrderValidDate" Type="datetime" Nullable="false" />
+    <Property Name="SalesManId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CompNo" Type="int" Nullable="false" />
+    <Property Name="BranchNo" Type="int" Nullable="false" />
+    <Property Name="LahTransferId" Type="int" Nullable="false" />
+    <Property Name="SaveDate" Type="datetime" Nullable="false" />
+    <Property Name="DeletionID" Type="int" Nullable="false" />
+    <Property Name="RefDocId" Type="varchar" MaxLength="50" />
+    <Property Name="RefDocName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SalesOrderDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OrderId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ItemID" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Qty" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Rate" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="SaleTaxRate" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="ASaleTaxRate" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="SExDutyRate" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CompNo" Type="int" Nullable="false" />
+    <Property Name="BranchNo" Type="int" Nullable="false" />
+    <Property Name="LahTransferId" Type="int" Nullable="false" />
+    <Property Name="SaveDate" Type="datetime" Nullable="false" />
+    <Property Name="DeletionID" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="SaleTax">
     <Key>
       <PropertyRef Name="STaxId" />
@@ -5643,12 +5684,18 @@ warning 6002: The table/view 'SairaInd.dbo.Visite' does not have a primary key d
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <!--Errors Found During Generation:
-error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_BonusCalculation_BonusSetup" />-->
-  <!--Errors Found During Generation:
-error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_BonusCalculation_EmployeePersonalInfo" />-->
+  <Association Name="FK_BonusCalculation_EmployeePersonalInfo">
+    <End Role="EmployeePersonalInfo" Type="Self.EmployeePersonalInfo" Multiplicity="0..1" />
+    <End Role="BonusCalculation" Type="Self.BonusCalculation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeePersonalInfo">
+        <PropertyRef Name="EmpNo" />
+      </Principal>
+      <Dependent Role="BonusCalculation">
+        <PropertyRef Name="EmpNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_EOBIDetail_EOBISetup">
     <End Role="EOBISetup" Type="Self.EOBISetup" Multiplicity="1" />
     <End Role="EOBIDetail" Type="Self.EOBIDetail" Multiplicity="*" />
@@ -5841,6 +5888,7 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
     <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BankChequeBook" EntityType="Self.BankChequeBook" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BankChequeCanelation" EntityType="Self.BankChequeCanelation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BonusCalculation" EntityType="Self.BonusCalculation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BonusSetup" EntityType="Self.BonusSetup" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Branches" EntityType="Self.Branches" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
@@ -5949,6 +5997,8 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
     <EntitySet Name="SaleInvoiceWeb" EntityType="Self.SaleInvoiceWeb" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalesCommReport" EntityType="Self.SalesCommReport" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SalesMan" EntityType="Self.SalesMan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesOrder" EntityType="Self.SalesOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesOrderDetail" EntityType="Self.SalesOrderDetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SaleTax" EntityType="Self.SaleTax" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SaleTaxSumup" EntityType="Self.SaleTaxSumup" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblItemStockOpeningBalance" EntityType="Self.tblItemStockOpeningBalance" Schema="dbo" store:Type="Tables" />
@@ -6153,12 +6203,12 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
     <EntitySet Name="Brand" EntityType="Self.Brand" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [Brand].[BrandId] AS [BrandId], 
+    [Brand].[BrandNum] AS [BrandNum], 
     [Brand].[Dscr] AS [Dscr], 
+    [Brand].[SaveDate] AS [SaveDate], 
     [Brand].[CompNo] AS [CompNo], 
     [Brand].[BranchNo] AS [BranchNo], 
-    [Brand].[BrandNum] AS [BrandNum], 
     [Brand].[LahTransferId] AS [LahTransferId], 
-    [Brand].[SaveDate] AS [SaveDate], 
     [Brand].[DeletionID] AS [DeletionID]
     FROM [dbo].[Brand] AS [Brand]</DefiningQuery>
     </EntitySet>
@@ -7954,6 +8004,10 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
     <AssociationSet Name="FK_AdvanceAgainstSalary_EmployeePersonalInfo" Association="Self.FK_AdvanceAgainstSalary_EmployeePersonalInfo">
       <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfo" />
       <End Role="AdvanceAgainstSalary" EntitySet="AdvanceAgainstSalary" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BonusCalculation_EmployeePersonalInfo" Association="Self.FK_BonusCalculation_EmployeePersonalInfo">
+      <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfo" />
+      <End Role="BonusCalculation" EntitySet="BonusCalculation" />
     </AssociationSet>
     <AssociationSet Name="FK_EOBIDetail_EOBISetup" Association="Self.FK_EOBIDetail_EOBISetup">
       <End Role="EOBISetup" EntitySet="EOBISetup" />

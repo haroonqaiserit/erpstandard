@@ -32,6 +32,18 @@ namespace ERPStandard.WEB.Controllers
         }
         #endregion
 
+        #region Inventory - Drop Downs
+        [HttpGet]
+        public ActionResult ItemDropdown()
+        {
+            var ddlData = ItemService.Instance.All_List();
+            return PartialView("ItemDropdown", ddlData);
+        }
+
+        
+
+        #endregion
+
 
     }
 }

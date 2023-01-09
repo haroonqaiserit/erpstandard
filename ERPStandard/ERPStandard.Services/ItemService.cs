@@ -95,6 +95,40 @@ namespace ERPStandard.Services
             }
             return viewModel;
         }
+
+        public List<ItemsStock> All_List(string dtSearch = "", int clmNameOrder = 0, int? ItemClass=null)
+        {
+            var viewModel = new List<ItemsStock>();
+            using (var context = new SairaIndEntities())
+            {
+                var comp = context.ItemsStocks.Where(x => x.Dscr.Contains(dtSearch)
+                        );
+                if (ItemClass.HasValue) { 
+                comp = comp.Where(x => x.ItemClass == ItemClass);
+                }
+                int totalpage = comp.Select(x => x.ItemID).Count();
+
+                if (clmNameOrder == 1)
+                {
+                    comp = comp.OrderBy(x => x.Dscr);
+                }
+                else if (clmNameOrder == 2)
+                {
+                    comp = comp.OrderBy(x => x.GodownId);
+                }
+                else if (clmNameOrder == 3)
+                {
+                    comp = comp.OrderBy(x => x.BrandId);
+                }
+                else
+                {
+                    comp = comp.OrderBy(x => x.Dscr);
+                }
+                viewModel = comp.Take(5).Where(x => x.CompNo == StandardVariables.CompNo && x.BranchNo == StandardVariables.BranchNo).ToList();
+            }
+            return viewModel;
+        }
+
         public ItemsStock Single(string Id)
         {
             var viewModel = new ItemsStock();

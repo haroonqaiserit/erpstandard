@@ -1947,6 +1947,7 @@
     <Content Include="Views\SaleQuotation\SaleQuotationCreate.cshtml" />
     <Content Include="Views\SaleQuotation\SaleQuotationIndex.cshtml" />
     <Content Include="Views\SaleQuotation\SaleQuotationList.cshtml" />
+    <Content Include="Views\Combofill\ItemDropdown.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -27,13 +27,11 @@
         <EntityTypeShape EntityType="SairaIndModel.Contact" Width="1.5" PointX="16.75" PointY="21.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.CostCenterNew" Width="1.5" PointX="22.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.Country" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SairaIndModel.CRM_Customers" Width="1.5" PointX="9.75" PointY="22.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.CRM_DealDetail" Width="1.5" PointX="11.75" PointY="22.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.CRM_Deals" Width="1.5" PointX="22.75" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.CRM_DealStage" Width="1.5" PointX="0.75" PointY="22.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.CRM_SaleQuotation" Width="1.5" PointX="22.75" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.CRM_SaleQuotationDetail" Width="1.5" PointX="23.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SairaIndModel.Customer" Width="1.5" PointX="7.375" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.CustomerDetail" Width="1.5" PointX="18.75" PointY="23.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.CustomerDtre" Width="1.5" PointX="24.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.DebitNoteStax" Width="1.5" PointX="24.75" PointY="9.75" IsExpanded="true" />
@@ -246,7 +244,6 @@
         <EntityTypeShape EntityType="SairaIndModel.Visite" Width="1.5" PointX="36.75" PointY="51.75" IsExpanded="true" />
         <AssociationConnector Association="SairaIndModel.FK_AdvanceAgainstBonus_EmployeePersonalInfo" ManuallyRouted="false" />
         <AssociationConnector Association="SairaIndModel.FK_AdvanceAgainstSalary_EmployeePersonalInfo" ManuallyRouted="false" />
-        <AssociationConnector Association="SairaIndModel.FK_SaleInvoice_Customer" ManuallyRouted="false" />
         <AssociationConnector Association="SairaIndModel.FK_IncomeTaxSetup_EmployeePersonalInfo" ManuallyRouted="false" />
         <AssociationConnector Association="SairaIndModel.FK_LoanAdjust_EmployeePersonalInfo" ManuallyRouted="false" />
         <AssociationConnector Association="SairaIndModel.FK_LoanTaken_EmployeePersonalInfo" ManuallyRouted="false" />
@@ -262,6 +259,11 @@
         <AssociationConnector Association="SairaIndModel.FK_SaleInvoiceDetail_SaleInvoice" ManuallyRouted="false" />
         <EntityTypeShape EntityType="SairaIndModel.SalesOrder" Width="1.5" PointX="21.375" PointY="52.75" />
         <EntityTypeShape EntityType="SairaIndModel.SalesOrderDetail" Width="1.5" PointX="23.375" PointY="52.75" />
+        <EntityTypeShape EntityType="SairaIndModel.BonusCalculation" Width="1.5" PointX="3" PointY="19.625" />
+        <AssociationConnector Association="SairaIndModel.FK_BonusCalculation_EmployeePersonalInfo" />
+        <EntityTypeShape EntityType="SairaIndModel.Customer" Width="1.5" PointX="7.75" PointY="6" />
+        <AssociationConnector Association="SairaIndModel.FK_SaleInvoice_Customer" />
+        <EntityTypeShape EntityType="SairaIndModel.CRM_Customers" Width="1.5" PointX="52.375" PointY="44.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -661,20 +661,22 @@ warning 6013: The table/view 'SairaInd.dbo.Bonus_Amount' does not have a primary
           <Property Name="SaveDate" Type="datetime" />
           <Property Name="DeletionID" Type="int" />
         </EntityType>-->
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'SairaInd.dbo.BonusCalculation' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="BonusCalculation">
-          <Property Name="BonusID" Type="varchar" MaxLength="50" />
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BonusID" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="EmpNo" Type="varchar" MaxLength="50" />
           <Property Name="BasicPay" Type="numeric" Precision="18" Scale="0" />
           <Property Name="BonusSalary" Type="numeric" Precision="18" Scale="0" />
           <Property Name="AdvAgainstBonus" Type="numeric" Precision="18" Scale="0" />
-          <Property Name="CompNo" Type="int" />
-          <Property Name="BranchNo" Type="int" />
-          <Property Name="LahTransferId" Type="int" />
-          <Property Name="SaveDate" Type="datetime" />
-          <Property Name="DeletionID" Type="int" />
-        </EntityType>-->
+          <Property Name="CompNo" Type="int" Nullable="false" />
+          <Property Name="BranchNo" Type="int" Nullable="false" />
+          <Property Name="LahTransferId" Type="int" Nullable="false" />
+          <Property Name="SaveDate" Type="datetime" Nullable="false" />
+          <Property Name="DeletionID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="BonusSetup">
           <Key>
             <PropertyRef Name="BonusID" />
@@ -715,12 +717,12 @@ warning 6002: The table/view 'SairaInd.dbo.Brand' does not have a primary key de
             <PropertyRef Name="CompNo" />
           </Key>
           <Property Name="BrandId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="BrandNum" Type="int" />
           <Property Name="Dscr" Type="nvarchar" MaxLength="50" />
+          <Property Name="SaveDate" Type="datetime" />
           <Property Name="CompNo" Type="int" Nullable="false" />
           <Property Name="BranchNo" Type="int" />
-          <Property Name="BrandNum" Type="int" />
           <Property Name="LahTransferId" Type="int" />
-          <Property Name="SaveDate" Type="datetime" />
           <Property Name="DeletionID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -5687,12 +5689,18 @@ warning 6002: The table/view 'SairaInd.dbo.Visite' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <!--Errors Found During Generation:
-error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_BonusCalculation_BonusSetup" />-->
-        <!--Errors Found During Generation:
-error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relationship, but cannot be found.
-        <Association Name="FK_BonusCalculation_EmployeePersonalInfo" />-->
+        <Association Name="FK_BonusCalculation_EmployeePersonalInfo">
+          <End Role="EmployeePersonalInfo" Type="Self.EmployeePersonalInfo" Multiplicity="0..1" />
+          <End Role="BonusCalculation" Type="Self.BonusCalculation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeePersonalInfo">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="BonusCalculation">
+              <PropertyRef Name="EmpNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_EOBIDetail_EOBISetup">
           <End Role="EOBISetup" Type="Self.EOBISetup" Multiplicity="1" />
           <End Role="EOBIDetail" Type="Self.EOBIDetail" Multiplicity="*" />
@@ -5885,6 +5893,7 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
           <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BankChequeBook" EntityType="Self.BankChequeBook" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BankChequeCanelation" EntityType="Self.BankChequeCanelation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BonusCalculation" EntityType="Self.BonusCalculation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BonusSetup" EntityType="Self.BonusSetup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Branches" EntityType="Self.Branches" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
@@ -6199,12 +6208,12 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
           <EntitySet Name="Brand" EntityType="Self.Brand" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [Brand].[BrandId] AS [BrandId], 
+    [Brand].[BrandNum] AS [BrandNum], 
     [Brand].[Dscr] AS [Dscr], 
+    [Brand].[SaveDate] AS [SaveDate], 
     [Brand].[CompNo] AS [CompNo], 
     [Brand].[BranchNo] AS [BranchNo], 
-    [Brand].[BrandNum] AS [BrandNum], 
     [Brand].[LahTransferId] AS [LahTransferId], 
-    [Brand].[SaveDate] AS [SaveDate], 
     [Brand].[DeletionID] AS [DeletionID]
     FROM [dbo].[Brand] AS [Brand]</DefiningQuery>
           </EntitySet>
@@ -8001,6 +8010,10 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
             <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfo" />
             <End Role="AdvanceAgainstSalary" EntitySet="AdvanceAgainstSalary" />
           </AssociationSet>
+          <AssociationSet Name="FK_BonusCalculation_EmployeePersonalInfo" Association="Self.FK_BonusCalculation_EmployeePersonalInfo">
+            <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfo" />
+            <End Role="BonusCalculation" EntitySet="BonusCalculation" />
+          </AssociationSet>
           <AssociationSet Name="FK_EOBIDetail_EOBISetup" Association="Self.FK_EOBIDetail_EOBISetup">
             <End Role="EOBISetup" EntitySet="EOBISetup" />
             <End Role="EOBIDetail" EntitySet="EOBIDetail" />
@@ -8487,29 +8500,6 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
           <Property Name="SaveDate" Type="DateTime" Precision="3" />
           <Property Name="DeletionID" Type="Int32" />
         </EntityType>
-        <EntityType Name="CRM_Customers">
-          <Key>
-            <PropertyRef Name="CustomerNo" />
-          </Key>
-          <Property Name="CustomerNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CustNum" Type="Int32" Nullable="false" />
-          <Property Name="PotentialCustomer" Type="Boolean" Nullable="false" />
-          <Property Name="CompNo" Type="String" Nullable="false" />
-          <Property Name="BranchNo" Type="String" Nullable="false" />
-          <Property Name="DeletionID" Type="Boolean" Nullable="false" />
-          <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CountryId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CityId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ContactPerson" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Phone1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Phone2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NationalTaxNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="SaleTaxRegisterNo" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
-          <Property Name="WebPage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="CRM_DealDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -8589,36 +8579,6 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
           <Property Name="LahTransferId" Type="Int32" Nullable="false" />
           <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DeletionID" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="CustomerNo" />
-          </Key>
-          <Property Name="CustomerNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CustNum" Type="Int32" Nullable="false" />
-          <Property Name="AcntId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Registered" Type="Boolean" Nullable="false" />
-          <Property Name="LFCustomer" Type="Boolean" Nullable="false" />
-          <Property Name="CompNo" Type="String" Nullable="false" />
-          <Property Name="BranchNo" Type="String" Nullable="false" />
-          <Property Name="LahTransferId" Type="Boolean" Nullable="false" />
-          <Property Name="DeletionID" Type="Boolean" Nullable="false" />
-          <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DtreNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="CountryId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="CityId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Phone1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Phone2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NationalTaxNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="SaleTaxRegisterNo" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
-          <Property Name="WebPage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="VendorCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="SaleInvoices" Relationship="Self.FK_SaleInvoice_Customer" FromRole="Customer" ToRole="SaleInvoice" />
-          <Property Name="CustomerType" Type="Int32" Nullable="false" />
-          <Property Name="ContactPerson" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CustomerDetail">
           <Key>
@@ -8833,6 +8793,7 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
           <NavigationProperty Name="LoanAdjuststments" Relationship="Self.FK_LoanAdjust_EmployeePersonalInfo" FromRole="EmployeePersonalInfo" ToRole="LoanAdjuststment" />
           <NavigationProperty Name="LoanTakens" Relationship="Self.FK_LoanTaken_EmployeePersonalInfo" FromRole="EmployeePersonalInfo" ToRole="LoanTaken" />
           <NavigationProperty Name="SalaryMasters" Relationship="Self.FK_SalaryMaster_EmployeePersonalInfo" FromRole="EmployeePersonalInfo" ToRole="SalaryMaster" />
+          <NavigationProperty Name="BonusCalculations" Relationship="SairaIndModel.FK_BonusCalculation_EmployeePersonalInfo" FromRole="EmployeePersonalInfo" ToRole="BonusCalculation" />
         </EntityType>
         <EntityType Name="EmpPersonalInfo1">
           <Key>
@@ -10426,9 +10387,9 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
           <Property Name="OpeningBalanceID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DeletionID" Type="Int32" />
           <Property Name="DebitCheck" Type="Int32" />
-          <NavigationProperty Name="Customer" Relationship="Self.FK_SaleInvoice_Customer" FromRole="SaleInvoice" ToRole="Customer" />
           <NavigationProperty Name="SaleAdvanceAdjustments" Relationship="Self.FK_SaleAdvanceAdjustment_SaleInvoice" FromRole="SaleInvoice" ToRole="SaleAdvanceAdjustment" />
           <NavigationProperty Name="SaleInvoiceDetails" Relationship="Self.FK_SaleInvoiceDetail_SaleInvoice" FromRole="SaleInvoice" ToRole="SaleInvoiceDetail" />
+          <NavigationProperty Name="Customer" Relationship="SairaIndModel.FK_SaleInvoice_Customer" FromRole="SaleInvoice" ToRole="Customer" />
         </EntityType>
         <EntityType Name="SaleInvoiceDetail">
           <Key>
@@ -13120,18 +13081,6 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SaleInvoice_Customer">
-          <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
-          <End Role="SaleInvoice" Type="Self.SaleInvoice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Customer">
-              <PropertyRef Name="CustomerNo" />
-            </Principal>
-            <Dependent Role="SaleInvoice">
-              <PropertyRef Name="CustomerNo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_IncomeTaxSetup_EmployeePersonalInfo">
           <End Role="EmployeePersonalInfo" Type="Self.EmployeePersonalInfo" Multiplicity="0..1" />
           <End Role="IncomeTaxSetup" Type="Self.IncomeTaxSetup" Multiplicity="*" />
@@ -13311,13 +13260,11 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
           <EntitySet Name="Contacts" EntityType="Self.Contact" />
           <EntitySet Name="CostCenterNews" EntityType="Self.CostCenterNew" />
           <EntitySet Name="Countries" EntityType="Self.Country" />
-          <EntitySet Name="CRM_Customers" EntityType="Self.CRM_Customers" />
           <EntitySet Name="CRM_DealDetail" EntityType="Self.CRM_DealDetail" />
           <EntitySet Name="CRM_Deals" EntityType="Self.CRM_Deals" />
           <EntitySet Name="CRM_DealStage" EntityType="Self.CRM_DealStage" />
           <EntitySet Name="CRM_SaleQuotation" EntityType="Self.CRM_SaleQuotation" />
           <EntitySet Name="CRM_SaleQuotationDetail" EntityType="Self.CRM_SaleQuotationDetail" />
-          <EntitySet Name="Customers" EntityType="Self.Customer" />
           <EntitySet Name="CustomerDetails" EntityType="Self.CustomerDetail" />
           <EntitySet Name="CustomerDtres" EntityType="Self.CustomerDtre" />
           <EntitySet Name="DebitNoteStaxes" EntityType="Self.DebitNoteStax" />
@@ -13536,10 +13483,6 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
             <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfoes" />
             <End Role="AdvanceAgainstSalary" EntitySet="AdvanceAgainstSalaries" />
           </AssociationSet>
-          <AssociationSet Name="FK_SaleInvoice_Customer" Association="Self.FK_SaleInvoice_Customer">
-            <End Role="Customer" EntitySet="Customers" />
-            <End Role="SaleInvoice" EntitySet="SaleInvoices" />
-          </AssociationSet>
           <AssociationSet Name="FK_IncomeTaxSetup_EmployeePersonalInfo" Association="Self.FK_IncomeTaxSetup_EmployeePersonalInfo">
             <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfoes" />
             <End Role="IncomeTaxSetup" EntitySet="IncomeTaxSetups" />
@@ -13602,6 +13545,17 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
           </FunctionImport>
           <EntitySet Name="SalesOrders" EntityType="SairaIndModel.SalesOrder" />
           <EntitySet Name="SalesOrderDetails" EntityType="SairaIndModel.SalesOrderDetail" />
+          <EntitySet Name="BonusCalculations" EntityType="SairaIndModel.BonusCalculation" />
+          <AssociationSet Name="FK_BonusCalculation_EmployeePersonalInfo" Association="SairaIndModel.FK_BonusCalculation_EmployeePersonalInfo">
+            <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfoes" />
+            <End Role="BonusCalculation" EntitySet="BonusCalculations" />
+          </AssociationSet>
+          <EntitySet Name="Customers" EntityType="SairaIndModel.Customer" />
+          <AssociationSet Name="FK_SaleInvoice_Customer" Association="SairaIndModel.FK_SaleInvoice_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="SaleInvoice" EntitySet="SaleInvoices" />
+          </AssociationSet>
+          <EntitySet Name="CRM_Customers" EntityType="SairaIndModel.CRM_Customers" />
         </EntityContainer>
         <EntityType Name="SalesOrder">
           <Key>
@@ -13639,6 +13593,100 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
           <Property Name="LahTransferId" Type="Int32" Nullable="false" />
           <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DeletionID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BonusCalculation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BonusID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmpNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BasicPay" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="BonusSalary" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AdvAgainstBonus" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CompNo" Type="Int32" Nullable="false" />
+          <Property Name="BranchNo" Type="Int32" Nullable="false" />
+          <Property Name="LahTransferId" Type="Int32" Nullable="false" />
+          <Property Name="SaveDate" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="DeletionID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="EmployeePersonalInfo" Relationship="SairaIndModel.FK_BonusCalculation_EmployeePersonalInfo" FromRole="BonusCalculation" ToRole="EmployeePersonalInfo" />
+        </EntityType>
+        <Association Name="FK_BonusCalculation_EmployeePersonalInfo">
+          <End Type="SairaIndModel.EmployeePersonalInfo" Role="EmployeePersonalInfo" Multiplicity="0..1" />
+          <End Type="SairaIndModel.BonusCalculation" Role="BonusCalculation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EmployeePersonalInfo">
+              <PropertyRef Name="EmpNo" />
+            </Principal>
+            <Dependent Role="BonusCalculation">
+              <PropertyRef Name="EmpNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerNo" />
+          </Key>
+          <Property Name="CustomerNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustNum" Type="Int32" Nullable="false" />
+          <Property Name="CustomerType" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPerson" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Phone1" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Phone2" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="AcntId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Registered" Type="Boolean" Nullable="false" />
+          <Property Name="LFCustomer" Type="Boolean" Nullable="false" />
+          <Property Name="CompNo" Type="Int32" Nullable="false" />
+          <Property Name="BranchNo" Type="Int32" Nullable="false" />
+          <Property Name="LahTransferId" Type="Int32" Nullable="false" />
+          <Property Name="DeletionID" Type="Int32" Nullable="false" />
+          <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DtreNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CountryId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CityId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NationalTaxNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="SaleTaxRegisterNo" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="WebPage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="VendorCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SaleInvoices" Relationship="SairaIndModel.FK_SaleInvoice_Customer" FromRole="Customer" ToRole="SaleInvoice" />
+        </EntityType>
+        <Association Name="FK_SaleInvoice_Customer">
+          <End Type="SairaIndModel.Customer" Role="Customer" Multiplicity="0..1" />
+          <End Type="SairaIndModel.SaleInvoice" Role="SaleInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerNo" />
+            </Principal>
+            <Dependent Role="SaleInvoice">
+              <PropertyRef Name="CustomerNo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CRM_Customers">
+          <Key>
+            <PropertyRef Name="CustomerNo" />
+          </Key>
+          <Property Name="CustomerNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustNum" Type="Int32" Nullable="false" />
+          <Property Name="PotentialCustomer" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPerson" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Phone1" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Phone2" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CompNo" Type="Int32" Nullable="false" />
+          <Property Name="BranchNo" Type="Int32" Nullable="false" />
+          <Property Name="DeletionID" Type="Int32" Nullable="false" />
+          <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CountryId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CityId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NationalTaxNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="SaleTaxRegisterNo" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="WebPage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -14088,30 +14136,6 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CRM_Customers">
-            <EntityTypeMapping TypeName="SairaIndModel.CRM_Customers">
-              <MappingFragment StoreEntitySet="CRM_Customers">
-                <ScalarProperty Name="CustomerNo" ColumnName="CustomerNo" />
-                <ScalarProperty Name="CustNum" ColumnName="CustNum" />
-                <ScalarProperty Name="PotentialCustomer" ColumnName="PotentialCustomer" />
-                <ScalarProperty Name="CompNo" ColumnName="CompNo" />
-                <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
-                <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
-                <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
-                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
-                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="NationalTaxNo" ColumnName="NationalTaxNo" />
-                <ScalarProperty Name="SaleTaxRegisterNo" ColumnName="SaleTaxRegisterNo" />
-                <ScalarProperty Name="WebPage" ColumnName="WebPage" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CRM_DealDetail">
             <EntityTypeMapping TypeName="SairaIndModel.CRM_DealDetail">
               <MappingFragment StoreEntitySet="CRM_DealDetail">
@@ -14194,36 +14218,6 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
                 <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
                 <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
                 <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="SairaIndModel.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
-                <ScalarProperty Name="CustomerType" ColumnName="CustomerType" />
-                <ScalarProperty Name="CustomerNo" ColumnName="CustomerNo" />
-                <ScalarProperty Name="CustNum" ColumnName="CustNum" />
-                <ScalarProperty Name="AcntId" ColumnName="AcntId" />
-                <ScalarProperty Name="Registered" ColumnName="Registered" />
-                <ScalarProperty Name="LFCustomer" ColumnName="LFCustomer" />
-                <ScalarProperty Name="CompNo" ColumnName="CompNo" />
-                <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
-                <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
-                <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
-                <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
-                <ScalarProperty Name="DtreNo" ColumnName="DtreNo" />
-                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
-                <ScalarProperty Name="CityId" ColumnName="CityId" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
-                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="NationalTaxNo" ColumnName="NationalTaxNo" />
-                <ScalarProperty Name="SaleTaxRegisterNo" ColumnName="SaleTaxRegisterNo" />
-                <ScalarProperty Name="WebPage" ColumnName="WebPage" />
-                <ScalarProperty Name="VendorCode" ColumnName="VendorCode" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -18526,6 +18520,77 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
                 <ScalarProperty Name="ItemID" ColumnName="ItemID" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BonusCalculations">
+            <EntityTypeMapping TypeName="SairaIndModel.BonusCalculation">
+              <MappingFragment StoreEntitySet="BonusCalculation">
+                <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+                <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+                <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
+                <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+                <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+                <ScalarProperty Name="AdvAgainstBonus" ColumnName="AdvAgainstBonus" />
+                <ScalarProperty Name="BonusSalary" ColumnName="BonusSalary" />
+                <ScalarProperty Name="BasicPay" ColumnName="BasicPay" />
+                <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
+                <ScalarProperty Name="BonusID" ColumnName="BonusID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="SairaIndModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="VendorCode" ColumnName="VendorCode" />
+                <ScalarProperty Name="WebPage" ColumnName="WebPage" />
+                <ScalarProperty Name="SaleTaxRegisterNo" ColumnName="SaleTaxRegisterNo" />
+                <ScalarProperty Name="NationalTaxNo" ColumnName="NationalTaxNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="DtreNo" ColumnName="DtreNo" />
+                <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+                <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+                <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
+                <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+                <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+                <ScalarProperty Name="LFCustomer" ColumnName="LFCustomer" />
+                <ScalarProperty Name="Registered" ColumnName="Registered" />
+                <ScalarProperty Name="AcntId" ColumnName="AcntId" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CustomerType" ColumnName="CustomerType" />
+                <ScalarProperty Name="CustNum" ColumnName="CustNum" />
+                <ScalarProperty Name="CustomerNo" ColumnName="CustomerNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CRM_Customers">
+            <EntityTypeMapping TypeName="SairaIndModel.CRM_Customers">
+              <MappingFragment StoreEntitySet="CRM_Customers">
+                <ScalarProperty Name="WebPage" ColumnName="WebPage" />
+                <ScalarProperty Name="SaleTaxRegisterNo" ColumnName="SaleTaxRegisterNo" />
+                <ScalarProperty Name="NationalTaxNo" ColumnName="NationalTaxNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+                <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+                <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+                <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PotentialCustomer" ColumnName="PotentialCustomer" />
+                <ScalarProperty Name="CustNum" ColumnName="CustNum" />
+                <ScalarProperty Name="CustomerNo" ColumnName="CustomerNo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
