@@ -15,7 +15,7 @@ namespace ERPStandard.DbEntities
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class SairaIndEntities : DbContext, IDisposable
+    public partial class SairaIndEntities : DbContext
     {
         public SairaIndEntities()
             : base("name=SairaIndEntities")
@@ -266,6 +266,8 @@ namespace ERPStandard.DbEntities
         public virtual DbSet<UserRight> UserRights { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Visite> Visites { get; set; }
+        public virtual DbSet<SalesOrder> SalesOrders { get; set; }
+        public virtual DbSet<SalesOrderDetail> SalesOrderDetails { get; set; }
     
         public virtual int Sp_CurrentStock(string itemid, string compNo, string branchNo, string storeUnitId, string godownId, string toDate)
         {

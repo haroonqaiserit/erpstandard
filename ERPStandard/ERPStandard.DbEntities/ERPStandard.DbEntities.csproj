@@ -702,6 +702,12 @@
     <Compile Include="SalesMan.cs">
       <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="SalesOrder.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SalesOrderDetail.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SaleTax.cs">
       <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
     </Compile>

@@ -27,29 +27,33 @@ namespace ERPStandard.Services
 
         }
         #endregion
-        public CustomerViewModel All(int page, int pageSize = 10, string dtSearch = "", int clmNameOrder = 0)
+        public CustomerViewModel All(int page, int pageSize = 10, string dtSearch = "", int clmNameOrder = 0, int CustomerType = 1)
         {
             var viewModel = new CustomerViewModel();
             using (var context = new SairaIndEntities())
             {
-                var comp = context.Customers.Where(x => x.CustomerName.Contains(dtSearch)
-                        || x.Dscr.Contains(dtSearch)
-                        || x.CustomerAddress.Contains(dtSearch)
+                var comp = context.Customers.Where(x => x.Name.Contains(dtSearch)
+                        || x.Address.Contains(dtSearch)
+                        || x.Phone1.Contains(dtSearch)
+                        || x.Phone2.Contains(dtSearch)
+                        || x.Email.Contains(dtSearch)
+                        || x.WebPage.Contains(dtSearch)
+                        || x.CustomerType == CustomerType
                         );
 
-                int totalpage = comp.Select(x => x.CompNo).Count();
+                int totalpage = comp.Select(x => x.CustomerNo).Count();
                 var pager = new Pager(totalpage, page, pageSize);
                 if (clmNameOrder == 1)
                 {
-                    comp = comp.OrderBy(x => x.CustomerName);
+                    comp = comp.OrderBy(x => x.Name);
                 }
                 else if (clmNameOrder == 2)
                 {
-                    comp = comp.OrderBy(x => x.Dscr);
+                    comp = comp.OrderBy(x => x.Address);
                 }
                 else if (clmNameOrder == 3)
                 {
-                    comp = comp.OrderBy(x => x.CustomerAddress);
+                    comp = comp.OrderBy(x => x.Phone1);
                 }
                 else if (clmNameOrder == 4)
                 {
@@ -57,11 +61,11 @@ namespace ERPStandard.Services
                 }
                 else if (clmNameOrder == 5)
                 {
-                    comp = comp.OrderBy(x => x.CompNo);
+                    comp = comp.OrderBy(x => x.Registered);
                 }
                 else
                 {
-                    comp = comp.OrderBy(x => x.Status);
+                    comp = comp.OrderBy(x => x.Name);
                 }
 
                 viewModel.Customers = comp.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize).ToList();
@@ -76,23 +80,25 @@ namespace ERPStandard.Services
             var viewModel = new CustomerViewModel();
             using (var context = new SairaIndEntities())
             {
-                var comp = context.Customers.Where(x => x.CustomerName.Contains(dtSearch)
-                        || x.Dscr.Contains(dtSearch)
-                        || x.CustomerAddress.Contains(dtSearch)
+                var comp = context.Customers.Where(x => x.Name.Contains(dtSearch)
+                        || x.Address.Contains(dtSearch)
+                        || x.Phone1.Contains(dtSearch)
+                        || x.Phone2.Contains(dtSearch)
+                        || x.Email.Contains(dtSearch)
+                        || x.WebPage.Contains(dtSearch)
                         );
 
-                int totalpage = comp.Select(x => x.CompNo).Count();
                 if (clmNameOrder == 1)
                 {
-                    comp = comp.OrderBy(x => x.CustomerName);
+                    comp = comp.OrderBy(x => x.Name);
                 }
                 else if (clmNameOrder == 2)
                 {
-                    comp = comp.OrderBy(x => x.Dscr);
+                    comp = comp.OrderBy(x => x.Address);
                 }
                 else if (clmNameOrder == 3)
                 {
-                    comp = comp.OrderBy(x => x.CustomerAddress);
+                    comp = comp.OrderBy(x => x.Phone1);
                 }
                 else if (clmNameOrder == 4)
                 {
@@ -100,13 +106,13 @@ namespace ERPStandard.Services
                 }
                 else if (clmNameOrder == 5)
                 {
-                    comp = comp.OrderBy(x => x.CompNo);
+                    comp = comp.OrderBy(x => x.Registered);
                 }
                 else
                 {
-                    comp = comp.OrderBy(x => x.Status);
+                    comp = comp.OrderBy(x => x.Name);
                 }
-                viewModel.Customers = comp.ToList();
+                viewModel.Customers = comp.Where(x=> x.CompNo == StandardVariables.CompNo && x.BranchNo == StandardVariables.BranchNo).ToList();
                 viewModel.dtSearch = dtSearch;
                 viewModel.clmNameOrder = clmNameOrder;
             }
@@ -131,8 +137,10 @@ namespace ERPStandard.Services
             {
                 compno = context.Customers.Select(x => x.CustNum).Max() + 1;
                 Customer.CustNum = compno;
-                Customer.CustomerNo = compno;
+                Customer.CustomerNo = Customer.CustNum.ToString().PadLeft(4,'0') + '-' + StandardVariables.BLetter;
                 Customer.DeletionID = 0;
+                Customer.CompNo = StandardVariables.CompNo;
+                Customer.BranchNo = StandardVariables.BranchNo;
                 Customer.LahTransferId = 0;
                 Customer.SaveDate = DateTime.Now;
                 context.Customers.Add(Customer);
@@ -143,16 +151,18 @@ namespace ERPStandard.Services
         public bool Update(Customer Customer)
         {
             var brn = Single(Customer.CustomerNo);
-            brn.CompNo = Customer.CompNo;
-            brn.Dscr = Customer.Dscr;
-            brn.CustomerName = Customer.CustomerName;
-            brn.CustomerAddress = Customer.CustomerAddress;
-            brn.AcntId = Customer.AcntId;
+
+            Customer.CompNo = brn.CompNo;
+            Customer.BranchNo = brn.BranchNo;
+            Customer.LahTransferId = brn.LahTransferId;
+            Customer.DeletionID = brn.DeletionID;
+            Customer.SaveDate = brn.SaveDate;
+            //Customer.CustomerType = brn.CustomerType;
 
             bool flgCompany = false;
             using (var context = new SairaIndEntities())
             {
-                context.Entry(brn).State = System.Data.Entity.EntityState.Modified;
+                context.Entry(Customer).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
                 flgCompany = true;
             }

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SairaIndModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SairaIndModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.Account_Head_New' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Account_Head_New">
@@ -198,8 +198,8 @@ warning 6013: The table/view 'SairaInd.dbo.Advance' does not have a primary key 
           <Property Name="NetSal" Type="money" />
           <Property Name="AdvDate" Type="smalldatetime" />
           <Property Name="BalSal" Type="money" />
-          <Property Name="CompNo" Type="float" />
-          <Property Name="BranchNo" Type="float" />
+          <Property Name="CompNo" Type="int" />
+          <Property Name="BranchNo" Type="int" />
           <Property Name="LahTransferId" Type="float" />
           <Property Name="SaveDate" Type="smalldatetime" />
           <Property Name="DeletionID" Type="float" />
@@ -1042,17 +1042,17 @@ warning 6002: The table/view 'SairaInd.dbo.Country1' does not have a primary key
           <Property Name="CustomerNo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CustNum" Type="int" Nullable="false" />
           <Property Name="PotentialCustomer" Type="bit" Nullable="false" />
-          <Property Name="CompNo" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="BranchNo" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="DeletionID" Type="bit" Nullable="false" />
-          <Property Name="SaveDate" Type="datetime" Nullable="false" />
-          <Property Name="CountryId" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="CityId" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="ContactPerson" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="Phone1" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Phone2" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="CompNo" Type="int" Nullable="false" />
+          <Property Name="BranchNo" Type="int" Nullable="false" />
+          <Property Name="DeletionID" Type="int" Nullable="false" />
+          <Property Name="SaveDate" Type="datetime" Nullable="false" />
+          <Property Name="CountryId" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="CityId" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="NationalTaxNo" Type="varchar" MaxLength="15" />
           <Property Name="SaleTaxRegisterNo" Type="varchar" MaxLength="17" />
@@ -1144,21 +1144,23 @@ warning 6002: The table/view 'SairaInd.dbo.Country1' does not have a primary key
           </Key>
           <Property Name="CustomerNo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CustNum" Type="int" Nullable="false" />
+          <Property Name="CustomerType" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="ContactPerson" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Phone1" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Phone2" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="AcntId" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Registered" Type="bit" Nullable="false" />
           <Property Name="LFCustomer" Type="bit" Nullable="false" />
-          <Property Name="CompNo" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="BranchNo" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="LahTransferId" Type="bit" Nullable="false" />
-          <Property Name="DeletionID" Type="bit" Nullable="false" />
+          <Property Name="CompNo" Type="int" Nullable="false" />
+          <Property Name="BranchNo" Type="int" Nullable="false" />
+          <Property Name="LahTransferId" Type="int" Nullable="false" />
+          <Property Name="DeletionID" Type="int" Nullable="false" />
           <Property Name="SaveDate" Type="datetime" Nullable="false" />
           <Property Name="DtreNo" Type="varchar" MaxLength="15" />
           <Property Name="CountryId" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="CityId" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="Name" Type="varchar" MaxLength="150" Nullable="false" />
-          <Property Name="Phone1" Type="varchar" MaxLength="15" Nullable="false" />
-          <Property Name="Phone2" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="NationalTaxNo" Type="varchar" MaxLength="15" />
           <Property Name="SaleTaxRegisterNo" Type="varchar" MaxLength="17" />
@@ -4953,6 +4955,43 @@ warning 6002: The table/view 'SairaInd.dbo.SalCalc' does not have a primary key 
           <Property Name="SaveDate" Type="datetime" />
           <Property Name="DeletionID" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="SalesOrder">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OrderNo" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CustomerNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Remarks" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="OrderValidDate" Type="datetime" Nullable="false" />
+          <Property Name="SalesManId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CompNo" Type="int" Nullable="false" />
+          <Property Name="BranchNo" Type="int" Nullable="false" />
+          <Property Name="LahTransferId" Type="int" Nullable="false" />
+          <Property Name="SaveDate" Type="datetime" Nullable="false" />
+          <Property Name="DeletionID" Type="int" Nullable="false" />
+          <Property Name="RefDocId" Type="varchar" MaxLength="50" />
+          <Property Name="RefDocName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SalesOrderDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Qty" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Rate" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SaleTaxRate" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="ASaleTaxRate" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SExDutyRate" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CompNo" Type="int" Nullable="false" />
+          <Property Name="BranchNo" Type="int" Nullable="false" />
+          <Property Name="LahTransferId" Type="int" Nullable="false" />
+          <Property Name="SaveDate" Type="datetime" Nullable="false" />
+          <Property Name="DeletionID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="SaleTax">
           <Key>
             <PropertyRef Name="STaxId" />
@@ -5954,6 +5993,8 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
           <EntitySet Name="SaleInvoiceWeb" EntityType="Self.SaleInvoiceWeb" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalesCommReport" EntityType="Self.SalesCommReport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SalesMan" EntityType="Self.SalesMan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesOrder" EntityType="Self.SalesOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalesOrderDetail" EntityType="Self.SalesOrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SaleTax" EntityType="Self.SaleTax" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SaleTaxSumup" EntityType="Self.SaleTaxSumup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblItemStockOpeningBalance" EntityType="Self.tblItemStockOpeningBalance" Schema="dbo" store:Type="Tables" />
@@ -8017,8 +8058,7 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
             <End Role="SaleInvoiceDetail" EntitySet="SaleInvoiceDetail" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SairaIndModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -8454,8 +8494,8 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
           <Property Name="CustomerNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CustNum" Type="Int32" Nullable="false" />
           <Property Name="PotentialCustomer" Type="Boolean" Nullable="false" />
-          <Property Name="CompNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="BranchNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CompNo" Type="String" Nullable="false" />
+          <Property Name="BranchNo" Type="String" Nullable="false" />
           <Property Name="DeletionID" Type="Boolean" Nullable="false" />
           <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CountryId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
@@ -8559,8 +8599,8 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
           <Property Name="AcntId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Registered" Type="Boolean" Nullable="false" />
           <Property Name="LFCustomer" Type="Boolean" Nullable="false" />
-          <Property Name="CompNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="BranchNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CompNo" Type="String" Nullable="false" />
+          <Property Name="BranchNo" Type="String" Nullable="false" />
           <Property Name="LahTransferId" Type="Boolean" Nullable="false" />
           <Property Name="DeletionID" Type="Boolean" Nullable="false" />
           <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="3" />
@@ -8577,6 +8617,8 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
           <Property Name="WebPage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="VendorCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="SaleInvoices" Relationship="Self.FK_SaleInvoice_Customer" FromRole="Customer" ToRole="SaleInvoice" />
+          <Property Name="CustomerType" Type="Int32" Nullable="false" />
+          <Property Name="ContactPerson" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="CustomerDetail">
           <Key>
@@ -13558,7 +13600,46 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
             <Parameter Name="GodownId" Mode="In" Type="String" />
             <Parameter Name="toDate" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="SalesOrders" EntityType="SairaIndModel.SalesOrder" />
+          <EntitySet Name="SalesOrderDetails" EntityType="SairaIndModel.SalesOrderDetail" />
         </EntityContainer>
+        <EntityType Name="SalesOrder">
+          <Key>
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="OrderId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OrderNo" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="CustomerNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="OrderValidDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SalesManId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompNo" Type="Int32" Nullable="false" />
+          <Property Name="BranchNo" Type="Int32" Nullable="false" />
+          <Property Name="LahTransferId" Type="Int32" Nullable="false" />
+          <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeletionID" Type="Int32" Nullable="false" />
+          <Property Name="RefDocId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RefDocName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SalesOrderDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Qty" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SaleTaxRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ASaleTaxRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SExDutyRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CompNo" Type="Int32" Nullable="false" />
+          <Property Name="BranchNo" Type="Int32" Nullable="false" />
+          <Property Name="LahTransferId" Type="Int32" Nullable="false" />
+          <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeletionID" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14119,6 +14200,8 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
           <EntitySetMapping Name="Customers">
             <EntityTypeMapping TypeName="SairaIndModel.Customer">
               <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="CustomerType" ColumnName="CustomerType" />
                 <ScalarProperty Name="CustomerNo" ColumnName="CustomerNo" />
                 <ScalarProperty Name="CustNum" ColumnName="CustNum" />
                 <ScalarProperty Name="AcntId" ColumnName="AcntId" />
@@ -18407,6 +18490,45 @@ error 6004: The table 'SairaInd.dbo.BonusCalculation' is referenced by a relatio
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="Sp_CurrentStock" FunctionName="SairaIndModel.Store.Sp_CurrentStock" />
+          <EntitySetMapping Name="SalesOrders">
+            <EntityTypeMapping TypeName="SairaIndModel.SalesOrder">
+              <MappingFragment StoreEntitySet="SalesOrder">
+                <ScalarProperty Name="RefDocName" ColumnName="RefDocName" />
+                <ScalarProperty Name="RefDocId" ColumnName="RefDocId" />
+                <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+                <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+                <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
+                <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+                <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+                <ScalarProperty Name="SalesManId" ColumnName="SalesManId" />
+                <ScalarProperty Name="OrderValidDate" ColumnName="OrderValidDate" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="CustomerNo" ColumnName="CustomerNo" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalesOrderDetails">
+            <EntityTypeMapping TypeName="SairaIndModel.SalesOrderDetail">
+              <MappingFragment StoreEntitySet="SalesOrderDetail">
+                <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+                <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+                <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
+                <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+                <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+                <ScalarProperty Name="SExDutyRate" ColumnName="SExDutyRate" />
+                <ScalarProperty Name="ASaleTaxRate" ColumnName="ASaleTaxRate" />
+                <ScalarProperty Name="SaleTaxRate" ColumnName="SaleTaxRate" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

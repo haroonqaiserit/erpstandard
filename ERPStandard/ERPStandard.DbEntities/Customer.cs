@@ -25,10 +25,10 @@ namespace ERPStandard.DbEntities
         public string AcntId { get; set; }
         public bool Registered { get; set; }
         public bool LFCustomer { get; set; }
-        public string CompNo { get; set; }
-        public string BranchNo { get; set; }
-        public bool LahTransferId { get; set; }
-        public bool DeletionID { get; set; }
+        public int CompNo { get; set; }
+        public int BranchNo { get; set; }
+        public int LahTransferId { get; set; }
+        public int DeletionID { get; set; }
         public System.DateTime SaveDate { get; set; }
         public string DtreNo { get; set; }
         public string CountryId { get; set; }
@@ -42,6 +42,8 @@ namespace ERPStandard.DbEntities
         public string SaleTaxRegisterNo { get; set; }
         public string WebPage { get; set; }
         public string VendorCode { get; set; }
+        public int CustomerType { get; set; }
+        public string ContactPerson { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SaleInvoice> SaleInvoices { get; set; }

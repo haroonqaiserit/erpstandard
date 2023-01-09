@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace ERPStandard.Services
 {
-    public class StandardVariables
+    public static class StandardVariables
     {
-        public string CompanyName { get; set; } = "SAIRA INDUSTRIES (PVT) LTD.";
-        public int CompNo { get; set; } = 1;
-        public int BranchNo { get; set; } = 1;
-        public DateTime SaveDate { get; set; } = DateTime.Now;
+        public static string CompanyName { get; set; } = "SAIRA INDUSTRIES (PVT) LTD.";
+        public static int CompNo { get; set; } = 1;
+        public static int BranchNo { get; set; } = 1;
+        public static string BLetter { get; set; } = "L";
+        public static DateTime SaveDate { get; set; } = DateTime.Now;
     }
 }
