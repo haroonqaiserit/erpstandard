@@ -120,20 +120,33 @@ namespace ERPStandard.Services
         }
         public int Add(CRM_SaleQuotation SaleQuotation, List<CRM_SaleQuotationDetail> SaleQuotationDetail)
         {
-            int compno = 0;
+            int savechanges = 0;
             using (var context = new SairaIndEntities())
             {
-                compno = context.CRM_SaleQuotation.Select(x => int.Parse(x.QuoteNo.ToString())).Max() + 1;
+                int compno = (int)context.CRM_SaleQuotation.Select(x => x.QuoteNo).Max() + 1;
                 SaleQuotation.QuoteNo = compno;
+                SaleQuotation.QuoteId = SaleQuotation.QuoteNo.ToString().PadLeft(4, '0') + '-' + StandardVariables.BLetter; ;
                 SaleQuotation.DeletionID = 0;
                 SaleQuotation.LahTransferId = 0;
                 SaleQuotation.SaveDate = DateTime.Now;
                 SaleQuotation.CompNo = GlobalVariables.CompNo;
                 SaleQuotation.BranchNo = GlobalVariables.BranchNo;
+                CRM_SaleQuotationDetail saledetail = new CRM_SaleQuotationDetail();
+                foreach (var item in SaleQuotationDetail)
+                {
+                    item.QuoteId = SaleQuotation.QuoteId;
+                    item.DeletionID = 0;
+                    item.LahTransferId = 0;
+                    item.SaveDate = DateTime.Now;
+                    item.CompNo = SaleQuotation.CompNo;
+                    item.BranchNo = SaleQuotation.BranchNo;
+                }
+                
                 context.CRM_SaleQuotation.Add(SaleQuotation);
-                context.SaveChanges();
+                context.CRM_SaleQuotationDetail.AddRange(SaleQuotationDetail);
+                savechanges = context.SaveChanges();
             }
-            return compno;
+            return savechanges;
         }
         public bool Update(CRM_SaleQuotation SaleQuotation)
         {

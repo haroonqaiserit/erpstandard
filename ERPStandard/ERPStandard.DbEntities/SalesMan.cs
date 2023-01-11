@@ -33,5 +33,6 @@ namespace ERPStandard.DbEntities
         public int LahTransferId { get; set; }
         public Nullable<System.DateTime> SaveDate { get; set; }
         public int DeletionID { get; set; }
+        public string EmpNo { get; set; }
     }
 }

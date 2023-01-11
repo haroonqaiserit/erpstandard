@@ -2489,10 +2489,11 @@ warning 6013: The table/view 'SairaInd.dbo.Items$' does not have a primary key d
     </Key>
     <Property Name="ItemID" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="ItemNo" Type="int" Nullable="false" />
+    <Property Name="Dscr" Type="varchar" MaxLength="75" Nullable="false" />
     <Property Name="ItemClass" Type="int" Nullable="false" />
+    <Property Name="ItemStore" Type="int" Nullable="false" />
     <Property Name="SPD" Type="bit" Nullable="false" />
     <Property Name="SPDRate" Type="numeric" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="Dscr" Type="varchar" MaxLength="75" Nullable="false" />
     <Property Name="Packing" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Weight" Type="numeric" Precision="18" Scale="2" Nullable="false" />
     <Property Name="GodownId" Type="varchar" MaxLength="50" Nullable="false" />
@@ -2512,7 +2513,6 @@ warning 6013: The table/view 'SairaInd.dbo.Items$' does not have a primary key d
     <Property Name="LahTransferId" Type="int" Nullable="false" />
     <Property Name="PartCode" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="ItemCode" Type="varchar" MaxLength="50" />
-    <Property Name="ItemStore" Type="int" Nullable="false" />
     <Property Name="ItemStoreCode" Type="int" Nullable="false" />
     <Property Name="StockMinQty" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="StockMaxQty" Type="numeric" Precision="18" Scale="0" Nullable="false" />
@@ -4933,6 +4933,7 @@ warning 6002: The table/view 'SairaInd.dbo.SalCalc' does not have a primary key 
       <PropertyRef Name="SalesManId" />
     </Key>
     <Property Name="SalesManId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EmpNo" Type="varchar" MaxLength="50" />
     <Property Name="CompNo" Type="int" Nullable="false" />
     <Property Name="BranchNo" Type="int" Nullable="false" />
     <Property Name="SalesManNum" Type="int" Nullable="false" />

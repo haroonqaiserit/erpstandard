@@ -213,6 +213,7 @@
             SaleQuotation.QuoteValidDate = $("#QuoteValidDate").val();
             SaleQuotation.Remarks = $("#Remarks").val();
             SaleQuotation.SalesManId = $("#SalesManId").val();
+            SaleQuotation.CustomerNo = $("#CustomerId").val();
 
 // Master Detail Record Save
             SaleQuotations.push(SaleQuotation);
@@ -221,10 +222,10 @@
             var flgerr = false;
             $('#tblQuotationDetail > tbody  > tr').each(function () {
                 var SaleQuotationDetail = {};
-                console.log("enter to read table combobox value");
-                console.log($('option:selected', $(this).find('td:eq(0) select')).val());
+                //console.log("enter to read table combobox value");
+                //console.log($('option:selected', $(this).find('td:eq(0) select')).val());
 
-                SaleQuotationDetail.ItemID = '1';// $(this).find("td:eq(0) input[type='text']").val();
+                SaleQuotationDetail.ItemID = $(this).find("td:eq(0) input[type='text']").val();
                 if (SaleQuotationDetail.ItemID == "") {
                     Swal.fire({
                         icon: 'error',
@@ -234,8 +235,9 @@
                     flgerr = true;
                     return;
                 }
-                SaleQuotationDetail.Qty = $(this).find("td:eq(1) input[type='number']").val();
-                SaleQuotationDetail.Rate = $(this).find("td:eq(2) input[type='number']").val();
+                console.log($(this).find("td:eq(3) input[type='number']").val());
+                SaleQuotationDetail.Qty = $(this).find("td:eq(7) input[type='number']").val();
+                SaleQuotationDetail.Rate = $(this).find("td:eq(8) input[type='number']").val();
                 if (SaleQuotationDetail.Qty == "" || SaleQuotationDetail.Rate == "") {
                     Swal.fire({
                         icon: 'error',
@@ -245,16 +247,17 @@
                     flgerr = true;
                     return;
                 }
-                SaleQuotationDetail.SaleTaxRate = $(this).find("td:eq(3) input[type='number']").val();
-                SaleQuotationDetail.ASaleTaxRate = $(this).find("td:eq(4) input[type='number']").val();
-                SaleQuotationDetail.SExDutyRate = $(this).find("td:eq(5) input[type='number']").val();
+                SaleQuotationDetail.SaleTaxRate = $(this).find("td:eq(9) input[type='number']").val();
+                SaleQuotationDetail.ASaleTaxRate = $(this).find("td:eq(10) input[type='number']").val();
+                SaleQuotationDetail.SExDutyRate = $(this).find("td:eq(11) input[type='number']").val();
 
                 SaleQuotationDetails.push(SaleQuotationDetail);
 
                 //console.log("SaleQuotation preview");
                 //console.log(SaleQuotation);
                 //console.log("SaleQuotation Detail");
-                //console.log(JSON.stringify(SaleQuotationDetails));
+                console.log(JSON.stringify(SaleQuotationDetail));
+                console.log(JSON.stringify(SaleQuotationDetails));
             });
             if (flgerr == false) {
                 $.ajax({

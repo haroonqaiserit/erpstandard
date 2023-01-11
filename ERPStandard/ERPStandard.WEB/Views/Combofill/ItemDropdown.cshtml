@@ -35,9 +35,9 @@
             {
                 foreach (var item in Model)
                 {
-                    <tr onclick="selectitemval('@item.ItemID')" style="cursor:pointer">
+                    <tr onclick="selectitemval('@item.ItemID', '@item.Dscr')" style="cursor:pointer">
                         <td>
-                            <a href="#" onclick="selectitemval('@item.ItemID')" style="color:cornflowerblue;font-size:20px;font-weight:bold">
+                            <a href="#" onclick="selectitemval('@item.ItemID', '@item.Dscr')" style="color:cornflowerblue;font-size:20px;font-weight:bold">
                                 @item.Dscr
                                 <br />
                                 @*@if (item.DeliveredDate.ToShortDateString().Contains("0001"))

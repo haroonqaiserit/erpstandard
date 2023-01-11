@@ -172,8 +172,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Sales\SalequotationController.cs" />
     <Compile Include="Controllers\Sales\SalesorderController.cs" />
-    <Compile Include="Controllers\CombofillController.cs" />
-    <Compile Include="Controllers\GeneralController.cs" />
+    <Compile Include="Controllers\General\CombofillController.cs" />
+    <Compile Include="Controllers\General\GeneralController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1951,6 +1951,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controllers\GL\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

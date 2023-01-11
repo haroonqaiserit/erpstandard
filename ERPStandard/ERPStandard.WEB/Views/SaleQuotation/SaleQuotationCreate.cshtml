@@ -105,6 +105,7 @@
                 <table id="tblQuotationDetail" class="table table-striped dataTable-table">
                     <thead>
                         <tr>
+                            <th>Item Id</th>
                             <th>Item Name</th>
                             <th>Qty</th>
                             <th>Rate</th>
@@ -115,21 +116,28 @@
                         </tr>
                     </thead>
                     <tbody id="tblRowBody">
-                        <tr id="tblRow">
-                            <td class="col-md-4">
-                                @*<select class="form-select" id="ItemID" name="ItemID" required>
-                                    <option value='' selected disabled> --Select Item--</option>
-                                </select>*@
 
-                                <div class="col-md-5 offset-3">
-                                    <div class="search-box">
-                                        <input type="text" id="CustomSearch" class="form-control" placeholder="Search all...">
-                                    </div>
-                                    <div id="searchpartial">
+
+
+                        <tr id="tblRow">
+                            <td class="col-md-1">
+                                <div class="md">
+                                    <div class="search-box-Id">
+                                        <input type="text" id="CustomSearchID" readonly class="form-control" placeholder="Id" name="ItemID">
                                     </div>
                                 </div>
+                            </td>
 
-
+                            <td class="col-md-4">
+                                <div>
+                                    <div class="search-box">
+                                        <input type="text" id="CustomSearch1" autocomplete="off" minlength="1" maxlength="150" onkeyup="getItemSearchRecords(this, event)" class="form-control chld" placeholder="Search all...">
+                                        <div id="searchpartial" class="itemsearchrecord">
+                                            <ul id="userlist" class="userlist1">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                             <td class="col-md-1">
                                 <input type="number" id="Qty" minlength="1" maxlength="9" required class="form-control" placeholder="Qty" name="Qty">
@@ -156,21 +164,25 @@
             </div>
             <table hidden>
                 <tr style="display: none" id="tblRowforCopy">
-                    <td class="col-md-4">
-                        @*<select class="form-select" id="ItemIDD" name="ItemID" required>
-                            <option value='' selected disabled> --Select Item--</option>
-                        </select>*@
 
-                        <div class="col-md-5 offset-3">
-                            <div class="search-box">
-                                <input type="text" id="CustomSearch" class="form-control" placeholder="Search all...">
-                            </div>
-                            <div id="searchpartial">
+                    <td class="col-md-1">
+                        <div class="md">
+                            <div class="search-box-Id">
+                                <input type="text" id="CustomSearchID" readonly class="form-control" placeholder="Id" name="ItemID">
                             </div>
                         </div>
+                    </td>
 
-
-
+                    <td class="col-md-4">
+                        <div>
+                            <div class="search-box">
+                                <input type="text" id="CustomSearch1"  autocomplete="off" minlength="1" maxlength="150" onkeyup="getItemSearchRecords(this, event)" class="form-control chld" placeholder="Search all...">
+                                <div id="searchpartial" class="itemsearchrecord">
+                                    <ul id="userlist" class="userlist1">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                     <td class="col-md-1">
                         <input type="number" id="Qty" minlength="1" maxlength="9" required class="form-control" placeholder="Qty" name="Qty">
@@ -204,8 +216,11 @@
 <script>
 
     $(document).ready(function () {
-        AccountComboFill();
-        CompanyComboFill();
+        SalesmanComboFill();
+        CustomerComboFill();
+        //var row = document.getElementById('tblRowforCopy');
+        //$("QuoteDate").text('@DateTime.Now');
+            //focus();
         //ItemFill();
     });
 
@@ -229,6 +244,7 @@
         //result_style.display = 'table-row'
 
         tbody.appendChild(clone); // add new row to end of table
+        clone.focus();
         //table.appendChild(clone); // add new row to end of table
     };
 
@@ -239,10 +255,10 @@
         }
     }
 
-    function AccountComboFill() {
+    function SalesmanComboFill() {
         $.ajax({
             type: "GET",
-            url: '@Url.Action("AccountDropdown", "Combofill")',
+            url: '@Url.Action("SalesmanDropdown", "Combofill")',
             dataType: "json",
             beforeSend: function () {
                 $("#CustomSearchLoader").show();
@@ -257,16 +273,21 @@
 
                 $.each(result, function (i, item) {
                     var rows;
-                    rows = "<option value='" + item.AcntId + "'>" + item.Dscr + "</option>";
+                    if (i == 0) {
+                        rows = "<option selected value='" + item.SalesManId + "'>" + item.Name + "</option>";
+                    }
+                    else {
+                        rows = "<option value='" + item.SalesManId + "'>" + item.Name + "</option>";
+                    }
                     $('#SalesManId').append(rows);
                 });
             }
         });
     };
-    function CompanyComboFill() {
+    function CustomerComboFill() {
         $.ajax({
             type: "GET",
-            url: '@Url.Action("CompanyDropdown", "Combofill")',
+            url: '@Url.Action("CustomerDropdown", "Combofill")',
             dataType: "json",
             beforeSend: function () {
                 $("#CustomSearchLoader").show();
@@ -278,39 +299,137 @@
                 //$('#AcntCode').html('');
                 //var rows1 = "<option value='' selected disabled > --Select Account--</option >";
                 //$('#AcntCode').append(rows1);
+                console.log("results received");
+                //console.log(result);
 
                 $.each(result, function (i, item) {
                     var rows;
-                    //console.log(i);
+                    //console.log(item);
                     if (i == 0) {
-                        rows = "<option selected value='" + item.CompNo + "'>" + item.Company_Name + "</option>";
+                        rows = "<option selected value='" + item.CustomerNo + "'>" + item.Name + "</option>";
                     }
                     else {
-                        rows = "<option value='" + item.CompNo + "'>" + item.Company_Name + "</option>";
+                        rows = "<option value='" + item.CustomerNo + "'>" + item.Name + "</option>";
                     }
                     $('#CustomerId').append(rows);
                 });
             }
         });
     };
-     var searchflg = false;
-    $("#CustomSearch").keyup(function () {
-        searchflg = true;
-        console.log(searchflg);
-        SearchingLikeSendle();
+    var searchflg = false;
+
+    var chnode;
+    var searchtextboxget;
+    var idsearchtxtboxget;
+    var Qtysearchtxtboxget;
+    $(document).mouseup(function (e) {
+        var container = $(chnode);
+
+        // if the target of the click isn't the container nor a descendant of the container
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+            container.hide();
+        }
     });
 
-    function SearchingLikeSendle() {
+
+    function getItemSearchRecords(e, evt) {
+
+        var p = e.parentNode;
+        //console.log(p.childNodes);
+        //console.log(pp.childNodes[1].childNodes[1].childNodes[1].childNodes[3]);
+        var pp = e.parentNode.parentNode.parentNode.parentNode;
+
+        idsearchtxtboxget = pp.childNodes[1].childNodes[1].childNodes[1].childNodes[1];
+        Qtysearchtxtboxget = pp.childNodes[5].childNodes[1];
+        //Qtysearchtxtboxget = pp.childNodes[1].childNodes[1].childNodes[1].childNodes[3];
+        searchtextboxget = p.childNodes[1];
+        chnode = p.childNodes[3];
+        //$(chnode).hide();
+        $(chnode).show();
+        $(chnode).html('');
+        var val = $(e).val();
+
+        if (evt.keyCode === 8) {
+            //console.log(evt.keyCode);
+            evt.preventDefault();
+            $(idsearchtxtboxget).val('');
+        }
+
+
+
+        if (evt.keyCode === 13) {
+            //evt.preventDefault();
+            $(chnode).html('');
+            $(chnode).hide();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("SingleFirstRec", "Combofill")',
+                data: {
+                    Search: val
+                },
+                beforeSend: function () {
+                    // $("#CustomSearchLoader").show();
+                },
+                complete: function () {
+                    //$("#CustomSearchLoader").show();
+                },
+                success: function (data) {
+                    $(idsearchtxtboxget).val(data["ItemID"]);
+                    $(searchtextboxget).val(data["Dscr"]);
+                    $(Qtysearchtxtboxget).focus();
+                }
+            });
+
+        } else {
+
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("ItemDropdown", "Combofill")',
+                data: {
+                    Search: val
+                },
+                beforeSend: function () {
+                    // $("#CustomSearchLoader").show();
+                },
+                complete: function () {
+                    //$("#CustomSearchLoader").show();
+                },
+                success: function (data) {
+                    //console.log(data);
+                    $(chnode).html(data);
+                }
+            });
+        }
+        //if (evt.keyCode === 40) {
+        //    console.log("down arrokey pressed");
+        //    //evt.preventDefault();
+        //    //return;
+        //    $(chnode).focus();
+        //}
+
+
+    };
+
+    //$("#CustomSearch").keyup(function () {
+    //    console.log(searchflg);
+    //    SearchingLikeSendle(e);
+    //});
+
+    function SearchingLikeSendle(val) {
         console.log("reached in SearchingLikeSendle");
-        var val = $("#CustomSearch").val();
+        //var val = $("#CustomSearch").val();
 
-        console.log(searchflg);
-        console.log(val);
+        //console.log(searchflg);
+        //console.log(val);
 
-        $("#searchpartial").show();
+        //$("#searchpartial").show();
+
+        if (chnode != null) {
+            chnode.show();
+        }
 
         if (val == "" || searchflg==false) {
-            $("#searchpartial").html("");
+            $(chnode).html("");
             return false;
         }
         $.ajax({
@@ -332,11 +451,18 @@
         })
     }
 
-    function selectitemval(itemval) {
+    function selectitemval(itemval, name) {
         searchflg = false;
-        $("#CustomSearch").val(itemval);
-        console.log(itemval);
-        $("#searchpartial").hide();
+        //$("#CustomSearch").val(itemval);
+        //console.log(v);
+        console.log(itemval + ' ' + name);
+
+        $(idsearchtxtboxget).val(itemval);
+        $(searchtextboxget).val(name);
+        $(Qtysearchtxtboxget).focus();
+        //$(searchtextboxget).val(name);
+        //console.log(itemval);
+        $(chnode).hide();
     }
 
     function ItemFill(search) {

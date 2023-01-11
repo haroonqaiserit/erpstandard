@@ -2455,6 +2455,7 @@
     <EntitySetMapping Name="SalesMen">
       <EntityTypeMapping TypeName="SairaIndModel.SalesMan">
         <MappingFragment StoreEntitySet="SalesMan">
+          <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
           <ScalarProperty Name="SalesManId" ColumnName="SalesManId" />
           <ScalarProperty Name="CompNo" ColumnName="CompNo" />
           <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />

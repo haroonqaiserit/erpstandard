@@ -56,14 +56,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountsServices.cs" />
-    <Compile Include="ItemService.cs" />
-    <Compile Include="CustomerService.cs" />
+    <Compile Include="GL\AccountsServices.cs" />
+    <Compile Include="Inventory\ItemService.cs" />
+    <Compile Include="Sales\SalesmanService.cs" />
+    <Compile Include="Sales\CustomerService.cs" />
     <Compile Include="GlobalVariables.cs" />
-    <Compile Include="SaleQuotationService.cs" />
-    <Compile Include="BranchService.cs" />
-    <Compile Include="ChartofAccountsService.cs" />
-    <Compile Include="Company1Service.cs" />
+    <Compile Include="Sales\SaleQuotationService.cs" />
+    <Compile Include="General\BranchService.cs" />
+    <Compile Include="GL\ChartofAccountsService.cs" />
+    <Compile Include="General\Company1Service.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StandardVariables.cs" />
   </ItemGroup>

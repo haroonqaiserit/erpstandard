@@ -129,6 +129,20 @@ namespace ERPStandard.Services
             return viewModel;
         }
 
+        public ItemsStock SingleFirstRec(string dtSearch = "")
+        {
+            var viewModel = new ItemsStock();
+            using (var context = new SairaIndEntities())
+            {
+                var comp = context.ItemsStocks.Where(x => x.Dscr.Contains(dtSearch)
+                        );
+                    comp = comp.OrderBy(x => x.Dscr);
+                viewModel = comp.Where(x => x.CompNo == StandardVariables.CompNo && x.BranchNo == StandardVariables.BranchNo).FirstOrDefault();
+            }
+            return viewModel;
+        }
+
+
         public ItemsStock Single(string Id)
         {
             var viewModel = new ItemsStock();

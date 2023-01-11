@@ -1,5 +1,6 @@
 ﻿using ERPStandard.DbEntities;
 using ERPStandard.ViewModels;
+using ERPStandard.ViewModels.Sales;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -118,6 +119,58 @@ namespace ERPStandard.Services
             }
             return viewModel;
         }
+
+        public List<CustomerListViewModel> All_List(string dtSearch = "", int clmNameOrder = 0, int? CustomerType = null)
+        {
+            var viewModel = new List<CustomerListViewModel>();
+            using (var context = new SairaIndEntities())
+            {
+                var comp = context.Customers.Where(x => x.Name.Contains(dtSearch)
+                        || x.Address.Contains(dtSearch)
+                        || x.Phone1.Contains(dtSearch)
+                        || x.Phone2.Contains(dtSearch)
+                        || x.Email.Contains(dtSearch)
+                        || x.WebPage.Contains(dtSearch)
+                        );
+
+                if (clmNameOrder == 1)
+                {
+                    comp = comp.OrderBy(x => x.Name);
+                }
+                else if (clmNameOrder == 2)
+                {
+                    comp = comp.OrderBy(x => x.Address);
+                }
+                else if (clmNameOrder == 3)
+                {
+                    comp = comp.OrderBy(x => x.Phone1);
+                }
+                else if (clmNameOrder == 4)
+                {
+                    comp = comp.OrderBy(x => x.AcntId);
+                }
+                else if (clmNameOrder == 5)
+                {
+                    comp = comp.OrderBy(x => x.Registered);
+                }
+                else
+                {
+                    comp = comp.OrderBy(x => x.Name);
+                }
+                var viewModel1= comp.Where(x => x.CompNo == StandardVariables.CompNo && x.BranchNo == StandardVariables.BranchNo).ToList();
+
+                foreach (var item in viewModel1)
+                {
+                    CustomerListViewModel customer = new CustomerListViewModel();
+                    customer.CustomerNo = item.CustomerNo;
+                    customer.Name = item.Name;
+                    viewModel.Add(customer);
+                }
+            }
+            return viewModel;
+        }
+
+
         public Customer Single(string Id)
         {
             var viewModel = new Customer();

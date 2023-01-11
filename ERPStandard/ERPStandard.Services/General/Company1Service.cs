@@ -132,7 +132,6 @@ namespace ERPStandard.Services
             return viewModel;
         }
 
-
         public Company1 Single(int Id)
         {
             var viewModel = new Company1();
