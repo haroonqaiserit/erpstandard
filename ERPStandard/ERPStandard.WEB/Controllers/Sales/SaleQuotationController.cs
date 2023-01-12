@@ -85,7 +85,17 @@ namespace ERPStandard.WEB.Controllers
             }
             return View();
         }
-
+        
+        [HttpGet]
+        public ActionResult SaleQuotationPreview(string Id)
+        {
+            var root = SaleQuotationService.Instance.InvoiceReport(Id);
+            if (root != null)
+            {
+                return Json(root, JsonRequestBehavior.AllowGet);
+            }
+            return View();
+        }
 
         #endregion
     }

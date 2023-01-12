@@ -1,0 +1,59 @@
+﻿@model ERPStandard.DbEntities.Branch
+@{
+    ViewBag.Title = "General Setup";
+    ViewBag.SubTitle = "Branch Edit";
+}
+
+<div class="card-header">
+    <h4 class="card-title">@ViewBag.SubTitle</h4>
+</div>
+<div class="card-content">
+    <div class="card-body">
+        <form class="form" method="post">
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label for="Status">Branch Code</label>
+                        <input type="text" disabled id="Status" class="form-control data-id" placeholder="Branch ID" name="Status" value="@Model.Status">
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label for="BranchName">Name</label>
+                        <input type="text" id="BranchName" class="form-control data-id" placeholder="Branch Name" name="BranchName" value="@Model.BranchName">
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label for="Dscr">Descritption</label>
+                        <input type="text" id="Dscr" class="form-control" placeholder="Branch Description" name="Dscr" value="@Model.Dscr">
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label for="BranchAddress">Address</label>
+                        <input type="text" id="BranchAddress" class="form-control" placeholder="Address" name="BranchAddress" value="@Model.BranchAddress">
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label for="CompNo">Company Code</label>
+                        <input type="text" id="CompNo" class="form-control" name="CompNo" placeholder="Phones" value="@Model.CompNo">
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        <label for="AcntId">Account Code</label>
+                        <input type="text" id="AcntId" class="form-control" name="AcntId" placeholder="Account Code" value="@Model.AcntId">
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-end">
+                    <button type="button" id="btnSave" class="btn btn-primary me-1 mb-1" onclick="onEditSave()">Submit</button>
+                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

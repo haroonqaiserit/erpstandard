@@ -1,0 +1,17 @@
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.Services\bin\Release\ERPStandard.Services.dll.config
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.Services\bin\Release\ERPStandard.Services.dll
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.Services\bin\Release\ERPStandard.Services.pdb
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.Services\bin\Release\EntityFramework.dll
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.Services\bin\Release\EntityFramework.SqlServer.dll
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.Services\bin\Release\ERPStandard.DbEntities.dll
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.Services\bin\Release\ERPStandard.ViewModels.dll
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.Services\bin\Release\ERPStandard.DbEntities.pdb
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.Services\bin\Release\ERPStandard.DbEntities.dll.config
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.Services\bin\Release\ERPStandard.ViewModels.pdb
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.Services\bin\Release\EntityFramework.xml
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.Services\bin\Release\EntityFramework.SqlServer.xml
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.Services\obj\Release\ERPStandard.Services.csproj.AssemblyReference.cache
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.Services\obj\Release\ERPStandard.Services.csproj.CoreCompileInputs.cache
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.Services\obj\Release\ERPStandard.Services.csproj.CopyComplete
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.Services\obj\Release\ERPStandard.Services.dll
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.Services\obj\Release\ERPStandard.Services.pdb

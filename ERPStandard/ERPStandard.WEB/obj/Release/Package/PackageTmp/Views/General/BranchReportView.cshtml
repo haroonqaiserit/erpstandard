@@ -1,0 +1,37 @@
+﻿@model  ERPStandard.ViewModels.BranchViewModel
+@*<link rel="stylesheet" href="~/assets/vendors/simple-datatables/style.css">
+<script src="~/assets/vendors/simple-datatables/simple-datatables.js"></script>*@
+
+<table hidden class="table table-striped dataTable-table" id="tblBranchReport">
+    <thead>
+        <tr>
+            <th><a href="javascript:;" class="dataTable-sorter">Name</a></th>
+            <th><a href="javascript:;" class="dataTable-sorter">Dscr</a></th>
+            <th><a href="javascript:;" class="dataTable-sorter">Address</a></th>
+            <th><a href="javascript:;" class="dataTable-sorter">AccountCode</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model != null)
+            {
+                foreach (var tbl in Model.Branches)
+                {
+                    <tr>
+                        <td>@tbl.BranchName</td>
+                        <td>@tbl.Dscr</td>
+                        <td>@tbl.BranchAddress</td>
+                        <td>@tbl.AcntId</td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+
+<script>
+    // Simple Datatable
+    //let tblCompanyReport = document.querySelector('#tblCompanyReport');
+    //let dataTable = new simpleDatatables.DataTable(tblCompanyReport);
+</script>
+<!--Try new table look-->

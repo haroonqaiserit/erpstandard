@@ -53,83 +53,80 @@
             }
         };
 
-        $("#btnPreview").click(function () {
-            console.log("Preview clicked");
-
-            previewReport();
-
-            //var doc = new jsPDF('l', 'in', [3, 5]);
-            //var doc = new jsPDF()
-            //doc.autoTable(columns);
-
-            //doc.fromHTML($("#tblID").html(), 15, 15, {
-            //"width": 170,
-            //"elementHandlers": specialElementHandlers
-            //});
-
-            //doc.autoTable({
-            //    html: '#tblID',
-            //    columnStyles: {
-            //        5: { cellWidth: 40 }
-            //    },
-            //    bodyStyles: {
-            //        minCellHeight: 30
-            //    }
-            //});
-
-            //var doc = new jsPDF();
-
-            //Example to prind HTML DIV
-            //doc.fromHTML($("#tblID").html(), 15, 15, {
-            //    "width": 170,
-            //    "elementHandlers": specialElementHandlers
-            //});
-
-            //Anouther example to print PDF
-            //let h1 = document.querySelector('#tblID');
-            // doc.fromHTML(h1, 15, 15);
-
-            //Save the PDF Document
-            ////doc.save("sample-file.pdf");
-
-            // Set the document to automatically print via JS
-            //doc.save("sample-file.pdf");
-            //doc.autoPrint();
-
-            //window.open(doc.output('bloburl'));
-            console.log("Download case not processed");
-
-            //const hiddFrame = document.createElement('iframe');
-            //hiddFrame.style.position = 'fixed';
-            //// "visibility: hidden" would trigger safety rules in some browsers like safari，
-            //// in which the iframe display in a pretty small size instead of hidden.
-            //// here is some little hack ~
-            //hiddFrame.style.width = '1px';
-            //hiddFrame.style.height = '1px';
-            //hiddFrame.style.opacity = '0.01';
-            //const isSafari = /^((?!chrome|android).)*safari/i.test(window.navigator.userAgent);
-            //if (isSafari) {
-            //    // fallback in safari
-            //    hiddFrame.onload = () => {
-            //        try {
-            //            hiddFrame.contentWindow.document.execCommand('print', false, null);
-            //        } catch (e) {
-            //            hiddFrame.contentWindow.print();
-            //        }
-            //    };
-            //}
-            //hiddFrame.src = doc.output('bloburl');
-            //document.body.appendChild(hiddFrame);
-
-
-        });
-
-
-
     });
 
+     function previewReport() {
+        var dtSearch = document.getElementById("dtSearch").value;
+        var clmNameOrder = 1;
+        var reportpreviewcount = 0;
+        $.ajax({
+            type: "Get",
+            url: '@Url.Action("CompanyReportView", "General")',
+            data: {
+                dtSearch: dtSearch,
+                clmNameOrder: clmNameOrder
+            },
+            beforeSend: function () {
+                $("#CustomSearchLoader").show();
+            },
+            complete: function () {
+                $("#CustomSearchLoader").hide();
+            },
+            success: function (result) {
+                //alert("result received");
+                $("#OrderReport").html(result);
+                if (reportpreviewcount == 0) {
+                var doc = new jsPDF('p');
+                doc.text('Company Report ', 20, 10)
+                //doc.autoTable({ html: '#tblCompanyReport' },
+                //    {(20, 20)});
 
+                doc.autoTable({ html: '#tblCompanyReport' });
 
+                //doc.text("This is the default font.", 20, 20);
+
+                doc.autoPrint();
+                addFooters(doc);
+                const hiddFrame = document.createElement('iframe');
+                hiddFrame.style.position = 'fixed';
+                // "visibility: hidden" would trigger safety rules in some browsers like safari，
+                // in which the iframe display in a pretty small size instead of hidden.
+                // here is some little hack ~
+                hiddFrame.style.width = '1px';
+                hiddFrame.style.height = '1px';
+                hiddFrame.style.opacity = '0.01';
+                const isSafari = /^((?!chrome|android).)*safari/i.test(window.navigator.userAgent);
+                if (isSafari) {
+                    // fallback in safari
+                    hiddFrame.onload = () => {
+                        try {
+                            hiddFrame.contentWindow.document.execCommand('print', false, null);
+                        } catch (e) {
+                            hiddFrame.contentWindow.print();
+                        }
+                    };
+                }
+                hiddFrame.src = doc.output('bloburl');
+                document.body.appendChild(hiddFrame);
+                reportpreviewcount = 1;
+            }
+            }
+        })
+    };
+
+    const addFooters = doc => {
+        const pageCount = doc.internal.getNumberOfPages()
+        doc.setFont('helvetica', 'italic')
+        doc.setFontSize(8)
+        for (var i = 1; i <= pageCount; i++) {
+            doc.setPage(i)
+            //doc.text('Page ' + String(i) + ' of ' + String(pageCount), doc.internal.pageSize.width / 2, 287, {
+            //    align: 'center'
+            //})
+            doc.text(150, 285, 'page ' + pageCount); //print number bottom right
+            console.log("Total pages: " + pageCount);
+        }
+    };
 
     function onLoad() {
         $.ajax({
@@ -446,78 +443,75 @@
 
     };
 
-    function previewReport() {
-        var dtSearch = document.getElementById("dtSearch").value;
-        var clmNameOrder = 1;
-        var reportpreviewcount = 0;
-        $.ajax({
-            type: "Get",
-            url: '@Url.Action("CompanyReportView", "General")',
-            data: {
-                dtSearch: dtSearch,
-                clmNameOrder: clmNameOrder
-            },
-            beforeSend: function () {
-                $("#CustomSearchLoader").show();
-            },
-            complete: function () {
-                $("#CustomSearchLoader").hide();
-            },
-            success: function (result) {
-                //alert("result received");
-                $("#OrderReport").html(result);
-                if (reportpreviewcount == 0) {
-                var doc = new jsPDF('p');
-                doc.text('Company Report ', 20, 10)
-                //doc.autoTable({ html: '#tblCompanyReport' },
-                //    {(20, 20)});
+            //$("#btnPreview").click(function () {
+        //    console.log("Preview clicked");
 
-                doc.autoTable({ html: '#tblCompanyReport' });
+        //    previewReport();
 
-                //doc.text("This is the default font.", 20, 20);
+        //    //var doc = new jsPDF('l', 'in', [3, 5]);
+        //    //var doc = new jsPDF()
+        //    //doc.autoTable(columns);
 
-                doc.autoPrint();
-                addFooters(doc);
-                const hiddFrame = document.createElement('iframe');
-                hiddFrame.style.position = 'fixed';
-                // "visibility: hidden" would trigger safety rules in some browsers like safari，
-                // in which the iframe display in a pretty small size instead of hidden.
-                // here is some little hack ~
-                hiddFrame.style.width = '1px';
-                hiddFrame.style.height = '1px';
-                hiddFrame.style.opacity = '0.01';
-                const isSafari = /^((?!chrome|android).)*safari/i.test(window.navigator.userAgent);
-                if (isSafari) {
-                    // fallback in safari
-                    hiddFrame.onload = () => {
-                        try {
-                            hiddFrame.contentWindow.document.execCommand('print', false, null);
-                        } catch (e) {
-                            hiddFrame.contentWindow.print();
-                        }
-                    };
-                }
-                hiddFrame.src = doc.output('bloburl');
-                document.body.appendChild(hiddFrame);
-                reportpreviewcount = 1;
-            }
-            }
-        })
-    };
+        //    //doc.fromHTML($("#tblID").html(), 15, 15, {
+        //    //"width": 170,
+        //    //"elementHandlers": specialElementHandlers
+        //    //});
 
-    const addFooters = doc => {
-        const pageCount = doc.internal.getNumberOfPages()
-        doc.setFont('helvetica', 'italic')
-        doc.setFontSize(8)
-        for (var i = 1; i <= pageCount; i++) {
-            doc.setPage(i)
-            //doc.text('Page ' + String(i) + ' of ' + String(pageCount), doc.internal.pageSize.width / 2, 287, {
-            //    align: 'center'
-            //})
-            doc.text(150, 285, 'page ' + pageCount); //print number bottom right
-            console.log("Total pages: " + pageCount);
-        }
-    };
+        //    //doc.autoTable({
+        //    //    html: '#tblID',
+        //    //    columnStyles: {
+        //    //        5: { cellWidth: 40 }
+        //    //    },
+        //    //    bodyStyles: {
+        //    //        minCellHeight: 30
+        //    //    }
+        //    //});
 
+        //    //var doc = new jsPDF();
+
+        //    //Example to prind HTML DIV
+        //    //doc.fromHTML($("#tblID").html(), 15, 15, {
+        //    //    "width": 170,
+        //    //    "elementHandlers": specialElementHandlers
+        //    //});
+
+        //    //Anouther example to print PDF
+        //    //let h1 = document.querySelector('#tblID');
+        //    // doc.fromHTML(h1, 15, 15);
+
+        //    //Save the PDF Document
+        //    ////doc.save("sample-file.pdf");
+
+        //    // Set the document to automatically print via JS
+        //    //doc.save("sample-file.pdf");
+        //    //doc.autoPrint();
+
+        //    //window.open(doc.output('bloburl'));
+        //    console.log("Download case not processed");
+
+        //    //const hiddFrame = document.createElement('iframe');
+        //    //hiddFrame.style.position = 'fixed';
+        //    //// "visibility: hidden" would trigger safety rules in some browsers like safari，
+        //    //// in which the iframe display in a pretty small size instead of hidden.
+        //    //// here is some little hack ~
+        //    //hiddFrame.style.width = '1px';
+        //    //hiddFrame.style.height = '1px';
+        //    //hiddFrame.style.opacity = '0.01';
+        //    //const isSafari = /^((?!chrome|android).)*safari/i.test(window.navigator.userAgent);
+        //    //if (isSafari) {
+        //    //    // fallback in safari
+        //    //    hiddFrame.onload = () => {
+        //    //        try {
+        //    //            hiddFrame.contentWindow.document.execCommand('print', false, null);
+        //    //        } catch (e) {
+        //    //            hiddFrame.contentWindow.print();
+        //    //        }
+        //    //    };
+        //    //}
+        //    //hiddFrame.src = doc.output('bloburl');
+        //    //document.body.appendChild(hiddFrame);
+
+
+        //});
 
 </script>

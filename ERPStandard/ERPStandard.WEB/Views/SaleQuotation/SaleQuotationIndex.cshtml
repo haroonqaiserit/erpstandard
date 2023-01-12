@@ -5,7 +5,7 @@
 @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>*@
 <script src="~/assets/js/jsPDF/jspdf.min.js"></script>
 <script src="~/assets/js/jsPDF/jspdf.plugin.autotable.min.js"></script>
-
+<script src="https://unpkg.com/jspdf-invoice-template@1.4.0/dist/index.js"></script>
 <div class="page-title">
     <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
@@ -13,7 +13,7 @@
             @*<p class="text-subtitle text-muted"><a href="index.html">Create New</a></p>*@
             <button class="btn btn-primary me-1 mb-1" type="button" id="btnList" onclick="onLoad()">List</button>
             <button class="btn btn-light-secondary me-1 mb-1" type="button" id="Create" onclick="onCreate()">New</button>
-            <button class="btn btn-light-secondary me-1 mb-1" type="button" id="btnPreview" onclick="previewReport()">Preview</button>
+            <button class="btn btn-light-secondary me-1 mb-1" type="button" id="btnPreview" onclick="generatePDF()">Preview</button>
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -52,10 +52,6 @@
                 return true;
             }
         };
-
-        $("#btnPreview").click(function () {
-            previewReport();
-        });
     });
 
     function onLoad() {
@@ -502,5 +498,167 @@
             return false;
         }
     }
+
+    function generatePDF() {
+
+        var Id = "1 -L";
+
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("SaleQuotationPreview", "Salequotation")',
+            data: {
+                Id: Id
+            },
+            dataType: "json",
+            beforeSend: function () {
+                $("#CustomSearchLoader").show();
+            },
+            complete: function () {
+                $("#CustomSearchLoader").hide();
+            },
+            success: function (result) {
+                //console.log(JSON.stringify(result));
+                var pdfObject = jsPDFInvoiceTemplate.default(result);
+                console.log(pdfObject);
+                //var res = JSON.stringify(result);
+                //console.log(res);
+                //console.log(res.replace(/["jsPDFInvoiceTemplate.OutputType.Save"]+/g, 'jsPDFInvoiceTemplate.OutputType.Save'));
+
+
+            //    $.each(result, function (i, item) {
+            //        var rows;
+            //        //console.log(i);
+            //        if (i == 0) {
+            //            rows = "<option selected value='" + item.ItemID + "'>" + item.Dscr + "</option>";
+            //        }
+            //        else {
+            //            rows = "<option value='" + item.ItemID + "'>" + item.Dscr + "</option>";
+            //        }
+            //        $('#ItemID').append(rows);
+            //        $('#ItemIDD').append(rows);
+            //    });
+            }
+        });
+
+
+
+    }
+        var props = {
+            outputType: jsPDFInvoiceTemplate.OutputType.Save,
+                returnJsPDFDocObject: true,
+                    fileName: "Invoice 2024",
+                        orientationLandscape: false,
+                            compress: true,
+                                logo: {
+                src: "https://raw.githubusercontent.com/edisonneza/jspdf-invoice-template/demo/images/logo.png",
+                    width: 53.33, //aspect ratio = width/height
+                        height: 26.66,
+                            margin: {
+                    top: 0, //negative or positive num, from the current position
+                        left: 0 //negative or positive num, from the current position
+                }
+            },
+            stamp: {
+                inAllPages: true,
+                    src: "https://raw.githubusercontent.com/edisonneza/jspdf-invoice-template/demo/images/qr_code.jpg",
+                        width: 20, //aspect ratio = width/height
+                            height: 20,
+                                margin: {
+                    top: 0, //negative or positive num, from the current position
+                        left: 0 //negative or positive num, from the current position
+                }
+            },
+            business: {
+                name: "Business Name",
+                    address: "Albania, Tirane ish-Dogana, Durres 2001",
+                        phone: "(+355) 069 11 11 111",
+                            email: "email@example.com",
+                                email_1: "info@example.al",
+                                    website: "www.example.al",
+                            },
+            contact: {
+                label: "Invoice issued for:",
+                    name: "Client Name",
+                        address: "Albania, Tirane, Astir",
+                            phone: "(+355) 069 22 22 222",
+                                email: "client@website.al",
+                                    otherInfo: "www.website.al",
+                            },
+            invoice: {
+                label: "Invoice #: ",
+                    num: 19,
+                        invDate: "Payment Date: 01/01/2021 18:12",
+                            invGenDate: "Invoice Date: 02/02/2021 10:17",
+                                headerBorder: true,
+                                    tableBodyBorder: true,
+                                        header: [
+                                            {
+                                                title: "#",
+                                                style: {
+                                                    width: 10
+                                                }
+                                            },
+                                            {
+                                                title: "Title",
+                                                style: {
+                                                    width: 30
+                                                }
+                                            },
+                                            {
+                                                title: "Description",
+                                                style: {
+                                                    width: 80
+                                                }
+                                            },
+                                            { title: "Price" },
+                                            { title: "Quantity" },
+                                            { title: "Unit" },
+                                            { title: "Total" }
+                                        ],
+                                            table: Array.from(Array(15), (item, index) => ([
+                                                index + 1,
+                                                "There are many variations ",
+                                                "Lorem Ipsum is simply dummy text dummy text ",
+                                                200.5,
+                                                4.5,
+                                                "m2",
+                                                400.5
+                                            ])),
+                                                additionalRows: [{
+                                                    col1: 'Total:',
+                                                    col2: '145,250.50',
+                                                    col3: 'ALL',
+                                                    style: {
+                                                        fontSize: 14 //optional, default 12
+                                                    }
+                                                },
+                                                {
+                                                    col1: 'VAT:',
+                                                    col2: '20',
+                                                    col3: '%',
+                                                    style: {
+                                                        fontSize: 10 //optional, default 12
+                                                    }
+                                                },
+                                                {
+                                                    col1: 'SubTotal:',
+                                                    col2: '116,199.90',
+                                                    col3: 'ALL',
+                                                    style: {
+                                                        fontSize: 10 //optional, default 12
+                                                    }
+                                                }],
+
+                                                    invDescLabel: "Invoice Note",
+                                                        invDesc: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary.",
+                            },
+            footer: {
+                text: "The invoice is created on a computer and is valid without the signature and stamp.",
+                            },
+            pageEnable: true,
+                pageLabel: "Page ",
+                        }
+
+
 
 </script>
