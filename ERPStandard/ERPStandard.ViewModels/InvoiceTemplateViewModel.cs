@@ -38,6 +38,9 @@ namespace ERPStandard.ViewModels
         public string email { get; set; }
         public string email_1 { get; set; }
         public string website { get; set; }
+        public string STaxRegNo { get; set; } = "";
+        public string NationalTaxNo { get; set; } = "";
+        public string City { get; set; } = "";
     }
 
     public class Contact
@@ -47,6 +50,10 @@ namespace ERPStandard.ViewModels
         public string address { get; set; }
         public string phone { get; set; }
         public string email { get; set; }
+        public string website { get; set; }
+        public string STaxRegNo { get; set; } = "";
+        public string NationalTaxNo { get; set; } = "";
+        public string City { get; set; } = "";
         public string otherInfo { get; set; }
     }
 
@@ -65,7 +72,7 @@ namespace ERPStandard.ViewModels
     public class Invoice
     {
         public string label { get; set; }
-        public int num { get; set; }
+        public string num { get; set; }
         public string invDate { get; set; }
         public string invGenDate { get; set; }
         public bool headerBorder { get; set; }
@@ -78,6 +85,9 @@ namespace ERPStandard.ViewModels
         public string invDesc { get; set; }
         public double InvNetlAmount { get; set; }
         public double DeliveryCharges { get; set; }
+        public string RefDocId { get; set; }
+        public string RefDocName { get; set; }
+        public string InvNetTotalAmnt { get; set; }
     }
 
     public class Logo

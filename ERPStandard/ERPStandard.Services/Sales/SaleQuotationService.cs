@@ -111,16 +111,19 @@ namespace ERPStandard.Services
         {
             string documentname = "Quotation";
             var root = new Root();
+            double InvNetTotalAmnt = 1250;
             using (var context = new SairaIndEntities())
             {
 
-                var inv_Master = (from m in context.CRM_SaleQuotation
-                         where m.CompNo == StandardVariables.CompNo 
-                         && m.BranchNo == StandardVariables.BranchNo
-                         && m.QuoteId == Id
-                         join d in context.Customers on m.CustomerNo equals d.CustomerNo
-                         where d.CompNo == m.CompNo & d.BranchNo == m.BranchNo
-                         select new { m, d }).FirstOrDefault();
+                var inv_Master = (from master in context.CRM_SaleQuotation
+                         where master.CompNo == StandardVariables.CompNo 
+                         && master.BranchNo == StandardVariables.BranchNo
+                         && master.QuoteId == Id
+                         join detail in context.Customers on master.CustomerNo equals detail.CustomerNo
+                         where detail.CompNo == master.CompNo & detail.BranchNo == master.BranchNo
+                         join customer in context.Company1 on master.CompNo equals customer.CompNo
+                         join city in context.Cities on detail.CityId equals city.CityId
+                         select new { master, detail, customer, city}).FirstOrDefault();
 
 
                 var inv_detail = (from m in context.CRM_SaleQuotation
@@ -174,30 +177,40 @@ namespace ERPStandard.Services
                 root.stamp = stamp;
                 //Business class settings - Root
                 Business business = new Business();
-                business.name = "Saira Industries";
-                business.address = "";
-                business.phone = "";
-                business.email = "";
+                business.name = inv_Master.customer.Company_Name == null? "": inv_Master.customer.Company_Name;
+                business.address = inv_Master.customer.Company_address == null? "": inv_Master.customer.Company_address;
+                business.phone = inv_Master.customer.Company_phones == null ? "" : inv_Master.customer.Company_phones;
+                business.email = inv_Master.customer.Company_email == null ? "" : inv_Master.customer.Company_email;
                 business.email_1 = "";
-                business.website = "";
+                business.website = ""; //inv_Master.c.company_website;
+                business.STaxRegNo = inv_Master.customer.STaxRegNo == null ? "" : inv_Master.customer.STaxRegNo;
+                business.NationalTaxNo = inv_Master.customer.NationalTaxNo == null ? "" : inv_Master.customer.NationalTaxNo;
+                business.City = inv_Master.customer.CityName == null ? "" : inv_Master.customer.CityName;
                 root.business = business;
                 ViewModels.Contact contact = new ViewModels.Contact();
                 contact.label = "Invoice issued for:";
-                contact.label = "Client Name";
-                contact.address = "Albania, Tirane, Astir";
-                contact.phone = "";
-                contact.email = "";
-                contact.otherInfo = "";
+                contact.name = inv_Master.detail.Name == null ? "" : inv_Master.detail.Name;
+                contact.address = inv_Master.detail.Address == null ? "" : inv_Master.detail.Address;
+                contact.phone = inv_Master.detail.Phone1 == null ? "" : inv_Master.detail.Phone1;
+                contact.email = inv_Master.detail.Email == null ? "" : inv_Master.detail.Email;
+                contact.website = inv_Master.detail.WebPage == null ? "" : inv_Master.detail.WebPage;
+                contact.STaxRegNo = inv_Master.detail.SaleTaxRegisterNo == null ? "" : inv_Master.detail.SaleTaxRegisterNo;
+                contact.NationalTaxNo = inv_Master.detail.NationalTaxNo == null ? "" : inv_Master.detail.NationalTaxNo;
+                contact.City = inv_Master.city.CityDesc == null ? "" : inv_Master.city.CityDesc;
+                //contact.otherInfo = inv_Master.d.r;
                 root.contact = contact;
                 Invoice invoice = new Invoice();
 
 
                 invoice.label = documentname + " #: ";
-                invoice.num = 19;
-                invoice.invDate = documentname + " Date: " + DateTime.Now;
-                invoice.invGenDate = "Print Date: " + DateTime.Now;
+                invoice.num =  inv_Master.master.QuoteNo.ToString();
+                invoice.invDate = inv_Master.master.QuoteDate.ToString("dd-MMM-yyyy");
+                invoice.invGenDate = "Print Date: " + DateTime.Now.ToString("dd-MMM-yyyy hh:mm tt"); ;
                 invoice.headerBorder = true;
                 invoice.tableBodyBorder = true;
+                invoice.RefDocId = inv_Master.master.RefDocId == null ? "" : inv_Master.master.RefDocId;
+                invoice.RefDocName = inv_Master.master.RefDocName == null ? "" : inv_Master.master.RefDocName;
+                invoice.InvNetTotalAmnt = InvNetTotalAmnt.ToString();
                 //Header Class Setting for Invoice table
                 List<Header> header_L = new List<Header>();
                 Header header = new Header();
@@ -273,14 +286,14 @@ namespace ERPStandard.Services
                 tbl = invoice_report_details;
                 invoice.table = tbl;
                 invoice.invDescLabel = "";//"This Quotation is Valid till: " + String.IsNullOrEmpty(inv_Master.m.QuoteValidDate.ToString()) ? DateTime.Now : inv_Master.m.QuoteValidDate;
-                invoice.invDesc = inv_Master.m.Remarks;
+                invoice.invDesc = inv_Master.master.Remarks;
                 root.invoice = invoice;
                 //tbl.Add(invoice_report_details);
                 Footer footer = new Footer();
                 footer.text = "The invoice is created on a computer and is valid without the signature and stamp.";
                 root.pageEnable=true;
                 root.footer = footer;
-                root.pageLabel = "Page Label here";
+                root.pageLabel = inv_Master.master.QuoteValidDate == null ? "" : "this " + documentname + " is valid till " + inv_Master.master.QuoteValidDate.ToString("dd-MMM-yyyy");
             }
             return root;
         }
