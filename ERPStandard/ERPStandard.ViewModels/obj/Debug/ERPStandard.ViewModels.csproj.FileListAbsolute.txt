@@ -10,3 +10,5 @@ D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.ViewMode
 D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.ViewModels\obj\Debug\ERPStandard.ViewModels.csproj.CopyComplete
 D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.ViewModels\obj\Debug\ERPStandard.ViewModels.dll
 D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.ViewModels\obj\Debug\ERPStandard.ViewModels.pdb
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.ViewModels\bin\Debug\Rotativa.Core.dll
+D:\Softwares\Personal\Personal\MVC\ERP Standard\ERPStandard\ERPStandard.ViewModels\bin\Debug\Rotativa.MVC.dll

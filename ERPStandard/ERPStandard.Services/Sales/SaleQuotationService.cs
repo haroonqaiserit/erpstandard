@@ -212,51 +212,67 @@ namespace ERPStandard.Services
                 //Header 2 Setting
                 header.title = "Sr"; //1
                 style.width = 5;
+                header.dataKey = "serialnum";
                 header.style = style;
                 header_L.Add(header);
 
+                header = new Header();
                 header.title = "Description"; //2
+                header.dataKey = "Item";
                 style.width = 30;
                 header.style = style;
                 header_L.Add(header);
 
                 //Header 3 Setting
+                header = new Header();
                 header.title = "Qty";  //3
+                header.dataKey = "Qty";
                 header.style = style;
                 header_L.Add(header);
 
                 //Header 3 Setting
+                header = new Header();
                 header.title = "Rate"; //4
+                header.dataKey = "rate";
                 header.style = style;
                 header_L.Add(header);
 
+                header = new Header();
                 header.title = "STax"; //5
+                header.dataKey = "STax";
                 header.style = style;
                 header_L.Add(header);
 
+                header = new Header();
                 header.title = "VAT"; //6
+                header.dataKey = "ASTax";
                 header.style = style;
                 header_L.Add(header);
 
+                header = new Header();
                 header.title = "ExDuty"; //7
+                header.dataKey = "SExDuty";
                 header.style = style;
                 header_L.Add(header);
 
+                header = new Header();
                 header.title = "Dis"; //8
+                header.dataKey = "discount";
                 header.style = style;
                 header_L.Add(header);
 
+                header = new Header();
                 header.title = "Amount"; //9
+                header.dataKey = "Amount";
                 header.style = style;
                 header_L.Add(header);
                 invoice.header = header_L;
                 //invoice.table = inv_detail;
-                List<List<InvoiceReportDetails>> tbl = new List<List<InvoiceReportDetails>>();
-                List<object> list = new List<object>();
-                object l = new InvoiceReportDetails();
-                tbl.Add(invoice_report_details);
+                List<InvoiceReportDetails> tbl = new List<InvoiceReportDetails>();
+                //List<List<InvoiceReportDetails>> tbl = new List<List<InvoiceReportDetails>>();
+                tbl = invoice_report_details;
                 invoice.table = tbl;
-                invoice.invDescLabel = "This Quotation is Valid till: " + inv_Master.m.QuoteValidDate;
+                invoice.invDescLabel = "";//"This Quotation is Valid till: " + String.IsNullOrEmpty(inv_Master.m.QuoteValidDate.ToString()) ? DateTime.Now : inv_Master.m.QuoteValidDate;
                 invoice.invDesc = inv_Master.m.Remarks;
                 root.invoice = invoice;
                 //tbl.Add(invoice_report_details);

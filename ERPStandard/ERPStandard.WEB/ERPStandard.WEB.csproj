@@ -188,6 +188,7 @@
   <ItemGroup>
     <Content Include="assets\css\app.css" />
     <Content Include="assets\css\bootstrap.css" />
+    <Content Include="assets\css\reportstyle.css" />
     <Content Include="assets\css\pages\auth.css" />
     <Content Include="assets\css\pages\chat.css" />
     <Content Include="assets\css\pages\dripicons.css" />
@@ -226,6 +227,8 @@
     <Content Include="assets\js\extensions\rater-js.js" />
     <Content Include="assets\js\extensions\sweetalert2.js" />
     <Content Include="assets\js\extensions\toastify.js" />
+    <Content Include="assets\js\htm2canvas\html2canvas.js" />
+    <Content Include="assets\js\htm2canvas\html2canvas.min.js" />
     <Content Include="assets\js\jsPDF\jspdf.min.js" />
     <Content Include="assets\js\jsPDF\jspdf.plugin.autotable.min.js" />
     <Content Include="assets\js\jsPDF\plugins\acroform.js" />
@@ -1948,6 +1951,8 @@
     <Content Include="Views\SaleQuotation\SaleQuotationIndex.cshtml" />
     <Content Include="Views\SaleQuotation\SaleQuotationList.cshtml" />
     <Content Include="Views\Combofill\ItemDropdown.cshtml" />
+    <Content Include="Views\SaleQuotation\SaleInvoiceTemplate.cshtml" />
+    <Content Include="Views\SaleQuotation\DocumentReportTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

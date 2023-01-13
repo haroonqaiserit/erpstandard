@@ -1,0 +1,95 @@
+﻿@model ERPStandard.ViewModels.Root
+@{
+    ViewBag.Title = "Sales Transaction";
+    ViewBag.SubTitle = "Quotation";
+}
+
+<div class="card-header">
+</div>
+<div class="card-content">
+    <div class="card-body">
+        <div class="container" id="html-template_s">
+            <<!-- invokes function to convert HTML invoice to PDF in JavaScript-->
+            <div class="download-link text-right">
+                <button class="btn-convert" onclick="convertHTMLToPDF()">Download</button>
+            </div>
+            <div class="text-right">
+                <b>Sender:</b> Vincy
+            </div>
+            <div class="border-top text-left">
+                <div class="heading">Invoice</div>
+            </div>
+            <table class="invoice-tbl table">
+                <tr>
+                    <td><b>Invoice number:</b> @Model.invoice.num</td>
+                </tr>
+                <tr>
+                    <td><b>Date:</b> @Model.invoice.invDate</td>
+                </tr>
+            </table>
+            <div></div>
+            <div class="border-bottom">
+                <table class="items-tbl table-bordered" id="html-template">
+                    <tr>
+                        <th>Product</th>
+                        <th class="text-right">Price ($)</th>
+                        <th class="text-right">Quantity</th>
+                        <th class="text-right">Total ($)</th>
+                    </tr>
+
+                    @foreach (var item in Model.invoice.table)
+                    {
+                        <tr>
+                            <th>@item.Item</th>
+                            <th class="text-right">@item.rate</th>
+                            <th class="text-right">@item.Qty</th>
+                            <th class="text-right">@item.Amount</th>
+                        </tr>
+                    }
+
+                    <tr class="text-bold">
+                        <td class="text-right" colspan="3">Shipping ($)</td>
+                        <td class="text-right">
+                            @Model.invoice.DeliveryCharges>
+                        </td>
+                    </tr>
+
+                    <tr class="text-bold">
+                        <td class="text-right" colspan="3">Grand Total ($)</td>
+                        <th class="text-right">@Model.invoice.InvNetlAmount</th>
+                    </tr>
+
+                </table>
+            </div>
+            <h3>Customer details:</h3>
+            <div>
+                <div class="cus-label" style="color: #000; padding: 5px;">
+                    Name: <span class="cus-field">
+                        @Model.contact.name
+                    </span>
+                </div>
+                <div class="cus-label">
+                    Email: <span class="cus-field">
+                        @Model.contact.email
+                    </span>
+                </div>
+                <div class="cus-label">
+                    Phone Number: <span class="cus-field">
+                        @Model.contact.phone
+                    </span>
+                </div>
+            </div>
+            <h3>Billing Address:</h3>
+            <div>
+                <div class="cus-label">
+                    Address1: <span class="cus-field">
+                        @Model.contact.address
+                    </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

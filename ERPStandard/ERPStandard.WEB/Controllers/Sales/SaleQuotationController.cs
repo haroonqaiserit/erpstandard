@@ -97,6 +97,39 @@ namespace ERPStandard.WEB.Controllers
             return View();
         }
 
+        //public ActionResult SaleInvoiceTemplate(string Id)
+        //{
+        //    if (string.IsNullOrEmpty(Id))
+        //    {
+        //        Id = "1 -L";
+        //    }
+        //    var root = SaleQuotationService.Instance.InvoiceReport(Id);
+        //    var printpdf = new ActionAsPdf("DocumentReportTemplate", root);
+        //    return printpdf;
+        //}
+
+        [HttpGet]
+        public ActionResult SaleInvoiceTemplate(string Id)
+        {
+            var root = SaleQuotationService.Instance.InvoiceReport(Id);
+            if (root != null)
+            {
+                try
+                {
+
+                    //return Json(root, JsonRequestBehavior.AllowGet);
+                    //return PartialView("DocumentReportTemplate", root);
+                    //return ActionAsPdf("DocumentReportTemplate", root);
+                    return PartialView("SaleInvoiceTemplate", root);
+                }
+                catch (Exception ex)
+                {
+                    return Json(ex, JsonRequestBehavior.AllowGet);
+                }
+            }
+            return View();
+        }
+
         #endregion
     }
 }

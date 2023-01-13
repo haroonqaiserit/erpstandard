@@ -58,6 +58,7 @@ namespace ERPStandard.ViewModels
     public class Header
     {
         public string title { get; set; }
+        public string dataKey { get; set; }
         public Style style { get; set; }
     }
 
@@ -70,10 +71,13 @@ namespace ERPStandard.ViewModels
         public bool headerBorder { get; set; }
         public bool tableBodyBorder { get; set; }
         public List<Header> header { get; set; }
-        public List<List<InvoiceReportDetails>> table { get; set; }
+        public List<InvoiceReportDetails> table { get; set; }
+        //public List<List<InvoiceReportDetails>> table { get; set; }
         public List<AdditionalRow> additionalRows { get; set; }
         public string invDescLabel { get; set; }
         public string invDesc { get; set; }
+        public double InvNetlAmount { get; set; }
+        public double DeliveryCharges { get; set; }
     }
 
     public class Logo
