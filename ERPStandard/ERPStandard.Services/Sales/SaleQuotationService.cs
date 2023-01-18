@@ -107,11 +107,18 @@ namespace ERPStandard.Services
             return viewModel;
         }
 
-        public Root InvoiceReport(string Id = "")
+        
+        //public Root InvoiceReport(string Id = "")
+        public Root<T> InvoiceReport<T> (string Id = "")
         {
             string documentname = "Quotation";
-            var root = new Root();
-            double InvNetTotalAmnt = 1250;
+            var root = new Root<T>();
+            int TotalAmnt = 0;
+            int SaleTotalAmnt = 0;
+            int AddSaleTaxTotalAmnt = 0;
+            int SExDutyTotalAmnt = 0;
+            int InvNetTotalAmnt = 0;
+
             using (var context = new SairaIndEntities())
             {
 
@@ -124,7 +131,8 @@ namespace ERPStandard.Services
                          join customer in context.Company1 on master.CompNo equals customer.CompNo
                          join city in context.Cities on detail.CityId equals city.CityId
                          select new { master, detail, customer, city}).FirstOrDefault();
-
+                List<T> invoice_report_details = new List<T>();
+                //List<InvoiceDetails_ISTAX_ISExDuty> invoice_report_details = new List<InvoiceDetails_ISTAX_ISExDuty>();
 
                 var inv_detail = (from m in context.CRM_SaleQuotation
                                   where m.CompNo == StandardVariables.CompNo
@@ -133,22 +141,60 @@ namespace ERPStandard.Services
                                   where d.CompNo == m.CompNo
                                      && d.BranchNo == m.BranchNo
                                      && m.QuoteId == Id
-                                  select new InvoiceReportDetails {
-                                      serialnum = (int)m.QuoteNo,
-                                      Item = d.ItemID,
+                                  join itm in context.ItemsStocks on d.ItemID equals itm.ItemID
+                                  where itm.CompNo == d.CompNo
+                                     && itm.BranchNo == d.BranchNo
+                                  select new InvoiceDetails_ISTAX_ISExDuty
+                                  {
+                                      serialnum = 1,
+                                      Item = itm.Dscr,
                                       Qty = d.Qty,
                                       rate = d.Rate,
-                                      STax=d.SaleTaxRate,
-                                      ASTax=d.ASaleTaxRate,
-                                      SExDuty = d.SExDutyRate,
-                                      discount=0,
-                                      Amount= d.Qty*d.Rate
+                                      Amount= d.Qty*d.Rate,
+                                      STaxRate = d.SaleTaxRate,
+                                      STaxAmount = Math.Round((d.Qty * d.Rate) * d.SaleTaxRate/100, 0),
+                                      SExDutyRate = d.SExDutyRate,
+                                      SExDutyAmount = Math.Round((d.Qty * d.Rate) * (d.SExDutyRate/100), 0),
+                                      NetAmount = Math.Round((d.Qty * d.Rate) + (d.Qty * d.Rate) * d.SaleTaxRate / 100 + (d.Qty * d.Rate) * (d.SExDutyRate / 100), 0)
                                   });
-                List<InvoiceReportDetails> invoice_report_details = new List<InvoiceReportDetails>();
-                invoice_report_details= inv_detail.ToList();
+                
+                var t = inv_detail.ToList();
+                var count = 1;
+                //t.Select(x => (x, count++)).ToList();
+
+                foreach (var x in t) x.serialnum = count++;
+
+                invoice_report_details = t as List<T>;
+                TotalAmnt = (int)Math.Round(t.Sum(n => n.Amount), 0);
+                SaleTotalAmnt = (int)Math.Round(t.Sum(n => n.STaxAmount.Value), 0);
+                //AddSaleTaxTotalAmnt = (int)Math.Round(t.Sum(n=> n.STaxAmount), 0);
+                SExDutyTotalAmnt = (int)Math.Round(t.Sum(n => n.SExDutyAmount.Value), 0);
+                InvNetTotalAmnt = (int)Math.Round(t.Sum(n => n.NetAmount), 0);
+
+                InvoiceDetails_ISTAX_ISExDuty TotalRow = new InvoiceDetails_ISTAX_ISExDuty
+                {
+                    serialnum = null,
+                    Item = "TOTAL",
+                    Qty = null,
+                    rate = null,
+                    Amount = TotalAmnt,
+                    STaxRate = null,
+                    STaxAmount = SaleTotalAmnt,
+                    SExDutyRate = null,
+                    SExDutyAmount = SExDutyTotalAmnt,
+                    NetAmount = InvNetTotalAmnt
+                };
+
+                t.Add(TotalRow);
+                //var t = inv_detail.ToList();
+                //if (typeof(T) == typeof(InvoiceDetails_ISTAX_ISExDuty))
+                //    invoice_report_details = t as List<T>;
+                //invoice_report_details = t as List<T>;
+
                 var company = Company1Service.Instance.Single(StandardVariables.CompNo);
 
-
+                List<T> invoice_report_details2 = new List<T>();
+                //invoice_report_details = invoice_report_details2;
                 root.outputType = "jsPDFInvoiceTemplate.OutputType.Save";
                 root.returnJsPDFDocObject = true;
                 root.fileName = "Sale " + documentname;
@@ -199,7 +245,7 @@ namespace ERPStandard.Services
                 contact.City = inv_Master.city.CityDesc == null ? "" : inv_Master.city.CityDesc;
                 //contact.otherInfo = inv_Master.d.r;
                 root.contact = contact;
-                Invoice invoice = new Invoice();
+                Invoice<T> invoice = new Invoice<T>();
 
 
                 invoice.label = documentname + " #: ";
@@ -211,80 +257,21 @@ namespace ERPStandard.Services
                 invoice.RefDocId = inv_Master.master.RefDocId == null ? "" : inv_Master.master.RefDocId;
                 invoice.RefDocName = inv_Master.master.RefDocName == null ? "" : inv_Master.master.RefDocName;
                 invoice.InvNetTotalAmnt = InvNetTotalAmnt.ToString();
+                invoice.SaleTotalAmnt = SaleTotalAmnt== 0? "": SaleTotalAmnt.ToString();
+                invoice.AddSaleTaxTotalAmnt = AddSaleTaxTotalAmnt == 0 ? "" : AddSaleTaxTotalAmnt.ToString();
+                invoice.SExDutyTotalAmnt = SExDutyTotalAmnt == 0 ? "" : SExDutyTotalAmnt.ToString();
+                invoice.TotalAmntInWords = StandardVariables.ConvertNumberToWords(InvNetTotalAmnt);
+
+
                 //Header Class Setting for Invoice table
                 List<Header> header_L = new List<Header>();
                 Header header = new Header();
+                InvoiceHeaders<T> InvoiceListHeaders = new InvoiceHeaders<T>();
+                header_L = InvoiceListHeaders.invoiceListHeaders(invoice_report_details);
                 Style style = new Style();
-                //Header 1 Setting
-
-
-                //header.title = "#";
-                //style.width = 10;
-                //header.style = style;
-                //header_L.Add(header);
-                //Header 2 Setting
-                header.title = "Sr"; //1
-                style.width = 5;
-                header.dataKey = "serialnum";
-                header.style = style;
-                header_L.Add(header);
-
-                header = new Header();
-                header.title = "Description"; //2
-                header.dataKey = "Item";
-                style.width = 30;
-                header.style = style;
-                header_L.Add(header);
-
-                //Header 3 Setting
-                header = new Header();
-                header.title = "Qty";  //3
-                header.dataKey = "Qty";
-                header.style = style;
-                header_L.Add(header);
-
-                //Header 3 Setting
-                header = new Header();
-                header.title = "Rate"; //4
-                header.dataKey = "rate";
-                header.style = style;
-                header_L.Add(header);
-
-                header = new Header();
-                header.title = "STax"; //5
-                header.dataKey = "STax";
-                header.style = style;
-                header_L.Add(header);
-
-                header = new Header();
-                header.title = "VAT"; //6
-                header.dataKey = "ASTax";
-                header.style = style;
-                header_L.Add(header);
-
-                header = new Header();
-                header.title = "ExDuty"; //7
-                header.dataKey = "SExDuty";
-                header.style = style;
-                header_L.Add(header);
-
-                header = new Header();
-                header.title = "Dis"; //8
-                header.dataKey = "discount";
-                header.style = style;
-                header_L.Add(header);
-
-                header = new Header();
-                header.title = "Amount"; //9
-                header.dataKey = "Amount";
-                header.style = style;
-                header_L.Add(header);
                 invoice.header = header_L;
-                //invoice.table = inv_detail;
-                List<InvoiceReportDetails> tbl = new List<InvoiceReportDetails>();
-                //List<List<InvoiceReportDetails>> tbl = new List<List<InvoiceReportDetails>>();
-                tbl = invoice_report_details;
-                invoice.table = tbl;
+
+                invoice.table = invoice_report_details;
                 invoice.invDescLabel = "";//"This Quotation is Valid till: " + String.IsNullOrEmpty(inv_Master.m.QuoteValidDate.ToString()) ? DateTime.Now : inv_Master.m.QuoteValidDate;
                 invoice.invDesc = inv_Master.master.Remarks;
                 root.invoice = invoice;

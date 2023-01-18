@@ -89,7 +89,7 @@ namespace ERPStandard.WEB.Controllers
         [HttpGet]
         public ActionResult SaleQuotationPreview(string Id)
         {
-            var root = SaleQuotationService.Instance.InvoiceReport(Id);
+            var root = SaleQuotationService.Instance.InvoiceReport<InvoiceDetails_ISTAX_ISExDuty>(Id);
             if (root != null)
             {
                 return Json(root, JsonRequestBehavior.AllowGet);
@@ -111,7 +111,7 @@ namespace ERPStandard.WEB.Controllers
         [HttpGet]
         public ActionResult SaleInvoiceTemplate(string Id)
         {
-            var root = SaleQuotationService.Instance.InvoiceReport(Id);
+            var root = SaleQuotationService.Instance.InvoiceReport<InvoiceDetails_ISTAX_ISExDuty>(Id);
             if (root != null)
             {
                 try

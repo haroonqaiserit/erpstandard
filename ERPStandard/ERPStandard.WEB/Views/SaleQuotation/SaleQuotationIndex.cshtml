@@ -17,7 +17,8 @@
             <button class="btn btn-primary me-1 mb-1" type="button" id="btnList" onclick="onLoad()">List</button>
             <button class="btn btn-light-secondary me-1 mb-1" type="button" id="Create" onclick="onCreate()">New</button>
             <button class="btn btn-light-secondary me-1 mb-1" type="button" id="btnPreview" onclick="generateInvPDFFormat2()">Preview</button>
-            <button>@Html.ActionLink("Downlad as PDF", "ConvertToPDF")</button>
+            <button class="btn btn-light-secondary me-1 mb-1" type="button" id="btnPreview" onclick="generateInvPDFFormat1()">Preview Detail</button>
+            
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -480,8 +481,8 @@
 
                 //doc.text("This is the default font.", 20, 20);
 
-                doc.autoPrint();
                 addFooters(doc);
+                doc.autoPrint();
                 const hiddFrame = document.createElement('iframe');
                 hiddFrame.style.position = 'fixed';
                 // "visibility: hidden" would trigger safety rules in some browsers like safari，
@@ -509,19 +510,6 @@
         })
     };
 
-    const addFooters = doc => {
-        const pageCount = doc.internal.getNumberOfPages()
-        doc.setFont('helvetica', 'italic')
-        doc.setFontSize(8)
-        for (var i = 1; i <= pageCount; i++) {
-            doc.setPage(i)
-            //doc.text('Page ' + String(i) + ' of ' + String(pageCount), doc.internal.pageSize.width / 2, 287, {
-            //    align: 'center'
-            //})
-            doc.text(150, 285, 'page ' + pageCount); //print number bottom right
-            console.log("Total pages: " + pageCount);
-        }
-    };
 
 
     function validateForm() {
@@ -584,13 +572,15 @@
                 //doc.setFontType('normal');
                 //doc.text(comapnyJSON.PIN, 80, startY);
                 doc.setFontType('bold');
-                doc.text("EMAIL", startX, startY += lineSpacing.NormalSpacing);
-                doc.setFontType('normal');
-                doc.text(result.business.email, 80, startY);
-                doc.setFontType('bold');
                 doc.text("Phone: ", startX, startY += lineSpacing.NormalSpacing);
                 doc.setFontType('normal');
                 doc.text(result.business.phone, 80, startY);
+                if (result.business.email != "") {
+                    doc.setFontType('bold');
+                    doc.text("EMAIL", startX, startY += lineSpacing.NormalSpacing);
+                    doc.setFontType('normal');
+                    doc.text(result.business.email, 80, startY);
+                }
                 var tempY = InitialstartY;
                 doc.setFontType('bold');
                 doc.text("Document No: ", rightStartCol1, tempY += lineSpacing.NormalSpacing);
@@ -609,7 +599,7 @@
                 doc.setFontType('bold');
                 doc.text("Total: ", rightStartCol1, tempY += lineSpacing.NormalSpacing);
                 doc.setFontType('normal');
-                doc.text(result.invoice.InvNetTotalAmnt, rightStartCol2, tempY);
+                doc.text(result.DisplayCurrency + result.invoice.InvNetTotalAmnt, rightStartCol2, tempY);
                 doc.setFontType('normal');
                 doc.setLineWidth(1);
                 doc.line(20, startY + lineSpacing.NormalSpacing, 220, startY + lineSpacing.NormalSpacing);
@@ -641,14 +631,18 @@
                 //doc.text("PIN", startX, startY += lineSpacing.NormalSpacing);
                 //doc.setFontType('normal');
                 //doc.text(customer_BillingInfoJSON.PIN, 80, startY);
-                doc.setFontType('bold');
-                doc.text("EMAIL", startX, startY += lineSpacing.NormalSpacing);
-                doc.setFontType('normal');
-                doc.text(result.contact.email, 80, startY);
+
                 doc.setFontType('bold');
                 doc.text("Phone: ", startX, startY += lineSpacing.NormalSpacing);
                 doc.setFontType('normal');
                 doc.text(result.contact.phone, 80, startY);
+                if (result.contact.email != "") {
+                    doc.setFontType('bold');
+                    doc.text("EMAIL", startX, startY += lineSpacing.NormalSpacing);
+                    doc.setFontType('normal');
+                    doc.text(result.contact.email, 80, startY);
+                }
+
                 //-------Customer Info Shipping---------------------
                 //var rightcol1 = 340;
                 //var rightcol2 = 400;
@@ -677,15 +671,17 @@
                 //doc.setFontType('normal');
                 //doc.text(customer_BillingInfoJSON.PIN, rightcol2, startY);
 
-                //doc.setFontType('bold');
-                //doc.text("EMAIL", rightcol1, startY += lineSpacing.NormalSpacing);
-                //doc.setFontType('normal');
-                //doc.text(customer_BillingInfoJSON.CustomerEmail, rightcol2, startY);
 
                 //doc.setFontType('bold');
                 //doc.text("Phone: ", rightcol1, startY += lineSpacing.NormalSpacing);
                 //doc.setFontType('normal');
                 //doc.text(customer_BillingInfoJSON.CustomerPhno, rightcol2, startY);
+
+                //doc.setFontType('bold');
+                //doc.text("EMAIL", rightcol1, startY += lineSpacing.NormalSpacing);
+                //doc.setFontType('normal');
+                //doc.text(customer_BillingInfoJSON.CustomerEmail, rightcol2, startY);
+
 
                 var header = function (data) {
                     doc.setFontSize(8);
@@ -706,16 +702,16 @@
                     styles: {
                         overflow: 'linebreak',
                         fontSize: 8,
-                        rowHeight: 10,
-                        columnWidth: 'wrap'
+                        minCellHeight: 10,
+                        cellWidth: 'wrap'
                     },
                     columnStyles: {
-                        1: { columnWidth: 'auto' },
-                        2: { columnWidth: 'auto' },
-                        3: { columnWidth: 'auto' },
-                        4: { columnWidth: 'auto' },
-                        5: { columnWidth: 'auto' },
-                        6: { columnWidth: 'auto' },
+                        1: { cellWidth: 'auto' },
+                        2: { cellWidth: 'auto' },
+                        3: { cellWidth: 'auto' },
+                        4: { cellWidth: 'auto' },
+                        5: { cellWidth: 'auto' },
+                        6: { cellWidth: 'auto' },
                     },
                     startY: startY += 50
                 };
@@ -767,12 +763,12 @@
                 var rightcol1 = 340;
                 var rightcol2 = 430;
 
-                startY = doc.autoTableEndPosY() + 30;
+                startY = doc.lastAutoTable.finalY + 30;
                 doc.setFontSize(fontSizes.NormalFontSize);
 
                 doc.setFontType('bold');
                 doc.text("Sub Total,", rightcol1, startY += lineSpacing.NormalSpacing);
-                doc.text(invoiceJSON.SubTotalAmnt, rightcol2, startY);
+                doc.text(result.invoice.InvNetTotalAmnt, rightcol2, startY);
                 doc.setFontSize(fontSizes.NormalFontSize);
                 doc.setFontType('bold');
                 doc.text("CGST Rs.", rightcol1, startY += lineSpacing.NormalSpacing);
@@ -797,9 +793,9 @@
                 doc.setFontType('bold');
                 doc.text("Grand Total Rs.", rightcol1, startY += lineSpacing.NormalSpacing);
                 doc.setFontType('normal');
-                doc.text(invoiceJSON.TotalAmnt, rightcol2 + 25, startY);
+                doc.text(result.invoice.InvNetTotalAmnt, rightcol2 + 25, startY);
                 doc.setFontType('bold');
-                doc.text('For ' + comapnyJSON.CompanyName + ',', rightcol2, startY += lineSpacing.NormalSpacing + 25);
+                doc.text('For ' + result.business.name + ',', rightcol2, startY += lineSpacing.NormalSpacing + 25);
                 doc.text('Authorised Signatory', rightcol2, startY += lineSpacing.NormalSpacing + 25);
                 doc.save('InvoiceTemplate.pdf');
 
@@ -1052,13 +1048,13 @@
                 //doc.setFontType('normal');
                 //doc.text(result.business.NationalTaxNo, 80, startY);
                 //doc.setFontType('bold');
-                //doc.text("EMAIL", startX, startY += lineSpacing.NormalSpacing);
-                //doc.setFontType('normal');
-                //doc.text(result.business.email, 80, startY);
-                //doc.setFontType('bold');
                 //doc.text("Phone: ", startX, startY += lineSpacing.NormalSpacing);
                 //doc.setFontType('normal');
                 //doc.text(result.business.phone, 80, startY);
+                //doc.setFontType('bold');
+                //doc.text("EMAIL", startX, startY += lineSpacing.NormalSpacing);
+                //doc.setFontType('normal');
+                //doc.text(result.business.email, 80, startY);
 
                 //*************************
                 // Document Information on Top
@@ -1080,7 +1076,7 @@
                 doc.setFontType('bold');
                 doc.text("Total: ", rightStartCol1, tempY += lineSpacing.NormalSpacing);
                 doc.setFontType('normal');
-                doc.text(result.invoice.InvNetTotalAmnt, rightStartCol2, tempY);
+                doc.text(result.DisplayCurrency + result.invoice.InvNetTotalAmnt, rightStartCol2, tempY);
                 //*************************
                 // End - Document Information on Top
                 startY = startY + 50; // setting the top for display line and document heading
@@ -1116,13 +1112,14 @@
                 //doc.setFontType('normal');
                 //doc.text(result.business.NationalTaxNo, 90, startY);
                 //doc.setFontType('bold');
-                //doc.text("EMAIL", startX, startY += lineSpacing.NormalSpacing);
-                //doc.setFontType('normal');
-                //doc.text(result.business.email, 90, startY);
-                //doc.setFontType('bold');
                 //doc.text("Phone: ", startX, startY += lineSpacing.NormalSpacing);
                 //doc.setFontType('normal');
                 //doc.text(result.business.phone, 90, startY);
+                //doc.setFontType('bold');
+                //doc.text("EMAIL", startX, startY += lineSpacing.NormalSpacing);
+                //doc.setFontType('normal');
+                //doc.text(result.business.email, 90, startY);
+
                 //-------Company/ Supplier Info Billing---------------------
                 //startY = startY + 10; // setting for the document display after heading
                 doc.setFontType('bold');
@@ -1152,13 +1149,17 @@
                 doc.setFontType('normal');
                 doc.text(result.business.City, 80, startY);
                 doc.setFontType('bold');
-                doc.text("EMAIL", startX, startY += lineSpacing.NormalSpacing);
-                doc.setFontType('normal');
-                doc.text(result.business.email, 80, startY);
-                doc.setFontType('bold');
                 doc.text("Phone: ", startX, startY += lineSpacing.NormalSpacing);
                 doc.setFontType('normal');
                 doc.text(result.business.phone, 80, startY);
+
+                if (result.business.email != "") {
+                    doc.setFontType('bold');
+                    doc.text("EMAIL", startX, startY += lineSpacing.NormalSpacing);
+                    doc.setFontType('normal');
+                    doc.text(result.business.email, 80, startY);
+                }
+
                 //-------Customer Info Shipping---------------------
                 var rightcol1 = 340;
                 var rightcol2 = 400;
@@ -1190,14 +1191,17 @@
                 doc.text(result.contact.City, rightcol2, startY);
 
                 doc.setFontType('bold');
-                doc.text("EMAIL", rightcol1, startY += lineSpacing.NormalSpacing);
-                doc.setFontType('normal');
-                doc.text(result.contact.email, rightcol2, startY);
-
-                doc.setFontType('bold');
                 doc.text("Phone: ", rightcol1, startY += lineSpacing.NormalSpacing);
                 doc.setFontType('normal');
                 doc.text(result.contact.phone, rightcol2, startY);
+
+                if (result.contact.email != "") {
+                    doc.setFontType('bold');
+                    doc.text("EMAIL: ", rightcol1, startY += lineSpacing.NormalSpacing);
+                    doc.setFontType('normal');
+                    doc.text(result.contact.email, rightcol2, startY);
+                }
+
 
                 var header = function (data) {
                     doc.setFontSize(8);
@@ -1218,16 +1222,25 @@
                     styles: {
                         overflow: 'linebreak',
                         fontSize: 8,
-                        rowHeight: 10,
-                        columnWidth: 'wrap'
+                        minCellHeight: 10,
+                        cellWidth: 'wrap',
+                        halign: 'right',
+                        fillColor: [178, 190, 181]
                     },
                     columnStyles: {
-                        1: { columnWidth: 'auto' },
-                        2: { columnWidth: 'auto' },
-                        3: { columnWidth: 'auto' },
-                        4: { columnWidth: 'auto' },
-                        5: { columnWidth: 'auto' },
-                        6: { columnWidth: 'auto' },
+                        0: { cellWidth: 'auto', halign: 'middle'},
+                        1: { cellWidth: 'auto', halign: 'left', valign: 'middle'},
+                        2: { cellWidth: 'auto' },
+                        3: { cellWidth: 'auto' },
+                        4: { cellWidth: 'auto' },
+                        5: { cellWidth: 'auto' },
+                        6: { cellWidth: 'auto' },
+                    },
+                    headerStyles: {
+                        textColor: 0,
+                        valign: 'middle',
+                        halign: 'left',
+                        2: { cellWidth: 'auto', hook: 'right' },
                     },
                     startY: startY += 50
                 };
@@ -1275,45 +1288,64 @@
                 console.log(result.invoice.table);
                 doc.autoTable(result.invoice.header, result.invoice.table, options);
                 //doc.autoTable(columns, rows, options);
-
+                /* This code was written to make the column bold
+                 * as i were trying to make total column bold
+                doc.autoTable({
+                    html: '#table',
+                    didParseCell: function (cell, data) {
+                        if (data.row.index === 0 || data.row.index === 2) {
+                            cell.styles.fontStyle = 'bold';
+                        }
+                    }
+                })
+                */
                 var rightcol1 = 340;
                 var rightcol2 = 430;
 
-                startY = doc.autoTableEndPosY() + 30;
+                startY = doc.lastAutoTable.finalY + 30;
                 doc.setFontSize(fontSizes.NormalFontSize);
 
+                if (!result.invoice.SaleTotalAmnt == "") {
                 doc.setFontType('bold');
-                doc.text("Sub Total,", rightcol1, startY += lineSpacing.NormalSpacing);
-                doc.text(invoiceJSON.SubTotalAmnt, rightcol2, startY);
-                doc.setFontSize(fontSizes.NormalFontSize);
-                doc.setFontType('bold');
-                doc.text("CGST Rs.", rightcol1, startY += lineSpacing.NormalSpacing);
+                doc.text("VAT Amount: ", startX, startY += lineSpacing.NormalSpacing+10);
                 doc.setFontType('normal');
-                doc.text(invoiceJSON.TotalCGST, rightcol2, startY);
+                    doc.text(result.DisplayCurrency + result.invoice.SaleTotalAmnt + "/-", 120, startY);
+                }
+                console.log(result.invoice.AddSaleTaxTotalAmnt);
+                if (!result.invoice.AddSaleTaxTotalAmnt == "") {
+                    doc.setFontType('bold');
+                    doc.text("Additional Sales Tax: ", startX, startY += lineSpacing.NormalSpacing + 10);
+                    doc.setFontType('normal');
+                    doc.text(result.DisplayCurrency + result.invoice.AddSaleTaxTotalAmnt + "/-", 150, startY);
+                }
+
+                if (!result.invoice.SExDutyTotalAmnt == "" || !result.invoice.SExDutyTotalAmnt == "0")
+                {
+                    doc.setFontType('bold');
+                    doc.text("Special Excise Duty : ", startX, startY += lineSpacing.NormalSpacing + 10);
+                    doc.setFontType('normal');
+                    doc.text(result.DisplayCurrency + result.invoice.SExDutyTotalAmnt + "/-", 150, startY);
+                }
+
                 doc.setFontType('bold');
-                doc.text("SGST Rs.", rightcol1, startY += lineSpacing.NormalSpacing);
+                doc.text("Value Inclusive of Taxes : ", startX, startY += lineSpacing.NormalSpacing + 10);
                 doc.setFontType('normal');
-                doc.text(invoiceJSON.TotalSGST, rightcol2, startY);
+                doc.text(result.DisplayCurrency + result.invoice.InvNetTotalAmnt + "/-", 170, startY);
+
                 doc.setFontType('bold');
-                doc.text("IGST Rs.", rightcol1, startY += lineSpacing.NormalSpacing);
+                doc.text("Amount In Words : ", startX, startY += lineSpacing.NormalSpacing + 10);
                 doc.setFontType('normal');
-                doc.text(invoiceJSON.TotalIGST, rightcol2, startY);
+                doc.text(result.invoice.TotalAmntInWords, 130, startY);
+                
+
                 doc.setFontType('bold');
-                doc.text("CESS Rs.", rightcol1, startY += lineSpacing.NormalSpacing);
-                doc.setFontType('normal');
-                doc.text(invoiceJSON.TotalCESS, rightcol2, startY);
-                doc.setFontType('bold');
-                doc.text("Total GST Rs.", rightcol1, startY += lineSpacing.NormalSpacing);
-                doc.setFontType('normal');
-                doc.text(invoiceJSON.TotalGST, rightcol2, startY);
-                doc.setFontType('bold');
-                doc.text("Grand Total Rs.", rightcol1, startY += lineSpacing.NormalSpacing);
-                doc.setFontType('normal');
-                doc.text(invoiceJSON.TotalAmnt, rightcol2 + 25, startY);
-                doc.setFontType('bold');
-                doc.text('For ' + comapnyJSON.CompanyName + ',', rightcol2, startY += lineSpacing.NormalSpacing + 25);
-                doc.text('Authorised Signatory', rightcol2, startY += lineSpacing.NormalSpacing + 25);
-                doc.save('InvoiceTemplate.pdf');
+                doc.text('For ' + result.business.name + ',', rightcol2, startY += lineSpacing.NormalSpacing + 25);
+                doc.line(420, startY + lineSpacing.NormalSpacing + 30, 580, startY + lineSpacing.NormalSpacing + 30);
+                doc.text('Authorised Signatory', rightcol2, startY += lineSpacing.NormalSpacing + 45);
+
+
+                addFooters(doc);
+                doc.save('Quotation.pdf');
 
                 //$("#EntityReportPreview").html(result);
 
@@ -1328,6 +1360,20 @@
         //-------Invoice Footer---------------------
 
     }
+
+    const addFooters = doc => {
+        const pageCount = doc.internal.getNumberOfPages()
+        doc.setFont('helvetica', 'italic')
+        doc.setFontSize(8)
+        for (var i = 1; i <= pageCount; i++) {
+            doc.setPage(i)
+            //doc.text('Page ' + String(i) + ' of ' + String(pageCount), doc.internal.pageSize.width / 2, 287, {
+            //    align: 'center'
+            //})
+            doc.text(50, 820, 'page ' + i + ' of ' + pageCount); //print number bottom right
+            console.log("Total pages: " + pageCount);
+        }
+    };
 
 
 </script>

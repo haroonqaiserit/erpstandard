@@ -8,17 +8,17 @@ namespace ERPStandard.ViewModels
 {
     public class InvoiceTemplateViewModel
     {
-        public Root root { get; set; }
-        public Logo logo { get; set; }
-        public Stamp stamp { get; set; }
-        public Business business { get; set; }
-        public Contact contact { get; set; }
-        public Invoice invoice { get; set; }
-        public Header header { get; set; }
-        public AdditionalRow additionalRow { get; set; }
-        public Footer footer { get; set; }
-        public Margin margin { get; set; }
-        public Style style { get; set; }
+        //public Root root { get; set; }
+        //public Logo logo { get; set; }
+        //public Stamp stamp { get; set; }
+        //public Business business { get; set; }
+        //public Contact contact { get; set; }
+        //public Invoice invoice { get; set; }
+        //public Header header { get; set; }
+        //public AdditionalRow additionalRow { get; set; }
+        //public Footer footer { get; set; }
+        //public Margin margin { get; set; }
+        //public Style style { get; set; }
     }
 
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
@@ -64,12 +64,105 @@ namespace ERPStandard.ViewModels
 
     public class Header
     {
-        public string title { get; set; }
+        public string title { get; set; } 
         public string dataKey { get; set; }
         public Style style { get; set; }
     }
 
-    public class Invoice
+    public class InvoiceHeaders<T>
+    {
+        //InvoiceDetails_ISTAX invoice = new InvoiceDetails_ISTAX();
+        public List<Header> invoiceListHeaders(object obj)
+        {
+            List<Header> header_L = new List<Header>();
+
+            if (typeof(T) == typeof(InvoiceDetails_ISTAX_ISExDuty))
+            {
+                Style style = new Style();
+                Header header = new Header();
+                //Header 1 Setting
+                header_L = headersMasterlist();
+
+
+                header = new Header();
+                header.title = "VAT%"; //5
+                header.dataKey = "STaxRate";
+                header.style = style;
+                header_L.Add(header);
+
+                header = new Header();
+                header.title = "VAT Amt"; //6
+                header.dataKey = "STaxAmount";
+                header.style = style;
+                header_L.Add(header);
+
+
+                header = new Header();
+                header.title = "SED%"; //7
+                header.dataKey = "SExDutyRate";
+                header.style = style;
+                header_L.Add(header);
+
+                header = new Header();
+                header.title = "SED Amt"; //8
+                header.dataKey = "SExDutyAmount";
+                header.style = style;
+                header_L.Add(header);
+
+                header = new Header();
+                header.title = "Net Amt"; //9
+                header.dataKey = "NetAmount";
+                header.style = style;
+                header_L.Add(header);
+
+            }
+
+            return header_L;
+        }
+   List<Header> headersMasterlist()
+        {
+            List<Header> header_L = new List<Header> ();
+            Style style = new Style();
+            Header header = new Header();
+            //Header 1 Setting
+            header.title = "Sr"; //1
+            style.width = 5;
+            header.dataKey = "serialnum";
+            header.style = style;
+            header_L.Add(header);
+
+            header = new Header();
+            header.title = "Description"; //2
+            header.dataKey = "Item";
+            style.width = 30;
+            header.style = style;
+            header_L.Add(header);
+
+            //Header 3 Setting
+            header = new Header();
+            header.title = "Qty";  //3
+            header.dataKey = "Qty";
+            header.style = style;
+            header_L.Add(header);
+
+            //Header 3 Setting
+            header = new Header();
+            header.title = "Rate"; //4
+            header.dataKey = "rate";
+            header.style = style;
+            header_L.Add(header);
+
+            header = new Header();
+            header.title = "Amount"; //9
+            header.dataKey = "Amount";
+            header.style = style;
+            header_L.Add(header);
+            return header_L;
+        }
+
+    }
+
+    public class Invoice<T>
     {
         public string label { get; set; }
         public string num { get; set; }
@@ -78,8 +171,7 @@ namespace ERPStandard.ViewModels
         public bool headerBorder { get; set; }
         public bool tableBodyBorder { get; set; }
         public List<Header> header { get; set; }
-        public List<InvoiceReportDetails> table { get; set; }
-        //public List<List<InvoiceReportDetails>> table { get; set; }
+        public List<T> table { get; set; }
         public List<AdditionalRow> additionalRows { get; set; }
         public string invDescLabel { get; set; }
         public string invDesc { get; set; }
@@ -88,6 +180,11 @@ namespace ERPStandard.ViewModels
         public string RefDocId { get; set; }
         public string RefDocName { get; set; }
         public string InvNetTotalAmnt { get; set; }
+        public string SaleTotalAmnt { get; set; }
+        public string AddSaleTaxTotalAmnt { get; set; }
+        public string SExDutyTotalAmnt { get; set; }
+        public string TotalAmntInWords { get; set; }
+
     }
 
     public class Logo
@@ -105,7 +202,7 @@ namespace ERPStandard.ViewModels
     }
 
     //const jsPDFInvoiceTemplate.OutputType.Save;
-    public class Root
+    public class Root<T>
     {
         public string outputType { get; set; } = "jsPDFInvoiceTemplate.OutputType.Save";
         public bool returnJsPDFDocObject { get; set; } = true;
@@ -116,10 +213,11 @@ namespace ERPStandard.ViewModels
         public Stamp stamp { get; set; }
         public Business business { get; set; }
         public Contact contact { get; set; }
-        public Invoice invoice { get; set; }
+        public Invoice<T> invoice { get; set; }
         public Footer footer { get; set; }
         public bool pageEnable { get; set; }
         public string pageLabel { get; set; }
+        public string DisplayCurrency { get; set; } = "Rs.";
     }
 
     public class Stamp
