@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ERPStandard.ViewModels.QuotationCreateNewViewModel
+@{
     ViewBag.Title = "Sales Transaction";
     ViewBag.SubTitle = "Quotation";
 }
@@ -88,14 +89,10 @@
 
                     </div>
                 </div>
-                <div class="col-sm-12 d-flex justify-content-end">
-                    <button type="button" id="btnSave" class="btn btn-primary me-1 mb-1" onclick="onSave()">Submit</button>
-                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
-                </div>
             </div>
             <div class="col-md-4">
                 <div class="form-group">
-                    <h1 danger>Quotation Details</h1>
+                    <h6 danger>Quotation Details</h6>
                 </div>
             </div>
 
@@ -105,13 +102,34 @@
                 <table id="tblQuotationDetail" class="table table-striped dataTable-table">
                     <thead>
                         <tr>
-                            <th>Item Id</th>
+                            <th style="display:none">Item Id</th>
                             <th>Item Name</th>
                             <th>Qty</th>
                             <th>Rate</th>
-                            <th>STax</th>
-                            <th>VAT</th>
-                            <th>ExDuty</th>
+                            <th style="display:none">Amt</th>
+                            <th style=@(Model.invoiceType == 0 ? "display:none" : "")>VAT</th>
+                            <th style="display:none">VAT Amt</th>
+                            @if (Model.invoiceType == 2 || Model.invoiceType == 4)
+                            {
+                                <th>ASTax</th>
+                                <th style="display:none" :">ASTax Amt</th>
+                            }
+                            else
+                            {
+                                <th style="display:none" :">ASTax</th>
+                                <th style="display:none" :">ASTax Amt</th>
+                            }
+                            @if (Model.invoiceType == 3 || Model.invoiceType == 4)
+                            {
+                                <th>ExDuty</th>
+                                <th style="display:none" :">ExDuty Amt</th>
+                            }
+                            else
+                            {
+                                <th style="display:none" :">ExDuty</th>
+                                <th style="display:none" :">ExDuty Amt</th>
+                            }
+                            <th>Net Amt</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -120,7 +138,7 @@
 
 
                         <tr id="tblRow">
-                            <td class="col-md-1">
+                            <td class="col-md-1" style="display:none">
                                 <div class="md">
                                     <div class="search-box-Id">
                                         <input type="text" id="CustomSearchID" readonly class="form-control" placeholder="Id" name="ItemID">
@@ -145,15 +163,56 @@
                             <td class="col-md-1">
                                 <input type="number" id="Rate" minlength="1" maxlength="9" required class="form-control" placeholder="Rate" name="Rate">
                             </td>
-                            <td class="col-md-1">
-                                <input type="number" id="SaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="STax" name="SaleTaxRate">
+                            <td class="col-md-1" style="display:none">
+                                <input type="number" readonly id="Amt" minlength="1" maxlength="9" class="form-control" placeholder="Amt" name="Amt">
                             </td>
-                            <td class="col-md-1">
-                                <input type="number" id="ASaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="AddTax" name="ASaleTaxRate">
+                            <td class="col-md-1" style=@(Model.invoiceType == 0? "display:none":"")>
+                                <input type="number" id="SaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="Tax" name="SaleTaxRate">
                             </td>
-                            <td class="col-md-1">
-                                <input type="number" id="SExDutyRate" minlength="1" maxlength="9" required class="form-control" placeholder="DutyRate" name="SExDutyRate">
+                            <td class="col-md-1" style="display:none">
+                                <input type="number" readonly id="SaleTaxAmt" minlength="1" maxlength="9" class="form-control" placeholder="SaleTaxAmt" name="SaleTaxAmt">
                             </td>
+                            @if (Model.invoiceType == 2 || Model.invoiceType == 4)
+                            {
+                                <td class="col-md-1">
+                                    <input type="number" id="ASaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="AddTax" name="ASaleTaxRate">
+                                </td>
+                                <td class="col-md-1" style="display:none">
+                                    <input type="number" readonly id="ASaleTaxAmt" minlength="1" maxlength="9" class="form-control" placeholder="ASaleTaxAmt" name="ASaleTaxAmt">
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="col-md-1" style="display:none">
+                                    <input type="number" id="ASaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="AddTax" name="ASaleTaxRate">
+                                </td>
+                                <td class="col-md-1" style="display:none">
+                                    <input type="number" readonly id="ASaleTaxAmt" minlength="1" maxlength="9" class="form-control" placeholder="ASaleTaxAmt" name="ASaleTaxAmt">
+                                </td>
+                            }
+                            @if (Model.invoiceType == 3 || Model.invoiceType == 4)
+                            {
+                                <td class="col-md-1">
+                                    <input type="number" id="SExDutyRate" minlength="1" maxlength="9" required class="form-control" placeholder="DutyRate" name="SExDutyRate">
+                                </td>
+                                <td class="col-md-1" style="display:none">
+                                    <input type="number" readonly id="SExDutyAmt" minlength="1" maxlength="9" class="form-control" placeholder="SExDutyAmt" name="SExDutyAmt">
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="col-md-1" style="display:none">
+                                    <input type="number" id="SExDutyRate" minlength="1" maxlength="9" required class="form-control" placeholder="DutyRate" name="SExDutyRate">
+                                </td>
+                                <td class="col-md-1" style="display:none">
+                                    <input type="number" readonly id="SExDutyAmt" minlength="1" maxlength="9" class="form-control" placeholder="SExDutyAmt" name="SExDutyAmt">
+                                </td>
+
+                            }
+                            <td class="col-md-1">
+                                <input type="number" readonly id="NetTotalAmt" minlength="1" maxlength="9" class="form-control" placeholder="Net Amt" name="NetTotalAmt">
+                            </td>
+
                             <td>
                                 <button type="button" class="badge bg-success" onclick="onAddRow()">Add</button>
                                 <button type="button" class="badge bg-danger" onclick="onDeleteRow(this)">Delete</button>
@@ -161,11 +220,16 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="col-sm-12 d-flex justify-content-end">
+                    <button type="button" id="btnSave" class="btn btn-primary me-1 mb-1" onclick="onSave()">Submit</button>
+                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                </div>
+
             </div>
             <table hidden>
                 <tr style="display: none" id="tblRowforCopy">
 
-                    <td class="col-md-1">
+                    <td class="col-md-1" style="display:none">
                         <div class="md">
                             <div class="search-box-Id">
                                 <input type="text" id="CustomSearchID" readonly class="form-control" placeholder="Id" name="ItemID">
@@ -176,7 +240,7 @@
                     <td class="col-md-4">
                         <div>
                             <div class="search-box">
-                                <input type="text" id="CustomSearch1"  autocomplete="off" minlength="1" maxlength="150" onkeyup="getItemSearchRecords(this, event)" class="form-control chld" placeholder="Search all...">
+                                <input type="text" id="CustomSearch1" autocomplete="off" minlength="1" maxlength="150" onkeyup="getItemSearchRecords(this, event)" class="form-control chld" placeholder="Search all...">
                                 <div id="searchpartial" class="itemsearchrecord">
                                     <ul id="userlist" class="userlist1">
                                     </ul>
@@ -190,15 +254,56 @@
                     <td class="col-md-1">
                         <input type="number" id="Rate" minlength="1" maxlength="9" required class="form-control" placeholder="Rate" name="Rate">
                     </td>
-                    <td class="col-md-1">
-                        <input type="number" id="SaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="STax" name="SaleTaxRate">
+                    <td class="col-md-1" style="display:none">
+                        <input type="number" readonly id="Amt" minlength="1" maxlength="9" class="form-control" placeholder="Amt" name="Amt">
                     </td>
-                    <td class="col-md-1">
-                        <input type="number" id="ASaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="AddTax" name="ASaleTaxRate">
+                    <td class="col-md-1" style=@(Model.invoiceType == 0? "display:none":"")>
+                        <input type="number" id="SaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="Tax" name="SaleTaxRate">
                     </td>
-                    <td class="col-md-1">
-                        <input type="number" id="SExDutyRate" minlength="1" maxlength="9" required class="form-control" placeholder="DutyRate" name="SExDutyRate">
+                    <td class="col-md-1" style="display:none">
+                        <input type="number" readonly id="SaleTaxAmt" minlength="1" maxlength="9" class="form-control" placeholder="SaleTaxAmt" name="SaleTaxAmt">
                     </td>
+                    @if (Model.invoiceType == 2 || Model.invoiceType == 4)
+                    {
+                        <td class="col-md-1">
+                            <input type="number" id="ASaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="AddTax" name="ASaleTaxRate">
+                        </td>
+                        <td class="col-md-1" style="display:none">
+                            <input type="number" readonly id="ASaleTaxAmt" minlength="1" maxlength="9" class="form-control" placeholder="ASaleTaxAmt" name="ASaleTaxAmt">
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="col-md-1" style="display:none">
+                            <input type="number" id="ASaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="AddTax" name="ASaleTaxRate">
+                        </td>
+                        <td class="col-md-1" style="display:none">
+                            <input type="number" readonly id="ASaleTaxAmt" minlength="1" maxlength="9" class="form-control" placeholder="ASaleTaxAmt" name="ASaleTaxAmt">
+                        </td>
+                    }
+                    @if (Model.invoiceType == 3 || Model.invoiceType == 4)
+                    {
+                        <td class="col-md-1">
+                            <input type="number" id="SExDutyRate" minlength="1" maxlength="9" required class="form-control" placeholder="DutyRate" name="SExDutyRate">
+                        </td>
+                        <td class="col-md-1" style="display:none">
+                            <input type="number" readonly id="SExDutyAmt" minlength="1" maxlength="9" class="form-control" placeholder="SExDutyAmt" name="SExDutyAmt">
+                        </td>
+                    }
+                    else
+                    {
+                        <td class="col-md-1" style="display:none">
+                            <input type="number" id="SExDutyRate" minlength="1" maxlength="9" required class="form-control" placeholder="DutyRate" name="SExDutyRate">
+                        </td>
+                        <td class="col-md-1" style="display:none">
+                            <input type="number" readonly id="SExDutyAmt" minlength="1" maxlength="9" class="form-control" placeholder="SExDutyAmt" name="SExDutyAmt">
+                        </td>
+
+                    }
+                    <td class="col-md-1">
+                        <input type="number" readonly id="NetTotalAmt" minlength="1" maxlength="9" class="form-control" placeholder="Net Amt" name="NetTotalAmt">
+                    </td>
+
                     <td>
                         <button type="button" class="badge bg-success" onclick="onAddRow()">Add</button>
                         <button type="button" class="badge bg-danger" onclick="onDeleteRow(this)">Delete</button>
@@ -218,6 +323,29 @@
     $(document).ready(function () {
         SalesmanComboFill();
         CustomerComboFill();
+
+        var now = new Date();
+
+        var day = ("0" + now.getDate()).slice(-2);
+        var month = ("0" + (now.getMonth() + 1)).slice(-2);
+
+        var today = now.getFullYear() + "-" + (month) + "-" + (day);
+
+        var dayValid = ("0" + (now.getDate() + 3)).slice(-2);
+
+        
+        var validdaate = now.getFullYear() + "-" + (month) + "-" + (dayValid);
+
+        $('#QuoteDate').val(today);
+        $('#QuoteValidDate').val(validdaate);
+
+
+        console.log("Date is set: " + dayValid);
+
+
+        $("#Remarks").focus();
+
+
         //var row = document.getElementById('tblRowforCopy');
         //$("QuoteDate").text('@DateTime.Now');
             //focus();

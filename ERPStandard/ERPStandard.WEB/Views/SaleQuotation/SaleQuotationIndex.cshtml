@@ -1065,8 +1065,11 @@
                 doc.text(result.invoice.num, rightStartCol2, tempY);
                 doc.setFontType('bold');
                 doc.text("Document Date: ", rightStartCol1, tempY += lineSpacing.NormalSpacing);
-                doc.setFontType('normal');
+                doc.setFontType('bold');
                 doc.text(result.invoice.invDate, rightStartCol2, tempY);
+                doc.text("Validity Date: ", rightStartCol1, tempY += lineSpacing.NormalSpacing);
+                doc.setFontType('normal');
+                doc.text(result.invoice.ValidDate, rightStartCol2, tempY);
                 if (result.invoice.RefDocId != "") {
                     doc.setFontType('bold');
                     doc.text("Reference No: ", rightStartCol1, tempY += lineSpacing.NormalSpacing);
@@ -1126,11 +1129,11 @@
                 doc.text("Supplier Details,", startX, startY += lineSpacing.NormalSpacing);
                 doc.text(result.business.name, startX, startY += lineSpacing.NormalSpacing);
                 doc.setFontSize(fontSizes.NormalFontSize);
-                doc.text("STxReg", startX, startY += lineSpacing.NormalSpacing);
+                doc.text("STxReg: ", startX, startY += lineSpacing.NormalSpacing);
                 doc.setFontType('normal');
                 doc.text(result.business.STaxRegNo, 80, startY);
                 doc.setFontType('bold');
-                doc.text("Address", startX, startY += lineSpacing.NormalSpacing);
+                doc.text("Address: ", startX, startY += lineSpacing.NormalSpacing);
                 doc.setFontType('normal');
 
                 if (result.business.address.length > 30) {
@@ -1145,7 +1148,7 @@
                 }
 
                 doc.setFontType('bold');
-                doc.text("CITY", startX, startY += lineSpacing.NormalSpacing);
+                doc.text("City: ", startX, startY += lineSpacing.NormalSpacing);
                 doc.setFontType('normal');
                 doc.text(result.business.City, 80, startY);
                 doc.setFontType('bold');
@@ -1155,7 +1158,7 @@
 
                 if (result.business.email != "") {
                     doc.setFontType('bold');
-                    doc.text("EMAIL", startX, startY += lineSpacing.NormalSpacing);
+                    doc.text("Email", startX, startY += lineSpacing.NormalSpacing);
                     doc.setFontType('normal');
                     doc.text(result.business.email, 80, startY);
                 }
@@ -1169,11 +1172,11 @@
                 doc.text(result.contact.name, rightcol1, startY += lineSpacing.NormalSpacing);
                 doc.setFontSize(fontSizes.NormalFontSize);
                 doc.setFontType('bold');
-                doc.text("STxReg", rightcol1, startY += lineSpacing.NormalSpacing);
+                doc.text("STxReg: ", rightcol1, startY += lineSpacing.NormalSpacing);
                 doc.setFontType('normal');
                 doc.text(result.contact.STaxRegNo, rightcol2, startY);
                 doc.setFontType('bold');
-                doc.text("Address", rightcol1, startY += lineSpacing.NormalSpacing);
+                doc.text("Address: ", rightcol1, startY += lineSpacing.NormalSpacing);
                 doc.setFontType('normal');
                 if (result.contact.address.length > 30) {
                     var line1 = result.contact.address.substring(1, 30);
@@ -1186,7 +1189,7 @@
                     doc.text(result.contact.address, rightcol2, startY += lineSpacing.NormalSpacing);
                 }
                 doc.setFontType('bold');
-                doc.text("CITY", rightcol1, startY += lineSpacing.NormalSpacing);
+                doc.text("City: ", rightcol1, startY += lineSpacing.NormalSpacing);
                 doc.setFontType('normal');
                 doc.text(result.contact.City, rightcol2, startY);
 
@@ -1197,7 +1200,7 @@
 
                 if (result.contact.email != "") {
                     doc.setFontType('bold');
-                    doc.text("EMAIL: ", rightcol1, startY += lineSpacing.NormalSpacing);
+                    doc.text("Email: ", rightcol1, startY += lineSpacing.NormalSpacing);
                     doc.setFontType('normal');
                     doc.text(result.contact.email, rightcol2, startY);
                 }
@@ -1305,6 +1308,13 @@
                 startY = doc.lastAutoTable.finalY + 30;
                 doc.setFontSize(fontSizes.NormalFontSize);
 
+                if (!result.invoice.invDesc == "") {
+                    doc.setFontType('bold');
+                    doc.text("Remarks : ", startX, startY += lineSpacing.NormalSpacing + 10);
+                    doc.setFontType('normal');
+                    doc.text(result.invoice.invDesc, 90, startY);
+                }
+
                 if (!result.invoice.SaleTotalAmnt == "") {
                 doc.setFontType('bold');
                 doc.text("VAT Amount: ", startX, startY += lineSpacing.NormalSpacing+10);
@@ -1312,6 +1322,7 @@
                     doc.text(result.DisplayCurrency + result.invoice.SaleTotalAmnt + "/-", 120, startY);
                 }
                 console.log(result.invoice.AddSaleTaxTotalAmnt);
+
                 if (!result.invoice.AddSaleTaxTotalAmnt == "") {
                     doc.setFontType('bold');
                     doc.text("Additional Sales Tax: ", startX, startY += lineSpacing.NormalSpacing + 10);
@@ -1328,7 +1339,10 @@
                 }
 
                 doc.setFontType('bold');
-                doc.text("Value Inclusive of Taxes : ", startX, startY += lineSpacing.NormalSpacing + 10);
+                if (result.invoice.SExDutyTotalAmnt == "" && result.invoice.AddSaleTaxTotalAmnt == "" && result.invoice.SaleTotalAmnt == "")
+                    doc.text("Net Invoice Amount : ", startX, startY += lineSpacing.NormalSpacing + 10);
+                else 
+                    doc.text("Value Inclusive of Taxes : ", startX, startY += lineSpacing.NormalSpacing + 10);
                 doc.setFontType('normal');
                 doc.text(result.DisplayCurrency + result.invoice.InvNetTotalAmnt + "/-", 170, startY);
 
@@ -1343,9 +1357,25 @@
                 doc.line(420, startY + lineSpacing.NormalSpacing + 30, 580, startY + lineSpacing.NormalSpacing + 30);
                 doc.text('Authorised Signatory', rightcol2, startY += lineSpacing.NormalSpacing + 45);
 
+                doc.setFont('helvetica', 'italic')
+                doc.setFontSize(8)
+                doc.text(50, 820, result.footer.text); //print number bottom right
+
 
                 addFooters(doc);
-                doc.save('Quotation.pdf');
+
+                const monthNames = ["Jan", "Fe", "Mar", "Apr", "May", "Jun",
+                    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                ];
+
+                const date = new Date();
+                let day = date.getDate();
+                let month = monthNames[date.getMonth()];
+                let year = date.getFullYear();
+
+                let DocName = result.invoice.label + '(' + result.invoice.num + ')' + year + '-' + month + '.pdf';
+
+                doc.save(DocName);
 
                 //$("#EntityReportPreview").html(result);
 
@@ -1370,7 +1400,7 @@
             //doc.text('Page ' + String(i) + ' of ' + String(pageCount), doc.internal.pageSize.width / 2, 287, {
             //    align: 'center'
             //})
-            doc.text(50, 820, 'page ' + i + ' of ' + pageCount); //print number bottom right
+            doc.text(520, 820, 'page ' + i + ' of ' + pageCount); //print number bottom right
             console.log("Total pages: " + pageCount);
         }
     };

@@ -54,6 +54,7 @@
     <Compile Include="InvoiceTemplateViewModel.cs" />
     <Compile Include="PaginationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuotationCreateNewViewModel.cs" />
     <Compile Include="Sales\CustomerListViewModel.cs" />
     <Compile Include="Sales\SalesManViewModel.cs" />
     <Compile Include="Sales\ItemViewModel.cs" />

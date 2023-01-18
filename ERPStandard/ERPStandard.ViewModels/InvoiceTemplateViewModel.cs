@@ -6,21 +6,6 @@ using System.Threading.Tasks;
 
 namespace ERPStandard.ViewModels
 {
-    public class InvoiceTemplateViewModel
-    {
-        //public Root root { get; set; }
-        //public Logo logo { get; set; }
-        //public Stamp stamp { get; set; }
-        //public Business business { get; set; }
-        //public Contact contact { get; set; }
-        //public Invoice invoice { get; set; }
-        //public Header header { get; set; }
-        //public AdditionalRow additionalRow { get; set; }
-        //public Footer footer { get; set; }
-        //public Margin margin { get; set; }
-        //public Style style { get; set; }
-    }
-
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
     public class AdditionalRow
     {
@@ -69,59 +54,141 @@ namespace ERPStandard.ViewModels
         public Style style { get; set; }
     }
 
-    public class InvoiceHeaders<T>
+    public class InvoiceHeaders
     {
         //InvoiceDetails_ISTAX invoice = new InvoiceDetails_ISTAX();
-        public List<Header> invoiceListHeaders(object obj)
+        public List<Header> invoiceListHeaders(InvoiceType invoiceType)
         {
             List<Header> header_L = new List<Header>();
+            Style style = new Style();
+            Header header = new Header();
+            //Header 1 Setting
+            header_L = headersMasterlist();
 
-            if (typeof(T) == typeof(InvoiceDetails_ISTAX_ISExDuty))
+            switch (invoiceType)
             {
-                Style style = new Style();
-                Header header = new Header();
-                //Header 1 Setting
-                header_L = headersMasterlist();
-
-
-                header = new Header();
-                header.title = "VAT%"; //5
-                header.dataKey = "STaxRate";
-                header.style = style;
-                header_L.Add(header);
-
-                header = new Header();
-                header.title = "VAT Amt"; //6
-                header.dataKey = "STaxAmount";
-                header.style = style;
-                header_L.Add(header);
-
-
-                header = new Header();
-                header.title = "SED%"; //7
-                header.dataKey = "SExDutyRate";
-                header.style = style;
-                header_L.Add(header);
-
-                header = new Header();
-                header.title = "SED Amt"; //8
-                header.dataKey = "SExDutyAmount";
-                header.style = style;
-                header_L.Add(header);
-
-                header = new Header();
-                header.title = "Net Amt"; //9
-                header.dataKey = "NetAmount";
-                header.style = style;
-                header_L.Add(header);
-
+                case InvoiceType.Invoice_Tax:
+                    header_L.AddRange(headersMasterlist_SaleTax());
+                    header_L.AddRange(headersMasterlist_NetAmt());
+                    break;
+                case InvoiceType.Invoice_Tax_AddTax:
+                    header_L.AddRange(headersMasterlist_STax_AddSTax());
+                    header_L.AddRange(headersMasterlist_NetAmt());
+                    break;
+                case InvoiceType.Invoice_Tax_SExDuty:
+                    header_L.AddRange(headersMasterlist_STax_SEDuty());
+                    header_L.AddRange(headersMasterlist_NetAmt());
+                    break;
+                case InvoiceType.Invoice_Tax_AddTax_SExDuty:
+                    header_L.AddRange(headersMasterlist_STax_AddSTax_SEDuty());
+                    header_L.AddRange(headersMasterlist_NetAmt());
+                    break;
+                default:
+                    header_L = headersMasterlist();
+                    break;
             }
+            return header_L;
+        }
+        List<Header> headersMasterlist_NetAmt()
+        {
+            List<Header> header_L = new List<Header>();
+            Style style = new Style();
+            Header header = new Header();
+
+            header = new Header();
+            header.title = "Net Amt"; //9
+            header.dataKey = "NetAmount";
+            header.style = style;
+            header_L.Add(header);
 
             return header_L;
         }
-   List<Header> headersMasterlist()
+        List<Header> headersMasterlist_SaleTax(string STaxDisplayHead = "VAT")
         {
-            List<Header> header_L = new List<Header> ();
+            List<Header> header_L = new List<Header>();
+            Style style = new Style();
+            Header header = new Header();
+
+            header = new Header();
+            header.title = STaxDisplayHead + "%"; //5
+            header.dataKey = "STaxRate";
+            header.style = style;
+            header_L.Add(header);
+
+            header = new Header();
+            header.title = STaxDisplayHead + " Amt"; //6
+            header.dataKey = "STaxAmount";
+            header.style = style;
+            header_L.Add(header);
+
+            return header_L;
+        }
+        List<Header> headersMasterlist_STax_AddSTax()
+        {
+            List<Header> header_L = new List<Header>();
+            Style style = new Style();
+            Header header = new Header();
+
+            header_L = headersMasterlist_SaleTax();
+
+            header = new Header();
+            header.title = "ASTax%"; //5
+            header.dataKey = "ASTaxRate";
+            header.style = style;
+            header_L.Add(header);
+
+            header = new Header();
+            header.title = "ASTax Amt"; //6
+            header.dataKey = "ASTaxAmount";
+            header.style = style;
+            header_L.Add(header);
+            return header_L;
+        }
+        List<Header> headersMasterlist_STax_SEDuty()
+        {
+            List<Header> header_L = new List<Header>();
+            Style style = new Style();
+            Header header = new Header();
+
+            header_L = headersMasterlist_SaleTax();
+
+            header = new Header();
+            header.title = "SED%"; //7
+            header.dataKey = "SExDutyRate";
+            header.style = style;
+            header_L.Add(header);
+
+            header = new Header();
+            header.title = "SED Amt"; //8
+            header.dataKey = "SExDutyAmount";
+            header.style = style;
+            header_L.Add(header);
+            return header_L;
+        }
+        List<Header> headersMasterlist_STax_AddSTax_SEDuty()
+        {
+            List<Header> header_L = new List<Header>();
+            Style style = new Style();
+            Header header = new Header();
+
+            header_L = headersMasterlist_STax_AddSTax();
+
+            header = new Header();
+            header.title = "SED%"; //7
+            header.dataKey = "SExDutyRate";
+            header.style = style;
+            header_L.Add(header);
+
+            header = new Header();
+            header.title = "SED Amt"; //8
+            header.dataKey = "SExDutyAmount";
+            header.style = style;
+            header_L.Add(header);
+            return header_L;
+        }
+        List<Header> headersMasterlist()
+        {
+            List<Header> header_L = new List<Header>();
             Style style = new Style();
             Header header = new Header();
             //Header 1 Setting
@@ -167,6 +234,7 @@ namespace ERPStandard.ViewModels
         public string label { get; set; }
         public string num { get; set; }
         public string invDate { get; set; }
+        public string ValidDate { get; set; }
         public string invGenDate { get; set; }
         public bool headerBorder { get; set; }
         public bool tableBodyBorder { get; set; }
@@ -218,6 +286,7 @@ namespace ERPStandard.ViewModels
         public bool pageEnable { get; set; }
         public string pageLabel { get; set; }
         public string DisplayCurrency { get; set; } = "Rs.";
+        public string SoftwareCompanyDisplayText { get; set; } = "System Generated Report by Finanical Pro®";
     }
 
     public class Stamp
@@ -234,6 +303,5 @@ namespace ERPStandard.ViewModels
         public int width { get; set; }
         public int fontSize { get; set; }
     }
-
-
 }
+

@@ -64,7 +64,9 @@ namespace ERPStandard.WEB.Controllers
         [HttpGet]
         public ActionResult SaleQuotationCreate()
         {
-            return PartialView();
+            QuotationCreateNewViewModel quotationCreateNewViewModel = new QuotationCreateNewViewModel();
+            quotationCreateNewViewModel.invoiceType = (int)InvoiceType.Invoice_Tax_SExDuty;
+            return PartialView("SaleQuotationCreate", quotationCreateNewViewModel);
         }
         [HttpPost]
         public ActionResult SaleQuotationCreate(CRM_SaleQuotation SaleQuotation, List<CRM_SaleQuotationDetail> SaleQuotationDetail)
