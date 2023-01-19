@@ -149,7 +149,7 @@
                             <td class="col-md-4">
                                 <div>
                                     <div class="search-box">
-                                        <input type="text" id="CustomSearch1" autocomplete="off" minlength="1" maxlength="150" onkeyup="getItemSearchRecords(this, event)" class="form-control chld" placeholder="Search all...">
+                                        <input type="text"  id="CustomSearch1" autocomplete="off" minlength="1" maxlength="150" onkeyup="getItemSearchRecords(this, event)" class="form-control chld" placeholder="Search all...">
                                         <div id="searchpartial" class="itemsearchrecord">
                                             <ul id="userlist" class="userlist1">
                                             </ul>
@@ -158,24 +158,33 @@
                                 </div>
                             </td>
                             <td class="col-md-1">
-                                <input type="number" id="Qty" minlength="1" maxlength="9" required class="form-control" placeholder="Qty" name="Qty">
+                                <input type="number" id="Qty"  minlength="1" maxlength="9" required class="form-control" placeholder="Qty" name="Qty" onkeydown="handleKeyDownQty(event)">
                             </td>
                             <td class="col-md-1">
-                                <input type="number" id="Rate" minlength="1" maxlength="9" required class="form-control" placeholder="Rate" name="Rate">
+                                <input type="number" id="Rate"  minlength="1" maxlength="9" required class="form-control" placeholder="Rate" name="Rate" onkeydown="handleKeyDownRate(event)">
                             </td>
                             <td class="col-md-1" style="display:none">
                                 <input type="number" readonly id="Amt" minlength="1" maxlength="9" class="form-control" placeholder="Amt" name="Amt">
                             </td>
-                            <td class="col-md-1" style=@(Model.invoiceType == 0? "display:none":"")>
-                                <input type="number" id="SaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="Tax" name="SaleTaxRate">
-                            </td>
+                            @if (Model.invoiceType == 0)
+                            {
+                                <td class="col-md-1" style="display:none">
+                                    <input type="number" id="SaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="Tax" name="SaleTaxRate">
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="col-md-1">
+                                    <input type="number" id="SaleTaxRate"  minlength="1" maxlength="9" required class="form-control" placeholder="Tax" name="SaleTaxRate" onkeydown="handleKeyDownTax(event)">
+                                </td>
+                            }
                             <td class="col-md-1" style="display:none">
                                 <input type="number" readonly id="SaleTaxAmt" minlength="1" maxlength="9" class="form-control" placeholder="SaleTaxAmt" name="SaleTaxAmt">
                             </td>
                             @if (Model.invoiceType == 2 || Model.invoiceType == 4)
                             {
                                 <td class="col-md-1">
-                                    <input type="number" id="ASaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="AddTax" name="ASaleTaxRate">
+                                    <input type="number" id="ASaleTaxRate"  minlength="1" maxlength="9" required class="form-control" placeholder="AddTax" name="ASaleTaxRate" onkeydown="handleKeyDownAddTax(event)">
                                 </td>
                                 <td class="col-md-1" style="display:none">
                                     <input type="number" readonly id="ASaleTaxAmt" minlength="1" maxlength="9" class="form-control" placeholder="ASaleTaxAmt" name="ASaleTaxAmt">
@@ -193,7 +202,7 @@
                             @if (Model.invoiceType == 3 || Model.invoiceType == 4)
                             {
                                 <td class="col-md-1">
-                                    <input type="number" id="SExDutyRate" minlength="1" maxlength="9" required class="form-control" placeholder="DutyRate" name="SExDutyRate">
+                                    <input type="number" id="SExDutyRate"  minlength="1" maxlength="9" required class="form-control" placeholder="DutyRate" name="SExDutyRate" onkeydown="handleKeyDownAddSEd(event)">
                                 </td>
                                 <td class="col-md-1" style="display:none">
                                     <input type="number" readonly id="SExDutyAmt" minlength="1" maxlength="9" class="form-control" placeholder="SExDutyAmt" name="SExDutyAmt">
@@ -202,7 +211,7 @@
                             else
                             {
                                 <td class="col-md-1" style="display:none">
-                                    <input type="number" id="SExDutyRate" minlength="1" maxlength="9" required class="form-control" placeholder="DutyRate" name="SExDutyRate">
+                                    <input type="number" id="SExDutyRate" minlength="1" maxlength="9" required class="form-control" placeholder="DutyRate" name="SExDutyRate" onkeydown="handleKeyDown(event)">
                                 </td>
                                 <td class="col-md-1" style="display:none">
                                     <input type="number" readonly id="SExDutyAmt" minlength="1" maxlength="9" class="form-control" placeholder="SExDutyAmt" name="SExDutyAmt">
@@ -214,7 +223,7 @@
                             </td>
 
                             <td>
-                                <button type="button" class="badge bg-success" onclick="onAddRow()">Add</button>
+                                <button type="button" id="btnrowadd"  class="badge bg-success" onclick="onAddRow()">Add</button>
                                 <button type="button" class="badge bg-danger" onclick="onDeleteRow(this)">Delete</button>
                             </td>
                         </tr>
@@ -240,7 +249,7 @@
                     <td class="col-md-4">
                         <div>
                             <div class="search-box">
-                                <input type="text" id="CustomSearch1" autocomplete="off" minlength="1" maxlength="150" onkeyup="getItemSearchRecords(this, event)" class="form-control chld" placeholder="Search all...">
+                                <input type="text"  id="CustomSearch1" autocomplete="off" minlength="1" maxlength="150" onkeyup="getItemSearchRecords(this, event)" class="form-control chld" placeholder="Search all...">
                                 <div id="searchpartial" class="itemsearchrecord">
                                     <ul id="userlist" class="userlist1">
                                     </ul>
@@ -249,24 +258,33 @@
                         </div>
                     </td>
                     <td class="col-md-1">
-                        <input type="number" id="Qty" minlength="1" maxlength="9" required class="form-control" placeholder="Qty" name="Qty">
+                        <input type="number" id="Qty"  minlength="1" maxlength="9" required class="form-control" placeholder="Qty" name="Qty" onkeydown="handleKeyDownQty(event)">
                     </td>
                     <td class="col-md-1">
-                        <input type="number" id="Rate" minlength="1" maxlength="9" required class="form-control" placeholder="Rate" name="Rate">
+                        <input type="number" id="Rate"  minlength="1" maxlength="9" required class="form-control" placeholder="Rate" name="Rate" onkeydown="handleKeyDownRate(event)">
                     </td>
                     <td class="col-md-1" style="display:none">
                         <input type="number" readonly id="Amt" minlength="1" maxlength="9" class="form-control" placeholder="Amt" name="Amt">
                     </td>
-                    <td class="col-md-1" style=@(Model.invoiceType == 0? "display:none":"")>
-                        <input type="number" id="SaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="Tax" name="SaleTaxRate">
-                    </td>
+                    @if (Model.invoiceType == 0)
+                    {
+                        <td class="col-md-1" style="display:none">
+                            <input type="number" id="SaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="Tax" name="SaleTaxRate">
+                        </td>
+                    }
+                    else 
+                    {
+                        <td class="col-md-1">
+                            <input type="number" id="SaleTaxRate"  minlength="1" maxlength="9" required class="form-control" placeholder="Tax" name="SaleTaxRate" onkeydown="handleKeyDownTax(event)">
+                        </td>
+                    }
                     <td class="col-md-1" style="display:none">
                         <input type="number" readonly id="SaleTaxAmt" minlength="1" maxlength="9" class="form-control" placeholder="SaleTaxAmt" name="SaleTaxAmt">
                     </td>
                     @if (Model.invoiceType == 2 || Model.invoiceType == 4)
                     {
                         <td class="col-md-1">
-                            <input type="number" id="ASaleTaxRate" minlength="1" maxlength="9" required class="form-control" placeholder="AddTax" name="ASaleTaxRate">
+                            <input type="number" id="ASaleTaxRate"  minlength="1" maxlength="9" required class="form-control" placeholder="AddTax" name="ASaleTaxRate" onkeydown="handleKeyDownAddTax(event)">
                         </td>
                         <td class="col-md-1" style="display:none">
                             <input type="number" readonly id="ASaleTaxAmt" minlength="1" maxlength="9" class="form-control" placeholder="ASaleTaxAmt" name="ASaleTaxAmt">
@@ -284,7 +302,7 @@
                     @if (Model.invoiceType == 3 || Model.invoiceType == 4)
                     {
                         <td class="col-md-1">
-                            <input type="number" id="SExDutyRate" minlength="1" maxlength="9" required class="form-control" placeholder="DutyRate" name="SExDutyRate">
+                            <input type="number" id="SExDutyRate"  minlength="1" maxlength="9" required class="form-control" placeholder="DutyRate" name="SExDutyRate" onkeydown="handleKeyDownAddSEd(event)">
                         </td>
                         <td class="col-md-1" style="display:none">
                             <input type="number" readonly id="SExDutyAmt" minlength="1" maxlength="9" class="form-control" placeholder="SExDutyAmt" name="SExDutyAmt">
@@ -293,7 +311,7 @@
                     else
                     {
                         <td class="col-md-1" style="display:none">
-                            <input type="number" id="SExDutyRate" minlength="1" maxlength="9" required class="form-control" placeholder="DutyRate" name="SExDutyRate">
+                            <input type="number" id="SExDutyRate" minlength="1" maxlength="9" required class="form-control" placeholder="DutyRate" name="SExDutyRate" onkeydown="handleKeyDown(event)">
                         </td>
                         <td class="col-md-1" style="display:none">
                             <input type="number" readonly id="SExDutyAmt" minlength="1" maxlength="9" class="form-control" placeholder="SExDutyAmt" name="SExDutyAmt">
@@ -305,7 +323,7 @@
                     </td>
 
                     <td>
-                        <button type="button" class="badge bg-success" onclick="onAddRow()">Add</button>
+                        <button type="button" id="btnrowadd"  class="badge bg-success" onclick="onAddRow()">Add</button>
                         <button type="button" class="badge bg-danger" onclick="onDeleteRow(this)">Delete</button>
                     </td>
                 </tr>
@@ -352,6 +370,114 @@
         //ItemFill();
     });
 
+
+    function handleKeyDownQty(e) {
+        if (e.keyCode === 13) {
+            /*var currentTabIndex = e.target.tabIndex;
+            console.log("currentTabIndex is: "+currentTabIndex);
+            var nextTabIndex = currentTabIndex + 1;
+            var nextInput = document.querySelector("[tabIndex='" + nextTabIndex + "']");
+            if (nextInput) {
+                nextInput.focus();
+            }*/
+
+
+            e.preventDefault();
+            var currentRow = e.target.closest("td");
+            var nextRow = currentRow.nextElementSibling;
+            var nextInput = nextRow.querySelector("#Rate");
+            console.log("current row " + currentRow);
+            console.log("reached " + nextInput);
+
+            if (nextInput) {
+                nextInput.focus();
+            }
+
+
+        }
+    }
+    function handleKeyDownRate(e) {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
+            //SEduty =8, SEdutyAmt =9, NetVal=10, BtnAdd = 11
+            var currentCell = e.target.closest("td");
+            var nextCell = currentCell.nextElementSibling.nextElementSibling;
+            var nextInput = nextCell.querySelector("#SaleTaxRate");
+            if (nextInput.style.display === "none" || nextInput.style.display === "") {
+                nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
+                nextInput = nextCell.querySelector("#btnrowadd");
+                console.log("next input td " + nextInput);
+            }
+            if (nextInput) {
+                nextInput.focus();
+            }
+        }
+    }
+
+    function handleKeyDownTax(e) {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
+            //SEduty =8, SEdutyAmt =9, NetVal=10, BtnAdd = 11
+            var currentCell = e.target.closest("td");
+            var nextCell = currentCell.nextElementSibling.nextElementSibling;
+            var nextInput = nextCell.querySelector("#ASaleTaxRate");
+            console.log("next input td " + nextInput);
+            console.log("display style " + nextInput.style.display);
+
+            if (nextInput.style.display === "none" || nextInput.style.display === "") {
+                console.log("next input td with none style " + nextInput);
+
+                nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
+                nextInput = nextCell.querySelector("#SExDutyRate");
+                if (nextInput.style.display === "none") {
+                    nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
+                    nextInput = nextCell.querySelector("#btnrowadd");
+                    console.log("next input td " + nextInput);
+                }
+            }
+            if (nextInput) {
+                nextInput.focus();
+            }
+        }
+    }
+
+    
+    function handleKeyDownAddTax(e) {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
+            //SEduty =8, SEdutyAmt =9, NetVal=10, BtnAdd = 11
+            var currentCell = e.target.closest("td");
+            var nextCell = currentCell.nextElementSibling.nextElementSibling;
+            var nextInput = nextCell.querySelector("#SExDutyRate");
+            if (nextInput.style.display === "none" || nextInput.style.display === "") {
+                nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
+                nextInput = nextCell.querySelector("#btnrowadd");
+                console.log("next input td " + nextInput);
+            }
+            if (nextInput) {
+                nextInput.focus();
+            }
+        }
+    }
+
+    function handleKeyDownAddSEd(e) {
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
+            //SEduty =8, SEdutyAmt =9, NetVal=10, BtnAdd = 11
+            var currentCell = e.target.closest("td");
+            var nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling;
+            var nextInput = nextCell.querySelector("#btnrowadd");
+            if (nextInput) {
+                nextInput.focus();
+            }
+        }
+    }
+
+
     function onAddRow() {
         console.log("Reached on Add Row");
         //var table = document.getElementById('tblQuotationDetail');
@@ -373,6 +499,15 @@
 
         tbody.appendChild(clone); // add new row to end of table
         clone.focus();
+/*
+        var newRow = $("table#tblQuotationDetail tr:last");
+        var firstInput = newRow.find("input:first");
+        console.log("new row added: " + firstInput);
+        console.log("new row added name: " + firstInput.name);
+        firstInput.focus();
+*/
+
+
         //table.appendChild(clone); // add new row to end of table
     };
 
@@ -478,15 +613,21 @@
         var val = $(e).val();
 
         if (evt.keyCode === 8) {
-            //console.log(evt.keyCode);
             evt.preventDefault();
             $(idsearchtxtboxget).val('');
+            $(chnode).focus();
+            console.log("Focus not set");
+            
+        }
+        if (evt.keyCode === 9) {
+            evt.preventDefault();
+            $(chnode).focus();
+            console.log("Focus not set");
         }
 
 
-
         if (evt.keyCode === 13) {
-            //evt.preventDefault();
+            evt.preventDefault();
             $(chnode).html('');
             $(chnode).hide();
             $.ajax({
@@ -535,6 +676,27 @@
         //    $(chnode).focus();
         //}
 
+        if (evt.keyCode === 40) {
+            evt.preventDefault();
+
+            //console.log(p.childNodes[3]);
+            //console.log(p.childNodes[3].childNodes[1]);
+
+            //var currentCell = evt.target.closest("td");
+            //var nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling;
+            //var nextInput = nextCell.querySelector("#SearchBoxRow");
+            //if (nextInput) {
+            //    nextInput.focus();
+            //}
+
+
+            console.log(evt.keyCode);
+            //$(idsearchtxtboxget).val('');
+            //$(chnode).hide();
+            $(chnode).focus();
+            console.log("Focus not set");
+
+        }
 
     };
 

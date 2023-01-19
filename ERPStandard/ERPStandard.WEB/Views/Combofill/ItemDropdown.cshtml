@@ -36,7 +36,7 @@
                 foreach (var item in Model)
                 {
                     <tr onclick="selectitemval('@item.ItemID', '@item.Dscr')" style="cursor:pointer">
-                        <td>
+                        <td id="SearchBoxRow">
                             <a href="#" onclick="selectitemval('@item.ItemID', '@item.Dscr')" style="color:cornflowerblue;font-size:20px;font-weight:bold">
                                 @item.Dscr
                                 <br />
