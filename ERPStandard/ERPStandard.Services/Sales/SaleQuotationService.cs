@@ -38,6 +38,13 @@ namespace ERPStandard.Services
                         || x.RefDocName.Contains(dtSearch)
                         );
 
+                comp = (from qm in context.CRM_SaleQuotation
+                        where qm.QuoteId.Contains(dtSearch)
+                        || qm.Remarks.Contains(dtSearch)
+                        || qm.RefDocName.Contains(dtSearch)
+                        );
+
+
                 int totalpage = comp.Select(x => x.QuoteId).Count();
                 var pager = new Pager(totalpage, page, pageSize);
                 if (clmNameOrder == 1)

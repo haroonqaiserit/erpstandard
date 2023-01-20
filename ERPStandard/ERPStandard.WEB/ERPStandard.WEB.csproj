@@ -1953,6 +1953,7 @@
     <Content Include="Views\Combofill\ItemDropdown.cshtml" />
     <Content Include="Views\SaleQuotation\SaleInvoiceTemplate.cshtml" />
     <Content Include="Views\SaleQuotation\DocumentReportTemplate.cshtml" />
+    <Content Include="Views\Combofill\ItemDropdown2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

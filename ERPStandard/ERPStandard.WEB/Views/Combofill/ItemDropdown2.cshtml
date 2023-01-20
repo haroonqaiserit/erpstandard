@@ -1,0 +1,91 @@
+﻿@model List<ERPStandard.DbEntities.ItemsStock>
+<style>
+    #table {
+        height: 95%;
+        opacity: 1 !important;
+        visibility: visible !important;
+        border: none;
+        border-radius: 1px;
+        overflow: auto;
+        box-shadow: 0 3px 10px rgba(34, 25, 25, 0.4);
+        border-collapse: separate;
+        background: white;
+        padding: 30px;
+        width: 100%;
+        position: relative !important;
+        top: 13%;
+        z-index: 100000;
+        transition: all 0.25s linear;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+
+<div class=" table-responsive" hidden id="table">
+    <table class="table centerdiv">
+        <tbody>
+            @if (Model.Count() == 0)
+            {
+                <tr>
+                    <td colspan="2" class="text-center">
+                        No Result.....
+                    </td>
+                </tr>
+            }
+            else
+            {
+                foreach (var item in Model)
+                {
+                    <tr onclick="selectitemval('@item.ItemID', '@item.Dscr')" style="cursor:pointer">
+                        <td id="SearchBoxRow">
+                            <a href="#" onclick="selectitemval('@item.ItemID', '@item.Dscr')" style="color:cornflowerblue;font-size:20px;font-weight:bold">
+                                @item.Dscr
+                                <br />
+                                @*@if (item.DeliveredDate.ToShortDateString().Contains("0001"))
+                                {
+                                    <span class="badge badge-info x3">@(item.CreatedOn.Value.ToShortDateString() +"-----" + item.OrderStatus.Name)</span>
+                                }
+                                else
+                                {
+                                    <span class="badge" style="background-color:green;color:white">@(item.DeliveredDate.ToShortDateString() + "-----" + item.OrderStatus.Name)</span>
+                                }*@
+                            </a>
+                            <h4>
+                                @if (item.ItemClass == 1)
+                                {
+                                    <span class="badge badge-info">
+                                        Finish Good
+                                    </span>
+                                    <br />
+                                }
+                                else if (item.ItemClass == 2)
+                                {
+                                    <span class="badge badge-info">
+                                        Raw Material
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-info">
+                                        Tool &Aacute; Spares
+                                    </span>
+                                    <br />
+                                }
+
+                            </h4>
+                            @if (!string.IsNullOrEmpty(item.PartCode))
+                            {
+                                <span>@Html.Raw(item.PartCode)</span>
+                            }
+                            @*@if (item.OrderStatusId == 4)
+                                {
+                                    <span>@item.CancelRemarks</span>
+                                }*@
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+

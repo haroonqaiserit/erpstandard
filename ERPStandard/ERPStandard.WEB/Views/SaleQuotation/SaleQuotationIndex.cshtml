@@ -1,8 +1,8 @@
 ﻿@{
     ViewBag.Title = "Sales Quotation";
 }
-@*<script src="~/assets/js/jspdf.min.js"></script>*@
-@*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>*@
+
+<script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/assets/js/jsPDF/jspdf.min.js"></script>
 <script src="~/assets/js/jsPDF/jspdf.plugin.autotable.min.js"></script>
 <script src="~/assets/js/htm2canvas/html2canvas.js"></script>
@@ -223,9 +223,33 @@
         })
     };
 
-    function onSave() {
-        if (validateForm) {
-            console.log(validateForm);
+    function onSave(form) {
+        //if (!$(form).valid()) {
+        //    return;
+        //}
+
+
+
+
+        $(form).validate({
+            rules: {
+                "input[name='Qty']": {
+                    required: true,
+                },
+                "input[name='Rate']": {
+                    required: true,
+                },
+            },
+            errorPlacement: function (error, element) {
+                error.appendTo(element.closest("td"));
+            },
+            submitHandler: function (form) {
+                // your ajax code here
+            }
+        });
+
+
+        console.log(validateForm);
             var SaleQuotations = [];
             var SaleQuotation = {};
             var SaleQuotationDetails = [];
@@ -244,6 +268,73 @@
             SaleQuotation.Remarks = $("#Remarks").val();
             SaleQuotation.SalesManId = $("#SalesManId").val();
             SaleQuotation.CustomerNo = $("#CustomerId").val();
+
+        var i=0;
+
+        $('#tblQuotationDetail > tbody  > tr').each(function () {
+            var SaleQuotationDetail = {};
+            //console.log("enter to read table combobox value");
+            var textboxval = null;
+
+            textboxval = $(this).find("td:eq(0) input[type='text']").val();
+            console.log("value " + i + " is :" + textboxval);
+            i++;
+            textboxval = $(this).find("td:eq(1) input[type='text']").val();
+            console.log("value " + i + " is :" + textboxval);
+            i++;
+            textboxval = $(this).find("td:eq(2) input[type='number']").val();
+            console.log("value " + i + " is :" + textboxval);
+            i++;
+            textboxval = $(this).find("td:eq(3) input[type='number']").val();
+            console.log("value " + i + " is :" + textboxval);
+            i++;
+            textboxval = $(this).find("td:eq(4) input[type='number']").val();
+            console.log("value " + i + " is :" + textboxval);
+            i++;
+            textboxval = $(this).find("td:eq(5) input[type='number']").val();
+            console.log("value " + i + " is :" + textboxval);
+            i++;
+            textboxval = $(this).find("td:eq(6) input[type='number']").val();
+            console.log("value " + i + " is :" + textboxval);
+            i++;
+            textboxval = $(this).find("td:eq(7) input[type='number']").val();
+            console.log("value " + i + " is :" + textboxval);
+            i++;
+            textboxval = $(this).find("td:eq(8) input[type='number']").val();
+            console.log("value " + i + " is :" + textboxval);
+            i++;
+            textboxval = $(this).find("td:eq(9) input[type='number']").val();
+            console.log("value " + i + " is :" + textboxval);
+            i++;
+            textboxval = $(this).find("td:eq(10) input[type='number']").val();
+            console.log("value " + i + " is :" + textboxval);
+            i++;
+            textboxval = $(this).find("td:eq(11) input[type='number']").val();
+            console.log("value " + i + " is :" + textboxval);
+            i++;
+            textboxval = $(this).find("td:eq(12) input[type='number']").val();
+            console.log("value " + i + " is :" + textboxval);
+            i++;
+            textboxval = $(this).find("td:eq(13) input[type='number']").val();
+            console.log("value " + i + " is :" + textboxval);
+            i++;
+            textboxval = $(this).find("td:eq(14) input[type='number']").val();
+            console.log("value " + i + " is :" + textboxval);
+            i++;
+            textboxval = $(this).find("td:eq(15) input[type='number']").val();
+            console.log("value " + i + " is :" + textboxval);
+            i++;
+            textboxval = $(this).find("td:eq(16) input[type='number']").val();
+            console.log("value " + i + " is :" + textboxval);
+            i++;
+            textboxval = $(this).find("td:eq(17) input[type='number']").val();
+            console.log("value " + i + " is :" + textboxval);
+
+
+
+            i++;
+        });
+
 
 // Master Detail Record Save
             SaleQuotations.push(SaleQuotation);
@@ -265,9 +356,11 @@
                     flgerr = true;
                     return;
                 }
-                console.log($(this).find("td:eq(3) input[type='number']").val());
-                SaleQuotationDetail.Qty = $(this).find("td:eq(7) input[type='number']").val();
-                SaleQuotationDetail.Rate = $(this).find("td:eq(8) input[type='number']").val();
+                //debugger;
+                //console.log($(this).find("td:eq(3) input[type='number']").val());
+                SaleQuotationDetail.Qty = $(this).find("td:eq(2) input[type='number']").val();
+                SaleQuotationDetail.Rate = $(this).find("td:eq(3) input[type='number']").val();
+                console.log(SaleQuotationDetail.Qty)
                 if (SaleQuotationDetail.Qty == "" || SaleQuotationDetail.Rate == "") {
                     Swal.fire({
                         icon: 'error',
@@ -277,9 +370,9 @@
                     flgerr = true;
                     return;
                 }
-                SaleQuotationDetail.SaleTaxRate = $(this).find("td:eq(9) input[type='number']").val();
-                SaleQuotationDetail.ASaleTaxRate = $(this).find("td:eq(10) input[type='number']").val();
-                SaleQuotationDetail.SExDutyRate = $(this).find("td:eq(11) input[type='number']").val();
+                SaleQuotationDetail.SaleTaxRate = $(this).find("td:eq(5) input[type='number']").val();
+                SaleQuotationDetail.ASaleTaxRate = $(this).find("td:eq(7) input[type='number']").val();
+                SaleQuotationDetail.SExDutyRate = $(this).find("td:eq(9) input[type='number']").val();
 
                 SaleQuotationDetails.push(SaleQuotationDetail);
 
@@ -318,9 +411,6 @@
 
 
 // Master Detail Record Save
-
-
-        }
     };
 
     function onDelete(data) {
