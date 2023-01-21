@@ -9,7 +9,7 @@ namespace ERPStandard.ViewModels.Sales
 {
     public class SaleQuotationViewModel
     {
-        public List<CRM_SaleQuotation> SaleQuotation { get; set; }
+        public List<SaleQuotationMasterViewModel> SaleQuotation { get; set; }
         public Pager Pager { get; set; }
         public string dtSearch { get; set; }
         public int clmNameOrder { get; set; }

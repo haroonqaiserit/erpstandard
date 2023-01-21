@@ -1094,8 +1094,11 @@
     var lineSpacing = {
         NormalSpacing: 12,
     };
-    function generateInvPDFFormat2() {
-        var Id = "1 -L";
+    function generateInvPDFFormat2(Id) {
+        if (!Id) {
+            return;
+        };
+
         $.ajax({
             type: "GET",
             url: '@Url.Action("SaleQuotationPreview", "Salequotation")',

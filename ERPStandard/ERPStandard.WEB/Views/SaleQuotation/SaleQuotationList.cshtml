@@ -39,15 +39,14 @@
                                                 <td>@comp.QuoteNo</td>
                                                 <td>@comp.QuoteDate</td>
                                                 <td>@comp.QuoteValidDate</td>
-                                                <td>@comp.CustomerNo</td>
-                                                <td>@comp.SalesManId</td>
+                                                <td>@comp.CustomerName</td>
+                                                <td>@comp.SalesManName</td>
                                                 <td>@comp.Remarks</td>
                                                 <td>
                                                     @{
                                                         if (comp.DeletionID == 0)
                                                         {
-                                                            <span class="badge bg-success">Active</span>
-
+                                                            <button class="badge btn-primary" onclick="generateInvPDFFormat2('@comp.QuoteId')">Privew</button>
                                                         }
                                                         else
                                                         {

@@ -33,18 +33,45 @@ namespace ERPStandard.Services
             var viewModel = new SaleQuotationViewModel();
             using (var context = new SairaIndEntities())
             {
-                var comp = context.CRM_SaleQuotation.Where(x => x.QuoteId.Contains(dtSearch)
+                var comp = context.CRM_SaleQuotation
+                    .Join(context.Customers,
+                        o => o.CustomerNo,
+                        cust => cust.CustomerNo,
+                        (o, cust) => new
+                        {
+                            o.QuoteId,
+                            o.QuoteNo,
+                            o.QuoteDate,
+                            o.QuoteValidDate,
+                            o.RefDocId,
+                            o.RefDocName,
+                            o.Remarks,
+                            o.DeletionID,
+                            o.SalesManId,
+                            CustomerName = cust.Name,
+                        })
+                .Join(context.SalesMen,
+                    o => o.SalesManId,
+                    sal => sal.SalesManId,
+                    (o, sal) => new SaleQuotationMasterViewModel
+                    {
+                        QuoteId = o.QuoteId,
+                        QuoteNo = o.QuoteNo,
+                        QuoteDate = o.QuoteDate,
+                        QuoteValidDate = o.QuoteValidDate,
+                        RefDocId = o.RefDocId,
+                        RefDocName = o.RefDocName,
+                        Remarks = o.Remarks,
+                        DeletionID = o.DeletionID,
+                        CustomerName = o.CustomerName,
+                        SalesManName = sal.Name
+                    }
+                ).Where(x => x.QuoteId.Contains(dtSearch)
                         || x.Remarks.Contains(dtSearch)
                         || x.RefDocName.Contains(dtSearch)
+                        || x.CustomerName.Contains(dtSearch)
+                        || x.SalesManName.Contains(dtSearch)
                         );
-
-                comp = (from qm in context.CRM_SaleQuotation
-                        where qm.QuoteId.Contains(dtSearch)
-                        || qm.Remarks.Contains(dtSearch)
-                        || qm.RefDocName.Contains(dtSearch)
-                        );
-
-
                 int totalpage = comp.Select(x => x.QuoteId).Count();
                 var pager = new Pager(totalpage, page, pageSize);
                 if (clmNameOrder == 1)
@@ -83,7 +110,40 @@ namespace ERPStandard.Services
                 var comp = context.CRM_SaleQuotation.Where(x => x.QuoteId.Contains(dtSearch)
                         || x.Remarks.Contains(dtSearch)
                         || x.RefDocName.Contains(dtSearch)
-                        );
+                        ).Join(context.Customers,
+                        o => o.CustomerNo,
+                        cust => cust.CustomerNo,
+                        (o, cust) => new
+                        {
+                            o.QuoteId,
+                            o.QuoteNo,
+                            o.QuoteDate,
+                            o.QuoteValidDate,
+                            o.RefDocId,
+                            o.RefDocName,
+                            o.Remarks,
+                            o.DeletionID,
+                            o.SalesManId,
+                            CustomerName = cust.Name,
+                        }).Where(x => x.CustomerName.Contains(dtSearch))
+                .Join(context.SalesMen,
+                    o => o.SalesManId,
+                    sal => sal.SalesManId,
+                    (o, sal) => new SaleQuotationMasterViewModel
+                    {
+                        QuoteId = o.QuoteId,
+                        QuoteNo = o.QuoteNo,
+                        QuoteDate = o.QuoteDate,
+                        QuoteValidDate = o.QuoteValidDate,
+                        RefDocId = o.RefDocId,
+                        RefDocName = o.RefDocName,
+                        Remarks = o.Remarks,
+                        DeletionID = o.DeletionID,
+                        CustomerName = o.CustomerName,
+                        SalesManName = sal.Name
+                    }
+                ).Where(x => x.SalesManName.Contains(dtSearch));
+
 
                 int totalpage = comp.Select(x => x.QuoteId).Count();
                 if (clmNameOrder == 1)

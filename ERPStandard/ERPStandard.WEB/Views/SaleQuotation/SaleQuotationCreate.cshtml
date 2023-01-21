@@ -148,9 +148,9 @@
 
                             <td class="col-md-4">
                                 <div>
-                                    <div class="search-box">
+                                    <div class="search-panel">
                                         <input type="text" name="customsearchtext" id="CustomSearch1" autocomplete="off" minlength="1" maxlength="150" onkeyup="getItemSearchRecords(this, event)" class="form-control chld" placeholder="Search all...">
-                                        <div id="searchpartial" class="itemsearchrecord container" >
+                                        <div id="searchpartial" class="itemsearchrecord container">
                                         </div>
                                     </div>
                                 </div>
@@ -247,9 +247,9 @@
 
                     <td class="col-md-4">
                         <div>
-                            <div class="search-box">
+                            <div class="search-panel">
                                 <input type="text" name="customsearchtext" id="CustomSearch1" autofocus autocomplete="off" minlength="1" maxlength="150" onkeyup="getItemSearchRecords(this, event)" class="form-control chld" placeholder="Search all...">
-                                <div id="searchpartial" class="itemsearchrecord">
+                                <div id="searchpartial" class="itemsearchrecord  container">
                                     <ul id="userlist" class="userlist1">
                                     </ul>
                                 </div>
@@ -340,38 +340,20 @@
     $(document).ready(function () {
         SalesmanComboFill();
         CustomerComboFill();
-
         var now = new Date();
-
         var day = ("0" + now.getDate()).slice(-2);
         var month = ("0" + (now.getMonth() + 1)).slice(-2);
-
         var today = now.getFullYear() + "-" + (month) + "-" + (day);
-
         var dayValid = ("0" + (now.getDate() + 3)).slice(-2);
-
-        
         var validdaate = now.getFullYear() + "-" + (month) + "-" + (dayValid);
-
         $('#QuoteDate').val(today);
         $('#QuoteValidDate').val(validdaate);
-
-
-        console.log("Date is set: " + dayValid);
-
-
         $("#Remarks").focus();
-
-
-        //var row = document.getElementById('tblRowforCopy');
-        //$("QuoteDate").text('@DateTime.Now');
-            //focus();
-        //ItemFill();
     });
-
-
     function handleKeyDownQty(eval, e) {
-        console.log($(eval).val());
+        //console.log($(eval).val());
+        calculateAmt(e);
+
         if (e.keyCode === 13) {
             /*var currentTabIndex = e.target.tabIndex;
             console.log("currentTabIndex is: "+currentTabIndex);
@@ -384,8 +366,8 @@
             var currentRow = e.target.closest("td");
             var nextRow = currentRow.nextElementSibling;
             var nextInput = nextRow.querySelector("#Rate");
-            console.log("current row " + currentRow);
-            console.log("reached " + nextInput);
+            //console.log("current row " + currentRow);
+            //console.log("reached " + nextInput);
 
             if (nextInput) {
                 nextInput.focus();
@@ -393,6 +375,7 @@
         }
     }
     function handleKeyDownRate(eval, e) {
+        calculateAmt(e);
         if (e.keyCode === 13) {
             e.preventDefault();
             // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
@@ -401,19 +384,11 @@
             var currentCell = e.target.closest("td");
             var nextCell = currentCell.nextElementSibling.nextElementSibling;
             var nextInput = nextCell.querySelector("#SaleTaxRate");
-            if (nextInput.className.includes("focus")) {
-                console.log(nextInput);
-                console.log("Focus");
-            } else {
-                console.log(nextInput);
-                console.log("Not Focus" + nextInput.className);
-            }
-
 
             if (!nextInput.className.includes("focus")) {
                 nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
                 nextInput = nextCell.querySelector("#btnrowadd");
-                console.log("next input td " + nextInput);
+                //console.log("next input td " + nextInput);
             }
             if (nextInput) {
                 nextInput.focus();
@@ -421,8 +396,8 @@
         }
 
     }
-
     function handleKeyDownTax(eval, e) {
+        calculateAmt(e);
         if (e.keyCode === 13) {
             e.preventDefault();
             // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
@@ -430,18 +405,18 @@
             var currentCell = e.target.closest("td");
             var nextCell = currentCell.nextElementSibling.nextElementSibling;
             var nextInput = nextCell.querySelector("#ASaleTaxRate");
-            console.log("next input td " + nextInput);
-            console.log("display style " + nextInput.style.display);
+            //console.log("next input td " + nextInput);
+            //console.log("display style " + nextInput.style.display);
 
             if (!nextInput.className.includes("focus")) {
-                console.log("next input td with none style " + nextInput);
+                //console.log("next input td with none style " + nextInput);
 
                 nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
                 nextInput = nextCell.querySelector("#SExDutyRate");
                 if (!nextInput.className.includes("focus")) {
                     nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
                     nextInput = nextCell.querySelector("#btnrowadd");
-                    console.log("next input td " + nextInput);
+                    //console.log("next input td " + nextInput);
                 }
             }
             if (nextInput) {
@@ -449,8 +424,8 @@
             }
         }
     }
-    
     function handleKeyDownAddTax(eval, e) {
+        calculateAmt(e);
         if (e.keyCode === 13) {
             e.preventDefault();
             // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
@@ -468,8 +443,8 @@
             }
         }
     }
-
     function handleKeyDownAddSEd(e) {
+        calculateAmt(e);
         if (e.keyCode === 13) {
             e.preventDefault();
             // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
@@ -482,7 +457,65 @@
             }
         }
     }
+    function calculateAmt(e) {
+        if (e) {
+            var TableRow = e.target.closest('tr');
+            var ItemID = TableRow.querySelector('[name=ItemID]')
 
+            
+            var Qty = TableRow.querySelector('[name=Qty]')
+            var Rate = TableRow.querySelector('[name=Rate]')
+            var Amt = TableRow.querySelector('[name=Amt]')
+            var SaleTaxRate = TableRow.querySelector('[name=SaleTaxRate]')
+            var SaleTaxAmt = TableRow.querySelector('[name=AmtSaleTaxAmt]')
+            var ASaleTaxRate = TableRow.querySelector('[name=ASaleTaxRate]')
+            var ASaleTaxAmt = TableRow.querySelector('[name=ASaleTaxAmt]')
+            var SExDutyRate = TableRow.querySelector('[name=SExDutyRate]')
+            var SExDutyAmt = TableRow.querySelector('[name=SExDutyAmt]')
+            var NetTotalAmt = TableRow.querySelector('[name=NetTotalAmt]')
+            if (!$(ItemID).val()) {
+                $(Qty).val('');
+                $(Rate).val('');
+                $(Amt).val('');
+                $(SaleTaxRate).val('');
+                $(SaleTaxAmt).val('');
+                $(ASaleTaxRate).val('');
+                $(ASaleTaxAmt).val('');
+                $(SExDutyRate).val('');
+                $(SExDutyAmt).val('');
+                $(NetTotalAmt).val('');
+                return null;
+            }
+
+            if ($(Qty).val() > 0 && $(Rate).val()) {
+                var amount = $(Qty).val() * $(Rate).val()
+                var SaleTax_amount = amount * $(SaleTaxRate).val() / 100
+                var ASaleTax_amount = amount * $(ASaleTaxRate).val() / 100
+                var SExDuty_amount = amount * $(SExDutyRate).val() / 100
+                var NetTotal_amount = amount + SaleTax_amount + ASaleTax_amount + SExDuty_amount
+                $(Amt).val(amount);
+                $(SaleTaxAmt).val(SaleTax_amount);
+                $(ASaleTaxAmt).val(ASaleTax_amount);
+                $(SExDutyAmt).val(SExDuty_amount);
+                $(NetTotalAmt).val(NetTotal_amount);
+            }
+            else {
+                $(SaleTaxAmt).val('');
+                $(ASaleTaxAmt).val('');
+                $(SExDutyAmt).val('');
+                $(NetTotalAmt).val('');
+            }
+            //var currentRow = e.target.closest("tr");
+            //var currentCell1 = currentRow.target.closest("td");
+            //var nextRow = currentRow.nextElementSibling;
+            //var nextInput = nextRow.querySelector("#Rate");
+            //console.log("current row " + currentRow);
+            //console.log("reached " + nextInput);
+
+            //console.log(currentCell1);
+        }
+
+    }
     function onAddRow() {
         console.log("Reached on Add Row");
         //var table = document.getElementById('tblQuotationDetail');
@@ -499,35 +532,19 @@
         var clone = row.cloneNode(true); // copy children too
         clone.id = "newID"; // change id or other attributes/contents
         clone.style.display = 'table-row'
-        //var result_style = document.getElementById('result_tr').style;
-        //result_style.display = 'table-row'
-
         tbody.appendChild(clone); // add new row to end of table
         clone.focus();
         var newRow = $("table#tblQuotationDetail tr:last");
         var firstInput = newRow.find('input[name="customsearchtext"]');
-
-        //var article_id = newRow.closest('form').find('input[name="CustomSearch1"]').val();
-
-        //$(firstInput).val("Hello");
         console.log(firstInput);
         firstInput.focus();
-/*        console.log("new row added: " + firstInput);
-        console.log("new row added name: " + firstInput.name);
-        firstInput.focus();
-*/
-
-
-        //table.appendChild(clone); // add new row to end of table
     };
-
     function onDeleteRow(ev) {
         var p = ev.parentNode.parentNode;
         if (p.id != "tblRow") {
             p.parentNode.removeChild(p);
         }
     }
-
     function SalesmanComboFill() {
         $.ajax({
             type: "GET",
@@ -590,23 +607,12 @@
         });
     };
     var searchflg = false;
-
     var chnode;
     var searchtextboxget;
     var idsearchtxtboxget;
     var Qtysearchtxtboxget;
-    $(document).mouseup(function (e) {
-        var container = $(chnode);
-
-        // if the target of the click isn't the container nor a descendant of the container
-        if (!container.is(e.target) && container.has(e.target).length === 0) {
-            container.hide();
-        }
-    });
-
-
     function getItemSearchRecords(e, evt) {
-
+        calculateAmt(evt);
         var p = e.parentNode;
         //console.log(p.childNodes);
         //console.log(pp.childNodes[1].childNodes[1].childNodes[1].childNodes[3]);
@@ -626,18 +632,24 @@
             evt.preventDefault();
             $(idsearchtxtboxget).val('');
             $(chnode).focus();
-            console.log("Focus not set");
+            //console.log("Focus not set");
             
         }
         if (evt.keyCode === 9) {
             evt.preventDefault();
             $(chnode).focus();
-            console.log("Focus not set");
+            //console.log("Focus not set");
+        }
+        if (evt.keyCode === 27) {
+            evt.preventDefault();
+            $(chnode).hide();
+            //console.log("Focus not set");
         }
 
 
         if (evt.keyCode === 13) {
             evt.preventDefault();
+            if (val === "") return;
             $(chnode).html('');
             $(chnode).hide();
             $.ajax({
@@ -709,12 +721,6 @@
         }
 
     };
-
-    //$("#CustomSearch").keyup(function () {
-    //    console.log(searchflg);
-    //    SearchingLikeSendle(e);
-    //});
-
     function SearchingLikeSendle(val) {
         console.log("reached in SearchingLikeSendle");
         //var val = $("#CustomSearch").val();
@@ -750,7 +756,6 @@
             }
         })
     }
-
     function selectitemval(itemval, name) {
         searchflg = false;
         //$("#CustomSearch").val(itemval);
@@ -764,7 +769,6 @@
         //console.log(itemval);
         $(chnode).hide();
     }
-
     function ItemFill(search) {
         $.ajax({
             type: "GET",
@@ -799,9 +803,7 @@
             }
         });
     };
-
-
-       function getval(sel) {
+    function getval(sel) {
         var ReceiverId = $(sel).val();
 
            console.log(ReceiverId);
@@ -818,12 +820,15 @@
             }
         });*@
     };
+    $(document).mouseup(function (e) {
+        var container = $(chnode);
 
-
+        // if the target of the click isn't the container nor a descendant of the container
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+            container.hide();
+        }
+    });
 </script>
-
-
-
 
 <script>
     $('.select2').select2();
