@@ -925,10 +925,12 @@ warning 6002: The table/view 'SairaInd.dbo.Company' does not have a primary key 
           <Property Name="LahTransferId" Type="int" />
           <Property Name="SaveDate" Type="datetime" />
           <Property Name="DeletionID" Type="int" />
-          <Property Name="CityName" Type="varchar" MaxLength="25" />
           <Property Name="PostCode" Type="varchar" MaxLength="10" />
           <Property Name="STaxRegNo" Type="varchar" MaxLength="25" />
           <Property Name="NationalTaxNo" Type="varchar" MaxLength="25" />
+          <Property Name="CityName" Type="varchar" MaxLength="25" />
+          <Property Name="CompanyState" Type="varchar" MaxLength="25" />
+          <Property Name="company_website" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Contact">
           <Key>
@@ -4849,6 +4851,7 @@ warning 6002: The table/view 'SairaInd.dbo.SalCalc' does not have a primary key 
           <Property Name="SaleInvId" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="LineNo" Type="int" Nullable="false" />
           <Property Name="ItemId" Type="varchar" MaxLength="50" />
+          <Property Name="DelChallanId" Type="varchar" MaxLength="50" />
           <Property Name="SQty" Type="numeric" Precision="10" Scale="0" Nullable="false" />
           <Property Name="SaleRate" Type="numeric" Precision="24" Scale="4" />
           <Property Name="AmtWoSt" Type="money" />
@@ -8440,6 +8443,8 @@ warning 6002: The table/view 'SairaInd.dbo.Visite' does not have a primary key d
           <Property Name="PostCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="STaxRegNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="NationalTaxNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyState" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="company_website" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Contact">
           <Key>
@@ -10432,6 +10437,7 @@ warning 6002: The table/view 'SairaInd.dbo.Visite' does not have a primary key d
           <Property Name="SPDrate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="SPDAmount" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
           <NavigationProperty Name="SaleInvoice" Relationship="Self.FK_SaleInvoiceDetail_SaleInvoice" FromRole="SaleInvoiceDetail" ToRole="SaleInvoice" />
+          <Property Name="DelChallanId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="SaleInvoiceWeb">
           <Key>
@@ -14059,6 +14065,8 @@ warning 6002: The table/view 'SairaInd.dbo.Visite' does not have a primary key d
           <EntitySetMapping Name="Company1">
             <EntityTypeMapping TypeName="SairaIndModel.Company1">
               <MappingFragment StoreEntitySet="Company1">
+                <ScalarProperty Name="company_website" ColumnName="company_website" />
+                <ScalarProperty Name="CompanyState" ColumnName="CompanyState" />
                 <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
                 <ScalarProperty Name="company_desc" ColumnName="company_desc" />
                 <ScalarProperty Name="Company_address" ColumnName="Company_address" />
@@ -16056,6 +16064,7 @@ warning 6002: The table/view 'SairaInd.dbo.Visite' does not have a primary key d
           <EntitySetMapping Name="SaleInvoiceDetails">
             <EntityTypeMapping TypeName="SairaIndModel.SaleInvoiceDetail">
               <MappingFragment StoreEntitySet="SaleInvoiceDetail">
+                <ScalarProperty Name="DelChallanId" ColumnName="DelChallanId" />
                 <ScalarProperty Name="SaleInvId" ColumnName="SaleInvId" />
                 <ScalarProperty Name="LineNo" ColumnName="LineNo" />
                 <ScalarProperty Name="ItemId" ColumnName="ItemId" />

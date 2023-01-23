@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ERPStandard.DbEntities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,5 +21,7 @@ namespace ERPStandard.ViewModels.Sales
         public string RefDocName { get; set; }
         public int CompNo { get; set; }
         public int BranchNo { get; set; }
+        public int invoiceType { get; set; }
+        public virtual List<CRM_SaleQuotationDetail> QuotationDetail { get; set; }
     }
 }

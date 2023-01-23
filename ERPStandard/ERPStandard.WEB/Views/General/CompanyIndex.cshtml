@@ -242,7 +242,9 @@
          var CityName = $("#CityName").val();
          var PostCode = $("#PostCode").val();
          var STaxRegNo = $("#STaxRegNo").val();
-         var NationalTaxNo = $("#NationalTaxNo").val();
+        var NationalTaxNo = $("#NationalTaxNo").val();
+        var company_website = $("#company_website").val();
+
         //alert(EditId);
 
         $.ajax({
@@ -259,7 +261,8 @@
                 PostCode: PostCode,
                 STaxRegNo: STaxRegNo,
                 NationalTaxNo: NationalTaxNo,
-                CompNo: CompNo
+                CompNo: CompNo,
+                company_website: company_website
             },
             beforeSend: function () {
                 $("#CustomSearchLoader").show();
@@ -286,6 +289,7 @@
         var PostCode = $("#PostCode").val();
         var STaxRegNo = $("#STaxRegNo").val();
         var NationalTaxNo = $("#NationalTaxNo").val();
+        var company_website = $("#company_website").val();
 
         $.ajax({
             type: "POST",
@@ -300,7 +304,8 @@
                 CityName: CityName,
                 PostCode: PostCode,
                 STaxRegNo: STaxRegNo,
-                NationalTaxNo: NationalTaxNo
+                NationalTaxNo: NationalTaxNo,
+                company_website: company_website
             },
             beforeSend: function () {
                 $("#CustomSearchLoader").show();

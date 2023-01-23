@@ -24,16 +24,25 @@ namespace ERPStandard.WEB.Controllers
             return View();
         }
 
-        public ActionResult SaleQuotationList(int? pageno, int pageSize = 10, string dtSearch = "", int clmNameOrder = 0)
+        public ActionResult SaleQuotationList(int? pageno, int pageSize = 10, string dtSearch = "", int clmNameOrder = 0, string sortorder="")
         {
+            string m_sortorder = "desc";
+            if(sortorder == "asc")
+            {
+                m_sortorder = "desc";
+            }else if(sortorder == "desc")
+            {
+                m_sortorder = "asc";
+            }
+
             pageno = pageno.HasValue ? pageno.Value : 1;
-            var SaleQuotationViewModel = SaleQuotationListLoad(pageno.Value, pageSize, dtSearch, clmNameOrder);
+            var SaleQuotationViewModel = SaleQuotationListLoad(pageno.Value, pageSize, dtSearch, clmNameOrder, m_sortorder);
             return PartialView("SaleQuotationList", SaleQuotationViewModel);
         }
-        public SaleQuotationViewModel SaleQuotationListLoad(int pageno, int pageSize = 10, string dtSearch = "", int clmNameOrder = 0)
+        public SaleQuotationViewModel SaleQuotationListLoad(int pageno, int pageSize = 10, string dtSearch = "", int clmNameOrder = 0, string sortorder = "")
         {
             SaleQuotationViewModel SaleQuotationViewModel = new SaleQuotationViewModel();
-            SaleQuotationViewModel = SaleQuotationService.Instance.All(pageno, pageSize, dtSearch, clmNameOrder);
+            SaleQuotationViewModel = SaleQuotationService.Instance.All(pageno, pageSize, dtSearch, clmNameOrder, sortorder);
             return SaleQuotationViewModel;
         }
         public ActionResult SaleQuotationReportView(string dtSearch = "", int clmNameOrder = 0)
@@ -64,17 +73,33 @@ namespace ERPStandard.WEB.Controllers
         [HttpGet]
         public ActionResult SaleQuotationCreate()
         {
-            QuotationCreateNewViewModel quotationCreateNewViewModel = new QuotationCreateNewViewModel();
-            quotationCreateNewViewModel.invoiceType = (int)InvoiceType.Invoice_Tax_AddTax;
-            return PartialView("SaleQuotationCreate", quotationCreateNewViewModel);
+            SaleQuotationMasterViewModel saleQuotationMasterViewModel = new SaleQuotationMasterViewModel();
+            saleQuotationMasterViewModel.invoiceType = (int)InvoiceType.Invoice_Tax_AddTax;
+            return PartialView("SaleQuotationCreate", saleQuotationMasterViewModel);
         }
         [HttpPost]
         public ActionResult SaleQuotationCreate(CRM_SaleQuotation SaleQuotation, List<CRM_SaleQuotationDetail> SaleQuotationDetail)
         {
-            var compno = SaleQuotationService.Instance.Add(SaleQuotation, SaleQuotationDetail);
-            SaleQuotationViewModel SaleQuotationViewModel = new SaleQuotationViewModel();
-            SaleQuotationViewModel = SaleQuotationService.Instance.All(1);
-            return PartialView("SaleQuotationList", SaleQuotationViewModel);
+            try
+            {
+                var compno = SaleQuotationService.Instance.Add(SaleQuotation, SaleQuotationDetail);
+                SaleQuotationViewModel SaleQuotationViewModel = new SaleQuotationViewModel();
+                SaleQuotationViewModel = SaleQuotationService.Instance.All(1);
+                //return PartialView("SaleQuotationList", SaleQuotationViewModel);
+                if (compno > 0)
+                {
+                    return Json(new { result= "ture"}, JsonRequestBehavior.AllowGet);
+ //                   return Json(root, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { result = "false"}, JsonRequestBehavior.AllowGet); 
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { result = "false: " + ex.Message}, JsonRequestBehavior.AllowGet);
+            }
         }
         [HttpPost]
         public ActionResult SaleQuotationDelete(string Id)

@@ -154,7 +154,7 @@ namespace ERPStandard.Services
                 company.LahTransferId = 0;
                 company.SaveDate = DateTime.Now;
                 context.Company1.Add(company);
-                context.SaveChanges();
+                compno = context.SaveChanges();
             }
             return compno;
         }

@@ -2,7 +2,6 @@
     ViewBag.Title = "Sales Quotation";
 }
 
-<script src="~/Scripts/jquery.validate.js"></script>
 <script src="~/assets/js/jsPDF/jspdf.min.js"></script>
 <script src="~/assets/js/jsPDF/jspdf.plugin.autotable.min.js"></script>
 <script src="~/assets/js/htm2canvas/html2canvas.js"></script>
@@ -16,9 +15,6 @@
             @*<p class="text-subtitle text-muted"><a href="index.html">Create New</a></p>*@
             <button class="btn btn-primary me-1 mb-1" type="button" id="btnList" onclick="onLoad()">List</button>
             <button class="btn btn-light-secondary me-1 mb-1" type="button" id="Create" onclick="onCreate()">New</button>
-            <button class="btn btn-light-secondary me-1 mb-1" type="button" id="btnPreview" onclick="generateInvPDFFormat2()">Preview</button>
-            <button class="btn btn-light-secondary me-1 mb-1" type="button" id="btnPreview" onclick="generateInvPDFFormat1()">Preview Detail</button>
-            
         </div>
         <div class="col-12 col-md-6 order-md-2 order-first">
             <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
@@ -41,6 +37,7 @@
                 <div Id="EntityReportPreview">
 
                 </div>
+                
             </div>
         </div>
     </div>
@@ -144,7 +141,7 @@
     };
 
     $(".editButton").click(function () {
-        var EditId = $(this).attr("data-id");
+        var EditId = $(this).attr("data-id");   
         debugger;
         //alert(EditId);
 
@@ -228,9 +225,6 @@
         //    return;
         //}
 
-
-
-
         $(form).validate({
             rules: {
                 "input[name='Qty']": {
@@ -249,16 +243,16 @@
         });
 
 
-        console.log(validateForm);
-            var SaleQuotations = [];
-            var SaleQuotation = {};
-            var SaleQuotationDetails = [];
-            SaleQuotation.CustomerNo = $("#CustomerId").val();
+        var SaleQuotations = [];
+        var SaleQuotation = {};
+        var SaleQuotationDetails = [];
+        SaleQuotation.QuoteId = $("#QuoteId").val();
+        SaleQuotation.CustomerNo = $("#CustomerId").val();
 
             if (SaleQuotation.SalesManId == "" || SaleQuotation.CustomerNo == "") {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Oops...',
+                    title: 'Dropdowns Error!',
                     text: 'Please select the required dropdowns!',
                 })
                 return;
@@ -271,71 +265,7 @@
 
         var i=0;
 
-        $('#tblQuotationDetail > tbody  > tr').each(function () {
-            var SaleQuotationDetail = {};
-            //console.log("enter to read table combobox value");
-            var textboxval = null;
-
-            textboxval = $(this).find("td:eq(0) input[type='text']").val();
-            console.log("value " + i + " is :" + textboxval);
-            i++;
-            textboxval = $(this).find("td:eq(1) input[type='text']").val();
-            console.log("value " + i + " is :" + textboxval);
-            i++;
-            textboxval = $(this).find("td:eq(2) input[type='number']").val();
-            console.log("value " + i + " is :" + textboxval);
-            i++;
-            textboxval = $(this).find("td:eq(3) input[type='number']").val();
-            console.log("value " + i + " is :" + textboxval);
-            i++;
-            textboxval = $(this).find("td:eq(4) input[type='number']").val();
-            console.log("value " + i + " is :" + textboxval);
-            i++;
-            textboxval = $(this).find("td:eq(5) input[type='number']").val();
-            console.log("value " + i + " is :" + textboxval);
-            i++;
-            textboxval = $(this).find("td:eq(6) input[type='number']").val();
-            console.log("value " + i + " is :" + textboxval);
-            i++;
-            textboxval = $(this).find("td:eq(7) input[type='number']").val();
-            console.log("value " + i + " is :" + textboxval);
-            i++;
-            textboxval = $(this).find("td:eq(8) input[type='number']").val();
-            console.log("value " + i + " is :" + textboxval);
-            i++;
-            textboxval = $(this).find("td:eq(9) input[type='number']").val();
-            console.log("value " + i + " is :" + textboxval);
-            i++;
-            textboxval = $(this).find("td:eq(10) input[type='number']").val();
-            console.log("value " + i + " is :" + textboxval);
-            i++;
-            textboxval = $(this).find("td:eq(11) input[type='number']").val();
-            console.log("value " + i + " is :" + textboxval);
-            i++;
-            textboxval = $(this).find("td:eq(12) input[type='number']").val();
-            console.log("value " + i + " is :" + textboxval);
-            i++;
-            textboxval = $(this).find("td:eq(13) input[type='number']").val();
-            console.log("value " + i + " is :" + textboxval);
-            i++;
-            textboxval = $(this).find("td:eq(14) input[type='number']").val();
-            console.log("value " + i + " is :" + textboxval);
-            i++;
-            textboxval = $(this).find("td:eq(15) input[type='number']").val();
-            console.log("value " + i + " is :" + textboxval);
-            i++;
-            textboxval = $(this).find("td:eq(16) input[type='number']").val();
-            console.log("value " + i + " is :" + textboxval);
-            i++;
-            textboxval = $(this).find("td:eq(17) input[type='number']").val();
-            console.log("value " + i + " is :" + textboxval);
-
-
-
-            i++;
-        });
-
-
+     
 // Master Detail Record Save
             SaleQuotations.push(SaleQuotation);
             //console.log("SaleQuotation before loop preview");
@@ -345,67 +275,113 @@
                 var SaleQuotationDetail = {};
                 //console.log("enter to read table combobox value");
                 //console.log($('option:selected', $(this).find('td:eq(0) select')).val());
+                //var TableRow = e.target.closest('tr');
+                //var TableRow = this;
+                var SaleQuotationDetail = {};
+                SaleQuotationDetail.ItemID = $(this.querySelector('[name=ItemID]')).val();
 
-                SaleQuotationDetail.ItemID = $(this).find("td:eq(0) input[type='text']").val();
+                //console.log("trying to find itemid");
+                //console.log(ItemID);
+
+
+                //SaleQuotationDetail.ItemID = $(this).find("td:eq(0) input[type='text']").val();
                 if (SaleQuotationDetail.ItemID == "") {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
-                        text: "Item selection is mandatory",
+                        title: 'Empty Field',
+                        text: "Item selection error",
                     })
                     flgerr = true;
                     return;
                 }
                 //debugger;
                 //console.log($(this).find("td:eq(3) input[type='number']").val());
-                SaleQuotationDetail.Qty = $(this).find("td:eq(2) input[type='number']").val();
-                SaleQuotationDetail.Rate = $(this).find("td:eq(3) input[type='number']").val();
+                SaleQuotationDetail.Qty = $(this.querySelector('[name=Qty]')).val();
+                SaleQuotationDetail.Rate = $(this.querySelector('[name=Rate]')).val();
+                //SaleQuotationDetail.Qty = $(this).find("td:eq(2) input[type='number']").val();
+                //SaleQuotationDetail.Rate = $(this).find("td:eq(3) input[type='number']").val();
                 console.log(SaleQuotationDetail.Qty)
                 if (SaleQuotationDetail.Qty == "" || SaleQuotationDetail.Rate == "") {
                     Swal.fire({
                         icon: 'error',
-                        title: 'Oops...',
+                        title: 'Empty Field',
                         text: "Qty/Rate must required",
                     })
                     flgerr = true;
                     return;
                 }
-                SaleQuotationDetail.SaleTaxRate = $(this).find("td:eq(5) input[type='number']").val();
-                SaleQuotationDetail.ASaleTaxRate = $(this).find("td:eq(7) input[type='number']").val();
-                SaleQuotationDetail.SExDutyRate = $(this).find("td:eq(9) input[type='number']").val();
+
+                SaleQuotationDetail.SaleTaxRate = $(this.querySelector('[name=SaleTaxRate]')).val();
+                SaleQuotationDetail.ASaleTaxRate = $(this.querySelector('[name=ASaleTaxRate]')).val();
+                SaleQuotationDetail.SExDutyRate = $(this.querySelector('[name=SExDutyRate]')).val();
+
+
+                //SaleQuotationDetail.SaleTaxRate = $(this).find("td:eq(5) input[type='number']").val();
+                //SaleQuotationDetail.ASaleTaxRate = $(this).find("td:eq(7) input[type='number']").val();
+                //SaleQuotationDetail.SExDutyRate = $(this).find("td:eq(9) input[type='number']").val();
 
                 SaleQuotationDetails.push(SaleQuotationDetail);
 
-                //console.log("SaleQuotation preview");
-                //console.log(SaleQuotation);
-                //console.log("SaleQuotation Detail");
-                console.log(JSON.stringify(SaleQuotationDetail));
-                console.log(JSON.stringify(SaleQuotationDetails));
+                //console.log(JSON.stringify(SaleQuotationDetail));
+                //console.log(JSON.stringify(SaleQuotationDetails));
             });
-            if (flgerr == false) {
-                $.ajax({
-                    url: '@Url.Action("SaleQuotationCreate", "Salequotation")',
-                    type: "POST",
-                    data: JSON.stringify(
-                         {
-                            SaleQuotation: SaleQuotation,
-                            SaleQuotationDetail: SaleQuotationDetails
-                        }
-                    ),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        if (response.result == false) {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Oops...',
-                                text: '' + response.text + '',
+        if (flgerr ==    false) {
+
+            console.log("reached in save statement");
+               $.ajax({
+                   type: "POST",
+                   url: '@Url.Action("SaleQuotationCreate", "Salequotation")',
+                   data: JSON.stringify(
+                       {
+                           SaleQuotation: SaleQuotation,
+                           SaleQuotationDetail: SaleQuotationDetails
+                       }
+                   ),
+                   contentType: "application/json; charset=utf-8",
+                   dataType: "json",
+                   beforeSend: function () {
+                       $("#CustomSearchLoader").show();
+                   },
+                   complete: function () {
+                       $("#CustomSearchLoader").hide();
+                   },
+                   success: function (response) {
+                       //console.log(response);
+                       if (response.result == false) {
+                           Swal.fire({
+                               icon: 'error',
+                               title: 'Error Message',
+                               text: '' + response.result + '',
+                           })
+                       } else {
+                            $.ajax({
+                                url: '@Url.Action("SaleQuotationList", "Salequotation")',
                             })
-                        } else {
-                            $("#FormProcess").html(response);
-                        }
-                    }
-                });
+                                .done(function (response) {
+                                    $("#FormProcess").html(response);
+                            })
+                            .fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Error Loading..',
+                                    text: 'List Load Fail....',
+                                })
+                            });
+                       }
+                   },
+                   error: function (response) {
+                       $("#CustomSearchLoader").hide();
+                       console.log(response);
+                       console.log(response.result);
+                       Swal.fire({
+                           icon: 'error',
+                           title: 'Response Error',
+                           text: '' + response.result +'',
+                       })
+                   }
+            })
+
+
             }
 
 
@@ -456,7 +432,6 @@
                 }
             })
     };
-
     function getSearchRecords(e) {
 
         if (e.keyCode === 13) {
@@ -485,7 +460,6 @@
         }
 
     };
-
     function getPageValue() {
         var pageSize = document.getElementById("ddlTotalPageNo").value;
         var dtSearch = document.getElementById("dtSearch").value;
@@ -507,11 +481,13 @@
             success: function (result) {
                 //alert("result received");
                 $("#FormProcess").html(result);
+            },
+            error: function (result) {
+                alert("error is: " + result);
             }
         })
     };
-
-    function DataTableOrder(clmNameOrder) {
+    function DataTableOrder(clmNameOrder, sortorder) {
         //clmNameOrder.preventDefault();
         console.log(clmNameOrder);
         //debugger;
@@ -525,7 +501,8 @@
             data: {
                 pageSize: pageSize,
                 dtSearch: dtSearch,
-                clmNameOrder: clmNameOrder
+                clmNameOrder: clmNameOrder,
+                sortorder: sortorder
             },
             beforeSend: function () {
                 $("#CustomSearchLoader").show();
@@ -540,7 +517,6 @@
         })
 
     };
-
     function previewReport() {
         var dtSearch = document.getElementById("dtSearch").value;
         var clmNameOrder = 1;
@@ -599,17 +575,6 @@
             }
         })
     };
-
-
-
-    function validateForm() {
-        let x = document.forms["branchForm"]["BranchName"].value;
-        if (x == "") {
-            alert("Name must be filled out");
-            return false;
-        }
-    }
-
     function generateInvPDFFormat1() {
 
         var Id = "1 -L";
@@ -1019,10 +984,7 @@
             pageEnable: true,
                 pageLabel: "Page ",
                         }
-
     // new try for pdf report
-
-
     var company_logo = {
         w: 80,
         h: 50
@@ -1039,7 +1001,6 @@
         companyEmail: 'xyz@gmail.com',
         companyPhno: '+918189457845',
     };
-
     var customer_BillingInfoJSON = {
         CustomerName: 'Jino Shaji',
         CustomerGSTIN: '37B76C238B7E1Z5',
@@ -1052,9 +1013,6 @@
         CustomerEmail: 'abcd@gmail.com',
         CustomerPhno: '+918189457845',
     };
-
-
-
     var customer_ShippingInfoJSON = {
         CustomerName: 'Jino Shaji',
         CustomerGSTIN: '37B76C238B7E1Z5',
@@ -1067,8 +1025,6 @@
         CustomerEmail: 'abcd@gmail.com',
         CustomerPhno: '+918189457845',
     };
-
-
     var invoiceJSON = {
         InvoiceNo: 'INV-120152',
         InvoiceDate: '03-12-2017',
@@ -1434,7 +1390,7 @@
                 doc.setFontType('bold');
                 if (result.invoice.SExDutyTotalAmnt == "" && result.invoice.AddSaleTaxTotalAmnt == "" && result.invoice.SaleTotalAmnt == "")
                     doc.text("Net Invoice Amount : ", startX, startY += lineSpacing.NormalSpacing + 10);
-                else 
+                else
                     doc.text("Value Inclusive of Taxes : ", startX, startY += lineSpacing.NormalSpacing + 10);
                 doc.setFontType('normal');
                 doc.text(result.DisplayCurrency + result.invoice.InvNetTotalAmnt + "/-", 170, startY);
@@ -1443,7 +1399,7 @@
                 doc.text("Amount In Words : ", startX, startY += lineSpacing.NormalSpacing + 10);
                 doc.setFontType('normal');
                 doc.text(result.invoice.TotalAmntInWords, 130, startY);
-                
+
 
                 doc.setFontType('bold');
                 doc.text('For ' + result.business.name + ',', rightcol2, startY += lineSpacing.NormalSpacing + 25);
@@ -1483,7 +1439,6 @@
         //-------Invoice Footer---------------------
 
     }
-
     const addFooters = doc => {
         const pageCount = doc.internal.getNumberOfPages()
         doc.setFont('helvetica', 'italic')
@@ -1497,6 +1452,4 @@
             console.log("Total pages: " + pageCount);
         }
     };
-
-
 </script>

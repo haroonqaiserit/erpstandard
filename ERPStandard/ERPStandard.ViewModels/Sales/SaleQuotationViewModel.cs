@@ -13,5 +13,6 @@ namespace ERPStandard.ViewModels.Sales
         public Pager Pager { get; set; }
         public string dtSearch { get; set; }
         public int clmNameOrder { get; set; }
+        public string sortorder { get; set; }
     }
 }

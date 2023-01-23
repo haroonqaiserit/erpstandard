@@ -50,6 +50,7 @@
     <Compile Include="BranchViewModel.cs" />
     <Compile Include="ChartOfAccountViewModel.cs" />
     <Compile Include="Company1ViewModel.cs" />
+    <Compile Include="Inventory\ItemViewModelMaster.cs" />
     <Compile Include="InvoiceReportDetails.cs" />
     <Compile Include="InvoiceTemplateViewModel.cs" />
     <Compile Include="PaginationModel.cs" />
@@ -58,7 +59,7 @@
     <Compile Include="Sales\CustomerListViewModel.cs" />
     <Compile Include="Sales\SaleQuotationMasterViewModel.cs" />
     <Compile Include="Sales\SalesManViewModel.cs" />
-    <Compile Include="Sales\ItemViewModel.cs" />
+    <Compile Include="Inventory\ItemViewModel.cs" />
     <Compile Include="Sales\CustomerViewModel.cs" />
     <Compile Include="Sales\SaleQuotationViewModel.cs" />
     <Compile Include="Sales\SaleQuotationDetailViewModel.cs" />
@@ -78,5 +79,6 @@
     <None Include="App_Browsers\qt.browser" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

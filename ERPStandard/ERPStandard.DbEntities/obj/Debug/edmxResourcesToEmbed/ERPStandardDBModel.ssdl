@@ -920,10 +920,12 @@ warning 6002: The table/view 'SairaInd.dbo.Company' does not have a primary key 
     <Property Name="LahTransferId" Type="int" />
     <Property Name="SaveDate" Type="datetime" />
     <Property Name="DeletionID" Type="int" />
-    <Property Name="CityName" Type="varchar" MaxLength="25" />
     <Property Name="PostCode" Type="varchar" MaxLength="10" />
     <Property Name="STaxRegNo" Type="varchar" MaxLength="25" />
     <Property Name="NationalTaxNo" Type="varchar" MaxLength="25" />
+    <Property Name="CityName" Type="varchar" MaxLength="25" />
+    <Property Name="CompanyState" Type="varchar" MaxLength="25" />
+    <Property Name="company_website" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Contact">
     <Key>
@@ -4844,6 +4846,7 @@ warning 6002: The table/view 'SairaInd.dbo.SalCalc' does not have a primary key 
     <Property Name="SaleInvId" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="LineNo" Type="int" Nullable="false" />
     <Property Name="ItemId" Type="varchar" MaxLength="50" />
+    <Property Name="DelChallanId" Type="varchar" MaxLength="50" />
     <Property Name="SQty" Type="numeric" Precision="10" Scale="0" Nullable="false" />
     <Property Name="SaleRate" Type="numeric" Precision="24" Scale="4" />
     <Property Name="AmtWoSt" Type="money" />

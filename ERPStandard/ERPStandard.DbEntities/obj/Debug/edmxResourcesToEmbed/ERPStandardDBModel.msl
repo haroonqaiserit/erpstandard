@@ -364,6 +364,8 @@
     <EntitySetMapping Name="Company1">
       <EntityTypeMapping TypeName="SairaIndModel.Company1">
         <MappingFragment StoreEntitySet="Company1">
+          <ScalarProperty Name="company_website" ColumnName="company_website" />
+          <ScalarProperty Name="CompanyState" ColumnName="CompanyState" />
           <ScalarProperty Name="Company_Name" ColumnName="Company_Name" />
           <ScalarProperty Name="company_desc" ColumnName="company_desc" />
           <ScalarProperty Name="Company_address" ColumnName="Company_address" />
@@ -2361,6 +2363,7 @@
     <EntitySetMapping Name="SaleInvoiceDetails">
       <EntityTypeMapping TypeName="SairaIndModel.SaleInvoiceDetail">
         <MappingFragment StoreEntitySet="SaleInvoiceDetail">
+          <ScalarProperty Name="DelChallanId" ColumnName="DelChallanId" />
           <ScalarProperty Name="SaleInvId" ColumnName="SaleInvId" />
           <ScalarProperty Name="LineNo" ColumnName="LineNo" />
           <ScalarProperty Name="ItemId" ColumnName="ItemId" />

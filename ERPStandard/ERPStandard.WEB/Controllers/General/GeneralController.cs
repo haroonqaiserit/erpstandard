@@ -70,7 +70,7 @@ namespace ERPStandard.WEB.Controllers
             var compno = Company1Service.Instance.Add(company1);
             Company1ViewModel company1ViewModel = new Company1ViewModel();
             company1ViewModel = Company1Service.Instance.All(1);
-            return PartialView("SalesOrderList", company1ViewModel);
+            return PartialView("CompanyList", company1ViewModel);
         }
         [HttpPost]
         public ActionResult CompanyDelete(string Id)
@@ -79,7 +79,7 @@ namespace ERPStandard.WEB.Controllers
             if (flgComp == true)
             {
                 var company1ViewModel = CompanyListLoad(1);
-                return PartialView("SalesOrderList", company1ViewModel);
+                return PartialView("CompanyList", company1ViewModel);
             }
             return View();
         }

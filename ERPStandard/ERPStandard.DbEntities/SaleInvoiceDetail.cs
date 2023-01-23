@@ -48,6 +48,7 @@ namespace ERPStandard.DbEntities
         public decimal ExcDutyAmt { get; set; }
         public decimal SPDrate { get; set; }
         public decimal SPDAmount { get; set; }
+        public string DelChallanId { get; set; }
     
         public virtual SaleInvoice SaleInvoice { get; set; }
     }

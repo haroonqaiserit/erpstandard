@@ -13,6 +13,8 @@ namespace ERPStandard.Services
         public static int BranchNo { get; set; } = 1;
         public static string BLetter { get; set; } = "L";
         public static DateTime SaveDate { get; set; } = DateTime.Now;
+        public static DateTime FinYearFrom { get; set; } = DateTime.Parse("2018-07-01 00:00:00.000");
+        public static DateTime FinYearTo { get; set; } = DateTime.Parse("2022-12-30 00:00:00.000");
 
         public static string ConvertNumberToWords(int number)
         {

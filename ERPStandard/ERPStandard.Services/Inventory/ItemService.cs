@@ -1,5 +1,6 @@
 ﻿using ERPStandard.DbEntities;
 using ERPStandard.ViewModels;
+using ERPStandard.ViewModels.Inventory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -129,15 +130,53 @@ namespace ERPStandard.Services
             return viewModel;
         }
 
-        public ItemsStock SingleFirstRec(string dtSearch = "")
+        public ItemViewModelMaster SingleFirstRec(DateTime? docdate, string dtSearch = "")
         {
-            var viewModel = new ItemsStock();
+            if (docdate == null)
+            {
+                docdate = DateTime.Now;
+            }
+            var viewModel = new ItemViewModelMaster();
             using (var context = new SairaIndEntities())
             {
-                var comp = context.ItemsStocks.Where(x => x.Dscr.Contains(dtSearch)
-                        );
-                    comp = comp.OrderBy(x => x.Dscr);
-                viewModel = comp.Where(x => x.CompNo == StandardVariables.CompNo && x.BranchNo == StandardVariables.BranchNo).FirstOrDefault();
+
+                var comp = (from i in context.ItemsStocks
+                    select new ItemViewModelMaster
+                    {
+                        ItemID = i.ItemID,
+                        Dscr = i.Dscr,
+                        STaxId = i.STaxId,
+                        Rate = i.Rate,
+                        STaxRate = null,
+                        ASTaxRate = null,
+                        ExcDuty = null,
+                        SaleTaxDate = null,
+                        DtpAplicalbeDate = null,
+                        CompNo = i.CompNo,
+                        BranchNo = i.BranchNo
+                    });
+                comp = comp.Where(x => x.Dscr.Contains(dtSearch));
+                viewModel = comp.OrderBy(x => x.Dscr).FirstOrDefault();//.Where(x => x.CompNo == StandardVariables.CompNo && x.BranchNo == StandardVariables.BranchNo).OrderBy(x => x.Dscr).FirstOrDefault();
+
+                var satax = (from st in context.SaleTaxes
+                             join st2 in context.SaleTaxDetails on st.STaxId equals st2.STaxId
+                             where st.STaxId == viewModel.STaxId 
+                                && st.CompNo == StandardVariables.CompNo && st.BranchNo == StandardVariables.BranchNo
+                                && docdate >= st2.SaleTaxDate
+                                && docdate <= st2.DtpAplicalbeDate
+                             select new { 
+                                st.STaxId,
+                                st.CompNo,
+                                st.BranchNo,
+                                st2.STaxRate,
+                                st2.ASTaxRate,
+                                st2.ExcDuty
+                             }).FirstOrDefault();
+                if (satax != null) { 
+                    viewModel.STaxRate = satax.STaxRate;
+                    viewModel.ASTaxRate = satax.ASTaxRate;
+                    viewModel.ExcDuty = satax.ExcDuty;
+                }
             }
             return viewModel;
         }

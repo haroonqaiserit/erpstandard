@@ -28,5 +28,7 @@ namespace ERPStandard.DbEntities
         public string PostCode { get; set; }
         public string STaxRegNo { get; set; }
         public string NationalTaxNo { get; set; }
+        public string CompanyState { get; set; }
+        public string company_website { get; set; }
     }
 }

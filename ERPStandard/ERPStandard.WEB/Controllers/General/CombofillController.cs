@@ -52,15 +52,15 @@ namespace ERPStandard.WEB.Controllers
 
         #region Inventory - Drop Downs
         [HttpGet]
-        public ActionResult ItemDropdown(string Search)
+        public ActionResult ItemDropdown(string Search, int ItemClass)
         {
-            var ddlData = ItemService.Instance.All_List(Search);
+            var ddlData = ItemService.Instance.All_List(Search,0, ItemClass);
             return PartialView("ItemDropdown", ddlData);
         }
 
-        public ActionResult SingleFirstRec(string Search)
+        public ActionResult SingleFirstRec(DateTime? docdate,string Search)
         {
-            var ddlData = ItemService.Instance.SingleFirstRec(Search);
+            var ddlData = ItemService.Instance.SingleFirstRec(docdate,Search);
             return Json(ddlData, JsonRequestBehavior.AllowGet);
         }
 

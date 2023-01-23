@@ -1,4 +1,4 @@
-﻿@model ERPStandard.ViewModels.QuotationCreateNewViewModel
+﻿@model ERPStandard.ViewModels.SaleQuotationMasterViewModel
 @{
     ViewBag.Title = "Sales Transaction";
     ViewBag.SubTitle = "Quotation";
@@ -49,17 +49,17 @@
 </div>
 <div class="card-content">
     <div class="card-body">
-
-
         <form name="QuotationForm" class="form form-horizontal">
             <div class="row">
-                <div class="col-md-1">
+                <div class="col-md-2">
                     <div class="form-group">
+                        <!--style="display:none"-->
+                        <input type="date" id="QuoteId" required class="form-control" name="QuoteId" , value='"@Model.QuoteId"'>
                         <label for="QuoteDate">Quote Date</label>
-                        <input type="date" id="QuoteDate" required class="form-control" name="QuoteDate">
+                        <input type="date" id="QuoteDate" required class="form-control" name="QuoteDate" , value='"@Model.QuoteDate"'>
                     </div>
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-2">
                     <div class="form-group">
                         <label for="QuoteValidDate">Valid Date</label>
                         <input type="date" id="QuoteValidDate" required class="form-control" name="QuoteValidDate">
@@ -363,6 +363,10 @@
                 nextInput.focus();
             }*/
             e.preventDefault();
+
+            var val = $(eval).val();
+            if (val === "") return;
+
             var currentRow = e.target.closest("td");
             var nextRow = currentRow.nextElementSibling;
             var nextInput = nextRow.querySelector("#Rate");
@@ -378,6 +382,8 @@
         calculateAmt(e);
         if (e.keyCode === 13) {
             e.preventDefault();
+            var val = $(eval).val();
+            if (val === "") return;
             // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
             //SEduty =8, SEdutyAmt =9, NetVal=10, BtnAdd = 11
             //console.log($(eval).val());
@@ -400,6 +406,8 @@
         calculateAmt(e);
         if (e.keyCode === 13) {
             e.preventDefault();
+            var val = $(eval).val();
+            if (val === "") return;
             // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
             //SEduty =8, SEdutyAmt =9, NetVal=10, BtnAdd = 11
             var currentCell = e.target.closest("td");
@@ -428,6 +436,8 @@
         calculateAmt(e);
         if (e.keyCode === 13) {
             e.preventDefault();
+            var val = $(eval).val();
+            if (val === "") return;
             // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
             //SEduty =8, SEdutyAmt =9, NetVal=10, BtnAdd = 11
             var currentCell = e.target.closest("td");
@@ -443,10 +453,12 @@
             }
         }
     }
-    function handleKeyDownAddSEd(e) {
+    function handleKeyDownAddSEd(eval,e) {
         calculateAmt(e);
         if (e.keyCode === 13) {
             e.preventDefault();
+            var val = $(eval).val();
+            if (val === "") return;
             // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
             //SEduty =8, SEdutyAmt =9, NetVal=10, BtnAdd = 11
             var currentCell = e.target.closest("td");
@@ -461,9 +473,15 @@
         if (e) {
             var TableRow = e.target.closest('tr');
             var ItemID = TableRow.querySelector('[name=ItemID]')
-
-            
             var Qty = TableRow.querySelector('[name=Qty]')
+
+            searchtextboxget = TableRow.querySelector('[name=customsearchtext]')
+            chnode = TableRow.querySelector('[id=searchpartial]')
+            //console.log(chnode);
+            idsearchtxtboxget = ItemID;
+            Qtysearchtxtboxget = Qty;
+
+
             var Rate = TableRow.querySelector('[name=Rate]')
             var Amt = TableRow.querySelector('[name=Amt]')
             var SaleTaxRate = TableRow.querySelector('[name=SaleTaxRate]')
@@ -473,6 +491,11 @@
             var SExDutyRate = TableRow.querySelector('[name=SExDutyRate]')
             var SExDutyAmt = TableRow.querySelector('[name=SExDutyAmt]')
             var NetTotalAmt = TableRow.querySelector('[name=NetTotalAmt]')
+            RateGet = Rate;
+            SaleTaxRateGet = SaleTaxRate;
+            ASaleTaxRateGet = ASaleTaxRate;
+            SExDutyRateGet = SExDutyRate;
+
             if (!$(ItemID).val()) {
                 $(Qty).val('');
                 $(Rate).val('');
@@ -484,6 +507,13 @@
                 $(SExDutyRate).val('');
                 $(SExDutyAmt).val('');
                 $(NetTotalAmt).val('');
+
+
+                //SaleTaxRateGet = null;
+                //ASaleTaxRateGet = null;
+                //SExDutyRateGet = null;
+
+
                 return null;
             }
 
@@ -611,18 +641,28 @@
     var searchtextboxget;
     var idsearchtxtboxget;
     var Qtysearchtxtboxget;
+
+
+    var RateGet;
+    var SaleTaxRateGet;
+    var ASaleTaxRateGet;
+    var SExDutyRateGet;
+
+
+
     function getItemSearchRecords(e, evt) {
         calculateAmt(evt);
-        var p = e.parentNode;
+        //var p = e.parentNode;
         //console.log(p.childNodes);
         //console.log(pp.childNodes[1].childNodes[1].childNodes[1].childNodes[3]);
-        var pp = e.parentNode.parentNode.parentNode.parentNode;
+        //var pp = e.parentNode.parentNode.parentNode.parentNode;
 
-        idsearchtxtboxget = pp.childNodes[1].childNodes[1].childNodes[1].childNodes[1];
-        Qtysearchtxtboxget = pp.childNodes[5].childNodes[1];
-        //Qtysearchtxtboxget = pp.childNodes[1].childNodes[1].childNodes[1].childNodes[3];
-        searchtextboxget = p.childNodes[1];
-        chnode = p.childNodes[3];
+        //idsearchtxtboxget = pp.childNodes[1].childNodes[1].childNodes[1].childNodes[1];
+        //Qtysearchtxtboxget = pp.childNodes[5].childNodes[1];
+        //searchtextboxget = p.childNodes[1];
+        //chnode = p.childNodes[3];
+        //console.log(chnode);
+
         //$(chnode).hide();
         $(chnode).show();
         $(chnode).html('');
@@ -633,7 +673,6 @@
             $(idsearchtxtboxget).val('');
             $(chnode).focus();
             //console.log("Focus not set");
-            
         }
         if (evt.keyCode === 9) {
             evt.preventDefault();
@@ -645,18 +684,18 @@
             $(chnode).hide();
             //console.log("Focus not set");
         }
-
-
         if (evt.keyCode === 13) {
             evt.preventDefault();
             if (val === "") return;
             $(chnode).html('');
             $(chnode).hide();
+            var QuoteDate = $("#QuoteDate").val();
             $.ajax({
                 type: "GET",
                 url: '@Url.Action("SingleFirstRec", "Combofill")',
                 data: {
-                    Search: val
+                    Search: val,
+                    docdate: QuoteDate
                 },
                 beforeSend: function () {
                     // $("#CustomSearchLoader").show();
@@ -665,19 +704,37 @@
                     //$("#CustomSearchLoader").show();
                 },
                 success: function (data) {
+                    if (!data["STaxRate"]) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Tax Error!',
+                            text: 'Please define Tax for the current period!',
+                        })
+                        return;
+                    }
+
                     $(idsearchtxtboxget).val(data["ItemID"]);
                     $(searchtextboxget).val(data["Dscr"]);
+                    if (data["Rate"] > 0) {
+                        $(RateGet).val(data["Rate"]);
+                    }
+                    $(SaleTaxRateGet).val(data["STaxRate"]);
+                    $(ASaleTaxRateGet).val(data["ASTaxRate"]);
+                    $(SExDutyRateGet).val(data["ExcDuty"]);
+                    console.log($(SaleTaxRateGet).val());
+                    console.log(data["STaxRate"]);
                     $(Qtysearchtxtboxget).focus();
                 }
             });
 
         } else {
-
+            var ItemClass = 1;//Finished Goods
             $.ajax({
                 type: "GET",
                 url: '@Url.Action("ItemDropdown", "Combofill")',
                 data: {
-                    Search: val
+                    Search: val,
+                    ItemClass: ItemClass
                 },
                 beforeSend: function () {
                     // $("#CustomSearchLoader").show();
@@ -722,7 +779,7 @@
 
     };
     function SearchingLikeSendle(val) {
-        console.log("reached in SearchingLikeSendle");
+        console.log("reached in Searching");
         //var val = $("#CustomSearch").val();
 
         //console.log(searchflg);
@@ -761,13 +818,46 @@
         //$("#CustomSearch").val(itemval);
         //console.log(v);
         console.log(itemval + ' ' + name);
+        var val = name;
+        var QuoteDate = $("#QuoteDate").val();
 
-        $(idsearchtxtboxget).val(itemval);
-        $(searchtextboxget).val(name);
-        $(Qtysearchtxtboxget).focus();
-        //$(searchtextboxget).val(name);
-        //console.log(itemval);
-        $(chnode).hide();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("SingleFirstRec", "Combofill")',
+                data: {
+                    Search: val,
+                    docdate: QuoteDate
+                },
+                beforeSend: function () {
+                    // $("#CustomSearchLoader").show();
+                },
+                complete: function () {
+                    //$("#CustomSearchLoader").show();
+                },
+                success: function (data) {
+                    if (!data["STaxRate"]) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Tax Error!',
+                            text: 'Please define Tax for the current period!',
+                        })
+                        return;
+                    }
+
+                    $(idsearchtxtboxget).val(data["ItemID"]);
+                    $(searchtextboxget).val(data["Dscr"]);
+                    if (data["Rate"] > 0) {
+                        $(RateGet).val(data["Rate"]);
+                    }
+                    $(SaleTaxRateGet).val(data["STaxRate"]);
+                    $(ASaleTaxRateGet).val(data["ASTaxRate"]);
+                    $(SExDutyRateGet).val(data["ExcDuty"]);
+                    console.log($(SaleTaxRateGet).val());
+                    console.log(data["STaxRate"]);
+                    $(Qtysearchtxtboxget).focus();
+                    $(chnode).hide();
+                }
+            });
     }
     function ItemFill(search) {
         $.ajax({

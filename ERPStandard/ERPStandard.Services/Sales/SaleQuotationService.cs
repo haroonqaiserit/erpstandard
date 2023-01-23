@@ -28,7 +28,7 @@ namespace ERPStandard.Services
 
         }
         #endregion
-        public SaleQuotationViewModel All(int page, int pageSize = 10, string dtSearch = "", int clmNameOrder = 0)
+        public SaleQuotationViewModel All(int page, int pageSize = 10, string dtSearch = "", int clmNameOrder = 0, string sortorder = "")
         {
             var viewModel = new SaleQuotationViewModel();
             using (var context = new SairaIndEntities())
@@ -76,28 +76,29 @@ namespace ERPStandard.Services
                 var pager = new Pager(totalpage, page, pageSize);
                 if (clmNameOrder == 1)
                 {
-                    comp = comp.OrderBy(x => x.QuoteNo);
+                    comp = sortorder=="asc"? comp.OrderBy(x => x.QuoteNo): comp.OrderByDescending(x => x.QuoteNo);
                 }
                 else if (clmNameOrder == 2)
                 {
-                    comp = comp.OrderBy(x => x.QuoteDate);
+                    comp = sortorder == "asc" ? comp.OrderBy(x => x.QuoteDate) : comp.OrderByDescending(x => x.QuoteDate);
                 }
                 else if (clmNameOrder == 3)
                 {
-                    comp = comp.OrderBy(x => x.QuoteValidDate);
+                    comp = sortorder == "asc" ? comp.OrderBy(x => x.QuoteValidDate) : comp.OrderByDescending(x => x.QuoteValidDate);
                 }
                 else if (clmNameOrder == 4)
                 {
-                    comp = comp.OrderBy(x => x.Remarks);
+                    comp = sortorder == "asc" ? comp.OrderBy(x => x.Remarks) : comp.OrderByDescending(x => x.Remarks);
                 }
                 else
                 {
-                    comp = comp.OrderBy(x => x.QuoteNo);
+                    comp = sortorder == "asc" ? comp.OrderBy(x => x.QuoteNo) : comp.OrderByDescending(x => x.QuoteNo);
                 }
 
                 viewModel.SaleQuotation = comp.Skip((pager.CurrentPage - 1) * pager.PageSize).Take(pager.PageSize).ToList();
                 viewModel.dtSearch = dtSearch;
                 viewModel.clmNameOrder = clmNameOrder;
+                viewModel.sortorder = sortorder;
                 viewModel.Pager = pager;
             }
             return viewModel;
@@ -611,7 +612,9 @@ namespace ERPStandard.Services
             {
                 if (!string.IsNullOrEmpty(Id))
                 {
+                    var compDetail = context.CRM_SaleQuotationDetail.Where(x => x.QuoteId == Id).ToList();
                     var comp = context.CRM_SaleQuotation.Where(x => x.QuoteId == Id).FirstOrDefault();
+                    context.CRM_SaleQuotationDetail.RemoveRange(compDetail);
                     context.CRM_SaleQuotation.Remove(comp);
                     context.SaveChanges();
                     flgCompany = true;

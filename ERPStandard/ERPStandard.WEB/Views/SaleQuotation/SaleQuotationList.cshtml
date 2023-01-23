@@ -1,71 +1,75 @@
 ﻿@model  ERPStandard.ViewModels.Sales.SaleQuotationViewModel
 <link rel="stylesheet" href="~/assets/vendors/simple-datatables/style.css">
 <script src="~/assets/vendors/simple-datatables/simple-datatables.js"></script>
-
+<script src="~/assets/vendors/fontawesome/all.min.js"></script>
 <div class="card-header">
     Quotation List
 </div>
-    <div class="card-body">
-        <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
-            <div class="dataTable-top">
-                <div class="dataTable-dropdown"><select class="dataTable-selector form-select" id="ddlTotalPageNo" onchange="getPageValue()"><option value="5" @(Model.Pager.PageSize == 5 ? "selected=''" : "")>5</option><option value="10" @(Model.Pager.PageSize == 10 ? "selected=''" : "")>10</option><option value="15" @(Model.Pager.PageSize == 15 ? "selected=''" : "")>15</option><option value="20" @(Model.Pager.PageSize == 20 ? "selected=''" : "")>20</option><option value="25" @(Model.Pager.PageSize == 25 ? "selected=''" : "")>25</option></select><label>entries per page</label></div>
-                <div class="dataTable-search">
-                    <input id="dtSearch" onkeypress="getSearchRecords(event)" class="dataTable-input" placeholder="Search..." type="text" value="@Model.dtSearch">
-                </div>
+<div class="card-body">
+    <button class="btn-primary" onclick="generateInvPDFFormat2()"><i class="fa fa-print"></i></button>
+    <button class="btn-success" onclick="generateInvPDFFormat2()"><i class="fa fa-file-excel"></i></button>
+
+
+    <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+        <div class="dataTable-top">
+            <div class="dataTable-dropdown"><select class="dataTable-selector form-select" id="ddlTotalPageNo" onchange="getPageValue()"><option value="5" @(Model.Pager.PageSize == 5 ? "selected=''" : "")>5</option><option value="10" @(Model.Pager.PageSize == 10 ? "selected=''" : "")>10</option><option value="15" @(Model.Pager.PageSize == 15 ? "selected=''" : "")>15</option><option value="20" @(Model.Pager.PageSize == 20 ? "selected=''" : "")>20</option><option value="25" @(Model.Pager.PageSize == 25 ? "selected=''" : "")>25</option></select><label>entries per page</label></div>
+            <div class="dataTable-search">
+                <input id="dtSearch" onkeypress="getSearchRecords(event)" class="dataTable-input" placeholder="Search..." type="text" value="@Model.dtSearch">
             </div>
-            
-                    <div class="dataTable-container">
-                        <table class="table table-striped dataTable-table" id="tblQuotationMaster">
-                            <thead>
+        </div>
+
+        <div class="dataTable-container">
+            <table class="table table-striped dataTable-table" id="tblQuotationMaster">
+                <thead>
+                    <tr>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 1 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(1, '@Model.sortorder')" class="dataTable-sorter" id="clm1">Quote No</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 2 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(2, '@Model.sortorder')" class="dataTable-sorter" id="clm2">QuoteDate</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 3 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(3, '@Model.sortorder')" class="dataTable-sorter" id="clm3">QuoteValidDate</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 4 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(4, '@Model.sortorder')" class="dataTable-sorter" id="clm4">Customer</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 5 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(5, '@Model.sortorder')" class="dataTable-sorter" id="clm5">Sales Person</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 6 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(6, '@Model.sortorder')" class="dataTable-sorter" id="clm6">Remarks</a></th>
+                        <th data-sortable=""><a href="javascript:;" class="dataTable-sorter">Action</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+                        if (Model != null)
+                        {
+                            foreach (var comp in Model.SaleQuotation)
+                            {
                                 <tr>
-                                    <th data-sortable="" class=@(Model.clmNameOrder == 1 ? "asc" : "")><a href="javascript:;" onclick="DataTableOrder(1)" class="dataTable-sorter">Quote No</a></th>
-                                    <th data-sortable="" class=@(Model.clmNameOrder == 2 ? "asc" : "")><a href="javascript:;" onclick="DataTableOrder(2)" class="dataTable-sorter">QuoteDate</a></th>
-                                    <th data-sortable="" class=@(Model.clmNameOrder == 3 ? "asc" : "")><a href="javascript:;" onclick="DataTableOrder(3)" class="dataTable-sorter">QuoteValidDate</a></th>
-                                    <th data-sortable="" class=@(Model.clmNameOrder == 4 ? "asc" : "")><a href="javascript:;" onclick="DataTableOrder(4)" class="dataTable-sorter">Customer</a></th>
-                                    <th data-sortable="" class=@(Model.clmNameOrder == 5 ? "asc" : "")><a href="javascript:;" onclick="DataTableOrder(5)" class="dataTable-sorter">Sales Person</a></th>
-                                    <th data-sortable="" class=@(Model.clmNameOrder == 6 ? "asc" : "")><a href="javascript:;" onclick="DataTableOrder(6)" class="dataTable-sorter">Remarks</a></th>
-                                    <th data-sortable=""><a href="javascript:;" class="dataTable-sorter">Status</a></th>
-                                    <th data-sortable=""><a href="javascript:;" class="dataTable-sorter">Action</a></th>
+                                    <td>@comp.QuoteNo</td>
+                                    <td>@comp.QuoteDate.ToString("dd-MMM-yyyy")</td>
+                                    <td>@comp.QuoteValidDate</td>
+                                    <td>@comp.CustomerName</td>
+                                    <td>@comp.SalesManName</td>
+                                    <td>@comp.Remarks</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            @{
+                                                if (comp.DeletionID == 0)
+                                                {
+                                                    <button type="button" class="btn-outline-success" onclick="generateInvPDFFormat2('@comp.QuoteId')" title="Print"><i class="fa fa-print"></i></button>
+                                                }
+                                                else
+                                                {
+                                                    <button type="button" class="btn-outline-danger" onclick="generateInvPDFFormat2('@comp.QuoteId')" title="Print"><i class="fa fa-print"></i></button>
+                                                }
+
+                                            }
+                                            <button type="button" class="btn-outline-success" onclick="onCreate('@comp.QuoteId')" title="Edit"><i class="fa fa-pen"></i></button>
+                                            <button type="button" class="btn-outline-danger" onclick="onDelete('@comp.QuoteId')" title="Delete"><i class="fa fa-trash"></i></button>
+                                        </div>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
 
-                                @{
-                                    if (Model != null)
-                                    {
-                                        foreach (var comp in Model.SaleQuotation)
-                                        {
-                                            <tr>
-                                                <td>@comp.QuoteNo</td>
-                                                <td>@comp.QuoteDate</td>
-                                                <td>@comp.QuoteValidDate</td>
-                                                <td>@comp.CustomerName</td>
-                                                <td>@comp.SalesManName</td>
-                                                <td>@comp.Remarks</td>
-                                                <td>
-                                                    @{
-                                                        if (comp.DeletionID == 0)
-                                                        {
-                                                            <button class="badge btn-primary" onclick="generateInvPDFFormat2('@comp.QuoteId')">Privew</button>
-                                                        }
-                                                        else
-                                                        {
-                                                            <span class="badge bg-danger">In-Active</span>
-                                                        }
-
-                                                    }
-                                                </td>
-                                                <td>
-                                                    <button class="badge bg-success editButton" onclick="onEdit('@comp.QuoteId')" data-id="@comp.QuoteId">Edit</button>
-                                                    <button class="badge bg-danger editButton" onclick="onDelete('@comp.QuoteId')" data-id="@comp.QuoteId">Delete</button>
-                                                </td>
-                                            </tr>
-                                        }
-                                    }
-                                }
-                            </tbody>
-                        </table>
-                    </div>
+        </div>
 
         <div class="dataTable-bottom">
             <div class="dataTable-info">
@@ -114,8 +118,9 @@
         </div>
 
         <!-- End Pagination -->
-            </div>
-        </div>
+    </div>
+
+</div>
         <script>
             // Simple Datatable
             let tbl = document.querySelector('#tblQuotationMaster');

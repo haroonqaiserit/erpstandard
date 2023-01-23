@@ -56,8 +56,10 @@
                                         }
                                     </td>
                                     <td>
-                                        <button class="badge bg-success editButton" onclick="onEdit('@comp.CompNo')" data-id="@comp.CompNo">Edit</button>
-                                        <button class="badge bg-danger editButton" onclick="onDelete('@comp.CompNo')" data-id="@comp.CompNo">Delete</button>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            <button type="button" class="btn btn-success editButton" onclick="onEdit('@comp.CompNo')" data-id="@comp.CompNo">Edit</button>
+                                            <button type="button" class="btn btn-danger editButton" onclick="onDelete('@comp.CompNo')" data-id="@comp.CompNo">Delete</button>
+                                        </div>
                                     </td>
                                 </tr>
                             }
