@@ -13,6 +13,8 @@ namespace ERPStandard.ViewModels.Sales
         public decimal QuoteNo { get; set; }
         public System.DateTime QuoteDate { get; set; }
         public System.DateTime QuoteValidDate { get; set; }
+        public string CustomerNo { get; set; }
+        public string SalesManId { get; set; }
         public string SalesManName { get; set; }
         public string CustomerName { get; set; }
         public string Remarks { get; set; }
@@ -22,6 +24,5 @@ namespace ERPStandard.ViewModels.Sales
         public int CompNo { get; set; }
         public int BranchNo { get; set; }
         public int invoiceType { get; set; }
-        public virtual List<CRM_SaleQuotationDetail> QuotationDetail { get; set; }
     }
 }

@@ -45,6 +45,20 @@
 
 <iframe name="print_frame" width="0" height="0" frameborder="1" src="about:blank"></iframe>
 <script>
+    function QutatonDetailExcel() {
+        console.log("print of excel sheteet");
+
+        function QutatonDetailExcel() {
+            $.ajax({
+                url: '@Url.Action("MasterDetailExcelExport", "Salequotation")',
+            }).done(function () {
+                alert('Added');
+            });
+        }
+
+    }
+
+
     function printDiv() {
         var Id = "1 -L";
         $.ajax({
@@ -141,7 +155,7 @@
     };
 
     $(".editButton").click(function () {
-        var EditId = $(this).attr("data-id");   
+        var EditId = $(this).attr("data-id");
         debugger;
         //alert(EditId);
 
@@ -182,7 +196,7 @@
                 $("#CustomSearchLoader").hide();
             },
             success: function (result) {
-                //alert("result received");
+                //alert("result received: " + result);
                 $("#FormProcess").html(result);
             }
         })
@@ -220,11 +234,9 @@
         })
     };
 
-    function onSave(form) {
-        //if (!$(form).valid()) {
-        //    return;
-        //}
-
+    function onSave(form, addedit) {
+        //addedit = 0 Add New Record
+        //addedit = 1 Edit Record
         $(form).validate({
             rules: {
                 "input[name='Qty']": {
@@ -241,7 +253,6 @@
                 // your ajax code here
             }
         });
-
 
         var SaleQuotations = [];
         var SaleQuotation = {};
@@ -264,25 +275,15 @@
             SaleQuotation.CustomerNo = $("#CustomerId").val();
 
         var i=0;
-
-     
-// Master Detail Record Save
+            // Master Detail Record Save
             SaleQuotations.push(SaleQuotation);
-            //console.log("SaleQuotation before loop preview");
-            //console.log(SaleQuotation);
             var flgerr = false;
             $('#tblQuotationDetail > tbody  > tr').each(function () {
                 var SaleQuotationDetail = {};
-                //console.log("enter to read table combobox value");
-                //console.log($('option:selected', $(this).find('td:eq(0) select')).val());
                 //var TableRow = e.target.closest('tr');
                 //var TableRow = this;
                 var SaleQuotationDetail = {};
                 SaleQuotationDetail.ItemID = $(this.querySelector('[name=ItemID]')).val();
-
-                //console.log("trying to find itemid");
-                //console.log(ItemID);
-
 
                 //SaleQuotationDetail.ItemID = $(this).find("td:eq(0) input[type='text']").val();
                 if (SaleQuotationDetail.ItemID == "") {
@@ -294,12 +295,8 @@
                     flgerr = true;
                     return;
                 }
-                //debugger;
-                //console.log($(this).find("td:eq(3) input[type='number']").val());
                 SaleQuotationDetail.Qty = $(this.querySelector('[name=Qty]')).val();
                 SaleQuotationDetail.Rate = $(this.querySelector('[name=Rate]')).val();
-                //SaleQuotationDetail.Qty = $(this).find("td:eq(2) input[type='number']").val();
-                //SaleQuotationDetail.Rate = $(this).find("td:eq(3) input[type='number']").val();
                 console.log(SaleQuotationDetail.Qty)
                 if (SaleQuotationDetail.Qty == "" || SaleQuotationDetail.Rate == "") {
                     Swal.fire({
@@ -310,27 +307,25 @@
                     flgerr = true;
                     return;
                 }
-
                 SaleQuotationDetail.SaleTaxRate = $(this.querySelector('[name=SaleTaxRate]')).val();
                 SaleQuotationDetail.ASaleTaxRate = $(this.querySelector('[name=ASaleTaxRate]')).val();
                 SaleQuotationDetail.SExDutyRate = $(this.querySelector('[name=SExDutyRate]')).val();
-
-
-                //SaleQuotationDetail.SaleTaxRate = $(this).find("td:eq(5) input[type='number']").val();
-                //SaleQuotationDetail.ASaleTaxRate = $(this).find("td:eq(7) input[type='number']").val();
-                //SaleQuotationDetail.SExDutyRate = $(this).find("td:eq(9) input[type='number']").val();
-
                 SaleQuotationDetails.push(SaleQuotationDetail);
-
-                //console.log(JSON.stringify(SaleQuotationDetail));
-                //console.log(JSON.stringify(SaleQuotationDetails));
             });
-        if (flgerr ==    false) {
+        if (flgerr == false) {
+
+            var savepath=null;
+            if (addedit == 0) {
+                savepath ='@Url.Action("SaleQuotationCreate", "Salequotation")';
+            }
+            else if (addedit == 1) {
+                savepath ='@Url.Action("SaleQuotationEdit", "Salequotation")';
+            }
 
             console.log("reached in save statement");
                $.ajax({
                    type: "POST",
-                   url: '@Url.Action("SaleQuotationCreate", "Salequotation")',
+                   url: savepath,
                    data: JSON.stringify(
                        {
                            SaleQuotation: SaleQuotation,
@@ -380,8 +375,6 @@
                        })
                    }
             })
-
-
             }
 
 
@@ -537,13 +530,14 @@
             success: function (result) {
                 //alert("result received");
                 $("#EntityReportPreview").html(result);
-                if (reportpreviewcount == 0) {
-                var doc = new jsPDF('p');
-                    doc.text('Branch Report ', 20, 10)
-                //doc.autoTable({ html: '#tblCompanyReport' },
-                //    {(20, 20)});
 
-                    doc.autoTable({ html: '#tblBranchReport' });
+                if (reportpreviewcount == 0) {
+                var doc = new jsPDF('l');
+                    doc.text('Quotation Report ', 15, 10)
+                    doc.autoTable({ html: '#tblDocumentReport' });
+
+                    //doc.autoTable({ html: '#tblDocumentReport' });
+                    //doc.autoTable({ html: result });
 
                 //doc.text("This is the default font.", 20, 20);
 
@@ -1050,6 +1044,89 @@
     var lineSpacing = {
         NormalSpacing: 12,
     };
+
+    function calculateAmt(e) {
+        if (e) {
+            var TableRow = e.target.closest('tr');
+            var ItemID = TableRow.querySelector('[name=ItemID]')
+            var Qty = TableRow.querySelector('[name=Qty]')
+
+            searchtextboxget = TableRow.querySelector('[name=customsearchtext]')
+            chnode = TableRow.querySelector('[id=searchpartial]')
+            //console.log(chnode);
+            idsearchtxtboxget = ItemID;
+            Qtysearchtxtboxget = Qty;
+
+
+            var Rate = TableRow.querySelector('[name=Rate]')
+            var Amt = TableRow.querySelector('[name=Amt]')
+            var SaleTaxRate = TableRow.querySelector('[name=SaleTaxRate]')
+            var SaleTaxAmt = TableRow.querySelector('[name=AmtSaleTaxAmt]')
+            var ASaleTaxRate = TableRow.querySelector('[name=ASaleTaxRate]')
+            var ASaleTaxAmt = TableRow.querySelector('[name=ASaleTaxAmt]')
+            var SExDutyRate = TableRow.querySelector('[name=SExDutyRate]')
+            var SExDutyAmt = TableRow.querySelector('[name=SExDutyAmt]')
+            var NetTotalAmt = TableRow.querySelector('[name=NetTotalAmt]')
+            RateGet = Rate;
+            SaleTaxRateGet = SaleTaxRate;
+            ASaleTaxRateGet = ASaleTaxRate;
+            SExDutyRateGet = SExDutyRate;
+
+            if (!$(ItemID).val()) {
+                $(Qty).val('');
+                $(Rate).val('');
+                $(Amt).val('');
+                $(SaleTaxRate).val('');
+                $(SaleTaxAmt).val('');
+                $(ASaleTaxRate).val('');
+                $(ASaleTaxAmt).val('');
+                $(SExDutyRate).val('');
+                $(SExDutyAmt).val('');
+                $(NetTotalAmt).val('');
+
+
+                //SaleTaxRateGet = null;
+                //ASaleTaxRateGet = null;
+                //SExDutyRateGet = null;
+
+
+                return null;
+            }
+
+            if ($(Qty).val() > 0 && $(Rate).val()) {
+                var amount = $(Qty).val() * $(Rate).val()
+                var SaleTax_amount = amount * $(SaleTaxRate).val() / 100
+                var ASaleTax_amount = amount * $(ASaleTaxRate).val() / 100
+                var SExDuty_amount = amount * $(SExDutyRate).val() / 100
+                var NetTotal_amount = Math.round((amount + SaleTax_amount + ASaleTax_amount + SExDuty_amount) * 100) / 100;
+                $(Amt).val(amount);
+                $(SaleTaxAmt).val(SaleTax_amount);
+                $(ASaleTaxAmt).val(ASaleTax_amount);
+                $(SExDutyAmt).val(SExDuty_amount);
+                $(NetTotalAmt).val(NetTotal_amount);
+            }
+            else {
+                $(SaleTaxAmt).val('');
+                $(ASaleTaxAmt).val('');
+                $(SExDutyAmt).val('');
+                $(NetTotalAmt).val('');
+            }
+            //var currentRow = e.target.closest("tr");
+            //var currentCell1 = currentRow.target.closest("td");
+            //var nextRow = currentRow.nextElementSibling;
+            //var nextInput = nextRow.querySelector("#Rate");
+            //console.log("current row " + currentRow);
+            //console.log("reached " + nextInput);
+
+            //console.log(currentCell1);
+        }
+
+    }
+    function handleClicknumeric(e) {
+        calculateAmt(e);
+    }
+
+
     function generateInvPDFFormat2(Id) {
         if (!Id) {
             return;

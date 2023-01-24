@@ -9,10 +9,19 @@ namespace ERPStandard.ViewModels.Sales
 {
     public class SaleQuotationDetailViewModel
     {
-        public CRM_SaleQuotation SaleQuotation { get; set; }
-        public List<CRM_SaleQuotationDetail> SaleQuotationDetail { get; set; }
-        public Pager Pager { get; set; }
-        public string dtSearch { get; set; }
-        public int clmNameOrder { get; set; }
+        public string QuoteId { get; set; }
+        public string ItemID { get; set; }
+        public string ItemName { get; set; }
+        public decimal Qty { get; set; }
+        public decimal Rate { get; set; }
+        public decimal SaleTaxRate { get; set; }
+        public decimal ASaleTaxRate { get; set; }
+        public decimal SExDutyRate { get; set; }
+        public int CompNo { get; set; }
+        public int BranchNo { get; set; }
+        public int LahTransferId { get; set; }
+        public System.DateTime SaveDate { get; set; }
+        public int DeletionID { get; set; }
+
     }
 }

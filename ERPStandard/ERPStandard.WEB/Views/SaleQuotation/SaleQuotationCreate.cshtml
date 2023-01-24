@@ -1,4 +1,4 @@
-﻿@model ERPStandard.ViewModels.SaleQuotationMasterViewModel
+﻿@model ERPStandard.ViewModels.QuotationCreateNewViewModel
 @{
     ViewBag.Title = "Sales Transaction";
     ViewBag.SubTitle = "Quotation";
@@ -45,18 +45,16 @@
 
 
 <div class="card-header">
-    <h4 class="card-title">@ViewBag.SubTitle</h4>
+    <h4 class="card-title">@ViewBag.SubTitle New</h4>
 </div>
 <div class="card-content">
     <div class="card-body">
-        <form name="QuotationForm" class="form form-horizontal">
+        <form name="QuotationForm" class="form">
             <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">
-                        <!--style="display:none"-->
-                        <input type="date" id="QuoteId" required class="form-control" name="QuoteId" , value='"@Model.QuoteId"'>
                         <label for="QuoteDate">Quote Date</label>
-                        <input type="date" id="QuoteDate" required class="form-control" name="QuoteDate" , value='"@Model.QuoteDate"'>
+                        <input type="date" id="QuoteDate" required class="form-control" name="QuoteDate">
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -65,13 +63,15 @@
                         <input type="date" id="QuoteValidDate" required class="form-control" name="QuoteValidDate">
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-8">
                     <div class="form-group">
                         <label for="Remarks">Remarks</label>
                         <input type="text" id="Remarks" minlength="3" maxlength="150" required class="form-control" placeholder="Remarks" name="Remarks">
                     </div>
                 </div>
-                <div class="col-md-4">
+            </div>
+            <div class="row">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="SalesManId">Sales Man</label>
                         <select class="choices form-select  select2" id="SalesManId" name="SalesManId" required>
@@ -79,8 +79,7 @@
                         </select>
                     </div>
                 </div>
-
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="CustomerNo">Customer</label>
                         <select class="form-select  select2" id="CustomerId" name="CustomerNo" required>
@@ -90,151 +89,143 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <h6 danger>Quotation Details</h6>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <h6 danger>Quotation Details</h6>
+                    </div>
                 </div>
             </div>
 
             <!-- Table for Quotation Details -->
-
-            <div>
-                <table id="tblQuotationDetail" class="table table-striped dataTable-table">
-                    <thead>
-                        <tr>
-                            <th style="display:none">Item Id</th>
-                            <th>Item Name</th>
-                            <th>Qty</th>
-                            <th>Rate</th>
-                            <th style="display:none">Amt</th>
-                            <th style=@(Model.invoiceType == 0 ? "display:none" : "")>VAT</th>
-                            <th style="display:none">VAT Amt</th>
-                            @if (Model.invoiceType == 2 || Model.invoiceType == 4)
-                            {
-                                <th>ASTax</th>
-                                <th style="display:none" :">ASTax Amt</th>
-                            }
-                            else
-                            {
-                                <th style="display:none" :">ASTax</th>
-                                <th style="display:none" :">ASTax Amt</th>
-                            }
-                            @if (Model.invoiceType == 3 || Model.invoiceType == 4)
-                            {
-                                <th>ExDuty</th>
-                                <th style="display:none" :">ExDuty Amt</th>
-                            }
-                            else
-                            {
-                                <th style="display:none" :">ExDuty</th>
-                                <th style="display:none" :">ExDuty Amt</th>
-                            }
-                            <th>Net Amt</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tblRowBody">
-
-
-
-                        <tr id="tblRow">
-                            <td class="col-md-1" style="display:none">
-                                <div class="md">
-                                    <div class="search-box-Id">
-                                        <input type="text" id="CustomSearchID" readonly class="form-control" placeholder="Id" name="ItemID">
-                                    </div>
-                                </div>
-                            </td>
-
-                            <td class="col-md-4">
-                                <div>
-                                    <div class="search-panel">
-                                        <input type="text" name="customsearchtext" id="CustomSearch1" autocomplete="off" minlength="1" maxlength="150" onkeyup="getItemSearchRecords(this, event)" class="form-control chld" placeholder="Search all...">
-                                        <div id="searchpartial" class="itemsearchrecord container">
+            <div class="row">
+                <div class="col-md-offset-12">
+                    <table id="tblQuotationDetail" class="table dataTable-table form-control">
+                        <thead>
+                            <tr class="btn-success">
+                                <th style="display:none">Item Id</th>
+                                <th>Item Name</th>
+                                <th>Qty</th>
+                                <th>Rate</th>
+                                <th style="display:none">Amt</th>
+                                <th style=@(Model.invoiceType == 0 ? "display:none" : "")>VAT</th>
+                                <th style="display:none">VAT Amt</th>
+                                @if (Model.invoiceType == 2 || Model.invoiceType == 4)
+                                {
+                                    <th>ASTax</th>
+                                    <th style="display:none" :">ASTax Amt</th>
+                                }
+                                else
+                                {
+                                    <th style="display:none" :">ASTax</th>
+                                    <th style="display:none" :">ASTax Amt</th>
+                                }
+                                @if (Model.invoiceType == 3 || Model.invoiceType == 4)
+                                {
+                                    <th>ExDuty</th>
+                                    <th style="display:none" :">ExDuty Amt</th>
+                                }
+                                else
+                                {
+                                    <th style="display:none" :">ExDuty</th>
+                                    <th style="display:none" :">ExDuty Amt</th>
+                                }
+                                <th>Net Amt</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblRowBody">
+                            <tr id="tblRow">
+                                <td class="col-md-1" style="display:none">
+                                    <div class="md">
+                                        <div class="search-box-Id">
+                                            <input type="text" id="CustomSearchID" readonly class="form-control" placeholder="Id" name="ItemID">
                                         </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="col-md-1">
-                                <input type="number" id="Qty"  min="1" max="999999999" required class="form-control" placeholder="Qty" name="Qty" onkeyup="handleKeyDownQty(this, event)">
-                            </td>
-                            <td class="col-md-1">
-                                <input type="number" id="Rate"  min="1" max="999999999" required class="form-control" placeholder="Rate" name="Rate" onkeyup="handleKeyDownRate(this, event)">
-                            </td>
-                            <td class="col-md-1" style="display:none">
-                                <input type="number" readonly id="Amt" class="form-control" placeholder="Amt" name="Amt">
-                            </td>
-                            @if (Model.invoiceType == 0)
-                            {
+                                </td>
+
+                                <td class="col-md-4">
+                                    <div>
+                                        <div class="search-panel">
+                                            <input type="text" name="customsearchtext" id="CustomSearch1" autocomplete="off" minlength="1" maxlength="150" onkeyup="getItemSearchRecords(this, event)" class="form-control chld" placeholder="Search all...">
+                                            <div id="searchpartial" class="itemsearchrecord container">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="col-md-1">
+                                    <input type="number" id="Qty" min="1" max="999999999" required class="form-control" placeholder="Qty" name="Qty" onkeyup="handleKeyDownQty(this, event)" onclick="handleClicknumeric(event)">
+                                </td>
+                                <td class="col-md-1">
+                                    <input type="number" id="Rate" min="1" max="999999999" required class="form-control" placeholder="Rate" name="Rate" onkeyup="handleKeyDownRate(this, event)" onclick="handleClicknumeric(event)">
+                                </td>
                                 <td class="col-md-1" style="display:none">
-                                    <input type="number" id="SaleTaxRate"  min="1" max="99"  required class="form-control" placeholder="Tax" name="SaleTaxRate">
+                                    <input type="number" readonly id="Amt" class="form-control" placeholder="Amt" name="Amt">
                                 </td>
-                            }
-                            else
-                            {
-                                <td class="col-md-1">
-                                    <input type="number" id="SaleTaxRate"  min="1" max="99"  required class="form-control focus" placeholder="Tax" name="SaleTaxRate" onkeyup="handleKeyDownTax(this, event)">
+                                @if (Model.invoiceType == 0)
+                                {
+                                    <td class="col-md-1" style="display:none">
+                                        <input type="number" id="SaleTaxRate" min="1" max="99" required class="form-control" placeholder="Tax" name="SaleTaxRate" onclick="handleClicknumeric(event)">
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="col-md-1">
+                                        <input type="number" id="SaleTaxRate" min="1" max="99" required class="form-control focus" placeholder="Tax" name="SaleTaxRate" onkeyup="handleKeyDownTax(this, event)" onclick="handleClicknumeric(event)">
+                                    </td>
+                                }
+                                <td class="col-md-1" style="display:none">
+                                    <input type="number" readonly id="SaleTaxAmt" minlength="1" maxlength="9" class="form-control" placeholder="SaleTaxAmt" name="SaleTaxAmt">
                                 </td>
-                            }
-                            <td class="col-md-1" style="display:none">
-                                <input type="number" readonly id="SaleTaxAmt" minlength="1" maxlength="9" class="form-control" placeholder="SaleTaxAmt" name="SaleTaxAmt">
-                            </td>
-                            @if (Model.invoiceType == 2 || Model.invoiceType == 4)
-                            {
-                                <td class="col-md-1">
-                                    <input type="number" id="ASaleTaxRate" min="1" max="99"  required class="form-control  focus" placeholder="AddTax" name="ASaleTaxRate" onkeyup="handleKeyDownAddTax(this, event)">
-                                </td>
+                                @if (Model.invoiceType == 2 || Model.invoiceType == 4)
+                                {
+                                    <td class="col-md-1">
+                                        <input type="number" id="ASaleTaxRate" min="1" max="99" required class="form-control  focus" placeholder="AddTax" name="ASaleTaxRate" onkeyup="handleKeyDownAddTax(this, event)" onclick="handleClicknumeric(event)">
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="col-md-1" style="display:none">
+                                        <input type="number" id="ASaleTaxRate" min="1" max="99" required class="form-control" placeholder="AddTax" name="ASaleTaxRate" onclick="handleClicknumeric(event)">
+                                    </td>
+                                }
                                 <td class="col-md-1" style="display:none">
                                     <input type="number" readonly id="ASaleTaxAmt" minlength="1" maxlength="9" class="form-control" placeholder="ASaleTaxAmt" name="ASaleTaxAmt">
                                 </td>
-                            }
-                            else
-                            {
+                                @if (Model.invoiceType == 3 || Model.invoiceType == 4)
+                                {
+                                    <td class="col-md-1">
+                                        <input type="number" id="SExDutyRate" min="1" max="99" required class="form-control  focus" placeholder="DutyRate" name="SExDutyRate" onkeyup="handleKeyDownAddSEd(this, event)" onclick="handleClicknumeric(event)">
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="col-md-1" style="display:none">
+                                        <input type="number" id="SExDutyRate" min="1" max="99" required class="form-control" placeholder="DutyRate" name="SExDutyRate">
+                                    </td>
+                                }
                                 <td class="col-md-1" style="display:none">
-                                    <input type="number" id="ASaleTaxRate"  min="1" max="99"  required class="form-control" placeholder="AddTax" name="ASaleTaxRate">
+                                    <input type="number" readonly id="SExDutyAmt" minlength="1" maxlength="9" class="form-control" placeholder="SExDutyAmt" name="SExDutyAmt">
                                 </td>
-                                <td class="col-md-1" style="display:none">
-                                    <input type="number" readonly id="ASaleTaxAmt" minlength="1" maxlength="9" class="form-control" placeholder="ASaleTaxAmt" name="ASaleTaxAmt">
-                                </td>
-                            }
-                            @if (Model.invoiceType == 3 || Model.invoiceType == 4)
-                            {
                                 <td class="col-md-1">
-                                    <input type="number" id="SExDutyRate"   min="1" max="99"  required class="form-control  focus" placeholder="DutyRate" name="SExDutyRate" onkeyup="handleKeyDownAddSEd(this, event)">
-                                </td>
-                                <td class="col-md-1" style="display:none">
-                                    <input type="number" readonly id="SExDutyAmt" minlength="1" maxlength="9" class="form-control" placeholder="SExDutyAmt" name="SExDutyAmt">
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="col-md-1" style="display:none">
-                                    <input type="number" id="SExDutyRate"  min="1" max="99"  required class="form-control" placeholder="DutyRate" name="SExDutyRate">
-                                </td>
-                                <td class="col-md-1" style="display:none">
-                                    <input type="number" readonly id="SExDutyAmt" minlength="1" maxlength="9" class="form-control" placeholder="SExDutyAmt" name="SExDutyAmt">
+                                    <input type="number" readonly id="NetTotalAmt" class="form-control" placeholder="Net Amt" name="NetTotalAmt">
                                 </td>
 
-                            }
-                            <td class="col-md-1">
-                                <input type="number" readonly id="NetTotalAmt" class="form-control" placeholder="Net Amt" name="NetTotalAmt">
-                            </td>
-
-                            <td>
-                                <button type="button" id="btnrowadd"  class="badge bg-success" onclick="onAddRow()">Add</button>
-                                <button type="button" class="badge bg-danger" onclick="onDeleteRow(this)">Delete</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="col-sm-12 d-flex justify-content-end">
-                    <button type="button" id="btnSave" class="btn btn-primary me-1 mb-1" onclick="onSave(this.form)">Submit</button>
-                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                <td class="col-md-1">
+                                    <button type="button" class="btn-success" id="btnrowadd" onclick="onAddRow()">Add</button>
+                                    <button type="button" class="btn-danger" onclick="onDeleteRow(this)">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="col-sm-12 d-flex justify-content-end">
+                        <button type="button" id="btnSave" class="btn btn-primary me-1 mb-1" onclick="onSave(this.form, '0')">Save</button>
+                        <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                    </div>
                 </div>
-
             </div>
             <!-- This table used to add new row Template -->
-            <table hidden>
+            <table hidden style="display: none">
                 <tr style="display: none" id="tblRowforCopy">
 
                     <td class="col-md-1" style="display:none">
@@ -257,10 +248,10 @@
                         </div>
                     </td>
                     <td class="col-md-1">
-                        <input type="number" id="Qty"  min="1" max="999999999"  required class="form-control" placeholder="Qty" name="Qty" onkeyup="handleKeyDownQty(this, event)">
+                        <input type="number" id="Qty" min="1" max="999999999" required class="form-control" placeholder="Qty" name="Qty" onkeyup="handleKeyDownQty(this, event)" onclick="handleClicknumeric(event)">
                     </td>
                     <td class="col-md-1">
-                        <input type="number" id="Rate"  min="1" max="999999999"  required class="form-control" placeholder="Rate" name="Rate" onkeyup="handleKeyDownRate(this, event)">
+                        <input type="number" id="Rate" min="1" max="999999999" required class="form-control" placeholder="Rate" name="Rate" onkeyup="handleKeyDownRate(this, event)" onclick="handleClicknumeric(event)">
                     </td>
                     <td class="col-md-1" style="display:none">
                         <input type="number" readonly id="Amt" minlength="1" maxlength="9" class="form-control" placeholder="Amt" name="Amt">
@@ -268,13 +259,13 @@
                     @if (Model.invoiceType == 0)
                     {
                         <td class="col-md-1" style="display:none">
-                            <input type="number" id="SaleTaxRate"  min="1" max="99" required class="form-control" placeholder="Tax" name="SaleTaxRate">
+                            <input type="number" id="SaleTaxRate" min="1" max="99" required class="form-control" placeholder="Tax" name="SaleTaxRate">
                         </td>
                     }
-                    else 
+                    else
                     {
                         <td class="col-md-1">
-                            <input type="number" id="SaleTaxRate"   min="1" max="99"  required class="form-control  focus" placeholder="Tax" name="SaleTaxRate" onkeyup="handleKeyDownTax(this, event)">
+                            <input type="number" id="SaleTaxRate" min="1" max="99" required class="form-control  focus" placeholder="Tax" name="SaleTaxRate" onkeyup="handleKeyDownTax(this, event)" onclick="handleClicknumeric(event)">
                         </td>
                     }
                     <td class="col-md-1" style="display:none">
@@ -283,55 +274,46 @@
                     @if (Model.invoiceType == 2 || Model.invoiceType == 4)
                     {
                         <td class="col-md-1">
-                            <input type="number" id="ASaleTaxRate"   min="1" max="99"  required class="form-control focus" placeholder="AddTax" name="ASaleTaxRate" onkeyup="handleKeyDownAddTax(this, event)">
-                        </td>
-                        <td class="col-md-1" style="display:none">
-                            <input type="number" readonly id="ASaleTaxAmt" class="form-control" placeholder="ASaleTaxAmt" name="ASaleTaxAmt">
+                            <input type="number" id="ASaleTaxRate" min="1" max="99" required class="form-control focus" placeholder="AddTax" name="ASaleTaxRate" onkeyup="handleKeyDownAddTax(this, event)" onclick="handleClicknumeric(event)">
                         </td>
                     }
                     else
                     {
                         <td class="col-md-1" style="display:none">
-                            <input type="number" id="ASaleTaxRate"  min="1" max="99"  required class="form-control" placeholder="AddTax" name="ASaleTaxRate">
-                        </td>
-                        <td class="col-md-1" style="display:none">
-                            <input type="number" readonly id="ASaleTaxAmt" class="form-control" placeholder="ASaleTaxAmt" name="ASaleTaxAmt">
+                            <input type="number" id="ASaleTaxRate" min="1" max="99" required class="form-control" placeholder="AddTax" name="ASaleTaxRate">
                         </td>
                     }
+                    <td class="col-md-1" style="display:none">
+                        <input type="number" readonly id="ASaleTaxAmt" class="form-control" placeholder="ASaleTaxAmt" name="ASaleTaxAmt">
+                    </td>
                     @if (Model.invoiceType == 3 || Model.invoiceType == 4)
                     {
                         <td class="col-md-1">
-                            <input type="number" id="SExDutyRate"  min="1" max="99"  required class="form-control focus" placeholder="DutyRate" name="SExDutyRate" onkeyup="handleKeyDownAddSEd(this, event)">
-                        </td>
-                        <td class="col-md-1" style="display:none">
-                            <input type="number" readonly id="SExDutyAmt" class="form-control" placeholder="SExDutyAmt" name="SExDutyAmt">
+                            <input type="number" id="SExDutyRate" min="1" max="99" required class="form-control focus" placeholder="DutyRate" name="SExDutyRate" onkeyup="handleKeyDownAddSEd(this, event)" onclick="handleClicknumeric(event)">
                         </td>
                     }
                     else
                     {
                         <td class="col-md-1" style="display:none">
-                            <input type="number" id="SExDutyRate"  min="1" max="99"  required class="form-control" placeholder="DutyRate" name="SExDutyRate" >
+                            <input type="number" id="SExDutyRate" min="1" max="99" required class="form-control" placeholder="DutyRate" name="SExDutyRate">
                         </td>
-                        <td class="col-md-1" style="display:none">
-                            <input type="number" readonly id="SExDutyAmt" class="form-control" placeholder="SExDutyAmt" name="SExDutyAmt">
-                        </td>
-
                     }
+                    <td class="col-md-1" style="display:none">
+                        <input type="number" readonly id="SExDutyAmt" class="form-control" placeholder="SExDutyAmt" name="SExDutyAmt">
+                    </td>
                     <td class="col-md-1">
                         <input type="number" readonly id="NetTotalAmt" class="form-control" placeholder="Net Amt" name="NetTotalAmt">
                     </td>
 
                     <td>
-                        <button type="button" id="btnrowadd"  class="badge bg-success" onclick="onAddRow()">Add</button>
+                        <button type="button" id="btnrowadd" class="badge bg-success" onclick="onAddRow()">Add</button>
                         <button type="button" class="badge bg-danger" onclick="onDeleteRow(this)">Delete</button>
                     </td>
                 </tr>
 
             </table>
             <!-- Table for Quotation Detail -->
-
         </form>
-
     </div>
 </div>
 
@@ -350,6 +332,8 @@
         $('#QuoteValidDate').val(validdaate);
         $("#Remarks").focus();
     });
+    //var nudMax = document.getElementById("max").value;
+
     function handleKeyDownQty(eval, e) {
         //console.log($(eval).val());
         calculateAmt(e);
@@ -468,83 +452,6 @@
                 nextInput.focus();
             }
         }
-    }
-    function calculateAmt(e) {
-        if (e) {
-            var TableRow = e.target.closest('tr');
-            var ItemID = TableRow.querySelector('[name=ItemID]')
-            var Qty = TableRow.querySelector('[name=Qty]')
-
-            searchtextboxget = TableRow.querySelector('[name=customsearchtext]')
-            chnode = TableRow.querySelector('[id=searchpartial]')
-            //console.log(chnode);
-            idsearchtxtboxget = ItemID;
-            Qtysearchtxtboxget = Qty;
-
-
-            var Rate = TableRow.querySelector('[name=Rate]')
-            var Amt = TableRow.querySelector('[name=Amt]')
-            var SaleTaxRate = TableRow.querySelector('[name=SaleTaxRate]')
-            var SaleTaxAmt = TableRow.querySelector('[name=AmtSaleTaxAmt]')
-            var ASaleTaxRate = TableRow.querySelector('[name=ASaleTaxRate]')
-            var ASaleTaxAmt = TableRow.querySelector('[name=ASaleTaxAmt]')
-            var SExDutyRate = TableRow.querySelector('[name=SExDutyRate]')
-            var SExDutyAmt = TableRow.querySelector('[name=SExDutyAmt]')
-            var NetTotalAmt = TableRow.querySelector('[name=NetTotalAmt]')
-            RateGet = Rate;
-            SaleTaxRateGet = SaleTaxRate;
-            ASaleTaxRateGet = ASaleTaxRate;
-            SExDutyRateGet = SExDutyRate;
-
-            if (!$(ItemID).val()) {
-                $(Qty).val('');
-                $(Rate).val('');
-                $(Amt).val('');
-                $(SaleTaxRate).val('');
-                $(SaleTaxAmt).val('');
-                $(ASaleTaxRate).val('');
-                $(ASaleTaxAmt).val('');
-                $(SExDutyRate).val('');
-                $(SExDutyAmt).val('');
-                $(NetTotalAmt).val('');
-
-
-                //SaleTaxRateGet = null;
-                //ASaleTaxRateGet = null;
-                //SExDutyRateGet = null;
-
-
-                return null;
-            }
-
-            if ($(Qty).val() > 0 && $(Rate).val()) {
-                var amount = $(Qty).val() * $(Rate).val()
-                var SaleTax_amount = amount * $(SaleTaxRate).val() / 100
-                var ASaleTax_amount = amount * $(ASaleTaxRate).val() / 100
-                var SExDuty_amount = amount * $(SExDutyRate).val() / 100
-                var NetTotal_amount = amount + SaleTax_amount + ASaleTax_amount + SExDuty_amount
-                $(Amt).val(amount);
-                $(SaleTaxAmt).val(SaleTax_amount);
-                $(ASaleTaxAmt).val(ASaleTax_amount);
-                $(SExDutyAmt).val(SExDuty_amount);
-                $(NetTotalAmt).val(NetTotal_amount);
-            }
-            else {
-                $(SaleTaxAmt).val('');
-                $(ASaleTaxAmt).val('');
-                $(SExDutyAmt).val('');
-                $(NetTotalAmt).val('');
-            }
-            //var currentRow = e.target.closest("tr");
-            //var currentCell1 = currentRow.target.closest("td");
-            //var nextRow = currentRow.nextElementSibling;
-            //var nextInput = nextRow.querySelector("#Rate");
-            //console.log("current row " + currentRow);
-            //console.log("reached " + nextInput);
-
-            //console.log(currentCell1);
-        }
-
     }
     function onAddRow() {
         console.log("Reached on Add Row");

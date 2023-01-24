@@ -174,9 +174,6 @@ namespace ERPStandard.Services
             }
             return viewModel;
         }
-
-        //public Root InvoiceReport(string Id = "")
-
         public Root<T> InvoiceReportList<T>(string Id)
         {
             var root = new Root<T>();
@@ -504,7 +501,6 @@ namespace ERPStandard.Services
             root.invoice = invoice;
             return root;
         }
-
         public Root<T> InvoiceReport<T> (string Id = "")
         {
             var root = new Root<T>();
@@ -542,7 +538,171 @@ namespace ERPStandard.Services
             root.footer = footer;
             return root;
         }
+        public SaleQuotationMasterDetailViewModel Single_Master_Detail(string Id)
+        {
+            var viewModel = new SaleQuotationMasterDetailViewModel();
+            using (var context = new SairaIndEntities())
+            {
+                var comp = context.CRM_SaleQuotation
+                    .Join(context.Customers,
+                        o => o.CustomerNo,
+                        cust => cust.CustomerNo,
+                        (o, cust) => new
+                        {
+                            o.QuoteId,
+                            o.QuoteNo,
+                            o.QuoteDate,
+                            o.QuoteValidDate,
+                            o.RefDocId,
+                            o.RefDocName,
+                            o.Remarks,
+                            o.DeletionID,
+                            o.SalesManId,
+                            o.CustomerNo,
+                            CustomerName = cust.Name,
+                            o.CompNo,
+                            o.BranchNo
+                        })
+                .Join(context.SalesMen,
+                    o => o.SalesManId,
+                    sal => sal.SalesManId,
+                    (o, sal) => new SaleQuotationMasterViewModel
+                    {
+                        QuoteId = o.QuoteId,
+                        QuoteNo = o.QuoteNo,
+                        QuoteDate = o.QuoteDate,
+                        QuoteValidDate = o.QuoteValidDate,
+                        RefDocId = o.RefDocId,
+                        RefDocName = o.RefDocName,
+                        Remarks = o.Remarks,
+                        DeletionID = o.DeletionID,
+                        CustomerNo = o.CustomerNo,
+                        SalesManId = o.SalesManId,
+                        CustomerName = o.CustomerName,
+                        SalesManName = sal.Name,
+                        CompNo = o.CompNo,
+                        BranchNo = o.BranchNo
+                    }
+                )
+                .Where(x => x.QuoteId==Id
+                        && x.CompNo == StandardVariables.CompNo
+                        && x.BranchNo == StandardVariables.BranchNo
+                        );
 
+                var compDetail = context.CRM_SaleQuotationDetail
+                    .Join(context.ItemsStocks,
+                    o => o.ItemID,
+                    i => i.ItemID,
+                    (o, i) => new SaleQuotationDetailViewModel
+                    {
+                        QuoteId = o.QuoteId,
+                        ItemID = o.ItemID,
+                        ItemName = i.Dscr,
+                        Qty = o.Qty,
+                        Rate = o.Rate,
+                        SaleTaxRate = o.SaleTaxRate,
+                        ASaleTaxRate = o.ASaleTaxRate,
+                        SExDutyRate = o.SExDutyRate,
+                        CompNo = o.CompNo,
+                        BranchNo = o.BranchNo
+                    }).Where(x => x.QuoteId == Id
+                        && x.CompNo == StandardVariables.CompNo
+                        && x.BranchNo == StandardVariables.BranchNo
+                        );
+                viewModel.SaleQuotationMaster = comp.FirstOrDefault();
+                viewModel.SaleQuotationDetail = compDetail.ToList();
+            }
+            return viewModel;
+        }
+
+        public List<SaleQuotationMasterDetailViewModel> QDtailed_Master_Detail()
+        {
+            var viewModelDetail = new List<SaleQuotationMasterDetailViewModel>();
+            using (var context = new SairaIndEntities())
+            {
+                var comp = context.CRM_SaleQuotation
+                    .Join(context.Customers,
+                        o => o.CustomerNo,
+                        cust => cust.CustomerNo,
+                        (o, cust) => new
+                        {
+                            o.QuoteId,
+                            o.QuoteNo,
+                            o.QuoteDate,
+                            o.QuoteValidDate,
+                            o.RefDocId,
+                            o.RefDocName,
+                            o.Remarks,
+                            o.DeletionID,
+                            o.SalesManId,
+                            o.CustomerNo,
+                            CustomerName = cust.Name,
+                            o.CompNo,
+                            o.BranchNo
+                        })
+                .Join(context.SalesMen,
+                    o => o.SalesManId,
+                    sal => sal.SalesManId,
+                    (o, sal) => new SaleQuotationMasterViewModel
+                    {
+                        QuoteId = o.QuoteId,
+                        QuoteNo = o.QuoteNo,
+                        QuoteDate = o.QuoteDate,
+                        QuoteValidDate = o.QuoteValidDate,
+                        RefDocId = o.RefDocId,
+                        RefDocName = o.RefDocName,
+                        Remarks = o.Remarks,
+                        DeletionID = o.DeletionID,
+                        CustomerNo = o.CustomerNo,
+                        SalesManId = o.SalesManId,
+                        CustomerName = o.CustomerName,
+                        SalesManName = sal.Name,
+                        CompNo = o.CompNo,
+                        BranchNo = o.BranchNo
+                    }
+                )
+                .Where(x => x.CompNo == StandardVariables.CompNo
+                        && x.BranchNo == StandardVariables.BranchNo
+                        ).ToList();
+
+                var compDetail = context.CRM_SaleQuotationDetail
+                    .Join(context.ItemsStocks,
+                    o => o.ItemID,
+                    i => i.ItemID,
+                    (o, i) => new SaleQuotationDetailViewModel
+                    {
+                        QuoteId = o.QuoteId,
+                        ItemID = o.ItemID,
+                        ItemName = i.Dscr,
+                        Qty = o.Qty,
+                        Rate = o.Rate,
+                        SaleTaxRate = o.SaleTaxRate,
+                        ASaleTaxRate = o.ASaleTaxRate,
+                        SExDutyRate = o.SExDutyRate,
+                        CompNo = o.CompNo,
+                        BranchNo = o.BranchNo
+                    }).Where(x => x.CompNo == StandardVariables.CompNo
+                        && x.BranchNo == StandardVariables.BranchNo
+                        ).ToList();
+
+                foreach (var item in comp)
+                {
+                    var viewModel = new SaleQuotationMasterDetailViewModel();
+                    viewModel.SaleQuotationMaster = item;
+                    var lst_d_quation = new List<SaleQuotationDetailViewModel>();
+                    foreach (var dtl in compDetail.Where(x=> x.QuoteId == item.QuoteId))
+                    {
+                        var d_quation = new SaleQuotationDetailViewModel();
+                        d_quation = dtl;
+                        lst_d_quation.Add(d_quation);
+                    }
+                    viewModel.SaleQuotationDetail = lst_d_quation;
+
+                    viewModelDetail.Add(viewModel);
+                }
+            }
+            return viewModelDetail;
+        }
 
         public CRM_SaleQuotation Single(string Id)
         {
@@ -586,24 +746,46 @@ namespace ERPStandard.Services
             }
             return savechanges;
         }
-        public bool Update(CRM_SaleQuotation SaleQuotation)
+        public int Update(CRM_SaleQuotation SaleQuotation, List<CRM_SaleQuotationDetail> SaleQuotationDetail)
         {
             var entityMain = Single(SaleQuotation.QuoteId);
+            entityMain.Remarks = SaleQuotation.Remarks;
+            entityMain.CustomerNo = SaleQuotation.CustomerNo;
+            entityMain.QuoteDate = SaleQuotation.QuoteDate;
+            entityMain.QuoteValidDate= SaleQuotation.QuoteValidDate;
+            //entityMain.RefDocId = SaleQuotation.RefDocId;
+            //entityMain.RefDocName = SaleQuotation.RefDocName;
+            entityMain.SalesManId = SaleQuotation.SalesManId;
 
-            SaleQuotation.CompNo = entityMain.CompNo;
-            SaleQuotation.BranchNo = entityMain.BranchNo;
-            SaleQuotation.SaveDate = DateTime.Now;
-            SaleQuotation.DeletionID = 0;
-            SaleQuotation.LahTransferId = 0;
-
-            bool flgCompany = false;
+            int savechanges = 0;
             using (var context = new SairaIndEntities())
             {
-                context.Entry(SaleQuotation).State = System.Data.Entity.EntityState.Modified;
-                context.SaveChanges();
-                flgCompany = true;
+                CRM_SaleQuotationDetail saledetail = new CRM_SaleQuotationDetail();
+                foreach (var item in SaleQuotationDetail)
+                {
+                    item.QuoteId = SaleQuotation.QuoteId;
+                    item.DeletionID = 0;
+                    item.LahTransferId = 0;
+                    item.SaveDate = DateTime.Now;
+                    item.CompNo = entityMain.CompNo;
+                    item.BranchNo = entityMain.BranchNo;
+                }
+                var compDetail = context.CRM_SaleQuotationDetail.Where(x => x.QuoteId == entityMain.QuoteId).ToList();
+                context.CRM_SaleQuotationDetail.RemoveRange(compDetail);
+                context.Entry(entityMain).State = System.Data.Entity.EntityState.Modified;
+                context.CRM_SaleQuotationDetail.AddRange(SaleQuotationDetail);
+                savechanges = context.SaveChanges();
+
+                //var delsavechanges = context.SaveChanges();
+                //if (delsavechanges > 0)
+                //{
+                //    context.Entry(entityMain).State = System.Data.Entity.EntityState.Modified;
+                //    context.CRM_SaleQuotationDetail.AddRange(SaleQuotationDetail);
+                //    savechanges = context.SaveChanges();
+                //}
             }
-            return flgCompany;
+
+            return savechanges;
         }
         public bool Delete(string Id)
         {

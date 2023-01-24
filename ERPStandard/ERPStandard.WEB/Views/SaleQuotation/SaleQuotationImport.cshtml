@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "Sales Quotation";
+}
+
+<script src="~/assets/js/jsPDF/jspdf.min.js"></script>
+<script src="~/assets/js/jsPDF/jspdf.plugin.autotable.min.js"></script>
+<script src="~/assets/js/htm2canvas/html2canvas.js"></script>
+<script src="https://unpkg.com/jspdf-invoice-template@1.4.0/dist/index.js"></script>
+<link href="~/assets/css/reportstyle.css" rel="stylesheet" />
+<link rel="stylesheet" href="style.css" media="all" />
+<div class="page-title">
+    <div class="row">
+        <div class="col-12 col-md-6 order-md-1 order-last">
+            <h3>@ViewBag.Title</h3>
+            @*<p class="text-subtitle text-muted"><a href="index.html">Create New</a></p>*@
+            <button class="btn btn-primary me-1 mb-1" type="button" id="btnList" onclick="onLoad()">List</button>
+            <button class="btn btn-light-secondary me-1 mb-1" type="button" id="Create" onclick="onCreate()">New</button>
+        </div>
+        <div class="col-12 col-md-6 order-md-2 order-first">
+            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">@ViewBag.SubTitle</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<section id="multiple-column-form">
+    <div class="row match-height">
+        <div class="col-12">
+            <div class="card">
+                <div Id="FormProcess">
+
+                </div>
+                <div Id="EntityReportPreview">
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>

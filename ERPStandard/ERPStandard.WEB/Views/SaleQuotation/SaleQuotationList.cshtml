@@ -1,13 +1,19 @@
 ﻿@model  ERPStandard.ViewModels.Sales.SaleQuotationViewModel
+@{
+    ViewBag.Title = "Sales Transaction";
+    ViewBag.SubTitle = "Quotation";
+}
 <link rel="stylesheet" href="~/assets/vendors/simple-datatables/style.css">
 <script src="~/assets/vendors/simple-datatables/simple-datatables.js"></script>
 <script src="~/assets/vendors/fontawesome/all.min.js"></script>
 <div class="card-header">
-    Quotation List
+    <h4 class="card-title">@ViewBag.SubTitle List</h4>
 </div>
 <div class="card-body">
-    <button class="btn-primary" onclick="generateInvPDFFormat2()"><i class="fa fa-print"></i></button>
-    <button class="btn-success" onclick="generateInvPDFFormat2()"><i class="fa fa-file-excel"></i></button>
+    <button class="btn-primary"  title="Print List" onclick="previewReport()"><i class="fa fa-print"></i></button>
+    <button type="button" class="btn-success"  title="Excel List" onclick="location.href='@Url.Action("MasterDetailExcelExport", "Salequotation")'"><i class='fa fa-file-excel'></i></button>
+    <button class="btn-danger" onclick="previewReport()" title="Import"><i class="fa fa-file-import"></i></button>
+    @*<button class="btn-success" onclick="QutatonDetailExcel()"><i class="fa fa-file-excel"></i></button>*@
 
 
     <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
@@ -21,10 +27,10 @@
         <div class="dataTable-container">
             <table class="table table-striped dataTable-table" id="tblQuotationMaster">
                 <thead>
-                    <tr>
-                        <th data-sortable="" class=@(Model.clmNameOrder == 1 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(1, '@Model.sortorder')" class="dataTable-sorter" id="clm1">Quote No</a></th>
-                        <th data-sortable="" class=@(Model.clmNameOrder == 2 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(2, '@Model.sortorder')" class="dataTable-sorter" id="clm2">QuoteDate</a></th>
-                        <th data-sortable="" class=@(Model.clmNameOrder == 3 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(3, '@Model.sortorder')" class="dataTable-sorter" id="clm3">QuoteValidDate</a></th>
+                    <tr class="btn-primary">
+                        <th data-sortable="" class=@(Model.clmNameOrder == 1 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(1, '@Model.sortorder')" class="dataTable-sorter" id="clm1">No</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 2 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(2, '@Model.sortorder')" class="dataTable-sorter" id="clm2">Date</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 3 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(3, '@Model.sortorder')" class="dataTable-sorter" id="clm3">Valid Date</a></th>
                         <th data-sortable="" class=@(Model.clmNameOrder == 4 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(4, '@Model.sortorder')" class="dataTable-sorter" id="clm4">Customer</a></th>
                         <th data-sortable="" class=@(Model.clmNameOrder == 5 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(5, '@Model.sortorder')" class="dataTable-sorter" id="clm5">Sales Person</a></th>
                         <th data-sortable="" class=@(Model.clmNameOrder == 6 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(6, '@Model.sortorder')" class="dataTable-sorter" id="clm6">Remarks</a></th>
@@ -41,7 +47,7 @@
                                 <tr>
                                     <td>@comp.QuoteNo</td>
                                     <td>@comp.QuoteDate.ToString("dd-MMM-yyyy")</td>
-                                    <td>@comp.QuoteValidDate</td>
+                                    <td>@comp.QuoteValidDate.ToString("dd-MMM-yyyy")</td>
                                     <td>@comp.CustomerName</td>
                                     <td>@comp.SalesManName</td>
                                     <td>@comp.Remarks</td>
@@ -58,7 +64,7 @@
                                                 }
 
                                             }
-                                            <button type="button" class="btn-outline-success" onclick="onCreate('@comp.QuoteId')" title="Edit"><i class="fa fa-pen"></i></button>
+                                            <button type="button" class="btn-outline-success" onclick="onEdit('@comp.QuoteId')" title="Edit"><i class="fa fa-pen"></i></button>
                                             <button type="button" class="btn-outline-danger" onclick="onDelete('@comp.QuoteId')" title="Delete"><i class="fa fa-trash"></i></button>
                                         </div>
                                     </td>
@@ -121,10 +127,9 @@
     </div>
 
 </div>
-        <script>
-            // Simple Datatable
-            let tbl = document.querySelector('#tblQuotationMaster');
-            let dataTable = new simpleDatatables.DataTable(tbl);
-        </script>
-        <!--Try new table look-->
-           
+<script>
+    // Simple Datatable
+    let tbl = document.querySelector('#tblQuotationMaster');
+    let dataTable = new simpleDatatables.DataTable(tbl);
+</script>
+<!--Try new table look-->

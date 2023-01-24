@@ -7,15 +7,132 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ClosedXML.Excel;
+using System.IO;
 
 namespace ERPStandard.WEB.Controllers
 {
+    //Colpse all open scopes
+    //Ctl + M + O
     public class SalequotationController : Controller
     {
         // In the name of Allah, the most merciful
         // Created on 08-Jan-2022
         // Created by Haroon
         // Sales Order Master Detail Form
+        #region Excel Export Methods
+
+        public byte[] Export<T>(List<T> list, string file, string sheetName)
+        {
+            byte[] content;
+            XLWorkbook _workbook = new XLWorkbook();
+            using (XLWorkbook workbook = new XLWorkbook())
+            {
+                workbook.AddWorksheet(sheetName).FirstCell().InsertTable<T>(list, false);
+
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    content = stream.ToArray();
+                }
+
+
+            }
+            return content;
+        }
+
+        public ActionResult excelexport()
+        {
+            var o1 = new { Id = 1, Name = "Foo" };
+            var o2 = new { Id = 2, Name = "Bar" };
+            var list = new[] { o1, o2 }.ToList();
+            byte[] content = Export(list, "excelexport", "sheet2");
+
+            return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Quotation.xlsx");
+
+        }
+
+        public ActionResult MasterDetailExcelExport()
+        {
+            var comp = SaleQuotationService.Instance.QDtailed_Master_Detail();
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.Worksheets.Add("Quotation");
+                var currentRow = 1;
+                worksheet.Row(currentRow).Style.Fill.BackgroundColor = XLColor.LightBlue;
+                #region Header
+                worksheet.Cell(currentRow, 1).Value = "SNo";
+                worksheet.Cell(currentRow, 2).Value = "QNo";
+                worksheet.Cell(currentRow, 3).Value = "Date";
+                worksheet.Cell(currentRow, 4).Value = "Valid Date";
+                worksheet.Cell(currentRow, 5).Value = "Salesman";
+                worksheet.Cell(currentRow, 6).Value = "Customer";
+                worksheet.Cell(currentRow, 7).Value = "Remarks";
+                worksheet.Cell(currentRow, 8).Value = "Item Detail";
+                worksheet.Cell(currentRow, 9).Value = "Qty";
+                worksheet.Cell(currentRow, 10).Value = "Rate";
+                worksheet.Cell(currentRow, 11).Value = "Value";
+                worksheet.Cell(currentRow, 12).Value = "VAT";
+                worksheet.Cell(currentRow, 13).Value = "VAT Value";
+                worksheet.Cell(currentRow, 14).Value = "ATax";
+                worksheet.Cell(currentRow, 15).Value = "ATax Value";
+                worksheet.Cell(currentRow, 16).Value = "SExduty";
+                worksheet.Cell(currentRow, 17).Value = "SExduty Value";
+                worksheet.Cell(currentRow, 18).Value = "Net Value";
+                #endregion 
+                #region Detail
+                int i = 1;
+                foreach (var item in comp)
+                {
+                int j = 1;
+                    currentRow += 1;
+                    worksheet.Cell(currentRow, j++).Value = i;
+                    worksheet.Cell(currentRow, j++).Value = item.SaleQuotationMaster.QuoteNo;
+                    worksheet.Cell(currentRow, j++).Value = item.SaleQuotationMaster.QuoteDate.ToString("dd-MMM-yyyy");
+                    worksheet.Cell(currentRow, j++).Value = item.SaleQuotationMaster.QuoteValidDate.ToString("dd-MMM-yyyy");
+                    worksheet.Cell(currentRow, j++).Value = item.SaleQuotationMaster.SalesManName;
+                    worksheet.Cell(currentRow, j++).Value = item.SaleQuotationMaster.CustomerName;
+                    worksheet.Cell(currentRow, j++).Value = item.SaleQuotationMaster.Remarks;
+                    foreach (var item_d in item.SaleQuotationDetail)
+                    {
+                        j = 8;
+                        var amount = item_d.Qty * item_d.Rate;
+                        var SaleTax_amount = Math.Round(amount * item_d.SaleTaxRate / 100, 2);
+                        var ASaleTax_amount = Math.Round(amount * item_d.ASaleTaxRate / 100, 2);
+                        var SExDuty_amount = Math.Round(amount * item_d.SExDutyRate / 100, 2);
+                        var NetTotal_amount = Math.Round(amount + SaleTax_amount + ASaleTax_amount + SExDuty_amount, 2);
+
+                        currentRow += 1;
+                        worksheet.Cell(currentRow, j++).Value = item_d.ItemName;
+                        worksheet.Cell(currentRow, j++).Value = item_d.Qty;
+                        worksheet.Cell(currentRow, j++).Value = item_d.Rate;
+                        worksheet.Cell(currentRow, j++).Value = amount;
+                        worksheet.Cell(currentRow, j++).Value = item_d.SaleTaxRate;
+                        worksheet.Cell(currentRow, j++).Value = SaleTax_amount;
+                        worksheet.Cell(currentRow, j++).Value = item_d.ASaleTaxRate;
+                        worksheet.Cell(currentRow, j++).Value = ASaleTax_amount;
+                        worksheet.Cell(currentRow, j++).Value = item_d.SExDutyRate;
+                        worksheet.Cell(currentRow, j++).Value = SExDuty_amount;
+                        worksheet.Cell(currentRow, j++).Value = NetTotal_amount;
+                    }
+                    i++;
+                }
+                #endregion 
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+                    return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "QuotationDetail.xlsx");
+                }
+            }
+        }
+
+        public ActionResult ImportExcelQutationList()
+        {
+            return PartialView("SaleQuotationImport");
+        }
+
+        #endregion
 
         #region Sales - Order
 
@@ -23,7 +140,6 @@ namespace ERPStandard.WEB.Controllers
         {
             return View();
         }
-
         public ActionResult SaleQuotationList(int? pageno, int pageSize = 10, string dtSearch = "", int clmNameOrder = 0, string sortorder="")
         {
             string m_sortorder = "desc";
@@ -47,35 +163,49 @@ namespace ERPStandard.WEB.Controllers
         }
         public ActionResult SaleQuotationReportView(string dtSearch = "", int clmNameOrder = 0)
         {
-            var SaleQuotationViewModel = SaleQuotationService.Instance.Report(dtSearch, clmNameOrder);
-            return PartialView("SaleQuotationReportView", SaleQuotationViewModel);
+            var comp = SaleQuotationService.Instance.QDtailed_Master_Detail();
+            return PartialView("SaleQuotationReportView", comp);
         }
 
         [HttpGet]
         public ActionResult SaleQuotationEdit(string Id)
         {
-            var comp = SaleQuotationService.Instance.Single(Id);
-            return PartialView("SaleQuotationEditView", comp);
+            var comp = SaleQuotationService.Instance.Single_Master_Detail(Id);
+            comp.invoiceType = (int)InvoiceType.Invoice_Tax_AddTax;
+            return PartialView("SaleQuotationEdit", comp);
         }
 
         [HttpPost]
-        public ActionResult SaleQuotationEdit(CRM_SaleQuotation SaleQuotation)
+        public ActionResult SaleQuotationEdit(CRM_SaleQuotation SaleQuotation, List<CRM_SaleQuotationDetail> SaleQuotationDetail)
         {
-            var flgComp = SaleQuotationService.Instance.Update(SaleQuotation);
-            if (flgComp == true)
+            //var flgComp = SaleQuotationService.Instance.Update(SaleQuotation);
+            try
             {
-                var SaleQuotationViewModel = SaleQuotationListLoad(1);
-                return PartialView("SaleQuotationList", SaleQuotationViewModel);
+                var compno = SaleQuotationService.Instance.Update(SaleQuotation, SaleQuotationDetail);
+                SaleQuotationViewModel SaleQuotationViewModel = new SaleQuotationViewModel();
+                SaleQuotationViewModel = SaleQuotationService.Instance.All(1);
+                //return PartialView("SaleQuotationList", SaleQuotationViewModel);
+                if (compno > 0)
+                {
+                    return Json(new { result = "ture" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { result = "false" }, JsonRequestBehavior.AllowGet);
+                }
             }
-            return View();
+            catch (Exception ex)
+            {
+                return Json(new { result = "false: " + ex.Message }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpGet]
         public ActionResult SaleQuotationCreate()
         {
-            SaleQuotationMasterViewModel saleQuotationMasterViewModel = new SaleQuotationMasterViewModel();
-            saleQuotationMasterViewModel.invoiceType = (int)InvoiceType.Invoice_Tax_AddTax;
-            return PartialView("SaleQuotationCreate", saleQuotationMasterViewModel);
+            QuotationCreateNewViewModel quotationCreateNewViewModel = new QuotationCreateNewViewModel();
+            quotationCreateNewViewModel.invoiceType = (int)InvoiceType.Invoice_Tax_AddTax;
+            return PartialView("SaleQuotationCreate", quotationCreateNewViewModel);
         }
         [HttpPost]
         public ActionResult SaleQuotationCreate(CRM_SaleQuotation SaleQuotation, List<CRM_SaleQuotationDetail> SaleQuotationDetail)
@@ -123,7 +253,6 @@ namespace ERPStandard.WEB.Controllers
             }
             return View();
         }
-
         //public ActionResult SaleInvoiceTemplate(string Id)
         //{
         //    if (string.IsNullOrEmpty(Id))
@@ -134,7 +263,6 @@ namespace ERPStandard.WEB.Controllers
         //    var printpdf = new ActionAsPdf("DocumentReportTemplate", root);
         //    return printpdf;
         //}
-
         [HttpGet]
         public ActionResult SaleInvoiceTemplate(string Id)
         {
@@ -156,7 +284,6 @@ namespace ERPStandard.WEB.Controllers
             }
             return View();
         }
-
         #endregion
     }
 }
