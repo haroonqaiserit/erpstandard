@@ -21,7 +21,6 @@ namespace ERPStandard.WEB.Controllers
         // Created by Haroon
         // Sales Order Master Detail Form
         #region Excel Export Methods
-
         public byte[] Export<T>(List<T> list, string file, string sheetName)
         {
             byte[] content;
@@ -40,7 +39,6 @@ namespace ERPStandard.WEB.Controllers
             }
             return content;
         }
-
         public ActionResult excelexport()
         {
             var o1 = new { Id = 1, Name = "Foo" };
@@ -51,7 +49,6 @@ namespace ERPStandard.WEB.Controllers
             return File(content, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Quotation.xlsx");
 
         }
-
         public ActionResult MasterDetailExcelExport()
         {
             var comp = SaleQuotationService.Instance.QDtailed_Master_Detail();
@@ -61,48 +58,50 @@ namespace ERPStandard.WEB.Controllers
                 var currentRow = 1;
                 worksheet.Row(currentRow).Style.Fill.BackgroundColor = XLColor.LightBlue;
                 #region Header
-                worksheet.Cell(currentRow, 1).Value = "SNo";
-                worksheet.Cell(currentRow, 2).Value = "QNo";
-                worksheet.Cell(currentRow, 3).Value = "Date";
-                worksheet.Cell(currentRow, 4).Value = "Valid Date";
-                worksheet.Cell(currentRow, 5).Value = "Salesman";
-                worksheet.Cell(currentRow, 6).Value = "Customer";
-                worksheet.Cell(currentRow, 7).Value = "Remarks";
-                worksheet.Cell(currentRow, 8).Value = "Item Detail";
-                worksheet.Cell(currentRow, 9).Value = "Qty";
-                worksheet.Cell(currentRow, 10).Value = "Rate";
-                worksheet.Cell(currentRow, 11).Value = "Value";
-                worksheet.Cell(currentRow, 12).Value = "VAT";
-                worksheet.Cell(currentRow, 13).Value = "VAT Value";
-                worksheet.Cell(currentRow, 14).Value = "ATax";
-                worksheet.Cell(currentRow, 15).Value = "ATax Value";
-                worksheet.Cell(currentRow, 16).Value = "SExduty";
-                worksheet.Cell(currentRow, 17).Value = "SExduty Value";
-                worksheet.Cell(currentRow, 18).Value = "Net Value";
+                int i = 1;
+                worksheet.Cell(currentRow, i++).Value = "SNo";
+                worksheet.Cell(currentRow, i++).Value = "QNo";
+                worksheet.Cell(currentRow, i++).Value = "Date";
+                worksheet.Cell(currentRow, i++).Value = "Valid Date";
+                worksheet.Cell(currentRow, i++).Value = "Salesman";
+                worksheet.Cell(currentRow, i++).Value = "Customer";
+                worksheet.Cell(currentRow, i++).Value = "Remarks";
+                worksheet.Cell(currentRow, i++).Value = "Item Code";
+                worksheet.Cell(currentRow, i++).Value = "Item Detail";
+                worksheet.Cell(currentRow, i++).Value = "Qty";
+                worksheet.Cell(currentRow, i++).Value = "Rate";
+                worksheet.Cell(currentRow, i++).Value = "Value";
+                worksheet.Cell(currentRow, i++).Value = "VAT";
+                worksheet.Cell(currentRow, i++).Value = "VAT Value";
+                worksheet.Cell(currentRow, i++).Value = "ATax";
+                worksheet.Cell(currentRow, i++).Value = "ATax Value";
+                worksheet.Cell(currentRow, i++).Value = "SExduty";
+                worksheet.Cell(currentRow, i++).Value = "SExduty Value";
+                worksheet.Cell(currentRow, i++).Value = "Net Value";
                 #endregion 
                 #region Detail
-                int i = 1;
+                i = 1;
                 foreach (var item in comp)
                 {
-                int j = 1;
-                    currentRow += 1;
-                    worksheet.Cell(currentRow, j++).Value = i;
-                    worksheet.Cell(currentRow, j++).Value = item.SaleQuotationMaster.QuoteNo;
-                    worksheet.Cell(currentRow, j++).Value = item.SaleQuotationMaster.QuoteDate.ToString("dd-MMM-yyyy");
-                    worksheet.Cell(currentRow, j++).Value = item.SaleQuotationMaster.QuoteValidDate.ToString("dd-MMM-yyyy");
-                    worksheet.Cell(currentRow, j++).Value = item.SaleQuotationMaster.SalesManName;
-                    worksheet.Cell(currentRow, j++).Value = item.SaleQuotationMaster.CustomerName;
-                    worksheet.Cell(currentRow, j++).Value = item.SaleQuotationMaster.Remarks;
                     foreach (var item_d in item.SaleQuotationDetail)
                     {
-                        j = 8;
+                        int j = 1;
+                        currentRow += 1;
+                        worksheet.Cell(currentRow, j++).Value = i;
+                        worksheet.Cell(currentRow, j++).Value = item.SaleQuotationMaster.QuoteNo;
+                        worksheet.Cell(currentRow, j++).Value = item.SaleQuotationMaster.QuoteDate.ToString("dd-MMM-yyyy");
+                        worksheet.Cell(currentRow, j++).Value = item.SaleQuotationMaster.QuoteValidDate.ToString("dd-MMM-yyyy");
+                        worksheet.Cell(currentRow, j++).Value = item.SaleQuotationMaster.SalesManName;
+                        worksheet.Cell(currentRow, j++).Value = item.SaleQuotationMaster.CustomerName;
+                        worksheet.Cell(currentRow, j++).Value = item.SaleQuotationMaster.Remarks;
                         var amount = item_d.Qty * item_d.Rate;
                         var SaleTax_amount = Math.Round(amount * item_d.SaleTaxRate / 100, 2);
                         var ASaleTax_amount = Math.Round(amount * item_d.ASaleTaxRate / 100, 2);
                         var SExDuty_amount = Math.Round(amount * item_d.SExDutyRate / 100, 2);
                         var NetTotal_amount = Math.Round(amount + SaleTax_amount + ASaleTax_amount + SExDuty_amount, 2);
 
-                        currentRow += 1;
+                        //currentRow += 1;
+                        worksheet.Cell(currentRow, j++).Value = item_d.ItemID;
                         worksheet.Cell(currentRow, j++).Value = item_d.ItemName;
                         worksheet.Cell(currentRow, j++).Value = item_d.Qty;
                         worksheet.Cell(currentRow, j++).Value = item_d.Rate;
@@ -127,11 +126,53 @@ namespace ERPStandard.WEB.Controllers
             }
         }
 
-        public ActionResult ImportExcelQutationList()
+        public ActionResult SaleQuotationImport()
         {
             return PartialView("SaleQuotationImport");
         }
+        [HttpPost]
+        public ActionResult MasterDetailExcelImport(HttpPostedFileBase myExcelData)
+        {
+            if(myExcelData.ContentLength > 0)//check is there file to upload
+            {
+                //string filePath = @"C:\Users\Public\Documents\";
+                //string fileName = DateTime.Now.ToString("yyMMddHHmmss");
+                //filePath = filePath + fileName + ".xlsx";
+                //myExcelData.SaveAs(filePath);
+                XLWorkbook xLWorkbook = new XLWorkbook(myExcelData.InputStream);
 
+                int row = 2;
+                while(xLWorkbook.Worksheets.Worksheet(1).Cell(row, 1).GetString() != "")
+                {
+                    int i = 1;
+                    int SNo = int.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
+                    double QNo = double.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
+                    DateTime Date = DateTime.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
+                    DateTime ValidDate = DateTime.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
+                    string Salesman = xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString();
+                    string Customer = xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString();
+                    string Remarks = xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString();
+                    string ItemCode = xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString();
+                    string ItemName = xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString();
+                    decimal Qty = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
+                    decimal Rate = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
+                    decimal Value = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
+                    decimal STax = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
+                    decimal STaxAmt = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
+                    decimal ASTax = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
+                    decimal ASTaxAmt = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
+                    decimal SExduty = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
+                    decimal SExdutyAmt = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
+                    decimal NetValue = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
+                    row++;
+                }
+            }
+            else
+            {
+                return Json(new { success = true, message = "please upload an excel file" }, JsonRequestBehavior.AllowGet);
+            }
+            return Json(new { success = true, message = "success" }, JsonRequestBehavior.AllowGet);
+        }
         #endregion
 
         #region Sales - Order

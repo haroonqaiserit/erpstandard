@@ -5,9 +5,10 @@
 <script src="~/assets/js/jsPDF/jspdf.min.js"></script>
 <script src="~/assets/js/jsPDF/jspdf.plugin.autotable.min.js"></script>
 <script src="~/assets/js/htm2canvas/html2canvas.js"></script>
-<script src="https://unpkg.com/jspdf-invoice-template@1.4.0/dist/index.js"></script>
+@*<script src="https://unpkg.com/jspdf-invoice-template@1.4.0/dist/index.js"></script>*@
+<script src="~/assets/js/jsPDF/invoicetemplate.js"></script>
 <link href="~/assets/css/reportstyle.css" rel="stylesheet" />
-<link rel="stylesheet" href="style.css" media="all" />
+@*<link rel="stylesheet" href="style.css" media="all" />*@
 <div class="page-title">
     <div class="row">
         <div class="col-12 col-md-6 order-md-1 order-last">
@@ -37,7 +38,7 @@
                 <div Id="EntityReportPreview">
 
                 </div>
-                
+
             </div>
         </div>
     </div>
@@ -47,18 +48,7 @@
 <script>
     function QutatonDetailExcel() {
         console.log("print of excel sheteet");
-
-        function QutatonDetailExcel() {
-            $.ajax({
-                url: '@Url.Action("MasterDetailExcelExport", "Salequotation")',
-            }).done(function () {
-                alert('Added');
-            });
-        }
-
     }
-
-
     function printDiv() {
         var Id = "1 -L";
         $.ajax({
@@ -84,11 +74,12 @@
         });
 
     }
-
 </script>
 
 <script>
 
+    var clmNameOrders="1";
+    var sortorders = "desc";
     $(document).ready(function () {
         onLoad();
 
@@ -98,19 +89,17 @@
             }
         };
     });
-
     function onLoad() {
         $.ajax({
             url: '@Url.Action("SaleQuotationList", "Salequotation")',
         })
-            .done(function (response) {
+        .done(function (response) {
                 $("#FormProcess").html(response);
         })
         .fail(function (XMLHttpRequest, textStatus, errorThrown) {
         	alert("List Load Fail");
         });
     }
-
     function onCreate() {
         $.ajax({
             url: '@Url.Action("SaleQuotationCreate", "Salequotation")'
@@ -125,9 +114,9 @@
                     //alert("FAIL");
                 });
     };
-
     function pagingwork(data) {
         var pageno = data;
+        console.log(pageno);
         var pageSize = document.getElementById("ddlTotalPageNo").value;
         var dtSearch = document.getElementById("dtSearch").value;
 
@@ -138,7 +127,9 @@
             data: {
                 pageno: pageno,
                 pageSize: pageSize,
-                dtSearch: dtSearch
+                dtSearch: dtSearch,
+                clmNameOrder: clmNameOrders,
+                sortorder: sortorders
             },
             beforeSend: function () {
                 $("#CustomSearchLoader").show();
@@ -153,32 +144,6 @@
         })
 
     };
-
-    $(".editButton").click(function () {
-        var EditId = $(this).attr("data-id");
-        debugger;
-        //alert(EditId);
-
-        $.ajax({
-            type: "POST",
-            url: '@Url.Action("SaleQuotationCreate", "Salequotation")',
-            data: {
-                Id: EditId
-            },
-            beforeSend: function () {
-                $("#CustomSearchLoader").show();
-            },
-            complete: function () {
-                $("#CustomSearchLoader").hide();
-            },
-            success: function (result) {
-                //alert("result received");
-                $("#FormProcess").html(result);
-            }
-        })
-
-    });
-
     function onEdit(data) {
         var EditId = data;
         //alert(EditId);
@@ -201,7 +166,6 @@
             }
         })
     };
-
     function onEditSave() {
         var Status = $("#Status").val();
         var BranchName = $("#BranchName").val();
@@ -233,12 +197,22 @@
             }
         })
     };
-
     function onSave(form, addedit) {
         //addedit = 0 Add New Record
         //addedit = 1 Edit Record
+        console.log(form);
+        var isValid = $(form).validate();
+        console.log(isValid.invalid);
+        if (!isValid) {
+            e.preventDefault(); //prevent the default action
+            return;
+        }
+
         $(form).validate({
             rules: {
+                "input[name='Remarks']": {
+                    required: true,
+                },
                 "input[name='Qty']": {
                     required: true,
                 },
@@ -381,7 +355,21 @@
 
 // Master Detail Record Save
     };
-
+    function onImport() {
+            $.ajax({
+                url: '@Url.Action("SaleQuotationImport", "Salequotation")',
+                beforeSend: function () {
+                    $("#CustomSearchLoader").show();
+                },
+                complete: function () {
+                    $("#CustomSearchLoader").hide();
+                },
+                success: function (result) {
+                    //alert("result received");
+                    $("#FormProcess").html(result);
+                }
+            })
+    };
     function onDelete(data) {
         //var confirmDelete = confirm("Are you sure you want to delete this record?");
 
@@ -436,7 +424,9 @@
                 url: '@Url.Action("SaleQuotationList", "Salequotation")',
                 data: {
                     pageSize: pageSize,
-                    dtSearch: dtSearch
+                    dtSearch: dtSearch,
+                    clmNameOrder: clmNameOrders,
+                    sortorder: sortorders
                 },
                 beforeSend: function () {
                     $("#CustomSearchLoader").show();
@@ -463,7 +453,9 @@
             url: '@Url.Action("SaleQuotationList", "Salequotation")',
             data: {
                 pageSize: pageSize,
-                dtSearch: dtSearch
+                dtSearch: dtSearch,
+                clmNameOrder: clmNameOrders,
+                sortorder: sortorders
             },
             beforeSend: function () {
                 $("#CustomSearchLoader").show();
@@ -481,12 +473,11 @@
         })
     };
     function DataTableOrder(clmNameOrder, sortorder) {
-        //clmNameOrder.preventDefault();
-        console.log(clmNameOrder);
-        //debugger;
-        var pageSize = document.getElementById("ddlTotalPageNo").value;
-        var dtSearch = document.getElementById("dtSearch").value;
+    var pageSize = document.getElementById("ddlTotalPageNo").value;
+    var dtSearch = document.getElementById("dtSearch").value;
 
+        clmNameOrders = clmNameOrder;
+        sortorders = sortorder;
         console.log(pageSize);
         $.ajax({
             type: "Get",
@@ -494,8 +485,8 @@
             data: {
                 pageSize: pageSize,
                 dtSearch: dtSearch,
-                clmNameOrder: clmNameOrder,
-                sortorder: sortorder
+                clmNameOrder: clmNameOrders,
+                sortorder: sortorders
             },
             beforeSend: function () {
                 $("#CustomSearchLoader").show();
@@ -764,45 +755,6 @@
                     },
                     startY: startY += 50
                 };
-                var columns = [
-                    { title: "ID", dataKey: "id", width: 90 },
-                    { title: "Product", dataKey: "Product", width: 40 },
-                    { title: "Rate/Item", dataKey: "Rate/Item", width: 40 },
-                    { title: "Qty", dataKey: "Qty", width: 40 },
-                    { title: "Dsnt", dataKey: "Dsnt", width: 40 },
-                    { title: "S.Total", dataKey: "STotal", width: 40 },
-                    { title: "CGST", dataKey: "CGST", width: 40 },
-                    { title: "SGST", dataKey: "SGST", width: 40 },
-                    { title: "IGST", dataKey: "IGST", width: 40 },
-                    { title: "CESS", dataKey: "CESS", width: 40 },
-                    { title: "Total", dataKey: "Total", width: 40 },
-                ];
-                var rows = [
-                    { "id": 1, "Product": "SAMSUNG GALAXY S8 PLUS 64GB HSNCODE: 330854040", "Rate/Item": "10", "Qty": "12", "Dsnt": "0", "STotal": "120", "CGST": 20, "SGST": 20, "IGST": 0, "CESS": 20, "Total": 180 },
-                    { "id": 2, "Product": "SAMSUNG GALAXY S8 PLUS 64GB HSNCODE: 330854040", "Rate/Item": "10", "Qty": "12", "Dsnt": "0", "STotal": "120", "CGST": 20, "SGST": 20, "IGST": 0, "CESS": 20, "Total": 180 },
-                    { "id": 3, "Product": "SAMSUNG GALAXY S8 PLUS 64GB HSNCODE: 330854040", "Rate/Item": "10", "Qty": "12", "Dsnt": "10", "STotal": "120", "CGST": 20, "SGST": 20, "IGST": 0, "CESS": 20, "Total": 180 },
-                    { "id": 4, "Product": "Shaw", "Rate/Item": "10", "Qty": "12", "Dsnt": "10", "STotal": "120", "CGST": 20, "SGST": 20, "IGST": 0, "CESS": 20, "Total": 180 },
-                    { "id": 4, "Product": "Shaw", "Rate/Item": "10", "Qty": "12", "Dsnt": "10", "STotal": "120", "CGST": 20, "SGST": 20, "IGST": 0, "CESS": 20, "Total": 180 },
-                    { "id": 4, "Product": "SAMSUNG GALAXY S8 PLUS 64GB HSNCODE: 330854040", "Rate/Item": "10", "Qty": "12", "Dsnt": "10", "STotal": "120", "CGST": 20, "SGST": 20, "IGST": 0, "CESS": 20, "Total": 180 },
-                    { "id": 4, "Product": "Shaw", "Rate/Item": "10", "Qty": "12", "Dsnt": "10", "STotal": "120", "CGST": 20, "SGST": 20, "IGST": 0, "CESS": 20, "Total": 180 },
-                    { "id": 4, "Product": "Shaw", "Rate/Item": "10", "Qty": "12", "Dsnt": "10", "STotal": "120", "CGST": 20, "SGST": 20, "IGST": 0, "CESS": 20, "Total": 180 },
-                    { "id": 4, "Product": "Shaw", "Rate/Item": "10", "Qty": "12", "Dsnt": "10", "STotal": "120", "CGST": 20, "SGST": 20, "IGST": 0, "CESS": 20, "Total": 180 },
-                    { "id": 4, "Product": "SAMSUNG GALAXY S8 PLUS 64GB HSNCODE: 330854040", "Rate/Item": "10", "Qty": "12", "Dsnt": "10", "STotal": "120", "CGST": 20, "SGST": 20, "IGST": 0, "CESS": 20, "Total": 180 },
-                    { "id": '', "Product": "", "Rate/Item": "Total", "Qty": "", "Dsnt": "20", "STotal": "360", "CGST": 60, "SGST": 60, "IGST": 0, "CESS": 60, "Total": 680 },
-                    { "id": '', "Product": "", "Rate/Item": "Total", "Qty": "", "Dsnt": "20", "STotal": "360", "CGST": 60, "SGST": 60, "IGST": 0, "CESS": 60, "Total": 680 },
-                    { "id": '', "Product": "", "Rate/Item": "Total", "Qty": "", "Dsnt": "20", "STotal": "360", "CGST": 60, "SGST": 60, "IGST": 0, "CESS": 60, "Total": 680 },
-                    { "id": '', "Product": "", "Rate/Item": "Total", "Qty": "", "Dsnt": "20", "STotal": "360", "CGST": 60, "SGST": 60, "IGST": 0, "CESS": 60, "Total": 680 },
-                    { "id": '', "Product": "", "Rate/Item": "Total", "Qty": "", "Dsnt": "20", "STotal": "360", "CGST": 60, "SGST": 60, "IGST": 0, "CESS": 60, "Total": 680 },
-                    { "id": '', "Product": "", "Rate/Item": "Total", "Qty": "", "Dsnt": "20", "STotal": "360", "CGST": 60, "SGST": 60, "IGST": 0, "CESS": 60, "Total": 680 },
-                    { "id": '', "Product": "", "Rate/Item": "Total", "Qty": "", "Dsnt": "20", "STotal": "360", "CGST": 60, "SGST": 60, "IGST": 0, "CESS": 60, "Total": 680 },
-                    { "id": '', "Product": "", "Rate/Item": "Total", "Qty": "", "Dsnt": "20", "STotal": "360", "CGST": 60, "SGST": 60, "IGST": 0, "CESS": 60, "Total": 680 },
-                    { "id": '', "Product": "", "Rate/Item": "Total", "Qty": "", "Dsnt": "20", "STotal": "360", "CGST": 60, "SGST": 60, "IGST": 0, "CESS": 60, "Total": 680 },
-                    { "id": '', "Product": "", "Rate/Item": "Total", "Qty": "", "Dsnt": "20", "STotal": "360", "CGST": 60, "SGST": 60, "IGST": 0, "CESS": 60, "Total": 680 },
-                    { "id": '', "Product": "", "Rate/Item": "Total", "Qty": "", "Dsnt": "20", "STotal": "360", "CGST": 60, "SGST": 60, "IGST": 0, "CESS": 60, "Total": 680 },
-                    { "id": '', "Product": "", "Rate/Item": "Total", "Qty": "", "Dsnt": "20", "STotal": "360", "CGST": 60, "SGST": 60, "IGST": 0, "CESS": 60, "Total": 680 },
-                    { "id": '', "Product": "", "Rate/Item": "Total", "Qty": "", "Dsnt": "20", "STotal": "360", "CGST": 60, "SGST": 60, "IGST": 0, "CESS": 60, "Total": 680 },
-                    { "id": '', "Product": "", "Rate/Item": "Total", "Qty": "", "Dsnt": "20", "STotal": "360", "CGST": 60, "SGST": 60, "IGST": 0, "CESS": 60, "Total": 680 },
-                ];
 
                 console.log(result.invoice);
                 console.log(result.invoice.table);
@@ -859,11 +811,8 @@
 
 
         });
-
-
-
     }
-        var props = {
+    var props = {
             outputType: jsPDFInvoiceTemplate.OutputType.Save,
                 returnJsPDFDocObject: true,
                     fileName: "Invoice 2024",
@@ -1044,7 +993,6 @@
     var lineSpacing = {
         NormalSpacing: 12,
     };
-
     function calculateAmt(e) {
         if (e) {
             var TableRow = e.target.closest('tr');
@@ -1125,8 +1073,6 @@
     function handleClicknumeric(e) {
         calculateAmt(e);
     }
-
-
     function generateInvPDFFormat2(Id) {
         if (!Id) {
             return;
@@ -1529,4 +1475,10 @@
             console.log("Total pages: " + pageCount);
         }
     };
+</script>
+
+<script>
+    // Simple Datatable
+    //let tbl = document.querySelector('#tblQuotationMaster');
+    //let dataTable = new simpleDatatables.DataTable(tbl);
 </script>

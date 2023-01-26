@@ -1,44 +1,78 @@
 ﻿@{
-    ViewBag.Title = "Sales Quotation";
+    ViewBag.Title = "Sales Transaction";
+    ViewBag.SubTitle = "Quotation";
 }
-
-<script src="~/assets/js/jsPDF/jspdf.min.js"></script>
-<script src="~/assets/js/jsPDF/jspdf.plugin.autotable.min.js"></script>
-<script src="~/assets/js/htm2canvas/html2canvas.js"></script>
-<script src="https://unpkg.com/jspdf-invoice-template@1.4.0/dist/index.js"></script>
-<link href="~/assets/css/reportstyle.css" rel="stylesheet" />
-<link rel="stylesheet" href="style.css" media="all" />
-<div class="page-title">
-    <div class="row">
-        <div class="col-12 col-md-6 order-md-1 order-last">
-            <h3>@ViewBag.Title</h3>
-            @*<p class="text-subtitle text-muted"><a href="index.html">Create New</a></p>*@
-            <button class="btn btn-primary me-1 mb-1" type="button" id="btnList" onclick="onLoad()">List</button>
-            <button class="btn btn-light-secondary me-1 mb-1" type="button" id="Create" onclick="onCreate()">New</button>
-        </div>
-        <div class="col-12 col-md-6 order-md-2 order-first">
-            <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">@ViewBag.SubTitle</li>
-                </ol>
-            </nav>
-        </div>
+<div class="card-header">
+    <h4 class="card-title">@ViewBag.SubTitle  Edit </h4>
+</div>
+<div class="card-content">
+    <div class="card-body">
+        <form name="QuotationForm" class="form">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="fuExcel">File Upload</label>
+                        <input type="file" id="fuExcel" name="fuExcel"/>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <button id="btnUpload" class="btn btn-success"> Upload</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
 
-<section id="multiple-column-form">
-    <div class="row match-height">
-        <div class="col-12">
-            <div class="card">
-                <div Id="FormProcess">
+    });
 
-                </div>
-                <div Id="EntityReportPreview">
+    $("#btnUpload").click(function () {
+        var formData = new FormData();
+        var fuUploadFile = document.getElementById("fuExcel");
+        var myFile = fuUploadFile.files[0];
+        formData.append("myExcelData", myFile);
 
-                </div>
-                
-            </div>
-        </div>
-    </div>
-</section>
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("MasterDetailExcelImport", "SaleQuotation")',
+            contentType: false,
+            processData: false,
+            data: formData,
+            beforeSend: function () {
+                $("#CustomSearchLoader").show();
+            },
+            complete: function () {
+                alert("result complete");
+                $("#CustomSearchLoader").hide();
+            },
+            success: function (result) {
+                alert(result);
+                //$("#FormProcess").html(result);
+            }
+        })
+    });
+
+
+    @*$("#btnUpload").click(function () {
+            var formData = new FormData();
+            var fuUploadFile = document.getElementById("fuExcel");
+            var myFile = fuUploadFile.files[0];
+            formData.append("myExcelData", myFile);
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("MasterDetailExcelImport", "SaleQuotation")',
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    alert(data.message);
+                }
+            })
+        })*@
+
+
+
+</script>

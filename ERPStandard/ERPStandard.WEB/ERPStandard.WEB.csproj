@@ -253,6 +253,7 @@
     <Content Include="assets\js\extensions\toastify.js" />
     <Content Include="assets\js\htm2canvas\html2canvas.js" />
     <Content Include="assets\js\htm2canvas\html2canvas.min.js" />
+    <Content Include="assets\js\jsPDF\invoicetemplate.js" />
     <Content Include="assets\js\jsPDF\jspdf.min.js" />
     <Content Include="assets\js\jsPDF\jspdf.plugin.autotable.min.js" />
     <Content Include="assets\js\jsPDF\plugins\acroform.js" />

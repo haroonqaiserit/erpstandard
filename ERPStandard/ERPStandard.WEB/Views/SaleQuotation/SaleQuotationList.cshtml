@@ -12,7 +12,7 @@
 <div class="card-body">
     <button class="btn-primary"  title="Print List" onclick="previewReport()"><i class="fa fa-print"></i></button>
     <button type="button" class="btn-success"  title="Excel List" onclick="location.href='@Url.Action("MasterDetailExcelExport", "Salequotation")'"><i class='fa fa-file-excel'></i></button>
-    <button class="btn-danger" onclick="previewReport()" title="Import"><i class="fa fa-file-import"></i></button>
+    <button class="btn-danger" onclick="onImport()" title="Import"><i class="fa fa-file-import"></i></button>
     @*<button class="btn-success" onclick="QutatonDetailExcel()"><i class="fa fa-file-excel"></i></button>*@
 
 
@@ -28,12 +28,12 @@
             <table class="table table-striped dataTable-table" id="tblQuotationMaster">
                 <thead>
                     <tr class="btn-primary">
-                        <th data-sortable="" class=@(Model.clmNameOrder == 1 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(1, '@Model.sortorder')" class="dataTable-sorter" id="clm1">No</a></th>
-                        <th data-sortable="" class=@(Model.clmNameOrder == 2 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(2, '@Model.sortorder')" class="dataTable-sorter" id="clm2">Date</a></th>
-                        <th data-sortable="" class=@(Model.clmNameOrder == 3 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(3, '@Model.sortorder')" class="dataTable-sorter" id="clm3">Valid Date</a></th>
-                        <th data-sortable="" class=@(Model.clmNameOrder == 4 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(4, '@Model.sortorder')" class="dataTable-sorter" id="clm4">Customer</a></th>
-                        <th data-sortable="" class=@(Model.clmNameOrder == 5 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(5, '@Model.sortorder')" class="dataTable-sorter" id="clm5">Sales Person</a></th>
-                        <th data-sortable="" class=@(Model.clmNameOrder == 6 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(6, '@Model.sortorder')" class="dataTable-sorter" id="clm6">Remarks</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 1 ? Model.sortorder : "") ><a href="javascript:;" onclick="DataTableOrder(1, '@Model.sortorder')" class="dataTable-sorter" sort-id="@Model.sortorder" id="clm1">No</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 2 ? Model.sortorder : "") ><a href="javascript:;" onclick="DataTableOrder(2, '@Model.sortorder')" class="dataTable-sorter" sort-id="@Model.sortorder" id="clm2">Date</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 3 ? Model.sortorder : "") ><a href="javascript:;" onclick="DataTableOrder(3, '@Model.sortorder')" class="dataTable-sorter" sort-id="@Model.sortorder" id="clm3">Valid Date</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 4 ? Model.sortorder : "") ><a href="javascript:;" onclick="DataTableOrder(4, '@Model.sortorder')" class="dataTable-sorter" sort-id="@Model.sortorder" id="clm4">Customer</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 5 ? Model.sortorder : "") ><a href="javascript:;" onclick="DataTableOrder(5, '@Model.sortorder')" class="dataTable-sorter" sort-id="@Model.sortorder" id="clm5">Sales Person</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 6 ? Model.sortorder : "") ><a href="javascript:;" onclick="DataTableOrder(6, '@Model.sortorder')" class="dataTable-sorter" sort-id="@Model.sortorder" id="clm6">Remarks</a></th>
                         <th data-sortable=""><a href="javascript:;" class="dataTable-sorter">Action</a></th>
                     </tr>
                 </thead>
@@ -127,9 +127,4 @@
     </div>
 
 </div>
-<script>
-    // Simple Datatable
-    let tbl = document.querySelector('#tblQuotationMaster');
-    let dataTable = new simpleDatatables.DataTable(tbl);
-</script>
 <!--Try new table look-->
