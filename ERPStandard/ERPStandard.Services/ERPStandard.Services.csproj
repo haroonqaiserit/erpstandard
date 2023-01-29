@@ -58,6 +58,9 @@
   <ItemGroup>
     <Compile Include="GL\AccountsServices.cs" />
     <Compile Include="Inventory\ItemService.cs" />
+    <Compile Include="Purchase\Purchaser\PurchaserService.cs" />
+    <Compile Include="Purchase\RequisitionOrder\PurchaseRequisitionOrderService.cs" />
+    <Compile Include="Purchase\Supplier\SupplierService.cs" />
     <Compile Include="Sales\SalesmanService.cs" />
     <Compile Include="Sales\CustomerService.cs" />
     <Compile Include="GlobalVariables.cs" />
@@ -82,6 +85,7 @@
       <Name>ERPStandard.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

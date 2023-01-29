@@ -15,7 +15,7 @@ namespace ERPStandard.DbEntities
     public partial class PurchaseRequisitionOrder
     {
         public string RequisitionID { get; set; }
-        public string RequisitionOrderNo { get; set; }
+        public int RequisitionOrderNo { get; set; }
         public System.DateTime RequisitionDate { get; set; }
         public string StoreUnitId { get; set; }
         public string Remarks { get; set; }
@@ -26,6 +26,9 @@ namespace ERPStandard.DbEntities
         public Nullable<int> LahTransferId { get; set; }
         public Nullable<System.DateTime> SaveDate { get; set; }
         public Nullable<int> DeletionID { get; set; }
-        public string PurchaserID { get; set; }
+        public string RefDocId { get; set; }
+        public string RefDocName { get; set; }
+        public int RequisitionOrderNo1 { get; set; }
+        public int RequisitionOrderNo2 { get; set; }
     }
 }

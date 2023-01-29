@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8d1d3a606cf94bd78f5326557eefaa11" Name="Diagram1">
+      <Diagram DiagramId="8d1d3a606cf94bd78f5326557eefaa11" Name="Diagram1" ZoomLevel="72" DisplayType="true">
         <EntityTypeShape EntityType="SairaIndModel.AccountInfo" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.Account" Width="1.5" PointX="7.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.AccountsBackUp" Width="1.5" PointX="14.75" PointY="12.75" IsExpanded="true" />
@@ -12,7 +12,6 @@
         <EntityTypeShape EntityType="SairaIndModel.AdjustmentSaleAcnt" Width="1.5" PointX="16.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.AdjustmentSaleAcntDetail" Width="1.5" PointX="18.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.AdvanceAgainstBonu" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="SairaIndModel.AdvanceAgainstSalary" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.AdvanceToPurchaser" Width="1.5" PointX="7.75" PointY="18.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.AdvanceToPurchaserDetail" Width="1.5" PointX="18.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.AllSupplier" Width="1.5" PointX="18.75" PointY="16.75" IsExpanded="true" />
@@ -42,7 +41,6 @@
         <EntityTypeShape EntityType="SairaIndModel.Designation" Width="1.5" PointX="25.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.District" Width="1.5" PointX="22.75" PointY="25.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.dtproperty" Width="1.5" PointX="24.75" PointY="25.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SairaIndModel.EmployeePersonalInfo" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.EmpPersonalInfo1" Width="1.5" PointX="26.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.EmpStatu" Width="1.5" PointX="26.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.EOBISetup" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
@@ -61,7 +59,6 @@
         <EntityTypeShape EntityType="SairaIndModel.GroupChange" Width="1.5" PointX="28.75" PointY="21.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.Holiday" Width="1.5" PointX="28.75" PointY="26.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.IncDetail" Width="1.5" PointX="19.75" PointY="29.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SairaIndModel.IncomeTaxSetup" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.Increment" Width="1.5" PointX="29.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.Invoice_detail" Width="1.5" PointX="21.75" PointY="29.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.Invoice_Info" Width="1.5" PointX="23.75" PointY="29.75" IsExpanded="true" />
@@ -93,12 +90,9 @@
         <EntityTypeShape EntityType="SairaIndModel.PReturnDetail" Width="1.5" PointX="33.75" PointY="33.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.PriceList" Width="1.5" PointX="34.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.PurAdvance" Width="1.5" PointX="9.75" PointY="34.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SairaIndModel.Purchaser" Width="1.5" PointX="34.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.PurchaseRequest" Width="1.5" PointX="34.75" PointY="18.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.PurchaseRequestDetail" Width="1.5" PointX="23.75" PointY="34.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SairaIndModel.PurchaseRequisitionOrder" Width="1.5" PointX="34.75" PointY="23.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SairaIndModel.PurchaseRequisitionOrderDetail" Width="1.5" PointX="35.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SairaIndModel.PurDeliveryChallDetail" Width="1.5" PointX="0.75" PointY="35.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.PurDeliveryChallDetail" Width="2.125" PointX="0.5" PointY="35.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.PurDellChallanMaster" Width="1.5" PointX="15.75" PointY="35.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.RawMaterial" Width="1.5" PointX="17.75" PointY="35.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.ReceiptBounce" Width="1.5" PointX="19.75" PointY="35.75" IsExpanded="true" />
@@ -159,10 +153,10 @@
         <EntityTypeShape EntityType="SairaIndModel.DelliveryChallanReportTable" Width="1.5" PointX="42.75" PointY="17.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.DeptChangeRep" Width="1.5" PointX="43.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.EmpDeduction" Width="1.5" PointX="2.75" PointY="43.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SairaIndModel.EmployeeOfficialInfo" Width="1.5" PointX="12.75" PointY="43.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SairaIndModel.EmployeePermAddress" Width="1.5" PointX="14.75" PointY="43.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SairaIndModel.EmplyeePresAddress" Width="1.5" PointX="16.75" PointY="43.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SairaIndModel.EmpSalary" Width="1.5" PointX="18.75" PointY="43.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.EmployeeOfficialInfo" Width="1.5" PointX="12.25" PointY="42.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.EmployeePermAddress" Width="2.375" PointX="14" PointY="44" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.EmplyeePresAddress" Width="2.25" PointX="17.25" PointY="43" IsExpanded="true" />
+        <EntityTypeShape EntityType="SairaIndModel.EmpSalary" Width="1.5" PointX="19.375" PointY="43.875" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.EOBIDetail" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.ExpenseInv" Width="1.5" PointX="43.75" PointY="23.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.ExpenseInvDetail" Width="1.5" PointX="23.75" PointY="43.75" IsExpanded="true" />
@@ -174,7 +168,6 @@
         <EntityTypeShape EntityType="SairaIndModel.GroupAssign" Width="1.5" PointX="43.75" PointY="36.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.Halfday" Width="1.5" PointX="43.75" PointY="40.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.ImpGLInt" Width="1.5" PointX="44.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SairaIndModel.IncomeTaxDetail" Width="1.5" PointX="5.25" PointY="15.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.InsurancePolicy" Width="1.5" PointX="44.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.ItemFinishGoodRegister" Width="1.5" PointX="44.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.ItemRawMaterialRegister" Width="1.5" PointX="41.75" PointY="44.75" IsExpanded="true" />
@@ -242,14 +235,7 @@
         <EntityTypeShape EntityType="SairaIndModel.UserRight" Width="1.5" PointX="51.75" PointY="33.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.User" Width="1.5" PointX="34.75" PointY="51.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.Visite" Width="1.5" PointX="36.75" PointY="51.75" IsExpanded="true" />
-        <AssociationConnector Association="SairaIndModel.FK_AdvanceAgainstBonus_EmployeePersonalInfo" ManuallyRouted="false" />
-        <AssociationConnector Association="SairaIndModel.FK_AdvanceAgainstSalary_EmployeePersonalInfo" ManuallyRouted="false" />
-        <AssociationConnector Association="SairaIndModel.FK_IncomeTaxSetup_EmployeePersonalInfo" ManuallyRouted="false" />
-        <AssociationConnector Association="SairaIndModel.FK_LoanAdjust_EmployeePersonalInfo" ManuallyRouted="false" />
-        <AssociationConnector Association="SairaIndModel.FK_LoanTaken_EmployeePersonalInfo" ManuallyRouted="false" />
-        <AssociationConnector Association="SairaIndModel.FK_SalaryMaster_EmployeePersonalInfo" ManuallyRouted="false" />
         <AssociationConnector Association="SairaIndModel.FK_EOBIDetail_EOBISetup" ManuallyRouted="false" />
-        <AssociationConnector Association="SairaIndModel.FK_IncomeTaxDetail_IncomeTaxSetup" ManuallyRouted="false" />
         <AssociationConnector Association="SairaIndModel.FK_InvoiceReceiptDetail_InvoiceReceipt" ManuallyRouted="false" />
         <AssociationConnector Association="SairaIndModel.FK_LoanAdjuststment_LoanTaken" ManuallyRouted="false" />
         <AssociationConnector Association="SairaIndModel.FK_SalaryDetail_SalaryMaster" ManuallyRouted="false" />
@@ -259,12 +245,25 @@
         <AssociationConnector Association="SairaIndModel.FK_SaleInvoiceDetail_SaleInvoice" ManuallyRouted="false" />
         <EntityTypeShape EntityType="SairaIndModel.SalesOrder" Width="1.5" PointX="21.375" PointY="52.75" />
         <EntityTypeShape EntityType="SairaIndModel.SalesOrderDetail" Width="1.5" PointX="23.375" PointY="52.75" />
-        <EntityTypeShape EntityType="SairaIndModel.BonusCalculation" Width="1.5" PointX="3" PointY="19.625" />
-        <AssociationConnector Association="SairaIndModel.FK_BonusCalculation_EmployeePersonalInfo" />
         <EntityTypeShape EntityType="SairaIndModel.Customer" Width="1.5" PointX="7.75" PointY="6" />
         <AssociationConnector Association="SairaIndModel.FK_SaleInvoice_Customer" />
         <EntityTypeShape EntityType="SairaIndModel.CRM_Customers" Width="1.5" PointX="52.375" PointY="44.75" />
-      </Diagram>
+        <EntityTypeShape EntityType="SairaIndModel.Purchaser" Width="1.5" PointX="8.375" PointY="23.75" />
+        <EntityTypeShape EntityType="SairaIndModel.AdvanceAgainstSalary" Width="1.5" PointX="3" PointY="29.875" />
+        <EntityTypeShape EntityType="SairaIndModel.BonusCalculation" Width="1.5" PointX="3" PointY="25.875" />
+        <EntityTypeShape EntityType="SairaIndModel.EmployeePersonalInfo" Width="1.5" PointX="0.75" PointY="17.375" />
+        <EntityTypeShape EntityType="SairaIndModel.IncomeTaxSetup" Width="1.5" PointX="3" PointY="16.125" />
+        <EntityTypeShape EntityType="SairaIndModel.IncomeTaxDetail" Width="1.5" PointX="5.25" PointY="16.125" />
+        <AssociationConnector Association="SairaIndModel.FK_AdvanceAgainstBonus_EmployeePersonalInfo" />
+        <AssociationConnector Association="SairaIndModel.FK_AdvanceAgainstSalary_EmployeePersonalInfo" />
+        <AssociationConnector Association="SairaIndModel.FK_BonusCalculation_EmployeePersonalInfo" />
+        <AssociationConnector Association="SairaIndModel.FK_IncomeTaxSetup_EmployeePersonalInfo" />
+        <AssociationConnector Association="SairaIndModel.FK_LoanAdjust_EmployeePersonalInfo" />
+        <AssociationConnector Association="SairaIndModel.FK_LoanTaken_EmployeePersonalInfo" />
+        <AssociationConnector Association="SairaIndModel.FK_SalaryMaster_EmployeePersonalInfo" />
+        <AssociationConnector Association="SairaIndModel.FK_IncomeTaxDetail_IncomeTaxSetup" />
+        </Diagram>
+      <Diagram DiagramId="3ce879e1bc8f4b728c1c78f8408c4829" Name="Diagram2" />
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

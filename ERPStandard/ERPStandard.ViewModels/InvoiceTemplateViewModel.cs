@@ -14,7 +14,6 @@ namespace ERPStandard.ViewModels
         public string col3 { get; set; }
         public Style style { get; set; }
     }
-
     public class Business
     {
         public string name { get; set; }
@@ -27,7 +26,6 @@ namespace ERPStandard.ViewModels
         public string NationalTaxNo { get; set; } = "";
         public string City { get; set; } = "";
     }
-
     public class Contact
     {
         public string label { get; set; }
@@ -41,19 +39,140 @@ namespace ERPStandard.ViewModels
         public string City { get; set; } = "";
         public string otherInfo { get; set; }
     }
-
     public class Footer
     {
         public string text { get; set; }
     }
-
     public class Header
     {
         public string title { get; set; } 
         public string dataKey { get; set; }
         public Style style { get; set; }
     }
+    public class PurchaseReqOrderHeaders
+    {
+        //InvoiceDetails_ISTAX invoice = new InvoiceDetails_ISTAX();
+        public List<Header> invoiceListHeaders()
+        {
+            List<Header> header_L = new List<Header>();
+            Style style = new Style();
+            Header header = new Header();
+            //Header 1 Setting
+            header_L = PurchaseReqMasterlist();
+            return header_L;
+        }
+        List<Header> PurchaseReqMasterlist()
+        {
+            List<Header> header_L = new List<Header>();
+            Style style = new Style();
+            Header header = new Header();
+            //Header 1 Setting
+            header.title = "Sr"; //1
+            style.width = 5;
+            header.dataKey = "serialnum";
+            header.style = style;
+            header_L.Add(header);
 
+            header = new Header();
+            header.title = "Description"; //2
+            header.dataKey = "Item";
+            style.width = 30;
+            header.style = style;
+            header_L.Add(header);
+
+            //Header 3 Setting
+            header = new Header();
+            header.title = "L Date";  //3
+            header.dataKey = "LDate";
+            header.style = style;
+            header_L.Add(header);
+
+            //Header 3 Setting
+            header = new Header();
+            header.title = "L Qty";  //3
+            header.dataKey = "LQty";
+            header.style = style;
+            header_L.Add(header);
+
+            //Header 3 Setting
+            header = new Header();
+            header.title = "L Rate";  //3
+            header.dataKey = "Rate";
+            header.style = style;
+            header_L.Add(header);
+
+            header = new Header();
+            header.title = "Stock"; //9
+            header.dataKey = "StockQty";
+            header.style = style;
+            header_L.Add(header);
+
+            //Header 3 Setting
+            header = new Header();
+            header.title = "R Qty";  //3
+            header.dataKey = "Qty";
+            header.style = style;
+            header_L.Add(header);
+
+            //Header 3 Setting
+            header = new Header();
+            header.title = "Unit"; //4
+            header.dataKey = "UOM";
+            header.style = style;
+            header_L.Add(header);
+
+            //Header 3 Setting
+            header = new Header();
+            header.title = "E.Amt"; //4
+            header.dataKey = "Amount";
+            header.style = style;
+            header_L.Add(header);
+
+            header = new Header();
+            header.title = "Cost Centre"; //9
+            header.dataKey = "UnitName";
+            header.style = style;
+            header_L.Add(header);
+
+            header = new Header();
+            header.title = "Required"; //9
+            header.dataKey = "RequiredDate";
+            header.style = style;
+            header_L.Add(header);
+
+            header = new Header();
+            header.title = "Requestee"; //9
+            header.dataKey = "DemandPerson";
+            header.style = style;
+            header_L.Add(header);
+
+            header = new Header();
+            header.title = "Status"; //9
+            header.dataKey = "ApprovedStatus";
+            header.style = style;
+            header_L.Add(header);
+            return header_L;
+        }
+    }
+    public class PurchaseReqDetaillist<T>
+    {
+        public string label { get; set; }
+        public string DocumentNum { get; set; }
+        public string DocumentDate { get; set; }
+        public string UnitName { get; set; }
+        public string DocumentGenDate { get; set; }
+        public bool headerBorder { get; set; }
+        public bool tableBodyBorder { get; set; }
+        public List<Header> header { get; set; }
+        public List<T> table { get; set; }
+        public List<AdditionalRow> additionalRows { get; set; }
+        public string DocumentDescLabel { get; set; }
+        public string DocumentDesc { get; set; }
+        public double DocumentNetlAmount { get; set; }
+        public string RefDocId { get; set; }
+        public string RefDocName { get; set; }
+        public string TotalAmntInWords { get; set; }
+    }
     public class InvoiceHeaders
     {
         //InvoiceDetails_ISTAX invoice = new InvoiceDetails_ISTAX();
@@ -228,7 +347,6 @@ namespace ERPStandard.ViewModels
         }
 
     }
-
     public class Invoice<T>
     {
         public string label { get; set; }
@@ -254,7 +372,6 @@ namespace ERPStandard.ViewModels
         public string TotalAmntInWords { get; set; }
 
     }
-
     public class Logo
     {
         public string src { get; set; }
@@ -262,13 +379,11 @@ namespace ERPStandard.ViewModels
         public double height { get; set; }
         public Margin margin { get; set; }
     }
-
     public class Margin
     {
         public int top { get; set; }
         public int left { get; set; }
     }
-
     //const jsPDFInvoiceTemplate.OutputType.Save;
     public class Root<T>
     {
@@ -288,7 +403,22 @@ namespace ERPStandard.ViewModels
         public string DisplayCurrency { get; set; } = "Rs.";
         public string SoftwareCompanyDisplayText { get; set; } = "System Generated Report by Finanical Pro®";
     }
-
+    public class PurchaseReqOrderRoot<T>
+    {
+        public string fileName { get; set; } = "RequsitionOrder";
+        public bool orientationLandscape { get; set; } = false;
+        public bool compress { get; set; } = true;
+        public Logo logo { get; set; }
+        public Stamp stamp { get; set; }
+        public Business business { get; set; }
+        public Contact contact { get; set; }
+        public PurchaseReqDetaillist<T> invoice { get; set; }
+        public Footer footer { get; set; }
+        public bool pageEnable { get; set; }
+        public string pageLabel { get; set; }
+        public string DisplayCurrency { get; set; } = "Rs.";
+        public string SoftwareCompanyDisplayText { get; set; } = "System Generated Report by Finanical Pro®";
+    }
     public class Stamp
     {
         public bool inAllPages { get; set; }
@@ -297,7 +427,6 @@ namespace ERPStandard.ViewModels
         public int height { get; set; }
         public Margin margin { get; set; }
     }
-
     public class Style
     {
         public int width { get; set; }

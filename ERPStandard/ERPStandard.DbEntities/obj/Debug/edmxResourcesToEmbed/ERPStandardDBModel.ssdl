@@ -1574,10 +1574,12 @@ warning 6002: The table/view 'SairaInd.dbo.EmployeePermAddress' does not have a 
     <Property Name="DESIG" Type="varchar" MaxLength="50" />
     <Property Name="Address" Type="varchar" MaxLength="100" />
     <Property Name="Address1" Type="varchar" MaxLength="100" />
-    <Property Name="TEL" Type="varchar" MaxLength="50" />
+    <Property Name="Phone1" Type="varchar" MaxLength="25" />
+    <Property Name="Phone2" Type="varchar" MaxLength="25" />
     <Property Name="HF" Type="varchar" MaxLength="50" />
     <Property Name="HireDate" Type="datetime" />
     <Property Name="EmpPic" Type="image" />
+    <Property Name="emal" Type="varchar" MaxLength="50" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.EmplyeePresAddress' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3156,12 +3158,25 @@ warning 6002: The table/view 'SairaInd.dbo.LoanTransDetail' does not have a prim
     </Key>
     <Property Name="LocalSupplierNo" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="AllSupplierNo" Type="varchar" MaxLength="50" />
+    <Property Name="SupplierNum" Type="int" />
+    <Property Name="SupplierType" Type="int" Nullable="false" />
     <Property Name="CompNo" Type="int" />
     <Property Name="BranchNo" Type="int" />
-    <Property Name="SupplierNum" Type="int" />
+    <Property Name="Name" Type="varchar" MaxLength="150" />
+    <Property Name="Address" Type="varchar" MaxLength="200" />
+    <Property Name="ContactPerson" Type="varchar" MaxLength="150" />
+    <Property Name="Phone1" Type="varchar" MaxLength="15" />
+    <Property Name="Phone2" Type="varchar" MaxLength="15" />
+    <Property Name="AcntId" Type="varchar" MaxLength="50" />
+    <Property Name="Registered" Type="bit" />
+    <Property Name="CountryId" Type="varchar" MaxLength="15" />
+    <Property Name="CityId" Type="varchar" MaxLength="15" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="WithHolding" Type="varchar" MaxLength="15" />
+    <Property Name="WebPage" Type="varchar" MaxLength="100" />
+    <Property Name="DeletionID" Type="int" />
     <Property Name="LahTransferId" Type="int" />
     <Property Name="SaveDate" Type="datetime" />
-    <Property Name="DeletionID" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.LogHistory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3858,17 +3873,13 @@ warning 6002: The table/view 'SairaInd.dbo.PurchaseOrderDetail' does not have a 
       <PropertyRef Name="PurchaseId" />
     </Key>
     <Property Name="PurchaseId" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="ContactNo" Type="varchar" MaxLength="50" />
-    <Property Name="Acntid" Type="varchar" MaxLength="50" />
-    <Property Name="Designation" Type="varchar" MaxLength="50" />
+    <Property Name="EmpNo" Type="varchar" MaxLength="50" />
+    <Property Name="PurchaserNum" Type="int" />
     <Property Name="CompNo" Type="int" />
     <Property Name="BranchNo" Type="int" />
-    <Property Name="PurchaserNum" Type="varchar" MaxLength="50" />
     <Property Name="LahTransferId" Type="int" />
     <Property Name="SaveDate" Type="datetime" />
     <Property Name="DeletionID" Type="int" />
-    <Property Name="Abb" Type="varchar" MaxLength="15" />
-    <Property Name="PID" Type="int" />
   </EntityType>
   <EntityType Name="PurchaseRequest">
     <Key>
@@ -3917,7 +3928,7 @@ warning 6002: The table/view 'SairaInd.dbo.PurchaseOrderDetail' does not have a 
       <PropertyRef Name="BranchNo" />
     </Key>
     <Property Name="RequisitionID" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="RequisitionOrderNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RequisitionOrderNo" Type="int" Nullable="false" />
     <Property Name="RequisitionDate" Type="datetime" Nullable="false" />
     <Property Name="StoreUnitId" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Remarks" Type="varchar" MaxLength="150" />
@@ -3928,7 +3939,8 @@ warning 6002: The table/view 'SairaInd.dbo.PurchaseOrderDetail' does not have a 
     <Property Name="LahTransferId" Type="int" />
     <Property Name="SaveDate" Type="datetime" />
     <Property Name="DeletionID" Type="int" />
-    <Property Name="PurchaserID" Type="varchar" MaxLength="50" />
+    <Property Name="RefDocId" Type="varchar" MaxLength="50" />
+    <Property Name="RefDocName" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="PurchaseRequisitionOrderDetail">
     <Key>
@@ -3962,6 +3974,7 @@ warning 6002: The table/view 'SairaInd.dbo.PurchaseOrderDetail' does not have a 
     <Property Name="CompNo" Type="int" Nullable="false" />
     <Property Name="BranchNo" Type="int" Nullable="false" />
     <Property Name="DemandPerson" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ApprovedStatus" Type="bit" />
   </EntityType>
   <EntityType Name="PurDeliveryChallDetail">
     <Key>
@@ -4937,8 +4950,6 @@ warning 6002: The table/view 'SairaInd.dbo.SalCalc' does not have a primary key 
     </Key>
     <Property Name="SalesManId" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="EmpNo" Type="varchar" MaxLength="50" />
-    <Property Name="CompNo" Type="int" Nullable="false" />
-    <Property Name="BranchNo" Type="int" Nullable="false" />
     <Property Name="SalesManNum" Type="int" Nullable="false" />
     <Property Name="Designation" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="CountryId" Type="varchar" MaxLength="15" Nullable="false" />
@@ -4952,6 +4963,8 @@ warning 6002: The table/view 'SairaInd.dbo.SalCalc' does not have a primary key 
     <Property Name="WebPage" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="NIC" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Mobile" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CompNo" Type="int" Nullable="false" />
+    <Property Name="BranchNo" Type="int" Nullable="false" />
     <Property Name="LahTransferId" Type="int" Nullable="false" />
     <Property Name="SaveDate" Type="datetime" />
     <Property Name="DeletionID" Type="int" Nullable="false" />

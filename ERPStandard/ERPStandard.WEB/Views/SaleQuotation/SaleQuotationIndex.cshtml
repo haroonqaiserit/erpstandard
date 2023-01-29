@@ -7,7 +7,7 @@
 <script src="~/assets/js/htm2canvas/html2canvas.js"></script>
 @*<script src="https://unpkg.com/jspdf-invoice-template@1.4.0/dist/index.js"></script>*@
 <script src="~/assets/js/jsPDF/invoicetemplate.js"></script>
-<link href="~/assets/css/reportstyle.css" rel="stylesheet" />
+<link href="~/assets/css/reportstyle.css" rel="stylesheet"/>
 @*<link rel="stylesheet" href="style.css" media="all" />*@
 <div class="page-title">
     <div class="row">
@@ -289,7 +289,7 @@
         if (flgerr == false) {
 
             var savepath=null;
-            if (addedit == 0) {
+            if (addedit == 0 || addedit == 2) {
                 savepath ='@Url.Action("SaleQuotationCreate", "Salequotation")';
             }
             else if (addedit == 1) {
@@ -323,8 +323,17 @@
                                text: '' + response.result + '',
                            })
                        } else {
+
+                            if (addedit == 2) {
+                                savepath ='@Url.Action("SaleQuotationCreate", "Salequotation")';
+                            }
+                            else {
+                                savepath ='@Url.Action("SaleQuotationList", "Salequotation")';
+                            }
+
                             $.ajax({
-                                url: '@Url.Action("SaleQuotationList", "Salequotation")',
+                                type: "Get",
+                                url: savepath,
                             })
                                 .done(function (response) {
                                     $("#FormProcess").html(response);

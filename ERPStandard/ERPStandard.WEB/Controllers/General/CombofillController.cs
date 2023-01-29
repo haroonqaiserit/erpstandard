@@ -48,6 +48,22 @@ namespace ERPStandard.WEB.Controllers
         }
         #endregion
 
+        #region Purchase - Drop Downs
+        public ActionResult SupplierDropdown()
+        {
+            var ddlData = SupplierService.Instance.All_List();
+            return Json(ddlData, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult PurchaserDropdown()
+        {
+            var ddlData = PurchaserService.Instance.All_List();
+            return Json(ddlData, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion
+
 
 
         #region Inventory - Drop Downs

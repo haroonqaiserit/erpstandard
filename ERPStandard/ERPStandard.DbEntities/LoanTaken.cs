@@ -42,8 +42,8 @@ namespace ERPStandard.DbEntities
         public Nullable<decimal> PreviousAdv { get; set; }
         public decimal GrossSalary { get; set; }
     
-        public virtual EmployeePersonalInfo EmployeePersonalInfo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LoanAdjuststment> LoanAdjuststments { get; set; }
+        public virtual EmployeePersonalInfo EmployeePersonalInfo { get; set; }
     }
 }

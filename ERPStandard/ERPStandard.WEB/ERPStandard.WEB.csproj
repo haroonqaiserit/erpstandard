@@ -1982,10 +1982,12 @@
     <Content Include="Views\SaleQuotation\SaleQuotationEdit.cshtml" />
     <Content Include="Views\SaleQuotation\SaleQuotationReportView.cshtml" />
     <Content Include="Views\SaleQuotation\SaleQuotationImport.cshtml" />
+    <Content Include="Views\SaleQuotation\SaleQuotationExcelImport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\GL\" />
+    <Folder Include="Controllers\Purchase\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

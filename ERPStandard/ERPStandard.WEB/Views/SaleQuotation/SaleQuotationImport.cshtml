@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
-                        <button id="btnUpload" class="btn btn-success"> Upload</button>
+                        <button type="button" id="btnUpload" class="btn btn-success"> Upload</button>
                     </div>
                 </div>
             </div>
@@ -35,6 +35,21 @@
         var myFile = fuUploadFile.files[0];
         formData.append("myExcelData", myFile);
 
+        //e.preventDefault = true;
+        @*var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(e) {
+            if ( 4 == this.readyState ) {
+                console.log(['xhr upload complete', e]);
+            }
+        };
+        xhr.open('post', '@Url.Action("MasterDetailExcelImport", "SaleQuotation")', true);
+        xhr.setRequestHeader("Content-Type","multipart/form-data");
+        var formData = new FormData();
+        formData.append("myExcelData", $("#fuExcel").files[0]);
+        //formData.append("coverFile", $("#coverFile").files[0]);
+        // etc
+        xhr.send(formData);*@
+
         $.ajax({
             type: "POST",
             url: '@Url.Action("MasterDetailExcelImport", "SaleQuotation")',
@@ -45,14 +60,16 @@
                 $("#CustomSearchLoader").show();
             },
             complete: function () {
-                alert("result complete");
+                //alert("result complete");
                 $("#CustomSearchLoader").hide();
             },
             success: function (result) {
-                alert(result);
-                //$("#FormProcess").html(result);
+                //alert(result);
+                $("#FormProcess").html(result);
             }
         })
+
+
     });
 
 

@@ -34,7 +34,6 @@ namespace ERPStandard.DbEntities
         public virtual DbSet<AdjustmentSaleAcnt> AdjustmentSaleAcnts { get; set; }
         public virtual DbSet<AdjustmentSaleAcntDetail> AdjustmentSaleAcntDetails { get; set; }
         public virtual DbSet<AdvanceAgainstBonu> AdvanceAgainstBonus { get; set; }
-        public virtual DbSet<AdvanceAgainstSalary> AdvanceAgainstSalaries { get; set; }
         public virtual DbSet<AdvanceToPurchaser> AdvanceToPurchasers { get; set; }
         public virtual DbSet<AdvanceToPurchaserDetail> AdvanceToPurchaserDetails { get; set; }
         public virtual DbSet<AllSupplier> AllSuppliers { get; set; }
@@ -64,7 +63,6 @@ namespace ERPStandard.DbEntities
         public virtual DbSet<Designation> Designations { get; set; }
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<dtproperty> dtproperties { get; set; }
-        public virtual DbSet<EmployeePersonalInfo> EmployeePersonalInfoes { get; set; }
         public virtual DbSet<EmpPersonalInfo1> EmpPersonalInfo1 { get; set; }
         public virtual DbSet<EmpStatu> EmpStatus { get; set; }
         public virtual DbSet<EOBISetup> EOBISetups { get; set; }
@@ -83,7 +81,6 @@ namespace ERPStandard.DbEntities
         public virtual DbSet<GroupChange> GroupChanges { get; set; }
         public virtual DbSet<Holiday> Holidays { get; set; }
         public virtual DbSet<IncDetail> IncDetails { get; set; }
-        public virtual DbSet<IncomeTaxSetup> IncomeTaxSetups { get; set; }
         public virtual DbSet<Increment> Increments { get; set; }
         public virtual DbSet<Invoice_detail> Invoice_detail { get; set; }
         public virtual DbSet<Invoice_Info> Invoice_Info { get; set; }
@@ -115,10 +112,8 @@ namespace ERPStandard.DbEntities
         public virtual DbSet<PReturnDetail> PReturnDetails { get; set; }
         public virtual DbSet<PriceList> PriceLists { get; set; }
         public virtual DbSet<PurAdvance> PurAdvances { get; set; }
-        public virtual DbSet<Purchaser> Purchasers { get; set; }
         public virtual DbSet<PurchaseRequest> PurchaseRequests { get; set; }
         public virtual DbSet<PurchaseRequestDetail> PurchaseRequestDetails { get; set; }
-        public virtual DbSet<PurchaseRequisitionOrder> PurchaseRequisitionOrders { get; set; }
         public virtual DbSet<PurchaseRequisitionOrderDetail> PurchaseRequisitionOrderDetails { get; set; }
         public virtual DbSet<PurDeliveryChallDetail> PurDeliveryChallDetails { get; set; }
         public virtual DbSet<PurDellChallanMaster> PurDellChallanMasters { get; set; }
@@ -196,7 +191,6 @@ namespace ERPStandard.DbEntities
         public virtual DbSet<GroupAssign> GroupAssigns { get; set; }
         public virtual DbSet<Halfday> Halfdays { get; set; }
         public virtual DbSet<ImpGLInt> ImpGLInts { get; set; }
-        public virtual DbSet<IncomeTaxDetail> IncomeTaxDetails { get; set; }
         public virtual DbSet<InsurancePolicy> InsurancePolicies { get; set; }
         public virtual DbSet<ItemFinishGoodRegister> ItemFinishGoodRegisters { get; set; }
         public virtual DbSet<ItemRawMaterialRegister> ItemRawMaterialRegisters { get; set; }
@@ -266,9 +260,15 @@ namespace ERPStandard.DbEntities
         public virtual DbSet<Visite> Visites { get; set; }
         public virtual DbSet<SalesOrder> SalesOrders { get; set; }
         public virtual DbSet<SalesOrderDetail> SalesOrderDetails { get; set; }
-        public virtual DbSet<BonusCalculation> BonusCalculations { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<CRM_Customers> CRM_Customers { get; set; }
+        public virtual DbSet<Purchaser> Purchasers { get; set; }
+        public virtual DbSet<AdvanceAgainstSalary> AdvanceAgainstSalaries { get; set; }
+        public virtual DbSet<BonusCalculation> BonusCalculations { get; set; }
+        public virtual DbSet<EmployeePersonalInfo> EmployeePersonalInfoes { get; set; }
+        public virtual DbSet<IncomeTaxSetup> IncomeTaxSetups { get; set; }
+        public virtual DbSet<IncomeTaxDetail> IncomeTaxDetails { get; set; }
+        public virtual DbSet<PurchaseRequisitionOrder> PurchaseRequisitionOrders { get; set; }
     
         public virtual int Sp_CurrentStock(string itemid, string compNo, string branchNo, string storeUnitId, string godownId, string toDate)
         {

@@ -39,5 +39,6 @@ namespace ERPStandard.DbEntities
         public int CompNo { get; set; }
         public int BranchNo { get; set; }
         public string DemandPerson { get; set; }
+        public Nullable<bool> ApprovedStatus { get; set; }
     }
 }

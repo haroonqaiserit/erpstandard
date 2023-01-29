@@ -19,11 +19,11 @@ namespace ERPStandard.DbEntities
         {
             this.AdvanceAgainstBonus = new HashSet<AdvanceAgainstBonu>();
             this.AdvanceAgainstSalaries = new HashSet<AdvanceAgainstSalary>();
+            this.BonusCalculations = new HashSet<BonusCalculation>();
             this.IncomeTaxSetups = new HashSet<IncomeTaxSetup>();
             this.LoanAdjuststments = new HashSet<LoanAdjuststment>();
             this.LoanTakens = new HashSet<LoanTaken>();
             this.SalaryMasters = new HashSet<SalaryMaster>();
-            this.BonusCalculations = new HashSet<BonusCalculation>();
         }
     
         public string EmpNo { get; set; }
@@ -57,15 +57,19 @@ namespace ERPStandard.DbEntities
         public string DESIG { get; set; }
         public string Address { get; set; }
         public string Address1 { get; set; }
-        public string TEL { get; set; }
+        public string Phone1 { get; set; }
+        public string Phone2 { get; set; }
         public string HF { get; set; }
         public Nullable<System.DateTime> HireDate { get; set; }
         public byte[] EmpPic { get; set; }
+        public string emal { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdvanceAgainstBonu> AdvanceAgainstBonus { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdvanceAgainstSalary> AdvanceAgainstSalaries { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BonusCalculation> BonusCalculations { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IncomeTaxSetup> IncomeTaxSetups { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -74,7 +78,5 @@ namespace ERPStandard.DbEntities
         public virtual ICollection<LoanTaken> LoanTakens { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalaryMaster> SalaryMasters { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BonusCalculation> BonusCalculations { get; set; }
     }
 }

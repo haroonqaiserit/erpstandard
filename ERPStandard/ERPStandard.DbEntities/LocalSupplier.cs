@@ -22,5 +22,18 @@ namespace ERPStandard.DbEntities
         public Nullable<int> LahTransferId { get; set; }
         public Nullable<System.DateTime> SaveDate { get; set; }
         public Nullable<int> DeletionID { get; set; }
+        public int SupplierType { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string ContactPerson { get; set; }
+        public string Phone1 { get; set; }
+        public string Phone2 { get; set; }
+        public string AcntId { get; set; }
+        public Nullable<bool> Registered { get; set; }
+        public string CountryId { get; set; }
+        public string CityId { get; set; }
+        public string Email { get; set; }
+        public string WithHolding { get; set; }
+        public string WebPage { get; set; }
     }
 }

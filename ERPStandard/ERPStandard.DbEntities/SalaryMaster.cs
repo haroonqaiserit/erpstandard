@@ -30,8 +30,8 @@ namespace ERPStandard.DbEntities
         public Nullable<System.DateTime> SaveDate { get; set; }
         public Nullable<int> DeletionID { get; set; }
     
-        public virtual EmployeePersonalInfo EmployeePersonalInfo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SalaryDetail> SalaryDetails { get; set; }
+        public virtual EmployeePersonalInfo EmployeePersonalInfo { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace ERPStandard.WEB.Controllers
     //Ctl + M + O
     public class SalequotationController : Controller
     {
-        // In the name of Allah, the most merciful
+        // In the name of Allah, The Most Merciful, The Most Benificial
         // Created on 08-Jan-2022
         // Created by Haroon
         // Sales Order Master Detail Form
@@ -133,7 +133,8 @@ namespace ERPStandard.WEB.Controllers
         [HttpPost]
         public ActionResult MasterDetailExcelImport(HttpPostedFileBase myExcelData)
         {
-            if(myExcelData.ContentLength > 0)//check is there file to upload
+            List<SaleQuotationMasterDetailExcel> QuotationExcelList = new List<SaleQuotationMasterDetailExcel>();
+            if (myExcelData.ContentLength > 0)//check is there file to upload
             {
                 //string filePath = @"C:\Users\Public\Documents\";
                 //string fileName = DateTime.Now.ToString("yyMMddHHmmss");
@@ -141,37 +142,47 @@ namespace ERPStandard.WEB.Controllers
                 //myExcelData.SaveAs(filePath);
                 XLWorkbook xLWorkbook = new XLWorkbook(myExcelData.InputStream);
 
+                var viewModel = new SaleQuotationMasterDetailViewModel();
+                var SaleQuotationMaster = new SaleQuotationMasterViewModel();
+                var SaleQuotationDetail = new SaleQuotationDetailViewModel();
+
                 int row = 2;
                 while(xLWorkbook.Worksheets.Worksheet(1).Cell(row, 1).GetString() != "")
                 {
-                    int i = 1;
-                    int SNo = int.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
-                    double QNo = double.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
-                    DateTime Date = DateTime.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
-                    DateTime ValidDate = DateTime.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
-                    string Salesman = xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString();
-                    string Customer = xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString();
-                    string Remarks = xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString();
-                    string ItemCode = xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString();
-                    string ItemName = xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString();
-                    decimal Qty = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
-                    decimal Rate = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
-                    decimal Value = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
-                    decimal STax = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
-                    decimal STaxAmt = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
-                    decimal ASTax = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
-                    decimal ASTaxAmt = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
-                    decimal SExduty = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
-                    decimal SExdutyAmt = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
-                    decimal NetValue = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, i++).GetString());
-                    row++;
+                    //int i = 1;
+                    var QuotationExcel = new SaleQuotationMasterDetailExcel
+                    {
+                        SNo = int.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, "A").GetString()),
+                        QuoteNo = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, "B").GetString()),
+                        QuoteDate = DateTime.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, "C").GetString()),
+                        QuoteValidDate = DateTime.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, "D").GetString()),
+                        SalesManName = xLWorkbook.Worksheets.Worksheet(1).Cell(row, "E").GetString(),
+                        SalesManId = xLWorkbook.Worksheets.Worksheet(1).Cell(row, "E").GetString(),
+                        CustomerName = xLWorkbook.Worksheets.Worksheet(1).Cell(row, "F").GetString(),
+                        CustomerNo = xLWorkbook.Worksheets.Worksheet(1).Cell(row, "F").GetString(),
+                        Remarks = xLWorkbook.Worksheets.Worksheet(1).Cell(row, "G").GetString(),
+                        ItemID = xLWorkbook.Worksheets.Worksheet(1).Cell(row, "H").GetString(),
+                        ItemName = xLWorkbook.Worksheets.Worksheet(1).Cell(row, "I").GetString(),
+                        Qty = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, "J").GetString()),
+                        Rate = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, "K").GetString()),
+                        //Value = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, "L").GetString()),
+                        SaleTaxRate = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, "M").GetString()),
+                        //STax = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, "N").GetString()),
+                        ASaleTaxRate = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, "O").GetString()),
+                        //ASTaxAmt = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, "P").GetString()),
+                        SExDutyRate = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, "Q").GetString()),
+                        //SExdutyAmt = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, "R").GetString()),
+                        //NetValue = decimal.Parse(xLWorkbook.Worksheets.Worksheet(1).Cell(row, "S").GetString())
+                    };
+                    QuotationExcelList.Add(QuotationExcel);
+                row++;
                 }
             }
             else
             {
                 return Json(new { success = true, message = "please upload an excel file" }, JsonRequestBehavior.AllowGet);
             }
-            return Json(new { success = true, message = "success" }, JsonRequestBehavior.AllowGet);
+            return PartialView("SaleQuotationExcelImport", QuotationExcelList);
         }
         #endregion
 
@@ -192,7 +203,7 @@ namespace ERPStandard.WEB.Controllers
                 m_sortorder = "asc";
             }
 
-            pageno = pageno.HasValue ? pageno.Value : 1;
+            pageno = pageno ?? 1;
             var SaleQuotationViewModel = SaleQuotationListLoad(pageno.Value, pageSize, dtSearch, clmNameOrder, m_sortorder);
             return PartialView("SaleQuotationList", SaleQuotationViewModel);
         }
@@ -244,8 +255,10 @@ namespace ERPStandard.WEB.Controllers
         [HttpGet]
         public ActionResult SaleQuotationCreate()
         {
-            QuotationCreateNewViewModel quotationCreateNewViewModel = new QuotationCreateNewViewModel();
-            quotationCreateNewViewModel.invoiceType = (int)InvoiceType.Invoice_Tax_AddTax;
+            QuotationCreateNewViewModel quotationCreateNewViewModel = new QuotationCreateNewViewModel
+            {
+                invoiceType = (int)InvoiceType.Invoice_Tax_AddTax
+            };
             return PartialView("SaleQuotationCreate", quotationCreateNewViewModel);
         }
         [HttpPost]

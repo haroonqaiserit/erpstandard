@@ -169,27 +169,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="AdvanceAgainstSalaries">
-      <EntityTypeMapping TypeName="SairaIndModel.AdvanceAgainstSalary">
-        <MappingFragment StoreEntitySet="AdvanceAgainstSalary">
-          <ScalarProperty Name="AdvAgainstSalID" ColumnName="AdvAgainstSalID" />
-          <ScalarProperty Name="AdvAgainstSalNum" ColumnName="AdvAgainstSalNum" />
-          <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
-          <ScalarProperty Name="AdvanceDate" ColumnName="AdvanceDate" />
-          <ScalarProperty Name="AdvanceMonth" ColumnName="AdvanceMonth" />
-          <ScalarProperty Name="GrossSalary" ColumnName="GrossSalary" />
-          <ScalarProperty Name="AdvanceAmount" ColumnName="AdvanceAmount" />
-          <ScalarProperty Name="AppAuth" ColumnName="AppAuth" />
-          <ScalarProperty Name="RecomAuth" ColumnName="RecomAuth" />
-          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
-          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
-          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
-          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
-          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
-          <ScalarProperty Name="BalanceSalary" ColumnName="BalanceSalary" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="AdvanceToPurchasers">
       <EntityTypeMapping TypeName="SairaIndModel.AdvanceToPurchaser">
         <MappingFragment StoreEntitySet="AdvanceToPurchaser">
@@ -704,47 +683,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="EmployeePersonalInfoes">
-      <EntityTypeMapping TypeName="SairaIndModel.EmployeePersonalInfo">
-        <MappingFragment StoreEntitySet="EmployeePersonalInfo">
-          <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
-          <ScalarProperty Name="TitleID" ColumnName="TitleID" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="FathName" ColumnName="FathName" />
-          <ScalarProperty Name="Domicile" ColumnName="Domicile" />
-          <ScalarProperty Name="Religion" ColumnName="Religion" />
-          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
-          <ScalarProperty Name="NICNo" ColumnName="NICNo" />
-          <ScalarProperty Name="BloodGrp" ColumnName="BloodGrp" />
-          <ScalarProperty Name="BrthDate" ColumnName="BrthDate" />
-          <ScalarProperty Name="EmerCont" ColumnName="EmerCont" />
-          <ScalarProperty Name="MaritStat" ColumnName="MaritStat" />
-          <ScalarProperty Name="EmerPhon" ColumnName="EmerPhon" />
-          <ScalarProperty Name="ChildNo" ColumnName="ChildNo" />
-          <ScalarProperty Name="LatQual" ColumnName="LatQual" />
-          <ScalarProperty Name="HelthIssu" ColumnName="HelthIssu" />
-          <ScalarProperty Name="Sex" ColumnName="Sex" />
-          <ScalarProperty Name="SpouseName" ColumnName="SpouseName" />
-          <ScalarProperty Name="Pic" ColumnName="Pic" />
-          <ScalarProperty Name="SpouseDob" ColumnName="SpouseDob" />
-          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
-          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
-          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
-          <ScalarProperty Name="EmpNum" ColumnName="EmpNum" />
-          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
-          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
-          <ScalarProperty Name="EmpType" ColumnName="EmpType" />
-          <ScalarProperty Name="DEPT" ColumnName="DEPT" />
-          <ScalarProperty Name="DESIG" ColumnName="DESIG" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="Address1" ColumnName="Address1" />
-          <ScalarProperty Name="TEL" ColumnName="TEL" />
-          <ScalarProperty Name="HF" ColumnName="HF" />
-          <ScalarProperty Name="HireDate" ColumnName="HireDate" />
-          <ScalarProperty Name="EmpPic" ColumnName="EmpPic" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="EmpPersonalInfo1">
       <EntityTypeMapping TypeName="SairaIndModel.EmpPersonalInfo1">
         <MappingFragment StoreEntitySet="EmpPersonalInfo1">
@@ -1067,20 +1005,6 @@
           <ScalarProperty Name="CurrSal" ColumnName="CurrSal" />
           <ScalarProperty Name="IncPer" ColumnName="IncPer" />
           <ScalarProperty Name="cid" ColumnName="cid" />
-          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
-          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
-          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="IncomeTaxSetups">
-      <EntityTypeMapping TypeName="SairaIndModel.IncomeTaxSetup">
-        <MappingFragment StoreEntitySet="IncomeTaxSetup">
-          <ScalarProperty Name="IncomeTaxId" ColumnName="IncomeTaxId" />
-          <ScalarProperty Name="IncomeTaxNum" ColumnName="IncomeTaxNum" />
-          <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
-          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
-          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
           <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
           <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
           <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
@@ -1507,6 +1431,19 @@
     <EntitySetMapping Name="LocalSuppliers">
       <EntityTypeMapping TypeName="SairaIndModel.LocalSupplier">
         <MappingFragment StoreEntitySet="LocalSuppliers">
+          <ScalarProperty Name="WebPage" ColumnName="WebPage" />
+          <ScalarProperty Name="WithHolding" ColumnName="WithHolding" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="CityId" ColumnName="CityId" />
+          <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+          <ScalarProperty Name="Registered" ColumnName="Registered" />
+          <ScalarProperty Name="AcntId" ColumnName="AcntId" />
+          <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+          <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SupplierType" ColumnName="SupplierType" />
           <ScalarProperty Name="LocalSupplierNo" ColumnName="LocalSupplierNo" />
           <ScalarProperty Name="AllSupplierNo" ColumnName="AllSupplierNo" />
           <ScalarProperty Name="CompNo" ColumnName="CompNo" />
@@ -1717,24 +1654,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Purchasers">
-      <EntityTypeMapping TypeName="SairaIndModel.Purchaser">
-        <MappingFragment StoreEntitySet="Purchaser">
-          <ScalarProperty Name="PurchaseId" ColumnName="PurchaseId" />
-          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
-          <ScalarProperty Name="Acntid" ColumnName="Acntid" />
-          <ScalarProperty Name="Designation" ColumnName="Designation" />
-          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
-          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
-          <ScalarProperty Name="PurchaserNum" ColumnName="PurchaserNum" />
-          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
-          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
-          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
-          <ScalarProperty Name="Abb" ColumnName="Abb" />
-          <ScalarProperty Name="PID" ColumnName="PID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="PurchaseRequests">
       <EntityTypeMapping TypeName="SairaIndModel.PurchaseRequest">
         <MappingFragment StoreEntitySet="PurchaseRequest">
@@ -1776,28 +1695,10 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PurchaseRequisitionOrders">
-      <EntityTypeMapping TypeName="SairaIndModel.PurchaseRequisitionOrder">
-        <MappingFragment StoreEntitySet="PurchaseRequisitionOrder">
-          <ScalarProperty Name="RequisitionID" ColumnName="RequisitionID" />
-          <ScalarProperty Name="RequisitionOrderNo" ColumnName="RequisitionOrderNo" />
-          <ScalarProperty Name="RequisitionDate" ColumnName="RequisitionDate" />
-          <ScalarProperty Name="StoreUnitId" ColumnName="StoreUnitId" />
-          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-          <ScalarProperty Name="ExpireDaysStatus" ColumnName="ExpireDaysStatus" />
-          <ScalarProperty Name="IndentoCode" ColumnName="IndentoCode" />
-          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
-          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
-          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
-          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
-          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
-          <ScalarProperty Name="PurchaserID" ColumnName="PurchaserID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="PurchaseRequisitionOrderDetails">
       <EntityTypeMapping TypeName="SairaIndModel.PurchaseRequisitionOrderDetail">
         <MappingFragment StoreEntitySet="PurchaseRequisitionOrderDetail">
+          <ScalarProperty Name="ApprovedStatus" ColumnName="ApprovedStatus" />
           <ScalarProperty Name="RequisitionID" ColumnName="RequisitionID" />
           <ScalarProperty Name="LineNo" ColumnName="LineNo" />
           <ScalarProperty Name="StoreUnitId" ColumnName="StoreUnitId" />
@@ -3356,21 +3257,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="IncomeTaxDetails">
-      <EntityTypeMapping TypeName="SairaIndModel.IncomeTaxDetail">
-        <MappingFragment StoreEntitySet="IncomeTaxDetail">
-          <ScalarProperty Name="IncomeTaxId" ColumnName="IncomeTaxId" />
-          <ScalarProperty Name="IncomeTaxAmount" ColumnName="IncomeTaxAmount" />
-          <ScalarProperty Name="DateAppFrom" ColumnName="DateAppFrom" />
-          <ScalarProperty Name="DateAppTo" ColumnName="DateAppTo" />
-          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
-          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
-          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
-          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
-          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="InsurancePolicies">
       <EntityTypeMapping TypeName="SairaIndModel.InsurancePolicy">
         <MappingFragment StoreEntitySet="InsurancePolicy">
@@ -4834,23 +4720,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="BonusCalculations">
-      <EntityTypeMapping TypeName="SairaIndModel.BonusCalculation">
-        <MappingFragment StoreEntitySet="BonusCalculation">
-          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
-          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
-          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
-          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
-          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
-          <ScalarProperty Name="AdvAgainstBonus" ColumnName="AdvAgainstBonus" />
-          <ScalarProperty Name="BonusSalary" ColumnName="BonusSalary" />
-          <ScalarProperty Name="BasicPay" ColumnName="BasicPay" />
-          <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
-          <ScalarProperty Name="BonusID" ColumnName="BonusID" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Customers">
       <EntityTypeMapping TypeName="SairaIndModel.Customer">
         <MappingFragment StoreEntitySet="Customer">
@@ -4902,6 +4771,150 @@
           <ScalarProperty Name="PotentialCustomer" ColumnName="PotentialCustomer" />
           <ScalarProperty Name="CustNum" ColumnName="CustNum" />
           <ScalarProperty Name="CustomerNo" ColumnName="CustomerNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Purchasers">
+      <EntityTypeMapping TypeName="SairaIndModel.Purchaser">
+        <MappingFragment StoreEntitySet="Purchaser">
+          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
+          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+          <ScalarProperty Name="PurchaserNum" ColumnName="PurchaserNum" />
+          <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
+          <ScalarProperty Name="PurchaseId" ColumnName="PurchaseId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AdvanceAgainstSalaries">
+      <EntityTypeMapping TypeName="SairaIndModel.AdvanceAgainstSalary">
+        <MappingFragment StoreEntitySet="AdvanceAgainstSalary">
+          <ScalarProperty Name="BalanceSalary" ColumnName="BalanceSalary" />
+          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
+          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+          <ScalarProperty Name="RecomAuth" ColumnName="RecomAuth" />
+          <ScalarProperty Name="AppAuth" ColumnName="AppAuth" />
+          <ScalarProperty Name="AdvanceAmount" ColumnName="AdvanceAmount" />
+          <ScalarProperty Name="GrossSalary" ColumnName="GrossSalary" />
+          <ScalarProperty Name="AdvanceMonth" ColumnName="AdvanceMonth" />
+          <ScalarProperty Name="AdvanceDate" ColumnName="AdvanceDate" />
+          <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
+          <ScalarProperty Name="AdvAgainstSalNum" ColumnName="AdvAgainstSalNum" />
+          <ScalarProperty Name="AdvAgainstSalID" ColumnName="AdvAgainstSalID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BonusCalculations">
+      <EntityTypeMapping TypeName="SairaIndModel.BonusCalculation">
+        <MappingFragment StoreEntitySet="BonusCalculation">
+          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
+          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+          <ScalarProperty Name="AdvAgainstBonus" ColumnName="AdvAgainstBonus" />
+          <ScalarProperty Name="BonusSalary" ColumnName="BonusSalary" />
+          <ScalarProperty Name="BasicPay" ColumnName="BasicPay" />
+          <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
+          <ScalarProperty Name="BonusID" ColumnName="BonusID" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeePersonalInfoes">
+      <EntityTypeMapping TypeName="SairaIndModel.EmployeePersonalInfo">
+        <MappingFragment StoreEntitySet="EmployeePersonalInfo">
+          <ScalarProperty Name="emal" ColumnName="emal" />
+          <ScalarProperty Name="EmpPic" ColumnName="EmpPic" />
+          <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+          <ScalarProperty Name="HF" ColumnName="HF" />
+          <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+          <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+          <ScalarProperty Name="Address1" ColumnName="Address1" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="DESIG" ColumnName="DESIG" />
+          <ScalarProperty Name="DEPT" ColumnName="DEPT" />
+          <ScalarProperty Name="EmpType" ColumnName="EmpType" />
+          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+          <ScalarProperty Name="EmpNum" ColumnName="EmpNum" />
+          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
+          <ScalarProperty Name="SpouseDob" ColumnName="SpouseDob" />
+          <ScalarProperty Name="Pic" ColumnName="Pic" />
+          <ScalarProperty Name="SpouseName" ColumnName="SpouseName" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="HelthIssu" ColumnName="HelthIssu" />
+          <ScalarProperty Name="LatQual" ColumnName="LatQual" />
+          <ScalarProperty Name="ChildNo" ColumnName="ChildNo" />
+          <ScalarProperty Name="EmerPhon" ColumnName="EmerPhon" />
+          <ScalarProperty Name="MaritStat" ColumnName="MaritStat" />
+          <ScalarProperty Name="EmerCont" ColumnName="EmerCont" />
+          <ScalarProperty Name="BrthDate" ColumnName="BrthDate" />
+          <ScalarProperty Name="BloodGrp" ColumnName="BloodGrp" />
+          <ScalarProperty Name="NICNo" ColumnName="NICNo" />
+          <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+          <ScalarProperty Name="Religion" ColumnName="Religion" />
+          <ScalarProperty Name="Domicile" ColumnName="Domicile" />
+          <ScalarProperty Name="FathName" ColumnName="FathName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="TitleID" ColumnName="TitleID" />
+          <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncomeTaxSetups">
+      <EntityTypeMapping TypeName="SairaIndModel.IncomeTaxSetup">
+        <MappingFragment StoreEntitySet="IncomeTaxSetup">
+          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
+          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+          <ScalarProperty Name="EmpNo" ColumnName="EmpNo" />
+          <ScalarProperty Name="IncomeTaxNum" ColumnName="IncomeTaxNum" />
+          <ScalarProperty Name="IncomeTaxId" ColumnName="IncomeTaxId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncomeTaxDetails">
+      <EntityTypeMapping TypeName="SairaIndModel.IncomeTaxDetail">
+        <MappingFragment StoreEntitySet="IncomeTaxDetail">
+          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
+          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+          <ScalarProperty Name="DateAppTo" ColumnName="DateAppTo" />
+          <ScalarProperty Name="DateAppFrom" ColumnName="DateAppFrom" />
+          <ScalarProperty Name="IncomeTaxAmount" ColumnName="IncomeTaxAmount" />
+          <ScalarProperty Name="IncomeTaxId" ColumnName="IncomeTaxId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseRequisitionOrders">
+      <EntityTypeMapping TypeName="SairaIndModel.PurchaseRequisitionOrder">
+        <MappingFragment StoreEntitySet="PurchaseRequisitionOrder">
+          <ScalarProperty Name="RequisitionOrderNo2" ColumnName="RequisitionOrderNo" />
+          <ScalarProperty Name="RefDocName" ColumnName="RefDocName" />
+          <ScalarProperty Name="RefDocId" ColumnName="RefDocId" />
+          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
+          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+          <ScalarProperty Name="IndentoCode" ColumnName="IndentoCode" />
+          <ScalarProperty Name="ExpireDaysStatus" ColumnName="ExpireDaysStatus" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="StoreUnitId" ColumnName="StoreUnitId" />
+          <ScalarProperty Name="RequisitionDate" ColumnName="RequisitionDate" />
+          <ScalarProperty Name="RequisitionID" ColumnName="RequisitionID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

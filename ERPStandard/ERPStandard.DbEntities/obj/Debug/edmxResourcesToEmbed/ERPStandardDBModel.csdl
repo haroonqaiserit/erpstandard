@@ -161,28 +161,7 @@
     <Property Name="BonusId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="BalanceBonus" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="AlreadyAdvanceTkn" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-    <NavigationProperty Name="EmployeePersonalInfo" Relationship="Self.FK_AdvanceAgainstBonus_EmployeePersonalInfo" FromRole="AdvanceAgainstBonus" ToRole="EmployeePersonalInfo" />
-  </EntityType>
-  <EntityType Name="AdvanceAgainstSalary">
-    <Key>
-      <PropertyRef Name="AdvAgainstSalID" />
-    </Key>
-    <Property Name="AdvAgainstSalID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="AdvAgainstSalNum" Type="Int32" />
-    <Property Name="EmpNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="AdvanceDate" Type="DateTime" Precision="3" />
-    <Property Name="AdvanceMonth" Type="DateTime" Precision="3" />
-    <Property Name="GrossSalary" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="AdvanceAmount" Type="Decimal" Precision="18" Scale="2" />
-    <Property Name="AppAuth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="RecomAuth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="CompNo" Type="Int32" />
-    <Property Name="BranchNo" Type="Int32" />
-    <Property Name="LahTransferId" Type="Int32" />
-    <Property Name="SaveDate" Type="DateTime" Precision="3" />
-    <Property Name="DeletionID" Type="Int32" />
-    <Property Name="BalanceSalary" Type="Decimal" Precision="18" Scale="2" />
-    <NavigationProperty Name="EmployeePersonalInfo" Relationship="Self.FK_AdvanceAgainstSalary_EmployeePersonalInfo" FromRole="AdvanceAgainstSalary" ToRole="EmployeePersonalInfo" />
+    <NavigationProperty Name="EmployeePersonalInfo" Relationship="SairaIndModel.FK_AdvanceAgainstBonus_EmployeePersonalInfo" FromRole="AdvanceAgainstBonu" ToRole="EmployeePersonalInfo" />
   </EntityType>
   <EntityType Name="AdvanceToPurchaser">
     <Key>
@@ -675,53 +654,6 @@
     <Property Name="lvalue" Type="Binary" MaxLength="Max" FixedLength="false" />
     <Property Name="version" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="EmployeePersonalInfo">
-    <Key>
-      <PropertyRef Name="EmpNo" />
-    </Key>
-    <Property Name="EmpNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="TitleID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="FathName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Domicile" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="Religion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-    <Property Name="Nationality" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-    <Property Name="NICNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-    <Property Name="BloodGrp" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-    <Property Name="BrthDate" Type="DateTime" Precision="3" />
-    <Property Name="EmerCont" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="MaritStat" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-    <Property Name="EmerPhon" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-    <Property Name="ChildNo" Type="Int32" />
-    <Property Name="LatQual" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="HelthIssu" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
-    <Property Name="Sex" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-    <Property Name="SpouseName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-    <Property Name="Pic" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
-    <Property Name="SpouseDob" Type="DateTime" Precision="3" />
-    <Property Name="LahTransferId" Type="Int32" />
-    <Property Name="CompNo" Type="Int32" />
-    <Property Name="BranchNo" Type="Int32" />
-    <Property Name="EmpNum" Type="Int32" />
-    <Property Name="SaveDate" Type="DateTime" Precision="3" />
-    <Property Name="DeletionID" Type="Int32" />
-    <Property Name="EmpType" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
-    <Property Name="DEPT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="DESIG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="Address1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-    <Property Name="TEL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="HF" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="HireDate" Type="DateTime" Precision="3" />
-    <Property Name="EmpPic" Type="Binary" MaxLength="Max" FixedLength="false" />
-    <NavigationProperty Name="AdvanceAgainstBonus" Relationship="Self.FK_AdvanceAgainstBonus_EmployeePersonalInfo" FromRole="EmployeePersonalInfo" ToRole="AdvanceAgainstBonus" />
-    <NavigationProperty Name="AdvanceAgainstSalaries" Relationship="Self.FK_AdvanceAgainstSalary_EmployeePersonalInfo" FromRole="EmployeePersonalInfo" ToRole="AdvanceAgainstSalary" />
-    <NavigationProperty Name="IncomeTaxSetups" Relationship="Self.FK_IncomeTaxSetup_EmployeePersonalInfo" FromRole="EmployeePersonalInfo" ToRole="IncomeTaxSetup" />
-    <NavigationProperty Name="LoanAdjuststments" Relationship="Self.FK_LoanAdjust_EmployeePersonalInfo" FromRole="EmployeePersonalInfo" ToRole="LoanAdjuststment" />
-    <NavigationProperty Name="LoanTakens" Relationship="Self.FK_LoanTaken_EmployeePersonalInfo" FromRole="EmployeePersonalInfo" ToRole="LoanTaken" />
-    <NavigationProperty Name="SalaryMasters" Relationship="Self.FK_SalaryMaster_EmployeePersonalInfo" FromRole="EmployeePersonalInfo" ToRole="SalaryMaster" />
-    <NavigationProperty Name="BonusCalculations" Relationship="SairaIndModel.FK_BonusCalculation_EmployeePersonalInfo" FromRole="EmployeePersonalInfo" ToRole="BonusCalculation" />
-  </EntityType>
   <EntityType Name="EmpPersonalInfo1">
     <Key>
       <PropertyRef Name="EmpNo" />
@@ -1035,21 +967,6 @@
     <Property Name="LahTransferId" Type="Int32" />
     <Property Name="SaveDate" Type="DateTime" Precision="3" />
     <Property Name="DeletionID" Type="Int32" />
-  </EntityType>
-  <EntityType Name="IncomeTaxSetup">
-    <Key>
-      <PropertyRef Name="IncomeTaxId" />
-    </Key>
-    <Property Name="IncomeTaxId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="IncomeTaxNum" Type="Int32" />
-    <Property Name="EmpNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="CompNo" Type="Int32" />
-    <Property Name="BranchNo" Type="Int32" />
-    <Property Name="LahTransferId" Type="Int32" />
-    <Property Name="SaveDate" Type="DateTime" Precision="3" />
-    <Property Name="DeletionID" Type="Int32" />
-    <NavigationProperty Name="EmployeePersonalInfo" Relationship="Self.FK_IncomeTaxSetup_EmployeePersonalInfo" FromRole="IncomeTaxSetup" ToRole="EmployeePersonalInfo" />
-    <NavigationProperty Name="IncomeTaxDetails" Relationship="Self.FK_IncomeTaxDetail_IncomeTaxSetup" FromRole="IncomeTaxSetup" ToRole="IncomeTaxDetail" />
   </EntityType>
   <EntityType Name="Increment">
     <Key>
@@ -1376,8 +1293,8 @@
     <Property Name="LahTransferId" Type="Int32" />
     <Property Name="SaveDate" Type="DateTime" Precision="3" />
     <Property Name="DeletionID" Type="Int32" />
-    <NavigationProperty Name="EmployeePersonalInfo" Relationship="Self.FK_LoanAdjust_EmployeePersonalInfo" FromRole="LoanAdjuststment" ToRole="EmployeePersonalInfo" />
     <NavigationProperty Name="LoanTaken" Relationship="Self.FK_LoanAdjuststment_LoanTaken" FromRole="LoanAdjuststment" ToRole="LoanTaken" />
+    <NavigationProperty Name="EmployeePersonalInfo" Relationship="SairaIndModel.FK_LoanAdjust_EmployeePersonalInfo" FromRole="LoanAdjuststment" ToRole="EmployeePersonalInfo" />
   </EntityType>
   <EntityType Name="LoanTaken">
     <Key>
@@ -1404,8 +1321,8 @@
     <Property Name="AdjustedDate" Type="DateTime" Precision="3" />
     <Property Name="PreviousAdv" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="GrossSalary" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-    <NavigationProperty Name="EmployeePersonalInfo" Relationship="Self.FK_LoanTaken_EmployeePersonalInfo" FromRole="LoanTaken" ToRole="EmployeePersonalInfo" />
     <NavigationProperty Name="LoanAdjuststments" Relationship="Self.FK_LoanAdjuststment_LoanTaken" FromRole="LoanTaken" ToRole="LoanAdjuststment" />
+    <NavigationProperty Name="EmployeePersonalInfo" Relationship="SairaIndModel.FK_LoanTaken_EmployeePersonalInfo" FromRole="LoanTaken" ToRole="EmployeePersonalInfo" />
   </EntityType>
   <EntityType Name="LocalPurchaseInvDetail">
     <Key>
@@ -1479,6 +1396,19 @@
     <Property Name="LahTransferId" Type="Int32" />
     <Property Name="SaveDate" Type="DateTime" Precision="3" />
     <Property Name="DeletionID" Type="Int32" />
+    <Property Name="SupplierType" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="ContactPerson" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Phone1" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Phone2" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="AcntId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Registered" Type="Boolean" />
+    <Property Name="CountryId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="CityId" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="WithHolding" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="WebPage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="OtherPurchaseInvDetail">
     <Key>
@@ -1672,23 +1602,6 @@
     <Property Name="SaveDate" Type="DateTime" Precision="3" />
     <Property Name="DeletionID" Type="Int32" />
   </EntityType>
-  <EntityType Name="Purchaser">
-    <Key>
-      <PropertyRef Name="PurchaseId" />
-    </Key>
-    <Property Name="PurchaseId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="ContactNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Acntid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="CompNo" Type="Int32" />
-    <Property Name="BranchNo" Type="Int32" />
-    <Property Name="PurchaserNum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="LahTransferId" Type="Int32" />
-    <Property Name="SaveDate" Type="DateTime" Precision="3" />
-    <Property Name="DeletionID" Type="Int32" />
-    <Property Name="Abb" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-    <Property Name="PID" Type="Int32" />
-  </EntityType>
   <EntityType Name="PurchaseRequest">
     <Key>
       <PropertyRef Name="PrId" />
@@ -1729,26 +1642,6 @@
     <Property Name="SaveDate" Type="DateTime" Precision="3" />
     <Property Name="DeletionID" Type="Int32" />
   </EntityType>
-  <EntityType Name="PurchaseRequisitionOrder">
-    <Key>
-      <PropertyRef Name="RequisitionID" />
-      <PropertyRef Name="CompNo" />
-      <PropertyRef Name="BranchNo" />
-    </Key>
-    <Property Name="RequisitionID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="RequisitionOrderNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="RequisitionDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="StoreUnitId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-    <Property Name="ExpireDaysStatus" Type="Int32" />
-    <Property Name="IndentoCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="CompNo" Type="Int32" Nullable="false" />
-    <Property Name="BranchNo" Type="Int32" Nullable="false" />
-    <Property Name="LahTransferId" Type="Int32" />
-    <Property Name="SaveDate" Type="DateTime" Precision="3" />
-    <Property Name="DeletionID" Type="Int32" />
-    <Property Name="PurchaserID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-  </EntityType>
   <EntityType Name="PurchaseRequisitionOrderDetail">
     <Key>
       <PropertyRef Name="RequisitionID" />
@@ -1781,6 +1674,7 @@
     <Property Name="CompNo" Type="Int32" Nullable="false" />
     <Property Name="BranchNo" Type="Int32" Nullable="false" />
     <Property Name="DemandPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ApprovedStatus" Type="Boolean" />
   </EntityType>
   <EntityType Name="PurDeliveryChallDetail">
     <Key>
@@ -2077,8 +1971,8 @@
     <Property Name="LahTransferId" Type="Int32" />
     <Property Name="SaveDate" Type="DateTime" Precision="3" />
     <Property Name="DeletionID" Type="Int32" />
-    <NavigationProperty Name="EmployeePersonalInfo" Relationship="Self.FK_SalaryMaster_EmployeePersonalInfo" FromRole="SalaryMaster" ToRole="EmployeePersonalInfo" />
     <NavigationProperty Name="SalaryDetails" Relationship="Self.FK_SalaryDetail_SalaryMaster" FromRole="SalaryMaster" ToRole="SalaryDetail" />
+    <NavigationProperty Name="EmployeePersonalInfo" Relationship="SairaIndModel.FK_SalaryMaster_EmployeePersonalInfo" FromRole="SalaryMaster" ToRole="EmployeePersonalInfo" />
   </EntityType>
   <EntityType Name="SalarySetup">
     <Key>
@@ -3387,26 +3281,6 @@
     <Property Name="LahTransferId" Type="Int32" />
     <Property Name="SaveDate" Type="DateTime" Precision="3" />
     <Property Name="DeletionID" Type="Int32" />
-  </EntityType>
-  <EntityType Name="IncomeTaxDetail">
-    <Key>
-      <PropertyRef Name="IncomeTaxId" />
-      <PropertyRef Name="IncomeTaxAmount" />
-      <PropertyRef Name="DateAppFrom" />
-      <PropertyRef Name="DateAppTo" />
-      <PropertyRef Name="CompNo" />
-      <PropertyRef Name="BranchNo" />
-    </Key>
-    <Property Name="IncomeTaxId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="IncomeTaxAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="DateAppFrom" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="DateAppTo" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="CompNo" Type="Int32" Nullable="false" />
-    <Property Name="BranchNo" Type="Int32" Nullable="false" />
-    <Property Name="LahTransferId" Type="Int32" />
-    <Property Name="SaveDate" Type="DateTime" Precision="3" />
-    <Property Name="DeletionID" Type="Int32" />
-    <NavigationProperty Name="IncomeTaxSetup" Relationship="Self.FK_IncomeTaxDetail_IncomeTaxSetup" FromRole="IncomeTaxDetail" ToRole="IncomeTaxSetup" />
   </EntityType>
   <EntityType Name="InsurancePolicy">
     <Key>
@@ -4986,78 +4860,6 @@
     <Property Name="SaveDate" Type="DateTime" Precision="3" />
     <Property Name="DeletionID" Type="Int32" />
   </EntityType>
-  <Association Name="FK_AdvanceAgainstBonus_EmployeePersonalInfo">
-    <End Role="EmployeePersonalInfo" Type="Self.EmployeePersonalInfo" Multiplicity="1" />
-    <End Role="AdvanceAgainstBonus" Type="Self.AdvanceAgainstBonu" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EmployeePersonalInfo">
-        <PropertyRef Name="EmpNo" />
-      </Principal>
-      <Dependent Role="AdvanceAgainstBonus">
-        <PropertyRef Name="EmpNo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_AdvanceAgainstSalary_EmployeePersonalInfo">
-    <End Role="EmployeePersonalInfo" Type="Self.EmployeePersonalInfo" Multiplicity="0..1" />
-    <End Role="AdvanceAgainstSalary" Type="Self.AdvanceAgainstSalary" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EmployeePersonalInfo">
-        <PropertyRef Name="EmpNo" />
-      </Principal>
-      <Dependent Role="AdvanceAgainstSalary">
-        <PropertyRef Name="EmpNo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_IncomeTaxSetup_EmployeePersonalInfo">
-    <End Role="EmployeePersonalInfo" Type="Self.EmployeePersonalInfo" Multiplicity="0..1" />
-    <End Role="IncomeTaxSetup" Type="Self.IncomeTaxSetup" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EmployeePersonalInfo">
-        <PropertyRef Name="EmpNo" />
-      </Principal>
-      <Dependent Role="IncomeTaxSetup">
-        <PropertyRef Name="EmpNo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_LoanAdjust_EmployeePersonalInfo">
-    <End Role="EmployeePersonalInfo" Type="Self.EmployeePersonalInfo" Multiplicity="0..1" />
-    <End Role="LoanAdjuststment" Type="Self.LoanAdjuststment" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EmployeePersonalInfo">
-        <PropertyRef Name="EmpNo" />
-      </Principal>
-      <Dependent Role="LoanAdjuststment">
-        <PropertyRef Name="EmpNo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_LoanTaken_EmployeePersonalInfo">
-    <End Role="EmployeePersonalInfo" Type="Self.EmployeePersonalInfo" Multiplicity="0..1" />
-    <End Role="LoanTaken" Type="Self.LoanTaken" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EmployeePersonalInfo">
-        <PropertyRef Name="EmpNo" />
-      </Principal>
-      <Dependent Role="LoanTaken">
-        <PropertyRef Name="EmpNo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_SalaryMaster_EmployeePersonalInfo">
-    <End Role="EmployeePersonalInfo" Type="Self.EmployeePersonalInfo" Multiplicity="0..1" />
-    <End Role="SalaryMaster" Type="Self.SalaryMaster" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EmployeePersonalInfo">
-        <PropertyRef Name="EmpNo" />
-      </Principal>
-      <Dependent Role="SalaryMaster">
-        <PropertyRef Name="EmpNo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_EOBIDetail_EOBISetup">
     <End Role="EOBISetup" Type="Self.EOBISetup" Multiplicity="1" />
     <End Role="EOBIDetail" Type="Self.EOBIDetail" Multiplicity="*" />
@@ -5067,18 +4869,6 @@
       </Principal>
       <Dependent Role="EOBIDetail">
         <PropertyRef Name="EOBIId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_IncomeTaxDetail_IncomeTaxSetup">
-    <End Role="IncomeTaxSetup" Type="Self.IncomeTaxSetup" Multiplicity="1" />
-    <End Role="IncomeTaxDetail" Type="Self.IncomeTaxDetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="IncomeTaxSetup">
-        <PropertyRef Name="IncomeTaxId" />
-      </Principal>
-      <Dependent Role="IncomeTaxDetail">
-        <PropertyRef Name="IncomeTaxId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -5174,7 +4964,6 @@
     <EntitySet Name="AdjustmentSaleAcnts" EntityType="Self.AdjustmentSaleAcnt" />
     <EntitySet Name="AdjustmentSaleAcntDetails" EntityType="Self.AdjustmentSaleAcntDetail" />
     <EntitySet Name="AdvanceAgainstBonus" EntityType="Self.AdvanceAgainstBonu" />
-    <EntitySet Name="AdvanceAgainstSalaries" EntityType="Self.AdvanceAgainstSalary" />
     <EntitySet Name="AdvanceToPurchasers" EntityType="Self.AdvanceToPurchaser" />
     <EntitySet Name="AdvanceToPurchaserDetails" EntityType="Self.AdvanceToPurchaserDetail" />
     <EntitySet Name="AllSuppliers" EntityType="Self.AllSupplier" />
@@ -5204,7 +4993,6 @@
     <EntitySet Name="Designations" EntityType="Self.Designation" />
     <EntitySet Name="Districts" EntityType="Self.District" />
     <EntitySet Name="dtproperties" EntityType="Self.dtproperty" />
-    <EntitySet Name="EmployeePersonalInfoes" EntityType="Self.EmployeePersonalInfo" />
     <EntitySet Name="EmpPersonalInfo1" EntityType="Self.EmpPersonalInfo1" />
     <EntitySet Name="EmpStatus" EntityType="Self.EmpStatu" />
     <EntitySet Name="EOBISetups" EntityType="Self.EOBISetup" />
@@ -5223,7 +5011,6 @@
     <EntitySet Name="GroupChanges" EntityType="Self.GroupChange" />
     <EntitySet Name="Holidays" EntityType="Self.Holiday" />
     <EntitySet Name="IncDetails" EntityType="Self.IncDetail" />
-    <EntitySet Name="IncomeTaxSetups" EntityType="Self.IncomeTaxSetup" />
     <EntitySet Name="Increments" EntityType="Self.Increment" />
     <EntitySet Name="Invoice_detail" EntityType="Self.Invoice_detail" />
     <EntitySet Name="Invoice_Info" EntityType="Self.Invoice_Info" />
@@ -5255,10 +5042,8 @@
     <EntitySet Name="PReturnDetails" EntityType="Self.PReturnDetail" />
     <EntitySet Name="PriceLists" EntityType="Self.PriceList" />
     <EntitySet Name="PurAdvances" EntityType="Self.PurAdvance" />
-    <EntitySet Name="Purchasers" EntityType="Self.Purchaser" />
     <EntitySet Name="PurchaseRequests" EntityType="Self.PurchaseRequest" />
     <EntitySet Name="PurchaseRequestDetails" EntityType="Self.PurchaseRequestDetail" />
-    <EntitySet Name="PurchaseRequisitionOrders" EntityType="Self.PurchaseRequisitionOrder" />
     <EntitySet Name="PurchaseRequisitionOrderDetails" EntityType="Self.PurchaseRequisitionOrderDetail" />
     <EntitySet Name="PurDeliveryChallDetails" EntityType="Self.PurDeliveryChallDetail" />
     <EntitySet Name="PurDellChallanMasters" EntityType="Self.PurDellChallanMaster" />
@@ -5336,7 +5121,6 @@
     <EntitySet Name="GroupAssigns" EntityType="Self.GroupAssign" />
     <EntitySet Name="Halfdays" EntityType="Self.Halfday" />
     <EntitySet Name="ImpGLInts" EntityType="Self.ImpGLInt" />
-    <EntitySet Name="IncomeTaxDetails" EntityType="Self.IncomeTaxDetail" />
     <EntitySet Name="InsurancePolicies" EntityType="Self.InsurancePolicy" />
     <EntitySet Name="ItemFinishGoodRegisters" EntityType="Self.ItemFinishGoodRegister" />
     <EntitySet Name="ItemRawMaterialRegisters" EntityType="Self.ItemRawMaterialRegister" />
@@ -5404,37 +5188,9 @@
     <EntitySet Name="UserRights" EntityType="Self.UserRight" />
     <EntitySet Name="Users" EntityType="Self.User" />
     <EntitySet Name="Visites" EntityType="Self.Visite" />
-    <AssociationSet Name="FK_AdvanceAgainstBonus_EmployeePersonalInfo" Association="Self.FK_AdvanceAgainstBonus_EmployeePersonalInfo">
-      <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfoes" />
-      <End Role="AdvanceAgainstBonus" EntitySet="AdvanceAgainstBonus" />
-    </AssociationSet>
-    <AssociationSet Name="FK_AdvanceAgainstSalary_EmployeePersonalInfo" Association="Self.FK_AdvanceAgainstSalary_EmployeePersonalInfo">
-      <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfoes" />
-      <End Role="AdvanceAgainstSalary" EntitySet="AdvanceAgainstSalaries" />
-    </AssociationSet>
-    <AssociationSet Name="FK_IncomeTaxSetup_EmployeePersonalInfo" Association="Self.FK_IncomeTaxSetup_EmployeePersonalInfo">
-      <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfoes" />
-      <End Role="IncomeTaxSetup" EntitySet="IncomeTaxSetups" />
-    </AssociationSet>
-    <AssociationSet Name="FK_LoanAdjust_EmployeePersonalInfo" Association="Self.FK_LoanAdjust_EmployeePersonalInfo">
-      <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfoes" />
-      <End Role="LoanAdjuststment" EntitySet="LoanAdjuststments" />
-    </AssociationSet>
-    <AssociationSet Name="FK_LoanTaken_EmployeePersonalInfo" Association="Self.FK_LoanTaken_EmployeePersonalInfo">
-      <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfoes" />
-      <End Role="LoanTaken" EntitySet="LoanTakens" />
-    </AssociationSet>
-    <AssociationSet Name="FK_SalaryMaster_EmployeePersonalInfo" Association="Self.FK_SalaryMaster_EmployeePersonalInfo">
-      <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfoes" />
-      <End Role="SalaryMaster" EntitySet="SalaryMasters" />
-    </AssociationSet>
     <AssociationSet Name="FK_EOBIDetail_EOBISetup" Association="Self.FK_EOBIDetail_EOBISetup">
       <End Role="EOBISetup" EntitySet="EOBISetups" />
       <End Role="EOBIDetail" EntitySet="EOBIDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_IncomeTaxDetail_IncomeTaxSetup" Association="Self.FK_IncomeTaxDetail_IncomeTaxSetup">
-      <End Role="IncomeTaxSetup" EntitySet="IncomeTaxSetups" />
-      <End Role="IncomeTaxDetail" EntitySet="IncomeTaxDetails" />
     </AssociationSet>
     <AssociationSet Name="FK_InvoiceReceiptDetail_InvoiceReceipt" Association="Self.FK_InvoiceReceiptDetail_InvoiceReceipt">
       <End Role="InvoiceReceipt" EntitySet="InvoiceReceipts" />
@@ -5474,17 +5230,51 @@
     </FunctionImport>
     <EntitySet Name="SalesOrders" EntityType="SairaIndModel.SalesOrder" />
     <EntitySet Name="SalesOrderDetails" EntityType="SairaIndModel.SalesOrderDetail" />
-    <EntitySet Name="BonusCalculations" EntityType="SairaIndModel.BonusCalculation" />
-    <AssociationSet Name="FK_BonusCalculation_EmployeePersonalInfo" Association="SairaIndModel.FK_BonusCalculation_EmployeePersonalInfo">
-      <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfoes" />
-      <End Role="BonusCalculation" EntitySet="BonusCalculations" />
-    </AssociationSet>
     <EntitySet Name="Customers" EntityType="SairaIndModel.Customer" />
     <AssociationSet Name="FK_SaleInvoice_Customer" Association="SairaIndModel.FK_SaleInvoice_Customer">
       <End Role="Customer" EntitySet="Customers" />
       <End Role="SaleInvoice" EntitySet="SaleInvoices" />
     </AssociationSet>
     <EntitySet Name="CRM_Customers" EntityType="SairaIndModel.CRM_Customers" />
+    <EntitySet Name="Purchasers" EntityType="SairaIndModel.Purchaser" />
+    <EntitySet Name="AdvanceAgainstSalaries" EntityType="SairaIndModel.AdvanceAgainstSalary" />
+    <EntitySet Name="BonusCalculations" EntityType="SairaIndModel.BonusCalculation" />
+    <EntitySet Name="EmployeePersonalInfoes" EntityType="SairaIndModel.EmployeePersonalInfo" />
+    <EntitySet Name="IncomeTaxSetups" EntityType="SairaIndModel.IncomeTaxSetup" />
+    <EntitySet Name="IncomeTaxDetails" EntityType="SairaIndModel.IncomeTaxDetail" />
+    <AssociationSet Name="FK_AdvanceAgainstBonus_EmployeePersonalInfo" Association="SairaIndModel.FK_AdvanceAgainstBonus_EmployeePersonalInfo">
+      <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfoes" />
+      <End Role="AdvanceAgainstBonu" EntitySet="AdvanceAgainstBonus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AdvanceAgainstSalary_EmployeePersonalInfo" Association="SairaIndModel.FK_AdvanceAgainstSalary_EmployeePersonalInfo">
+      <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfoes" />
+      <End Role="AdvanceAgainstSalary" EntitySet="AdvanceAgainstSalaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BonusCalculation_EmployeePersonalInfo" Association="SairaIndModel.FK_BonusCalculation_EmployeePersonalInfo">
+      <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfoes" />
+      <End Role="BonusCalculation" EntitySet="BonusCalculations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IncomeTaxSetup_EmployeePersonalInfo" Association="SairaIndModel.FK_IncomeTaxSetup_EmployeePersonalInfo">
+      <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfoes" />
+      <End Role="IncomeTaxSetup" EntitySet="IncomeTaxSetups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LoanAdjust_EmployeePersonalInfo" Association="SairaIndModel.FK_LoanAdjust_EmployeePersonalInfo">
+      <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfoes" />
+      <End Role="LoanAdjuststment" EntitySet="LoanAdjuststments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LoanTaken_EmployeePersonalInfo" Association="SairaIndModel.FK_LoanTaken_EmployeePersonalInfo">
+      <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfoes" />
+      <End Role="LoanTaken" EntitySet="LoanTakens" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SalaryMaster_EmployeePersonalInfo" Association="SairaIndModel.FK_SalaryMaster_EmployeePersonalInfo">
+      <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfoes" />
+      <End Role="SalaryMaster" EntitySet="SalaryMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IncomeTaxDetail_IncomeTaxSetup" Association="SairaIndModel.FK_IncomeTaxDetail_IncomeTaxSetup">
+      <End Role="IncomeTaxSetup" EntitySet="IncomeTaxSetups" />
+      <End Role="IncomeTaxDetail" EntitySet="IncomeTaxDetails" />
+    </AssociationSet>
+    <EntitySet Name="PurchaseRequisitionOrders" EntityType="SairaIndModel.PurchaseRequisitionOrder" />
   </EntityContainer>
   <EntityType Name="SalesOrder">
     <Key>
@@ -5523,35 +5313,6 @@
     <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="DeletionID" Type="Int32" Nullable="false" />
   </EntityType>
-  <EntityType Name="BonusCalculation">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="BonusID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="EmpNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="BasicPay" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="BonusSalary" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="AdvAgainstBonus" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="CompNo" Type="Int32" Nullable="false" />
-    <Property Name="BranchNo" Type="Int32" Nullable="false" />
-    <Property Name="LahTransferId" Type="Int32" Nullable="false" />
-    <Property Name="SaveDate" Type="DateTime" Precision="3" Nullable="false" />
-    <Property Name="DeletionID" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="EmployeePersonalInfo" Relationship="SairaIndModel.FK_BonusCalculation_EmployeePersonalInfo" FromRole="BonusCalculation" ToRole="EmployeePersonalInfo" />
-  </EntityType>
-  <Association Name="FK_BonusCalculation_EmployeePersonalInfo">
-    <End Type="SairaIndModel.EmployeePersonalInfo" Role="EmployeePersonalInfo" Multiplicity="0..1" />
-    <End Type="SairaIndModel.BonusCalculation" Role="BonusCalculation" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EmployeePersonalInfo">
-        <PropertyRef Name="EmpNo" />
-      </Principal>
-      <Dependent Role="BonusCalculation">
-        <PropertyRef Name="EmpNo" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="Customer">
     <Key>
       <PropertyRef Name="CustomerNo" />
@@ -5616,5 +5377,259 @@
     <Property Name="NationalTaxNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="SaleTaxRegisterNo" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
     <Property Name="WebPage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Purchaser">
+    <Key>
+      <PropertyRef Name="PurchaseId" />
+    </Key>
+    <Property Name="PurchaseId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmpNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PurchaserNum" Type="Int32" />
+    <Property Name="CompNo" Type="Int32" />
+    <Property Name="BranchNo" Type="Int32" />
+    <Property Name="LahTransferId" Type="Int32" />
+    <Property Name="SaveDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletionID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="AdvanceAgainstSalary">
+    <Key>
+      <PropertyRef Name="AdvAgainstSalID" />
+    </Key>
+    <Property Name="AdvAgainstSalID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AdvAgainstSalNum" Type="Int32" />
+    <Property Name="EmpNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AdvanceDate" Type="DateTime" Precision="3" />
+    <Property Name="AdvanceMonth" Type="DateTime" Precision="3" />
+    <Property Name="GrossSalary" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AdvanceAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AppAuth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RecomAuth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CompNo" Type="Int32" />
+    <Property Name="BranchNo" Type="Int32" />
+    <Property Name="LahTransferId" Type="Int32" />
+    <Property Name="SaveDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletionID" Type="Int32" />
+    <Property Name="BalanceSalary" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="EmployeePersonalInfo" Relationship="SairaIndModel.FK_AdvanceAgainstSalary_EmployeePersonalInfo" FromRole="AdvanceAgainstSalary" ToRole="EmployeePersonalInfo" />
+  </EntityType>
+  <EntityType Name="BonusCalculation">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BonusID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmpNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BasicPay" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="BonusSalary" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="AdvAgainstBonus" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="CompNo" Type="Int32" Nullable="false" />
+    <Property Name="BranchNo" Type="Int32" Nullable="false" />
+    <Property Name="LahTransferId" Type="Int32" Nullable="false" />
+    <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DeletionID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="EmployeePersonalInfo" Relationship="SairaIndModel.FK_BonusCalculation_EmployeePersonalInfo" FromRole="BonusCalculation" ToRole="EmployeePersonalInfo" />
+  </EntityType>
+  <EntityType Name="EmployeePersonalInfo">
+    <Key>
+      <PropertyRef Name="EmpNo" />
+    </Key>
+    <Property Name="EmpNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TitleID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FathName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Domicile" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Religion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Nationality" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="NICNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="BloodGrp" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="BrthDate" Type="DateTime" Precision="3" />
+    <Property Name="EmerCont" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="MaritStat" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="EmerPhon" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="ChildNo" Type="Int32" />
+    <Property Name="LatQual" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HelthIssu" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="Sex" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="SpouseName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="Pic" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="SpouseDob" Type="DateTime" Precision="3" />
+    <Property Name="LahTransferId" Type="Int32" />
+    <Property Name="CompNo" Type="Int32" />
+    <Property Name="BranchNo" Type="Int32" />
+    <Property Name="EmpNum" Type="Int32" />
+    <Property Name="SaveDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletionID" Type="Int32" />
+    <Property Name="EmpType" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="DEPT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DESIG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Address1" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Phone1" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="Phone2" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="HF" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="HireDate" Type="DateTime" Precision="3" />
+    <Property Name="EmpPic" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="AdvanceAgainstBonus" Relationship="SairaIndModel.FK_AdvanceAgainstBonus_EmployeePersonalInfo" FromRole="EmployeePersonalInfo" ToRole="AdvanceAgainstBonu" />
+    <NavigationProperty Name="AdvanceAgainstSalaries" Relationship="SairaIndModel.FK_AdvanceAgainstSalary_EmployeePersonalInfo" FromRole="EmployeePersonalInfo" ToRole="AdvanceAgainstSalary" />
+    <NavigationProperty Name="BonusCalculations" Relationship="SairaIndModel.FK_BonusCalculation_EmployeePersonalInfo" FromRole="EmployeePersonalInfo" ToRole="BonusCalculation" />
+    <NavigationProperty Name="IncomeTaxSetups" Relationship="SairaIndModel.FK_IncomeTaxSetup_EmployeePersonalInfo" FromRole="EmployeePersonalInfo" ToRole="IncomeTaxSetup" />
+    <NavigationProperty Name="LoanAdjuststments" Relationship="SairaIndModel.FK_LoanAdjust_EmployeePersonalInfo" FromRole="EmployeePersonalInfo" ToRole="LoanAdjuststment" />
+    <NavigationProperty Name="LoanTakens" Relationship="SairaIndModel.FK_LoanTaken_EmployeePersonalInfo" FromRole="EmployeePersonalInfo" ToRole="LoanTaken" />
+    <NavigationProperty Name="SalaryMasters" Relationship="SairaIndModel.FK_SalaryMaster_EmployeePersonalInfo" FromRole="EmployeePersonalInfo" ToRole="SalaryMaster" />
+    <Property Name="emal" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="IncomeTaxSetup">
+    <Key>
+      <PropertyRef Name="IncomeTaxId" />
+    </Key>
+    <Property Name="IncomeTaxId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IncomeTaxNum" Type="Int32" />
+    <Property Name="EmpNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CompNo" Type="Int32" />
+    <Property Name="BranchNo" Type="Int32" />
+    <Property Name="LahTransferId" Type="Int32" />
+    <Property Name="SaveDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletionID" Type="Int32" />
+    <NavigationProperty Name="EmployeePersonalInfo" Relationship="SairaIndModel.FK_IncomeTaxSetup_EmployeePersonalInfo" FromRole="IncomeTaxSetup" ToRole="EmployeePersonalInfo" />
+    <NavigationProperty Name="IncomeTaxDetails" Relationship="SairaIndModel.FK_IncomeTaxDetail_IncomeTaxSetup" FromRole="IncomeTaxSetup" ToRole="IncomeTaxDetail" />
+  </EntityType>
+  <EntityType Name="IncomeTaxDetail">
+    <Key>
+      <PropertyRef Name="IncomeTaxId" />
+      <PropertyRef Name="IncomeTaxAmount" />
+      <PropertyRef Name="DateAppFrom" />
+      <PropertyRef Name="DateAppTo" />
+      <PropertyRef Name="CompNo" />
+      <PropertyRef Name="BranchNo" />
+    </Key>
+    <Property Name="IncomeTaxId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IncomeTaxAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="DateAppFrom" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateAppTo" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CompNo" Type="Int32" Nullable="false" />
+    <Property Name="BranchNo" Type="Int32" Nullable="false" />
+    <Property Name="LahTransferId" Type="Int32" />
+    <Property Name="SaveDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletionID" Type="Int32" />
+    <NavigationProperty Name="IncomeTaxSetup" Relationship="SairaIndModel.FK_IncomeTaxDetail_IncomeTaxSetup" FromRole="IncomeTaxDetail" ToRole="IncomeTaxSetup" />
+  </EntityType>
+  <Association Name="FK_AdvanceAgainstBonus_EmployeePersonalInfo">
+    <End Type="SairaIndModel.EmployeePersonalInfo" Role="EmployeePersonalInfo" Multiplicity="1" />
+    <End Type="SairaIndModel.AdvanceAgainstBonu" Role="AdvanceAgainstBonu" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeePersonalInfo">
+        <PropertyRef Name="EmpNo" />
+      </Principal>
+      <Dependent Role="AdvanceAgainstBonu">
+        <PropertyRef Name="EmpNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AdvanceAgainstSalary_EmployeePersonalInfo">
+    <End Type="SairaIndModel.EmployeePersonalInfo" Role="EmployeePersonalInfo" Multiplicity="0..1" />
+    <End Type="SairaIndModel.AdvanceAgainstSalary" Role="AdvanceAgainstSalary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeePersonalInfo">
+        <PropertyRef Name="EmpNo" />
+      </Principal>
+      <Dependent Role="AdvanceAgainstSalary">
+        <PropertyRef Name="EmpNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BonusCalculation_EmployeePersonalInfo">
+    <End Type="SairaIndModel.EmployeePersonalInfo" Role="EmployeePersonalInfo" Multiplicity="0..1" />
+    <End Type="SairaIndModel.BonusCalculation" Role="BonusCalculation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeePersonalInfo">
+        <PropertyRef Name="EmpNo" />
+      </Principal>
+      <Dependent Role="BonusCalculation">
+        <PropertyRef Name="EmpNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IncomeTaxSetup_EmployeePersonalInfo">
+    <End Type="SairaIndModel.EmployeePersonalInfo" Role="EmployeePersonalInfo" Multiplicity="0..1" />
+    <End Type="SairaIndModel.IncomeTaxSetup" Role="IncomeTaxSetup" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeePersonalInfo">
+        <PropertyRef Name="EmpNo" />
+      </Principal>
+      <Dependent Role="IncomeTaxSetup">
+        <PropertyRef Name="EmpNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LoanAdjust_EmployeePersonalInfo">
+    <End Type="SairaIndModel.EmployeePersonalInfo" Role="EmployeePersonalInfo" Multiplicity="0..1" />
+    <End Type="SairaIndModel.LoanAdjuststment" Role="LoanAdjuststment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeePersonalInfo">
+        <PropertyRef Name="EmpNo" />
+      </Principal>
+      <Dependent Role="LoanAdjuststment">
+        <PropertyRef Name="EmpNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LoanTaken_EmployeePersonalInfo">
+    <End Type="SairaIndModel.EmployeePersonalInfo" Role="EmployeePersonalInfo" Multiplicity="0..1" />
+    <End Type="SairaIndModel.LoanTaken" Role="LoanTaken" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeePersonalInfo">
+        <PropertyRef Name="EmpNo" />
+      </Principal>
+      <Dependent Role="LoanTaken">
+        <PropertyRef Name="EmpNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SalaryMaster_EmployeePersonalInfo">
+    <End Type="SairaIndModel.EmployeePersonalInfo" Role="EmployeePersonalInfo" Multiplicity="0..1" />
+    <End Type="SairaIndModel.SalaryMaster" Role="SalaryMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EmployeePersonalInfo">
+        <PropertyRef Name="EmpNo" />
+      </Principal>
+      <Dependent Role="SalaryMaster">
+        <PropertyRef Name="EmpNo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IncomeTaxDetail_IncomeTaxSetup">
+    <End Type="SairaIndModel.IncomeTaxSetup" Role="IncomeTaxSetup" Multiplicity="1" />
+    <End Type="SairaIndModel.IncomeTaxDetail" Role="IncomeTaxDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IncomeTaxSetup">
+        <PropertyRef Name="IncomeTaxId" />
+      </Principal>
+      <Dependent Role="IncomeTaxDetail">
+        <PropertyRef Name="IncomeTaxId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="PurchaseRequisitionOrder">
+    <Key>
+      <PropertyRef Name="RequisitionID" />
+      <PropertyRef Name="CompNo" />
+      <PropertyRef Name="BranchNo" />
+    </Key>
+    <Property Name="RequisitionID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RequisitionOrderNo" Type="String" Nullable="false" />
+    <Property Name="RequisitionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StoreUnitId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="ExpireDaysStatus" Type="Int32" />
+    <Property Name="IndentoCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CompNo" Type="Int32" Nullable="false" />
+    <Property Name="BranchNo" Type="Int32" Nullable="false" />
+    <Property Name="LahTransferId" Type="Int32" />
+    <Property Name="SaveDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletionID" Type="Int32" />
+    <Property Name="RefDocId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RefDocName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RequisitionOrderNo1" Type="Int32" Nullable="false" />
+    <Property Name="RequisitionOrderNo2" Type="Int32" Nullable="false" />
   </EntityType>
 </Schema>

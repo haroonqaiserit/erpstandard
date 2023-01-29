@@ -15,16 +15,12 @@ namespace ERPStandard.DbEntities
     public partial class Purchaser
     {
         public string PurchaseId { get; set; }
-        public string ContactNo { get; set; }
-        public string Acntid { get; set; }
-        public string Designation { get; set; }
+        public string EmpNo { get; set; }
+        public Nullable<int> PurchaserNum { get; set; }
         public Nullable<int> CompNo { get; set; }
         public Nullable<int> BranchNo { get; set; }
-        public string PurchaserNum { get; set; }
         public Nullable<int> LahTransferId { get; set; }
         public Nullable<System.DateTime> SaveDate { get; set; }
         public Nullable<int> DeletionID { get; set; }
-        public string Abb { get; set; }
-        public Nullable<int> PID { get; set; }
     }
 }

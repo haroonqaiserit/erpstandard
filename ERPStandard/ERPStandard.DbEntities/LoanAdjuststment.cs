@@ -35,7 +35,7 @@ namespace ERPStandard.DbEntities
         public Nullable<System.DateTime> SaveDate { get; set; }
         public Nullable<int> DeletionID { get; set; }
     
-        public virtual EmployeePersonalInfo EmployeePersonalInfo { get; set; }
         public virtual LoanTaken LoanTaken { get; set; }
+        public virtual EmployeePersonalInfo EmployeePersonalInfo { get; set; }
     }
 }
