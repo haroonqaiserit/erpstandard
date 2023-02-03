@@ -19,5 +19,7 @@ namespace ERPStandard.DbEntities
         public int CompNo { get; set; }
         public int BranchNo { get; set; }
         public System.DateTime SaveDate { get; set; }
+        public int StoreUnitNo { get; set; }
+        public int DeletionID { get; set; }
     }
 }

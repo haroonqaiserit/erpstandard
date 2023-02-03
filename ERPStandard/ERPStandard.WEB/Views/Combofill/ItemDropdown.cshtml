@@ -1,4 +1,5 @@
 ﻿@model List<ERPStandard.DbEntities.ItemsStock>
+<div id="listGroup">
     <ul class="list-group">
         @if (Model.Count() == 0)
         {
@@ -9,15 +10,18 @@
             int i = 0;
             foreach (var item in Model)
             {
-    <li class="list-group-item @(i==0?"active":"")">
-        <a href="#" onclick="selectitemval('@item.ItemID', '@item.Dscr')" style="color:cornflowerblue;font-size:20px;font-weight:bold">
-            @item.Dscr
-        </a>
-    </li>
+                <li class="list-group-item @(i==0?"active":"")">
+                    <a href="#" onclick="selectitemval('@item.ItemID', '@item.Dscr')" style="color:cornflowerblue;font-size:20px;font-weight:bold">
+                        @item.Dscr
+                    </a>
+                </li>
                 i++;
             }
         }
     </ul>
+</div>
+
+
 <script>
 
     //$('div.container').on('focus', 'li', function () {

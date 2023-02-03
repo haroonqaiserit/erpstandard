@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERPStandard.ViewModels.Sales
+namespace ERPStandard.ViewModels.Purchase.RquisitionOrder
 {
-    public class PurchaseRequisitionOrderViewModel
+    public class PurReqOrderViewModel
     {
-        public List<PurchaseRequisitionOrderMasterViewModel> RequisitionOrderMaster { get; set; }
+        public List<PurReqOrderMasterViewModel> RequisitionOrderMaster { get; set; }
         public Pager Pager { get; set; }
         public string dtSearch { get; set; }
         public int clmNameOrder { get; set; }

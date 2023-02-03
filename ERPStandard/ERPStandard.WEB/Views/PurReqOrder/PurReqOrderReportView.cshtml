@@ -1,0 +1,65 @@
+﻿@model  List<ERPStandard.ViewModels.Sales.SaleQuotationMasterDetailViewModel>
+@*<link rel="stylesheet" href="~/assets/vendors/simple-datatables/style.css">
+<script src="~/assets/vendors/simple-datatables/simple-datatables.js"></script>*@
+
+<table hidden class="table table-striped dataTable-table" id="tblDocumentReport">
+    <thead>
+        <tr>
+            <th><a href="javascript:;" class="dataTable-sorter">SNo</a></th>
+            <th><a href="javascript:;" class="dataTable-sorter">QNo</a></th>
+            <th><a href="javascript:;" class="dataTable-sorter">Customer</a></th>
+            <th><a href="javascript:;" class="dataTable-sorter">Item</a></th>
+            <th><a href="javascript:;" class="dataTable-sorter">Qty</a></th>
+            <th><a href="javascript:;" class="dataTable-sorter">Rate</a></th>
+            <th><a href="javascript:;" class="dataTable-sorter">Value</a></th>
+            <th><a href="javascript:;" class="dataTable-sorter">VAT</a></th>
+            <th><a href="javascript:;" class="dataTable-sorter">ATax</a></th>
+            <th><a href="javascript:;" class="dataTable-sorter">SExduty</a></th>
+            <th><a href="javascript:;" class="dataTable-sorter">Net</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model != null)
+            {
+                int i = 1;
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@i</td>
+                        <td>@item.SaleQuotationMaster.QuoteNo</td>
+                        <td>@item.SaleQuotationMaster.CustomerName </td>
+                        @foreach (var item_d in item.SaleQuotationDetail)
+                        {
+                            var amount = item_d.Qty * item_d.Rate;
+                            var SaleTax_amount = Math.Round(amount * item_d.SaleTaxRate / 100, 2);
+                            var ASaleTax_amount = Math.Round(amount * item_d.ASaleTaxRate / 100, 2);
+                            var SExDuty_amount = Math.Round(amount * item_d.SExDutyRate / 100, 2);
+                            var NetTotal_amount = Math.Round(amount + SaleTax_amount + ASaleTax_amount + SExDuty_amount, 2);
+
+                            <td>@item_d.ItemName </td>
+                            <td>@item_d.Qty </td>
+                            <td>@item_d.Rate </td>
+                            <td>@amount </td>
+                            <td>@Math.Round(item_d.SaleTaxRate,1)% @SaleTax_amount </td>
+                            <td>@Math.Round(item_d.ASaleTaxRate,1)% @ASaleTax_amount </td>
+                            <td>@Math.Round(item_d.SExDutyRate,1)% @SExDuty_amount </td>
+                            <td>@NetTotal_amount </td>
+                        }
+                    </tr>
+                    i++;
+                }
+
+
+
+    }
+        }
+    </tbody>
+</table>
+
+<script>
+    // Simple Datatable
+    //let tblCompanyReport = document.querySelector('#tblCompanyReport');
+    //let dataTable = new simpleDatatables.DataTable(tblCompanyReport);
+</script>
+<!--Try new table look-->

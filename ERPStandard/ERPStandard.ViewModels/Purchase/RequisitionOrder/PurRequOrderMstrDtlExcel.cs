@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERPStandard.ViewModels.Sales
+namespace ERPStandard.ViewModels.Purchase.RquisitionOrder
 {
-    public class PurchaseRequisitionOrderMasterDetailExcel
+    public class PurRequOrderMstrDtlExcel
     {
         #region Requisition Master Data
         public int SNo { get; set; }

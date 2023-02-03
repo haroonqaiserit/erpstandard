@@ -1,0 +1,689 @@
+﻿@model List<ERPStandard.ViewModels.Sales.SaleQuotationMasterDetailExcel>
+@{
+    ViewBag.Title = "Sales Transaction";
+    ViewBag.SubTitle = "Quotation";
+}
+<style>
+    .select2-container .select2-selection--single {
+        height: 34px !important;
+    }
+
+    .select2-container--default .select2-selection--single {
+        border: 1px solid #ccc !important;
+        border-radius: 0px !important;
+    }
+</style>
+<style>
+    .search-table {
+        padding: 1%;
+    }
+
+    .search-box {
+        background: #c1c1c1;
+        border: 1px solid #ababab;
+    }
+
+        .search-box input:focus {
+            box-shadow: none;
+            border: 2px solid #eeeeee;
+        }
+
+    #searchpartial {
+        position: absolute;
+        z-index: 10;
+    }
+
+    #CustomSearchLoader {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        z-index: 9999;
+    }
+</style>
+
+<div class="card-header">
+    <h4 class="card-title">@ViewBag.SubTitle - Excel Upload </h4>
+</div>
+<div class="card-content">
+    <div class="card-body">
+        <form name="QuotationFormExcel" class="form">
+            <div class="row">
+                <div class="col-md-offset-12">
+                    <table id="tblQuotationDetail" class="table dataTable-table form-control" >
+                        <thead>
+                            <tr class="btn-danger">
+                                <th>SNo</th>
+                                <th>QuoteNo</th>
+                                <th>Date</th>
+                                <th>Valid Date</th>
+                                <th style="display:none">SalesManID</th>
+                                <th>SalesPerson</th>
+                                <th style="display:none">CustomerNo</th>
+                                <th>Customer</th>
+                                <th>Remarks</th>
+
+                                <th>ItemId</th>
+                                <th>ItemName</th>
+                                <th>Qty</th>
+                                <th>Rate</th>
+                                <th>Amount</th>
+                                <th>VAT</th>
+                                <th>VAT Amt</th>
+                                <th>ASTax</th>
+                                <th>ASTax Amt</th>
+                                <th>SED Rate</th>
+                                <th>SED Amt</th>
+                                <th>Net Amt</th>
+
+
+
+                            </tr>
+                        </thead>
+                        <tbody id="tblRowBody">
+                            @{int i = 0;
+                                foreach (var item in Model)
+                                {
+                                    var amount = item.Qty * item.Rate;
+                                    var SaleTax_amount = Math.Round(amount * item.SaleTaxRate / 100, 2);
+                                    var ASaleTax_amount = Math.Round(amount * item.ASaleTaxRate / 100, 2);
+                                    var SExDuty_amount = Math.Round(amount * item.SExDutyRate / 100, 2);
+                                    var NetTotal_amount = Math.Round(amount + SaleTax_amount + ASaleTax_amount + SExDuty_amount, 2);
+
+                                    <tr id="@(i==0? "tblRow":"newRow")">
+                                        <td>
+                                            @item.SNo
+                                        </td>
+
+                                        <td>
+                                            <input type="text" id="QuoteNo" required class="form-control" name="QuoteNo" , value="@item.QuoteNo">
+                                        </td>
+
+                                        <td>
+                                            <input type="date" id="QuoteDate" required class="form-control" name="QuoteDate" , value='"@item.QuoteDate.ToString("dd-MMM-yyyy")"'>
+                                        </td>
+                                        <td>
+                                            <input type="date" id="QuoteValidDate" required class="form-control" name="QuoteValidDate" , value='"@item.QuoteValidDate"'>
+                                        </td>
+                                        <td style="display:none">
+                                            <input type="text" id="SalesManId" minlength="3" maxlength="150" required class="form-control" placeholder="SalesManId" name="SalesManId" , value="@item.SalesManId">
+                                        </td>
+                                        <td>
+                                            <input type="text" id="SalesManName" minlength="3" maxlength="150" required class="form-control" placeholder="SalesManName" name="SalesManName" , value="@item.SalesManName">
+                                        </td>
+                                        <td class="col-md-2" style="display:none">
+                                            <input type="text" id="CustomerNo" minlength="3" maxlength="150" required class="form-control" placeholder="CustomerName" name="CustomerNo" , value="@item.CustomerNo">
+                                        </td>
+                                        <td class="col-md-2">
+                                            <input type="text" id="CustomerName" minlength="3" maxlength="150" required class="form-control" placeholder="CustomerName" name="CustomerName" , value="@item.CustomerName">
+                                        </td>
+                                        <td>
+                                            <input type="text" id="Remarks" minlength="3" maxlength="150" required class="form-control" placeholder="Remarks" name="Remarks" , value="@item.Remarks">
+                                        </td>
+
+                                        <td>
+                                            <div class="md">
+                                                <input type="text" id="CustomSearchID" readonly class="form-control" placeholder="Id" name="ItemID" value="@item.ItemID">
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            <div>
+                                                <div class="search-panel">
+                                                    <input type="text" name="customsearchtext" id="CustomSearch1" autocomplete="off" minlength="1" maxlength="150" onkeyup="getItemSearchRecords(this, event)" class="form-control chld" placeholder="Search all..." value="@item.ItemName">
+                                                    <div id="searchpartial" class="itemsearchrecord container">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td style="width:12px">
+                                            <input type="text" id="Qty" min="1" max="999999999" required class="form-control" placeholder="Qty" name="Qty" onkeyup="handleKeyDownQty(this, event)" onclick="handleClicknumeric(event)" value="@item.Qty">
+                                        </td>
+                                        <td>
+                                            <input type="text"  width="8" id="Rate" min="1" max="999999999" required class="form-control" placeholder="Rate" name="Rate" onkeyup="handleKeyDownRate(this, event)" onclick="handleClicknumeric(event)" value="@item.Rate">
+                                        </td>
+                                        <td>
+                                            <input type="text" readonly id="Amt" class="form-control" placeholder="Amt" name="Amt" value="@amount">
+                                        </td>
+                                        <td>
+                                            <input type="number"  width="8" id="SaleTaxRate" min="1" max="99" required class="form-control focus" placeholder="Tax" name="SaleTaxRate" onkeyup="handleKeyDownTax(this, event)" onclick="handleClicknumeric(event)" value="@item.SaleTaxRate">
+                                        </td>
+                                        <td>
+                                            <input type="number" readonly id="SaleTaxAmt" minlength="1" maxlength="9" class="form-control" placeholder="SaleTaxAmt" name="SaleTaxAmt" value="@SaleTax_amount">
+                                        </td>
+                                        <td>
+                                            <input type="number" id="ASaleTaxRate" min="1" max="99" required class="form-control  focus" placeholder="AddTax" name="ASaleTaxRate" onkeyup="handleKeyDownAddTax(this, event)" onclick="handleClicknumeric(event)" value="@item.ASaleTaxRate">
+                                        </td>
+                                        <td>
+                                            <input type="number" readonly id="ASaleTaxAmt" minlength="1" maxlength="9" class="form-control" placeholder="ASaleTaxAmt" name="ASaleTaxAmt" value="@ASaleTax_amount">
+                                        </td>
+                                        <td>
+                                            <input type="number" id="SExDutyRate" min="1" max="99" required class="form-control  focus" placeholder="DutyRate" name="SExDutyRate" onkeyup="handleKeyDownAddSEd(this, event)" onclick="handleClicknumeric(event)" value="@item.SExDutyRate">
+                                        </td>
+                                        <td>
+                                            <input type="number" readonly id="SExDutyAmt" minlength="1" maxlength="9" class="form-control" placeholder="SExDutyAmt" name="SExDutyAmt" value="@SExDuty_amount">
+                                        </td>
+                                        <td>
+                                            <input type="number" readonly id="NetTotalAmt" class="form-control" placeholder="Net Amt" name="NetTotalAmt" value="@NetTotal_amount">
+                                        </td>
+
+                                        <td>
+                                            <button type="button" class="btn-danger" onclick="onDeleteRow(this)">Delete</button>
+                                        </td>
+                                    </tr>
+                                    i++;
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    <div class="col-sm-12 d-flex justify-content-end">
+                        <button type="button" id="btnSave" class="btn btn-primary me-1 mb-1" onclick="onSave(this.form, '1')">Save</button>
+                        <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        //SalesmanComboFill();
+        //CustomerComboFill();
+    });
+    function handleKeyDownQty(eval, e) {
+        //console.log($(eval).val());
+        calculateAmt(e);
+
+        if (e.keyCode === 13) {
+            /*var currentTabIndex = e.target.tabIndex;
+            console.log("currentTabIndex is: "+currentTabIndex);
+            var nextTabIndex = currentTabIndex + 1;
+            var nextInput = document.querySelector("[tabIndex='" + nextTabIndex + "']");
+            if (nextInput) {
+                nextInput.focus();
+            }*/
+            e.preventDefault();
+
+            var val = $(eval).val();
+            if (val === "") return;
+
+            var currentRow = e.target.closest("td");
+            var nextRow = currentRow.nextElementSibling;
+            var nextInput = nextRow.querySelector("#Rate");
+            //console.log("current row " + currentRow);
+            //console.log("reached " + nextInput);
+
+            if (nextInput) {
+                nextInput.focus();
+            }
+        }
+    }
+    function handleKeyDownRate(eval, e) {
+        calculateAmt(e);
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            var val = $(eval).val();
+            if (val === "") return;
+            // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
+            //SEduty =8, SEdutyAmt =9, NetVal=10, BtnAdd = 11
+            //console.log($(eval).val());
+            var currentCell = e.target.closest("td");
+            var nextCell = currentCell.nextElementSibling.nextElementSibling;
+            var nextInput = nextCell.querySelector("#SaleTaxRate");
+
+            if (!nextInput.className.includes("focus")) {
+                nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
+                nextInput = nextCell.querySelector("#btnrowadd");
+                //console.log("next input td " + nextInput);
+            }
+            if (nextInput) {
+                nextInput.focus();
+            }
+        }
+
+    }
+    function handleKeyDownTax(eval, e) {
+        calculateAmt(e);
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            var val = $(eval).val();
+            if (val === "") return;
+            // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
+            //SEduty =8, SEdutyAmt =9, NetVal=10, BtnAdd = 11
+            var currentCell = e.target.closest("td");
+            var nextCell = currentCell.nextElementSibling.nextElementSibling;
+            var nextInput = nextCell.querySelector("#ASaleTaxRate");
+            //console.log("next input td " + nextInput);
+            //console.log("display style " + nextInput.style.display);
+
+            if (!nextInput.className.includes("focus")) {
+                //console.log("next input td with none style " + nextInput);
+
+                nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
+                nextInput = nextCell.querySelector("#SExDutyRate");
+                if (!nextInput.className.includes("focus")) {
+                    nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
+                    nextInput = nextCell.querySelector("#btnrowadd");
+                    //console.log("next input td " + nextInput);
+                }
+            }
+            if (nextInput) {
+                nextInput.focus();
+            }
+        }
+    }
+    function handleKeyDownAddTax(eval, e) {
+        calculateAmt(e);
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            var val = $(eval).val();
+            if (val === "") return;
+            // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
+            //SEduty =8, SEdutyAmt =9, NetVal=10, BtnAdd = 11
+            var currentCell = e.target.closest("td");
+            var nextCell = currentCell.nextElementSibling.nextElementSibling;
+            var nextInput = nextCell.querySelector("#SExDutyRate");
+            if (nextInput.style.display === "none" || nextInput.style.display === "") {
+                nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
+                nextInput = nextCell.querySelector("#btnrowadd");
+                console.log("next input td " + nextInput);
+            }
+            if (nextInput) {
+                nextInput.focus();
+            }
+        }
+    }
+    function handleKeyDownAddSEd(eval,e) {
+        calculateAmt(e);
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            var val = $(eval).val();
+            if (val === "") return;
+            // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
+            //SEduty =8, SEdutyAmt =9, NetVal=10, BtnAdd = 11
+            var currentCell = e.target.closest("td");
+            var nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling;
+            var nextInput = nextCell.querySelector("#btnrowadd");
+            if (nextInput) {
+                nextInput.focus();
+            }
+        }
+    }
+    function onAddRow() {
+        console.log("Reached on Add Row");
+        //var table = document.getElementById('tblQuotationDetail');
+        //var row = document.getElementById('tblRow')
+        //console.log(row[row.length - 1]);
+        ////var row = table.getElementById('tblRow')
+        //var rowOuterHtml = row[row.length - 1].rowOuterHtml;
+        //var newRow = table.insertRow();
+        //newRow.innerHTML = rowOuterHtml;
+
+        var table = document.getElementById('tblQuotationDetail');
+
+        $('#yourtableid tr').last().attr('id')
+
+
+        var row = document.getElementById('tblRowforCopy');
+        var tbody = document.getElementById('tblRowBody');
+        var clone = row.cloneNode(true); // copy children too
+        clone.id = "newID"; // change id or other attributes/contents
+        clone.style.display = 'table-row'
+        tbody.appendChild(clone); // add new row to end of table
+        //clone.focus();
+        $('#myTable tr:last').after(clone);
+        var newRow = $("table#tblQuotationDetail tr:last");
+        
+        var firstInput = newRow.find('input[name="customsearchtext"]');
+        console.log(firstInput);
+        firstInput.focus();
+    };
+    function onDeleteRow(ev) {
+
+    //    var TableRow = $(ev).closest('tr');
+    //    console.log(TableRow);
+    //    TableRow.removeChild;
+        var p = ev.parentNode.parentNode;
+        if (p.id != "tblRow") {
+            p.parentNode.removeChild(p);
+        }
+    }
+    function SalesmanComboFill() {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("SalesmanDropdown", "Combofill")',
+            dataType: "json",
+            beforeSend: function () {
+                $("#CustomSearchLoader").show();
+            },
+            complete: function () {
+                $("#CustomSearchLoader").hide();
+            },
+            success: function (result) {
+                //$('#AcntCode').html('');
+                //var rows1 = "<option value='' selected disabled > --Select Account--</option >";
+                //$('#AcntCode').append(rows1);
+
+                $.each(result, function (i, item) {
+                    var rows;
+                    rows = "<option value='" + item.SalesManId + "'>" + item.Name + "</option>";
+                    $('#SalesManId').append(rows);
+                });
+            }
+        });
+    };
+    function CustomerComboFill() {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("CustomerDropdown", "Combofill")',
+            dataType: "json",
+            beforeSend: function () {
+                $("#CustomSearchLoader").show();
+            },
+            complete: function () {
+                $("#CustomSearchLoader").hide();
+            },
+            success: function (result) {
+                //$('#AcntCode').html('');
+                //var rows1 = "<option value='' selected disabled > --Select Account--</option >";
+                //$('#AcntCode').append(rows1);
+                console.log("results received");
+                //console.log(result);
+
+                $.each(result, function (i, item) {
+                    var rows;
+                        rows = "<option value='" + item.CustomerNo + "'>" + item.Name + "</option>";
+                    $('#CustomerId').append(rows);
+                });
+            }
+        });
+    };
+    var searchflg = false;
+    var chnode;
+    var searchtextboxget;
+    var idsearchtxtboxget;
+    var Qtysearchtxtboxget;
+
+
+    var RateGet;
+    var SaleTaxRateGet;
+    var ASaleTaxRateGet;
+    var SExDutyRateGet;
+
+
+
+    function getItemSearchRecords(e, evt) {
+        calculateAmt(evt);
+        //var p = e.parentNode;
+        //console.log(p.childNodes);
+        //console.log(pp.childNodes[1].childNodes[1].childNodes[1].childNodes[3]);
+        //var pp = e.parentNode.parentNode.parentNode.parentNode;
+
+        //idsearchtxtboxget = pp.childNodes[1].childNodes[1].childNodes[1].childNodes[1];
+        //Qtysearchtxtboxget = pp.childNodes[5].childNodes[1];
+        //searchtextboxget = p.childNodes[1];
+        //chnode = p.childNodes[3];
+        //console.log(chnode);
+
+        //$(chnode).hide();
+        $(chnode).show();
+        $(chnode).html('');
+        var val = $(e).val();
+
+        if (evt.keyCode === 8) {
+            evt.preventDefault();
+            $(idsearchtxtboxget).val('');
+            $(chnode).focus();
+            //console.log("Focus not set");
+        }
+        if (evt.keyCode === 9) {
+            evt.preventDefault();
+            $(chnode).focus();
+            //console.log("Focus not set");
+        }
+        if (evt.keyCode === 27) {
+            evt.preventDefault();
+            $(chnode).hide();
+            //console.log("Focus not set");
+        }
+        if (evt.keyCode === 13) {
+            evt.preventDefault();
+            if (val === "") return;
+            $(chnode).html('');
+            $(chnode).hide();
+            var QuoteDate = $("#QuoteDate").val();
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("SingleFirstRec", "Combofill")',
+                data: {
+                    Search: val,
+                    docdate: QuoteDate
+                },
+                beforeSend: function () {
+                    // $("#CustomSearchLoader").show();
+                },
+                complete: function () {
+                    //$("#CustomSearchLoader").show();
+                },
+                success: function (data) {
+                    if (!data["STaxRate"]) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Tax Error!',
+                            text: 'Please define Tax for the current period!',
+                        })
+                        return;
+                    }
+
+                    $(idsearchtxtboxget).val(data["ItemID"]);
+                    $(searchtextboxget).val(data["Dscr"]);
+                    if (data["Rate"] > 0) {
+                        $(RateGet).val(data["Rate"]);
+                    }
+                    $(SaleTaxRateGet).val(data["STaxRate"]);
+                    $(ASaleTaxRateGet).val(data["ASTaxRate"]);
+                    $(SExDutyRateGet).val(data["ExcDuty"]);
+                    console.log($(SaleTaxRateGet).val());
+                    console.log(data["STaxRate"]);
+                    $(Qtysearchtxtboxget).focus();
+                }
+            });
+
+        } else {
+            var ItemClass = 1;//Finished Goods
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("ItemDropdown", "Combofill")',
+                data: {
+                    Search: val,
+                    ItemClass: ItemClass
+                },
+                beforeSend: function () {
+                    // $("#CustomSearchLoader").show();
+                },
+                complete: function () {
+                    //$("#CustomSearchLoader").show();
+                },
+                success: function (data) {
+                    //console.log(data);
+                    $(chnode).html(data);
+                }
+            });
+        }
+        //if (evt.keyCode === 40) {
+        //    console.log("down arrokey pressed");
+        //    //evt.preventDefault();
+        //    //return;
+        //    $(chnode).focus();
+        //}
+
+        if (evt.keyCode === 40) {
+            evt.preventDefault();
+
+            //console.log(p.childNodes[3]);
+            //console.log(p.childNodes[3].childNodes[1]);
+
+            //var currentCell = evt.target.closest("td");
+            //var nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling;
+            //var nextInput = nextCell.querySelector("#SearchBoxRow");
+            //if (nextInput) {
+            //    nextInput.focus();
+            //}
+
+
+            console.log(evt.keyCode);
+            //$(idsearchtxtboxget).val('');
+            //$(chnode).hide();
+            $(chnode).focus();
+            console.log("Focus not set");
+
+        }
+
+    };
+    function SearchingLikeSendle(val) {
+        console.log("reached in Searching");
+        //var val = $("#CustomSearch").val();
+
+        //console.log(searchflg);
+        //console.log(val);
+
+        //$("#searchpartial").show();
+
+        if (chnode != null) {
+            chnode.show();
+        }
+
+        if (val == "" || searchflg==false) {
+            $(chnode).html("");
+            return false;
+        }
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("ItemDropdown", "Combofill")',
+            data: {
+                Search: val
+            },
+            beforeSend: function () {
+               // $("#CustomSearchLoader").show();
+            },
+            complete: function () {
+                //$("#CustomSearchLoader").show();
+            },
+            success: function (data) {
+                console.log(data);
+                $("#searchpartial").html(data);
+            }
+        })
+    }
+    function selectitemval(itemval, name) {
+        searchflg = false;
+        //$("#CustomSearch").val(itemval);
+        //console.log(v);
+        console.log(itemval + ' ' + name);
+        var val = name;
+        var QuoteDate = $("#QuoteDate").val();
+
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("SingleFirstRec", "Combofill")',
+                data: {
+                    Search: val,
+                    docdate: QuoteDate
+                },
+                beforeSend: function () {
+                    // $("#CustomSearchLoader").show();
+                },
+                complete: function () {
+                    //$("#CustomSearchLoader").show();
+                },
+                success: function (data) {
+                    if (!data["STaxRate"]) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Tax Error!',
+                            text: 'Please define Tax for the current period!',
+                        })
+                        return;
+                    }
+
+                    $(idsearchtxtboxget).val(data["ItemID"]);
+                    $(searchtextboxget).val(data["Dscr"]);
+                    if (data["Rate"] > 0) {
+                        $(RateGet).val(data["Rate"]);
+                    }
+                    $(SaleTaxRateGet).val(data["STaxRate"]);
+                    $(ASaleTaxRateGet).val(data["ASTaxRate"]);
+                    $(SExDutyRateGet).val(data["ExcDuty"]);
+                    console.log($(SaleTaxRateGet).val());
+                    console.log(data["STaxRate"]);
+                    $(Qtysearchtxtboxget).focus();
+                    $(chnode).hide();
+                }
+            });
+    }
+    function ItemFill(search) {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("ItemDropdown", "Combofill")',
+            data: {
+                dtSearch: search
+            },
+            dataType: "json",
+            beforeSend: function () {
+                $("#CustomSearchLoader").show();
+            },
+            complete: function () {
+                $("#CustomSearchLoader").hide();
+            },
+            success: function (result) {
+                //$('#AcntCode').html('');
+                //var rows1 = "<option value='' selected disabled > --Select Account--</option >";
+                //$('#AcntCode').append(rows1);
+                console.log(result);
+                $.each(result, function (i, item) {
+                    var rows;
+                    //console.log(i);
+                    if (i == 0) {
+                        rows = "<option selected value='" + item.ItemID + "'>" + item.Dscr + "</option>";
+                    }
+                    else {
+                        rows = "<option value='" + item.ItemID + "'>" + item.Dscr + "</option>";
+                    }
+                    $('#ItemID').append(rows);
+                    $('#ItemIDD').append(rows);
+                });
+            }
+        });
+    };
+    function getval(sel) {
+        var ReceiverId = $(sel).val();
+
+           console.log(ReceiverId);
+        @*$.ajax({
+            type: "POST",
+            url: "/DeviceManagement/DeviceIsExist?ReceiverId=" + ReceiverId,
+            success: function (res) {
+                if (res.result == true) {
+                    window.location.href ="@Url.Action("EditDeviceM", "DeviceManagement")";
+                }
+            },
+            error: function (exception) {
+                alert('Exeption:');
+            }
+        });*@
+    };
+    $(document).mouseup(function (e) {
+        var container = $(chnode);
+
+        // if the target of the click isn't the container nor a descendant of the container
+        if (!container.is(e.target) && container.has(e.target).length === 0) {
+            container.hide();
+        }
+    });
+</script>
+
+<script>
+    $('.select2').select2();
+</script>

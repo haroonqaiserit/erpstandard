@@ -49,7 +49,7 @@ namespace ERPStandard.ViewModels
         public string dataKey { get; set; }
         public Style style { get; set; }
     }
-    public class PurchaseReqOrderHeaders
+    public class PurReqOrderHeaders
     {
         //InvoiceDetails_ISTAX invoice = new InvoiceDetails_ISTAX();
         public List<Header> invoiceListHeaders()
@@ -403,7 +403,7 @@ namespace ERPStandard.ViewModels
         public string DisplayCurrency { get; set; } = "Rs.";
         public string SoftwareCompanyDisplayText { get; set; } = "System Generated Report by Finanical Pro®";
     }
-    public class PurchaseReqOrderRoot<T>
+    public class PurReqOrderRoot<T>
     {
         public string fileName { get; set; } = "RequsitionOrder";
         public bool orientationLandscape { get; set; } = false;

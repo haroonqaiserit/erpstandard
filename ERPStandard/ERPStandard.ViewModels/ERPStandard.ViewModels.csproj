@@ -47,9 +47,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BranchViewModel.cs" />
+    <Compile Include="General\CostCenterListViewModel.cs" />
+    <Compile Include="General\CostCenterViewModel.cs" />
+    <Compile Include="General\StoreUnitViewModel.cs" />
+    <Compile Include="General\BranchViewModel.cs" />
     <Compile Include="ChartOfAccountViewModel.cs" />
-    <Compile Include="Company1ViewModel.cs" />
+    <Compile Include="General\Company1ViewModel.cs" />
+    <Compile Include="General\StoreUnitListViewModel.cs" />
     <Compile Include="Inventory\ItemViewModelMaster.cs" />
     <Compile Include="InvoiceReportDetails.cs" />
     <Compile Include="InvoiceTemplateViewModel.cs" />
@@ -59,11 +63,11 @@
     <Compile Include="Purchase\Purchaser\PurchaserViewModel.cs" />
     <Compile Include="Purchase\Supplier\SupplierListViewModel.cs" />
     <Compile Include="Purchase\Supplier\SupplierViewModel.cs" />
-    <Compile Include="Purchase\RequisitionOrder\PurchaseRequisitionOrderDetailViewModel.cs" />
-    <Compile Include="Purchase\RequisitionOrder\PurchaseRequisitionOrderMasterDetailExcel.cs" />
-    <Compile Include="Purchase\RequisitionOrder\PurchaseRequisitionOrderMasterDetailViewModel.cs" />
-    <Compile Include="Purchase\RequisitionOrder\PurchaseRequisitionOrderMasterViewModel.cs" />
-    <Compile Include="Purchase\RequisitionOrder\PurchaseRequisitionOrderViewModel.cs" />
+    <Compile Include="Purchase\RequisitionOrder\PurReqOrdDtlViewModel.cs" />
+    <Compile Include="Purchase\RequisitionOrder\PurRequOrderMstrDtlExcel.cs" />
+    <Compile Include="Purchase\RequisitionOrder\PurReqOrdMstDtlViewModel.cs" />
+    <Compile Include="Purchase\RequisitionOrder\PurReqOrderMasterViewModel.cs" />
+    <Compile Include="Purchase\RequisitionOrder\PurReqOrderViewModel.cs" />
     <Compile Include="QuotationCreateNewViewModel.cs" />
     <Compile Include="Sales\CustomerListViewModel.cs" />
     <Compile Include="Sales\SaleQuotationDetailViewModel.cs" />

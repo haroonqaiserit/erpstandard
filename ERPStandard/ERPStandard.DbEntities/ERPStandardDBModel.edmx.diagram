@@ -262,6 +262,8 @@
         <AssociationConnector Association="SairaIndModel.FK_LoanTaken_EmployeePersonalInfo" />
         <AssociationConnector Association="SairaIndModel.FK_SalaryMaster_EmployeePersonalInfo" />
         <AssociationConnector Association="SairaIndModel.FK_IncomeTaxDetail_IncomeTaxSetup" />
+        <EntityTypeShape EntityType="SairaIndModel.PurchaseRequisitionOrder" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="SairaIndModel.PurchaseRequisitionOrderDetail" Width="3.375" PointX="54.25" PointY="48.625" />
         </Diagram>
       <Diagram DiagramId="3ce879e1bc8f4b728c1c78f8408c4829" Name="Diagram2" />
     </edmx:Diagrams>

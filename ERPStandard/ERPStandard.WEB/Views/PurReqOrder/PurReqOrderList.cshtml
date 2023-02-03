@@ -1,0 +1,126 @@
+﻿@model  ERPStandard.ViewModels.Purchase.RquisitionOrder.PurReqOrderViewModel
+@{
+    ViewBag.Title = "Purchase Transaction";
+    ViewBag.SubTitle = "Requisition";
+}
+<link rel="stylesheet" href="~/assets/vendors/simple-datatables/style.css">
+<script src="~/assets/vendors/simple-datatables/simple-datatables.js"></script>
+<script src="~/assets/vendors/fontawesome/all.min.js"></script>
+<div class="card-header">
+    <h4 class="card-title">@ViewBag.SubTitle List</h4>
+</div>
+<div class="card-body">
+    <button class="btn-primary" title="Print List" onclick="previewReport()"><i class="fa fa-print"></i></button>
+    <button type="button" class="btn-success" title="Excel List" onclick="location.href='@Url.Action("MasterDetailExcelExport", "PurReqOrder")'"><i class='fa fa-file-excel'></i></button>
+    <button class="btn-danger" onclick="onImport()" title="Import"><i class="fa fa-file-import"></i></button>
+    @*<button class="btn-success" onclick="QutatonDetailExcel()"><i class="fa fa-file-excel"></i></button>*@
+
+
+    <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+        <div class="dataTable-top">
+            <div class="dataTable-dropdown"><select class="dataTable-selector form-select" id="ddlTotalPageNo" onchange="getPageValue()"><option value="5" @(Model.Pager.PageSize == 5 ? "selected=''" : "")>5</option><option value="10" @(Model.Pager.PageSize == 10 ? "selected=''" : "")>10</option><option value="15" @(Model.Pager.PageSize == 15 ? "selected=''" : "")>15</option><option value="20" @(Model.Pager.PageSize == 20 ? "selected=''" : "")>20</option><option value="25" @(Model.Pager.PageSize == 25 ? "selected=''" : "")>25</option></select><label>entries per page</label></div>
+            <div class="dataTable-search">
+                <input id="dtSearch" onkeypress="getSearchRecords(event)" class="dataTable-input" placeholder="Search..." type="text" value="@Model.dtSearch">
+            </div>
+        </div>
+
+        <div class="dataTable-container">
+            <table class="table table-striped dataTable-table" id="tblQuotationMaster">
+                <thead>
+                    <tr class="btn-primary">
+                        <th data-sortable="" class=@(Model.clmNameOrder == 1 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(1, '@Model.sortorder')" class="dataTable-sorter" sort-id="@Model.sortorder" id="clm1">RNo</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 2 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(2, '@Model.sortorder')" class="dataTable-sorter" sort-id="@Model.sortorder" id="clm2">Date</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 3 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(3, '@Model.sortorder')" class="dataTable-sorter" sort-id="@Model.sortorder" id="clm3">UnitName</a></th>
+                        <th data-sortable="" class=@(Model.clmNameOrder == 4 ? Model.sortorder : "")><a href="javascript:;" onclick="DataTableOrder(4, '@Model.sortorder')" class="dataTable-sorter" sort-id="@Model.sortorder" id="clm4">Remarks</a></th>
+                        <th data-sortable=""><a href="javascript:;" class="dataTable-sorter">Action</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @{
+                        if (Model != null)
+                        {
+                            foreach (var comp in Model.RequisitionOrderMaster)
+                            {
+                                <tr>
+                                    <td>@comp.RequisitionOrderNo</td>
+                                    <td>@comp.RequisitionDate.ToString("dd-MMM-yyyy")</td>
+                                    <td>@comp.UnitName</td>
+                                    <td>@comp.Remarks</td>
+                                    <td>
+                                        <div class="btn-group btn-group-sm" role="group">
+                                            @{
+                                                if (comp.DeletionID == 0)
+                                                {
+                                                    <button type="button" class="btn-outline-success" onclick="generateInvPDFFormat2('@comp.RequisitionID')" title="Print"><i class="fa fa-print"></i></button>
+                                                }
+                                                else
+                                                {
+                                                    <button type="button" class="btn-outline-danger" onclick="generateInvPDFFormat2('@comp.RequisitionID')" title="Print"><i class="fa fa-print"></i></button>
+                                                }
+
+                                            }
+                                            <button type="button" class="btn-outline-success" onclick="onEdit('@comp.RequisitionID')" title="Edit"><i class="fa fa-pen"></i></button>
+                                            <button type="button" class="btn-outline-danger" onclick="onDelete('@comp.RequisitionID')" title="Delete"><i class="fa fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="dataTable-bottom">
+            <div class="dataTable-info">
+                @if (Model.Pager.CurrentPage == Model.Pager.EndPage)
+                {
+                    <p>Showing @((Model.Pager.CurrentPage * Model.Pager.PageSize)- Model.Pager.PageSize+1) to @(Model.Pager.TotalItems) of @(Model.Pager.TotalItems) entries</p>
+                }
+                else if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                {
+                    <p>Showing @((Model.Pager.CurrentPage * Model.Pager.PageSize)- Model.Pager.PageSize+1)  to @(Model.Pager.PageSize * Model.Pager.CurrentPage) of @(Model.Pager.TotalItems)entries</p>
+                }
+                else
+                {
+                }
+
+
+            </div>
+
+            <!-- pager -->
+            @if (Model.Pager.EndPage > 1)
+            {
+
+                <ul class="pagination pagination-primary float-end dataTable-pagination">
+                    @if (Model.Pager.CurrentPage > 1)
+                    {
+                        <li class="page-item pager">
+                            <a href="#" onclick="pagingwork('@(Model.Pager.CurrentPage - 1)')" class="page-link">‹</a>
+                        </li>
+                    }
+
+                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                    {
+                        <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                            <a href="#" onclick="pagingwork('@page')" class="page-link">@page</a>
+                        </li>
+                    }
+
+                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                    {
+                        <li class="page-item pager">
+                            <a href="#" onclick="pagingwork('@(Model.Pager.CurrentPage + 1)')" class="page-link">›</a>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+
+        <!-- End Pagination -->
+    </div>
+
+</div>
+<!--Try new table look-->

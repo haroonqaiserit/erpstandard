@@ -21,7 +21,6 @@ namespace ERPStandard.WEB.Controllers
             return Json(dd, JsonRequestBehavior.AllowGet);
         }
         #endregion
-
         #region Accounts - Drop Downs 
         [HttpGet]
         public ActionResult AccountDropdown()
@@ -31,7 +30,6 @@ namespace ERPStandard.WEB.Controllers
             return Json(dd, JsonRequestBehavior.AllowGet);
         }
         #endregion
-
         #region Sales - Drop Downs
         [HttpGet]
         public ActionResult CustomerDropdown()
@@ -47,7 +45,6 @@ namespace ERPStandard.WEB.Controllers
             return Json(ddlData, JsonRequestBehavior.AllowGet);
         }
         #endregion
-
         #region Purchase - Drop Downs
         public ActionResult SupplierDropdown()
         {
@@ -63,10 +60,19 @@ namespace ERPStandard.WEB.Controllers
         }
 
         #endregion
-
-
-
         #region Inventory - Drop Downs
+        [HttpGet]
+        public ActionResult CostCenterDropdown()
+        {
+            var ddlData = CostCenterNewService.Instance.All_List();
+            return Json(ddlData, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult StoreUnitDropdown()
+        {
+            var ddlData = StoreUnitService.Instance.All_List();
+            return Json(ddlData, JsonRequestBehavior.AllowGet);
+        }
         [HttpGet]
         public ActionResult ItemDropdown(string Search, int ItemClass)
         {

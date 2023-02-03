@@ -1,5 +1,6 @@
 ﻿using ERPStandard.DbEntities;
 using ERPStandard.ViewModels;
+using ERPStandard.ViewModels.Purchase.RquisitionOrder;
 using ERPStandard.ViewModels.Sales;
 using System;
 using System.Collections.Generic;
@@ -9,35 +10,35 @@ using System.Threading.Tasks;
 
 namespace ERPStandard.Services
 {
-    public class PurchaseRequisitionOrderService
+    public class PurReqOrderService
     {
         #region "Singleton"
 
-        public static PurchaseRequisitionOrderService Instance
+        public static PurReqOrderService Instance
         {
             get
             {
-                if (instance == null) instance = new PurchaseRequisitionOrderService();
+                if (instance == null) instance = new PurReqOrderService();
                 return instance;
             }
         }
-        private static PurchaseRequisitionOrderService instance { get; set; }
+        private static PurReqOrderService instance { get; set; }
 
-        private PurchaseRequisitionOrderService()
+        private PurReqOrderService()
         {
 
         }
         #endregion
-        public PurchaseRequisitionOrderViewModel All(int page, int pageSize = 10, string dtSearch = "", int clmNameOrder = 0, string sortorder = "")
+        public PurReqOrderViewModel All(int page, int pageSize = 10, string dtSearch = "", int clmNameOrder = 0, string sortorder = "")
         {
-            var viewModel = new PurchaseRequisitionOrderViewModel();
+            var viewModel = new PurReqOrderViewModel();
             using (var context = new SairaIndEntities())
             {
                 var comp = context.PurchaseRequisitionOrders
                     .Join(context.tblStoreUnits,
                         o => o.StoreUnitId,
                         unit => unit.StoreUnitId,
-                    (o, unit) => new PurchaseRequisitionOrderMasterViewModel
+                    (o, unit) => new PurReqOrderMasterViewModel
                     {
                         RequisitionID = o.RequisitionID,
                         RequisitionOrderNo = o.RequisitionOrderNo,
@@ -88,16 +89,16 @@ namespace ERPStandard.Services
             }
             return viewModel;
         }
-        public PurchaseRequisitionOrderViewModel Report(string dtSearch = "", int clmNameOrder = 0)
+        public PurReqOrderViewModel Report(string dtSearch = "", int clmNameOrder = 0)
         {
-            var viewModel = new PurchaseRequisitionOrderViewModel();
+            var viewModel = new PurReqOrderViewModel();
             using (var context = new SairaIndEntities())
             {
                 var comp = context.PurchaseRequisitionOrders
                     .Join(context.tblStoreUnits,
                         o => o.StoreUnitId,
                         unit => unit.StoreUnitId,
-                    (o, unit) => new PurchaseRequisitionOrderMasterViewModel
+                    (o, unit) => new PurReqOrderMasterViewModel
                     {
                         RequisitionID = o.RequisitionID,
                         RequisitionOrderNo = o.RequisitionOrderNo,
@@ -145,11 +146,11 @@ namespace ERPStandard.Services
             }
             return viewModel;
         }
-        public PurchaseReqOrderRoot<T> RequsitionOrderReportList<T>(string Id)
+        public PurReqOrderRoot<T> RequsitionOrderReportList<T>(string Id)
         {
-            var root = new PurchaseReqOrderRoot<T>();
+            var root = new PurReqOrderRoot<T>();
             PurchaseReqDetaillist<T> invoice = new PurchaseReqDetaillist<T>();
-            PurchaseReqOrderHeaders invoiceHeaders = new PurchaseReqOrderHeaders();
+            PurReqOrderHeaders invoiceHeaders = new PurReqOrderHeaders();
             string documentname = "Requisition";
             root.fileName = "Sale " + documentname;
             root.orientationLandscape = false;
@@ -239,7 +240,7 @@ namespace ERPStandard.Services
                         && itm.BranchNo == d.BranchNo
                     join grn in grnRec on d.ItemId equals grn.ItemId into grn_rec
                     from grn in grn_rec.DefaultIfEmpty()
-                    select new PurchaseReqOrderDetails
+                    select new PurReqOrderDetails
                     {
                         serialnum = 1,
                         Item = itm.Dscr,
@@ -260,7 +261,7 @@ namespace ERPStandard.Services
                     foreach (var x in t) x.serialnum = count++;
                     TotalAmnt = (int)Math.Round((double)t.Sum(n => n.Amount), 0);
                     InvNetTotalAmnt = TotalAmnt;
-                    PurchaseReqOrderDetails TotalRow = new PurchaseReqOrderDetails
+                    PurReqOrderDetails TotalRow = new PurReqOrderDetails
                     {
                         serialnum = null,
                         Item = "TOTAL",
@@ -282,9 +283,9 @@ namespace ERPStandard.Services
             amt = Math.Round(qty * rate, 2);
             return amt;
         }
-        public PurchaseReqOrderRoot<T> InvoiceReport<T> (string Id = "")
+        public PurReqOrderRoot<T> InvoiceReport<T> (string Id = "")
         {
-            var root = new PurchaseReqOrderRoot<T>();
+            var root = new PurReqOrderRoot<T>();
 
             root = RequsitionOrderReportList<T>(Id);
 
@@ -319,9 +320,9 @@ namespace ERPStandard.Services
             root.footer = footer;
             return root;
         }
-        public PurchaseRequisitionOrderMasterDetailViewModel Single_Master_Detail(string Id)
+        public PurReqOrdMstDtlViewModel Single_Master_Detail(string Id)
         {
-            var viewModel = new PurchaseRequisitionOrderMasterDetailViewModel();
+            var viewModel = new PurReqOrdMstDtlViewModel();
             
             using (var context = new SairaIndEntities())
             {
@@ -329,7 +330,7 @@ namespace ERPStandard.Services
                     .Join(context.tblStoreUnits,
                         o => o.StoreUnitId,
                         unit => unit.StoreUnitId,
-                        (o, unit) => new PurchaseRequisitionOrderMasterDetailViewModel
+                        (o, unit) => new PurReqOrdMstDtlViewModel
                         {
                             RequisitionID = o.RequisitionID,
                             RequisitionOrderNo = o.RequisitionOrderNo,
@@ -387,7 +388,7 @@ namespace ERPStandard.Services
                                       && itm.BranchNo == d.BranchNo
                                   join grn in grnRec on d.ItemId equals grn.ItemId into grn_rec
                                   from grn in grn_rec.DefaultIfEmpty()
-                                  select new PurchaseRequisitionOrderDetailViewModel
+                                  select new PurReqOrdDtlViewModel
                                   {
                                       LineNo = 1,
                                       ItemID = itm.ItemID,
@@ -404,23 +405,23 @@ namespace ERPStandard.Services
                                       GrnID = d.GrnID,
                                       ApprovedStatus = d.ApprovedStatus.Value
                                   });
-                //List<PurchaseRequisitionOrderDetailViewModel> viewModel1 = new List<PurchaseRequisitionOrderDetailViewModel>();
+                //List<PurReqOrdDtlViewModel> viewModel1 = new List<PurReqOrdDtlViewModel>();
                 viewModel = comp.FirstOrDefault();
-                viewModel.SaleQuotationDetail = compDetail.ToList();
+                viewModel.PurReqOrderDetail = compDetail.ToList();
             }
             return viewModel;
         }
 
-        public List<PurchaseRequisitionOrderMasterDetailViewModel> QDtailed_Master_Detail()
+        public List<PurReqOrdMstDtlViewModel> QDtailed_Master_Detail()
         {
-            var viewModelDetail = new List<PurchaseRequisitionOrderMasterDetailViewModel>();
+            var viewModelDetail = new List<PurReqOrdMstDtlViewModel>();
             using (var context = new SairaIndEntities())
             {
                 var comp = context.PurchaseRequisitionOrders
                     .Join(context.tblStoreUnits,
                         o => o.StoreUnitId,
                         unit => unit.StoreUnitId,
-                        (o, unit) => new PurchaseRequisitionOrderMasterDetailViewModel
+                        (o, unit) => new PurReqOrdMstDtlViewModel
                         {
                             RequisitionID = o.RequisitionID,
                             RequisitionOrderNo = o.RequisitionOrderNo,
@@ -476,7 +477,7 @@ namespace ERPStandard.Services
                         && itm.BranchNo == d.BranchNo
                     join grn in grnRec on d.ItemId equals grn.ItemId into grn_rec
                     from grn in grn_rec.DefaultIfEmpty()
-                    select new PurchaseRequisitionOrderDetailViewModel
+                    select new PurReqOrdDtlViewModel
                     {
                         LineNo = 1,
                         RequisitionID = m.RequisitionID,
@@ -497,9 +498,9 @@ namespace ERPStandard.Services
 
                 foreach (var item in comp)
                 {
-                    var viewModel = new PurchaseRequisitionOrderMasterDetailViewModel();
+                    var viewModel = new PurReqOrdMstDtlViewModel();
                     viewModel = item;
-                    viewModel.SaleQuotationDetail = (List<PurchaseRequisitionOrderDetailViewModel>)compDetail.Where(x => x.RequisitionID == item.RequisitionID);
+                    viewModel.PurReqOrderDetail = (List<PurReqOrdDtlViewModel>)compDetail.Where(x => x.RequisitionID == item.RequisitionID);
                     viewModelDetail.Add(viewModel);
                 }
             }

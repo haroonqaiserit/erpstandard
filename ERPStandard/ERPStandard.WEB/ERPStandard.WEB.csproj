@@ -194,6 +194,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Purchase\PurReqOrderController.cs" />
     <Compile Include="Controllers\Sales\SalequotationController.cs" />
     <Compile Include="Controllers\Sales\SalesorderController.cs" />
     <Compile Include="Controllers\General\CombofillController.cs" />
@@ -1983,11 +1984,17 @@
     <Content Include="Views\SaleQuotation\SaleQuotationReportView.cshtml" />
     <Content Include="Views\SaleQuotation\SaleQuotationImport.cshtml" />
     <Content Include="Views\SaleQuotation\SaleQuotationExcelImport.cshtml" />
+    <Content Include="Views\PurReqOrder\PurReqOrderCreate.cshtml" />
+    <Content Include="Views\PurReqOrder\PurReqOrderEdit.cshtml" />
+    <Content Include="Views\PurReqOrder\PurReqOrderExcelImport.cshtml" />
+    <Content Include="Views\PurReqOrder\PurReqOrderImport.cshtml" />
+    <Content Include="Views\PurReqOrder\PurReqOrderIndex.cshtml" />
+    <Content Include="Views\PurReqOrder\PurReqOrderList.cshtml" />
+    <Content Include="Views\PurReqOrder\PurReqOrderReportView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\GL\" />
-    <Folder Include="Controllers\Purchase\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

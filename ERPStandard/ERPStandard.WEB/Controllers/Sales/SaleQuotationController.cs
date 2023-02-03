@@ -54,6 +54,7 @@ namespace ERPStandard.WEB.Controllers
             var comp = SaleQuotationService.Instance.QDtailed_Master_Detail();
             using (var workbook = new XLWorkbook())
             {
+                
                 var worksheet = workbook.Worksheets.Add("Quotation");
                 var currentRow = 1;
                 worksheet.Row(currentRow).Style.Fill.BackgroundColor = XLColor.LightBlue;
@@ -187,6 +188,14 @@ namespace ERPStandard.WEB.Controllers
         #endregion
 
         #region Sales - Order
+
+        [HttpGet]
+        public ActionResult Search(string query)
+        {
+            // Retrieve items from database that match the query
+            var items = ItemService.Instance.All_List(query, 0, (int)ItemClass.FinishGoods);
+            return Json(items, JsonRequestBehavior.AllowGet);
+        }
 
         public ActionResult SaleQuotationIndex()
         {

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ERPStandard.ViewModels.Sales
+namespace ERPStandard.ViewModels.Purchase.RquisitionOrder
 {
-    public class PurchaseRequisitionOrderMasterViewModel
+    public class PurReqOrderMasterViewModel
     {
         public string RequisitionID { get; set; }
         public int RequisitionOrderNo { get; set; }

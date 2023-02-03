@@ -114,7 +114,6 @@ namespace ERPStandard.DbEntities
         public virtual DbSet<PurAdvance> PurAdvances { get; set; }
         public virtual DbSet<PurchaseRequest> PurchaseRequests { get; set; }
         public virtual DbSet<PurchaseRequestDetail> PurchaseRequestDetails { get; set; }
-        public virtual DbSet<PurchaseRequisitionOrderDetail> PurchaseRequisitionOrderDetails { get; set; }
         public virtual DbSet<PurDeliveryChallDetail> PurDeliveryChallDetails { get; set; }
         public virtual DbSet<PurDellChallanMaster> PurDellChallanMasters { get; set; }
         public virtual DbSet<RawMaterial> RawMaterials { get; set; }
@@ -269,6 +268,7 @@ namespace ERPStandard.DbEntities
         public virtual DbSet<IncomeTaxSetup> IncomeTaxSetups { get; set; }
         public virtual DbSet<IncomeTaxDetail> IncomeTaxDetails { get; set; }
         public virtual DbSet<PurchaseRequisitionOrder> PurchaseRequisitionOrders { get; set; }
+        public virtual DbSet<PurchaseRequisitionOrderDetail> PurchaseRequisitionOrderDetails { get; set; }
     
         public virtual int Sp_CurrentStock(string itemid, string compNo, string branchNo, string storeUnitId, string godownId, string toDate)
         {

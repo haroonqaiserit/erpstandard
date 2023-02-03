@@ -2523,6 +2523,18 @@ warning 6013: The table/view 'SairaInd.dbo.Items$' does not have a primary key d
     <Property Name="Rate" Type="numeric" Precision="18" Scale="2" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.ItemStockToUpdate' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ItemStockToUpdate">
+          <Property Name="ItemID" Type="nvarchar" MaxLength="255" />
+          <Property Name="GodownName" Type="nvarchar" MaxLength="255" />
+          <Property Name="ItemName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Qty" Type="float" />
+          <Property Name="UnitRate" Type="float" />
+          <Property Name="RecordType" Type="nvarchar" MaxLength="255" />
+          <Property Name="GodownId" Type="varchar" MaxLength="50" />
+          <Property Name="statusclm" Type="int" />
+        </EntityType>-->
+  <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.ItemTransferToGodown' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="ItemTransferToGodown">
     <Key>
@@ -5385,15 +5397,19 @@ warning 6002: The table/view 'SairaInd.dbo.tblStoreUnit' does not have a primary
   <EntityType Name="tblStoreUnit">
     <Key>
       <PropertyRef Name="StoreUnitId" />
+      <PropertyRef Name="StoreUnitNo" />
       <PropertyRef Name="UnitName" />
       <PropertyRef Name="CompNo" />
       <PropertyRef Name="BranchNo" />
+      <PropertyRef Name="DeletionID" />
       <PropertyRef Name="SaveDate" />
     </Key>
     <Property Name="StoreUnitId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="StoreUnitNo" Type="int" Nullable="false" />
     <Property Name="UnitName" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="CompNo" Type="int" Nullable="false" />
     <Property Name="BranchNo" Type="int" Nullable="false" />
+    <Property Name="DeletionID" Type="int" Nullable="false" />
     <Property Name="SaveDate" Type="datetime" Nullable="false" />
   </EntityType>
   <!--Errors Found During Generation:
@@ -7838,9 +7854,11 @@ warning 6002: The table/view 'SairaInd.dbo.Visite' does not have a primary key d
     <EntitySet Name="tblStoreUnit" EntityType="Self.tblStoreUnit" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [tblStoreUnit].[StoreUnitId] AS [StoreUnitId], 
+    [tblStoreUnit].[StoreUnitNo] AS [StoreUnitNo], 
     [tblStoreUnit].[UnitName] AS [UnitName], 
     [tblStoreUnit].[CompNo] AS [CompNo], 
     [tblStoreUnit].[BranchNo] AS [BranchNo], 
+    [tblStoreUnit].[DeletionID] AS [DeletionID], 
     [tblStoreUnit].[SaveDate] AS [SaveDate]
     FROM [dbo].[tblStoreUnit] AS [tblStoreUnit]</DefiningQuery>
     </EntitySet>

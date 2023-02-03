@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Sales Transaction";
+    ViewBag.SubTitle = "Quotation";
+}
+<div class="card-header">
+    <h4 class="card-title">@ViewBag.SubTitle  Edit </h4>
+</div>
+<div class="card-content">
+    <div class="card-body">
+        <form name="QuotationForm" class="form">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="fuExcel">File Upload</label>
+                        <input type="file" id="fuExcel" name="fuExcel"/>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <button type="button" id="btnUpload" class="btn btn-success"> Upload</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+
+    });
+
+    $("#btnUpload").click(function () {
+        var formData = new FormData();
+        var fuUploadFile = document.getElementById("fuExcel");
+        var myFile = fuUploadFile.files[0];
+        formData.append("myExcelData", myFile);
+
+        //e.preventDefault = true;
+        @*var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(e) {
+            if ( 4 == this.readyState ) {
+                console.log(['xhr upload complete', e]);
+            }
+        };
+        xhr.open('post', '@Url.Action("MasterDetailExcelImport", "SaleQuotation")', true);
+        xhr.setRequestHeader("Content-Type","multipart/form-data");
+        var formData = new FormData();
+        formData.append("myExcelData", $("#fuExcel").files[0]);
+        //formData.append("coverFile", $("#coverFile").files[0]);
+        // etc
+        xhr.send(formData);*@
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("MasterDetailExcelImport", "SaleQuotation")',
+            contentType: false,
+            processData: false,
+            data: formData,
+            beforeSend: function () {
+                $("#CustomSearchLoader").show();
+            },
+            complete: function () {
+                //alert("result complete");
+                $("#CustomSearchLoader").hide();
+            },
+            success: function (result) {
+                //alert(result);
+                $("#FormProcess").html(result);
+            }
+        })
+
+
+    });
+
+
+    @*$("#btnUpload").click(function () {
+            var formData = new FormData();
+            var fuUploadFile = document.getElementById("fuExcel");
+            var myFile = fuUploadFile.files[0];
+            formData.append("myExcelData", myFile);
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("MasterDetailExcelImport", "SaleQuotation")',
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    alert(data.message);
+                }
+            })
+        })*@
+
+
+
+</script>

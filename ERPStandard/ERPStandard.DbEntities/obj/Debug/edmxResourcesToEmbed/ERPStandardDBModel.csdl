@@ -1642,40 +1642,6 @@
     <Property Name="SaveDate" Type="DateTime" Precision="3" />
     <Property Name="DeletionID" Type="Int32" />
   </EntityType>
-  <EntityType Name="PurchaseRequisitionOrderDetail">
-    <Key>
-      <PropertyRef Name="RequisitionID" />
-      <PropertyRef Name="LineNo" />
-      <PropertyRef Name="CompNo" />
-      <PropertyRef Name="BranchNo" />
-    </Key>
-    <Property Name="RequisitionID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="LineNo" Type="Int32" Nullable="false" />
-    <Property Name="StoreUnitId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="RequisitionDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="ItemId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="StockQty" Type="Decimal" Precision="18" Scale="4" />
-    <Property Name="ItemMeasureUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="ItemSpecification" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-    <Property Name="RequiredQty" Type="Decimal" Precision="18" Scale="4" />
-    <Property Name="RequiredDate" Type="DateTime" Precision="3" />
-    <Property Name="BalanceQty" Type="Decimal" Precision="18" Scale="4" />
-    <Property Name="ItemClearedStatus" Type="Int32" />
-    <Property Name="LahTransferId" Type="Int32" />
-    <Property Name="SaveDate" Type="DateTime" Precision="3" />
-    <Property Name="DeletionID" Type="Int32" />
-    <Property Name="GrnID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="GrnBalanceQty" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="GrnItemClearedStatus" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-    <Property Name="GrnDate" Type="DateTime" Precision="3" />
-    <Property Name="LstPurQty" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="GrnRate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="CostCenterId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="CompNo" Type="Int32" Nullable="false" />
-    <Property Name="BranchNo" Type="Int32" Nullable="false" />
-    <Property Name="DemandPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="ApprovedStatus" Type="Boolean" />
-  </EntityType>
   <EntityType Name="PurDeliveryChallDetail">
     <Key>
       <PropertyRef Name="DeliveryChallId" />
@@ -4664,12 +4630,16 @@
       <PropertyRef Name="CompNo" />
       <PropertyRef Name="BranchNo" />
       <PropertyRef Name="SaveDate" />
+      <PropertyRef Name="StoreUnitNo" />
+      <PropertyRef Name="DeletionID" />
     </Key>
     <Property Name="StoreUnitId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="UnitName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="CompNo" Type="Int32" Nullable="false" />
     <Property Name="BranchNo" Type="Int32" Nullable="false" />
     <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StoreUnitNo" Type="Int32" Nullable="false" />
+    <Property Name="DeletionID" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="tblSupplierBuyer">
     <Key>
@@ -5044,7 +5014,6 @@
     <EntitySet Name="PurAdvances" EntityType="Self.PurAdvance" />
     <EntitySet Name="PurchaseRequests" EntityType="Self.PurchaseRequest" />
     <EntitySet Name="PurchaseRequestDetails" EntityType="Self.PurchaseRequestDetail" />
-    <EntitySet Name="PurchaseRequisitionOrderDetails" EntityType="Self.PurchaseRequisitionOrderDetail" />
     <EntitySet Name="PurDeliveryChallDetails" EntityType="Self.PurDeliveryChallDetail" />
     <EntitySet Name="PurDellChallanMasters" EntityType="Self.PurDellChallanMaster" />
     <EntitySet Name="RawMaterials" EntityType="Self.RawMaterial" />
@@ -5275,6 +5244,7 @@
       <End Role="IncomeTaxDetail" EntitySet="IncomeTaxDetails" />
     </AssociationSet>
     <EntitySet Name="PurchaseRequisitionOrders" EntityType="SairaIndModel.PurchaseRequisitionOrder" />
+    <EntitySet Name="PurchaseRequisitionOrderDetails" EntityType="SairaIndModel.PurchaseRequisitionOrderDetail" />
   </EntityContainer>
   <EntityType Name="SalesOrder">
     <Key>
@@ -5616,7 +5586,7 @@
       <PropertyRef Name="BranchNo" />
     </Key>
     <Property Name="RequisitionID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="RequisitionOrderNo" Type="String" Nullable="false" />
+    <Property Name="RequisitionOrderNo" Type="Int32" Nullable="false" />
     <Property Name="RequisitionDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="StoreUnitId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Remarks" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
@@ -5629,7 +5599,39 @@
     <Property Name="DeletionID" Type="Int32" />
     <Property Name="RefDocId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="RefDocName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="RequisitionOrderNo1" Type="Int32" Nullable="false" />
-    <Property Name="RequisitionOrderNo2" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PurchaseRequisitionOrderDetail">
+    <Key>
+      <PropertyRef Name="RequisitionID" />
+      <PropertyRef Name="LineNo" />
+      <PropertyRef Name="CompNo" />
+      <PropertyRef Name="BranchNo" />
+    </Key>
+    <Property Name="RequisitionID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LineNo" Type="Int32" Nullable="false" />
+    <Property Name="StoreUnitId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RequisitionDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ItemId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StockQty" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="ItemMeasureUnit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ItemSpecification" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="RequiredQty" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="RequiredDate" Type="DateTime" Precision="3" />
+    <Property Name="BalanceQty" Type="Decimal" Precision="18" Scale="4" />
+    <Property Name="ItemClearedStatus" Type="Int32" />
+    <Property Name="LahTransferId" Type="Int32" />
+    <Property Name="SaveDate" Type="DateTime" Precision="3" />
+    <Property Name="DeletionID" Type="Int32" />
+    <Property Name="GrnID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="GrnBalanceQty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="GrnItemClearedStatus" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="GrnDate" Type="DateTime" Precision="3" />
+    <Property Name="LstPurQty" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="GrnRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="CostCenterId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CompNo" Type="Int32" Nullable="false" />
+    <Property Name="BranchNo" Type="Int32" Nullable="false" />
+    <Property Name="DemandPerson" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ApprovedStatus" Type="Boolean" />
   </EntityType>
 </Schema>

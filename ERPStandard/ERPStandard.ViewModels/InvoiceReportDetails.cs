@@ -91,7 +91,7 @@ namespace ERPStandard.ViewModels
 
     #region Purchase
     #region Purchase Requsition Order
-    public class PurchaseReqOrderDetails
+    public class PurReqOrderDetails
     {
         public int? serialnum { get; set; }
         public string Item { get; set; }

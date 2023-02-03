@@ -1695,38 +1695,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PurchaseRequisitionOrderDetails">
-      <EntityTypeMapping TypeName="SairaIndModel.PurchaseRequisitionOrderDetail">
-        <MappingFragment StoreEntitySet="PurchaseRequisitionOrderDetail">
-          <ScalarProperty Name="ApprovedStatus" ColumnName="ApprovedStatus" />
-          <ScalarProperty Name="RequisitionID" ColumnName="RequisitionID" />
-          <ScalarProperty Name="LineNo" ColumnName="LineNo" />
-          <ScalarProperty Name="StoreUnitId" ColumnName="StoreUnitId" />
-          <ScalarProperty Name="RequisitionDate" ColumnName="RequisitionDate" />
-          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
-          <ScalarProperty Name="StockQty" ColumnName="StockQty" />
-          <ScalarProperty Name="ItemMeasureUnit" ColumnName="ItemMeasureUnit" />
-          <ScalarProperty Name="ItemSpecification" ColumnName="ItemSpecification" />
-          <ScalarProperty Name="RequiredQty" ColumnName="RequiredQty" />
-          <ScalarProperty Name="RequiredDate" ColumnName="RequiredDate" />
-          <ScalarProperty Name="BalanceQty" ColumnName="BalanceQty" />
-          <ScalarProperty Name="ItemClearedStatus" ColumnName="ItemClearedStatus" />
-          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
-          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
-          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
-          <ScalarProperty Name="GrnID" ColumnName="GrnID" />
-          <ScalarProperty Name="GrnBalanceQty" ColumnName="GrnBalanceQty" />
-          <ScalarProperty Name="GrnItemClearedStatus" ColumnName="GrnItemClearedStatus" />
-          <ScalarProperty Name="GrnDate" ColumnName="GrnDate" />
-          <ScalarProperty Name="LstPurQty" ColumnName="LstPurQty" />
-          <ScalarProperty Name="GrnRate" ColumnName="GrnRate" />
-          <ScalarProperty Name="CostCenterId" ColumnName="CostCenterId" />
-          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
-          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
-          <ScalarProperty Name="DemandPerson" ColumnName="DemandPerson" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="PurDeliveryChallDetails">
       <EntityTypeMapping TypeName="SairaIndModel.PurDeliveryChallDetail">
         <MappingFragment StoreEntitySet="PurDeliveryChallDetail">
@@ -4486,6 +4454,8 @@
     <EntitySetMapping Name="tblStoreUnits">
       <EntityTypeMapping TypeName="SairaIndModel.tblStoreUnit">
         <MappingFragment StoreEntitySet="tblStoreUnit">
+          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+          <ScalarProperty Name="StoreUnitNo" ColumnName="StoreUnitNo" />
           <ScalarProperty Name="StoreUnitId" ColumnName="StoreUnitId" />
           <ScalarProperty Name="UnitName" ColumnName="UnitName" />
           <ScalarProperty Name="CompNo" ColumnName="CompNo" />
@@ -4901,7 +4871,6 @@
     <EntitySetMapping Name="PurchaseRequisitionOrders">
       <EntityTypeMapping TypeName="SairaIndModel.PurchaseRequisitionOrder">
         <MappingFragment StoreEntitySet="PurchaseRequisitionOrder">
-          <ScalarProperty Name="RequisitionOrderNo2" ColumnName="RequisitionOrderNo" />
           <ScalarProperty Name="RefDocName" ColumnName="RefDocName" />
           <ScalarProperty Name="RefDocId" ColumnName="RefDocId" />
           <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
@@ -4914,6 +4883,39 @@
           <ScalarProperty Name="Remarks" ColumnName="Remarks" />
           <ScalarProperty Name="StoreUnitId" ColumnName="StoreUnitId" />
           <ScalarProperty Name="RequisitionDate" ColumnName="RequisitionDate" />
+          <ScalarProperty Name="RequisitionOrderNo" ColumnName="RequisitionOrderNo" />
+          <ScalarProperty Name="RequisitionID" ColumnName="RequisitionID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseRequisitionOrderDetails">
+      <EntityTypeMapping TypeName="SairaIndModel.PurchaseRequisitionOrderDetail">
+        <MappingFragment StoreEntitySet="PurchaseRequisitionOrderDetail">
+          <ScalarProperty Name="ApprovedStatus" ColumnName="ApprovedStatus" />
+          <ScalarProperty Name="DemandPerson" ColumnName="DemandPerson" />
+          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+          <ScalarProperty Name="CostCenterId" ColumnName="CostCenterId" />
+          <ScalarProperty Name="GrnRate" ColumnName="GrnRate" />
+          <ScalarProperty Name="LstPurQty" ColumnName="LstPurQty" />
+          <ScalarProperty Name="GrnDate" ColumnName="GrnDate" />
+          <ScalarProperty Name="GrnItemClearedStatus" ColumnName="GrnItemClearedStatus" />
+          <ScalarProperty Name="GrnBalanceQty" ColumnName="GrnBalanceQty" />
+          <ScalarProperty Name="GrnID" ColumnName="GrnID" />
+          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
+          <ScalarProperty Name="ItemClearedStatus" ColumnName="ItemClearedStatus" />
+          <ScalarProperty Name="BalanceQty" ColumnName="BalanceQty" />
+          <ScalarProperty Name="RequiredDate" ColumnName="RequiredDate" />
+          <ScalarProperty Name="RequiredQty" ColumnName="RequiredQty" />
+          <ScalarProperty Name="ItemSpecification" ColumnName="ItemSpecification" />
+          <ScalarProperty Name="ItemMeasureUnit" ColumnName="ItemMeasureUnit" />
+          <ScalarProperty Name="StockQty" ColumnName="StockQty" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="RequisitionDate" ColumnName="RequisitionDate" />
+          <ScalarProperty Name="StoreUnitId" ColumnName="StoreUnitId" />
+          <ScalarProperty Name="LineNo" ColumnName="LineNo" />
           <ScalarProperty Name="RequisitionID" ColumnName="RequisitionID" />
         </MappingFragment>
       </EntityTypeMapping>
