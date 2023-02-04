@@ -45,7 +45,6 @@
                         </select>
                     </div>
                 </div>
-
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="Remarks">Remarks</label>
@@ -67,7 +66,7 @@
                     <table id="tblDocumentDetail" class="table dataTable-table table-bordered  form-control">
                         <thead>
                             <tr>
-                                <th colspan="6" class="bg-success text-white" style="text-align:center">R E Q U I S I T I O N &nbsp;&nbsp; D E T A I L</th>
+                                <th colspan="8" class="bg-success text-white" style="text-align:center">R E Q U I S I T I O N &nbsp;&nbsp; D E T A I L</th>
                                 <th colspan="3" class="bg-success text-white" style="text-align:center">L A S T &nbsp;&nbsp; G R N</th>
                                 <th class="bg-success text-white text-center align-middle " rowspan="2">Action</th>
                             </tr>
@@ -79,7 +78,10 @@
                                 <th class="bg-success text-white">Stock</th>
                                 <th class="bg-success text-white">Specs</th>
                                 <th class="bg-success text-white">Qty</th>
+                                <th class="bg-success text-white">UOM</th>
                                 <th class="bg-success text-white">Required Date</th>
+                                <th class="bg-success text-white">Request by</th>
+                                <th style="display:none">GRNID</th>
                                 <th class="bg-primary text-white text-center align-middle ">Qty</th>
                                 <th class="bg-primary text-white text-center align-middle ">Rate</th>
                                 <th class="bg-primary text-white text-center align-middle ">Date</th>
@@ -107,22 +109,37 @@
                                 </td>
                                 <td id="stockqty">
                                     <div class="form-group">
-                                        <input  type="text" id="StockQty" disabled minlength="3" maxlength="150" class="form-control  custom-input" placeholder="SQty" name="StockQty">
-                                    </div>
-                                </td>
-                                <td class="col-md-2">
-                                    <div class="form-group">
-                                        <input type="text" id="ItemSpecification" required minlength="3" maxlength="150" class="form-control" placeholder="Specification" name="ItemSpecification" onkeydown="handleKeyDownItemSpec(this, event)">
+                                        <input type="text" id="StockQty" disabled minlength="3" maxlength="150" class="form-control  custom-input" placeholder="SQty" name="StockQty">
                                     </div>
                                 </td>
                                 <td class="col-md-1">
                                     <div class="form-group">
+                                        <input type="text" id="ItemSpecification" required minlength="3" maxlength="150" class="form-control" placeholder="Specification" name="ItemSpecification" onkeydown="handleKeyDownItemSpec(this, event)">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
                                         <input type="number" id="RequiredQty" required minlength="3" maxlength="150" class="form-control" placeholder="Qty" name="RequiredQty" onkeydown="handleKeyDownQty(this,event)">
+                                    </div>
+                                </td>
+                                <td id="ItemMeasureUnit">
+                                    <div class="form-group">
+                                        <input type="text" id="ItemMeasureUnit" minlength="3" maxlength="10" class="form-control" placeholder="UOM" name="ItemMeasureUnit" onkeydown="handleKeyDownUOM(this,event)">
                                     </div>
                                 </td>
                                 <td class="col-md-1">
                                     <div class="form-group">
                                         <input type="date" id="RequiredDate" required class="form-control" name="RequiredDate" onkeydown="handleKeyDownReqDate(this,event)">
+                                    </div>
+                                </td>
+                                <td class="col-md-1">
+                                    <div class="form-group">
+                                        <input type="text" id="DemandPerson" required class="form-control" name="DemandPerson" onkeydown="handleKeyDownReqPerson(this,event)">
+                                    </div>
+                                </td>
+                                <td style="display:none">
+                                    <div class="form-group">
+                                        <input type="text" id="lastGrnId" disabled class="form-control custom-input" placeholder="GrnID" name="GrnID">
                                     </div>
                                 </td>
                                 <td>
@@ -137,7 +154,7 @@
                                 </td>
                                 <td>
                                     <div class="form-group">
-                                        <input type="text" id="lastGrnDate" disabled  class="form-control text-center" placeholder="Date" name="RequiredQty">
+                                        <input type="text" id="lastGrnDate" disabled class="form-control text-center" placeholder="Date" name="RequiredQty">
                                     </div>
                                 </td>
                                 <td class="col-md-1">
@@ -182,19 +199,34 @@
                             <input type="text" id="StockQty" disabled minlength="3" maxlength="150" class="form-control  custom-input" placeholder="SQty" name="StockQty">
                         </div>
                     </td>
-                    <td class="col-md-2">
+                    <td class="col-md-1">
                         <div class="form-group">
-                            <input type="text" id="ItemSpecification" required minlength="3" maxlength="150" class="form-control" placeholder="Specification" name="ItemSpecification">
+                            <input type="text" id="ItemSpecification" required minlength="3" maxlength="150" class="form-control" placeholder="Specification" name="ItemSpecification" onkeydown="handleKeyDownItemSpec(this, event)">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="form-group">
+                            <input type="number" id="RequiredQty" required minlength="3" maxlength="150" class="form-control" placeholder="Qty" name="RequiredQty" onkeydown="handleKeyDownQty(this,event)">
+                        </div>
+                    </td>
+                    <td id="ItemMeasureUnit">
+                        <div class="form-group">
+                            <input type="text" id="ItemMeasureUnit" minlength="3" maxlength="10" class="form-control" placeholder="UOM" name="ItemMeasureUnit" onkeydown="handleKeyDownUOM(this,event)">
                         </div>
                     </td>
                     <td class="col-md-1">
                         <div class="form-group">
-                            <input type="number" id="RequiredQty" required minlength="3" maxlength="150" class="form-control" placeholder="Qty" name="RequiredQty">
+                            <input type="date" id="RequiredDate" required class="form-control" name="RequiredDate" onkeydown="handleKeyDownReqDate(this,event)">
                         </div>
                     </td>
                     <td class="col-md-1">
                         <div class="form-group">
-                            <input type="date" id="RequiredDate" required class="form-control" name="RequiredDate">
+                            <input type="text" id="DemandPerson" required class="form-control" name="DemandPerson" onkeydown="handleKeyDownReqPerson(this,event)">
+                        </div>
+                    </td>
+                    <td style="display:none">
+                        <div class="form-group">
+                            <input type="text" id="lastGrnId" disabled class="form-control custom-input" placeholder="GrnID" name="GrnID">
                         </div>
                     </td>
                     <td>
@@ -207,7 +239,7 @@
                             <input type="text" id="lastGrnRate" disabled class="form-control custom-input" placeholder="Rate" name="RequiredQty">
                         </div>
                     </td>
-                    <td>
+                    <td class="col-md-1">
                         <div class="form-group">
                             <input type="text" id="lastGrnDate" disabled class="form-control text-center" placeholder="Date" name="RequiredQty">
                         </div>
@@ -231,7 +263,7 @@
     function handleKeyDown(event) {
         var key = event.key;
         var textbox = event.target;
-        console.log(key);
+        //console.log(key);
         calculateAmt(event);
 
         var TableRow = event.target.closest('tr');
@@ -313,6 +345,7 @@
         AvgRateGet.val = "";
         Qtysearchtxtboxget.val = "";
         StockQtyGet.val = "";
+        GrnIDGet.val = "";
         GrnQtyGet.val = "";
         GrnRateGet.val = "";
         GrnDateGet.val = "";
@@ -366,7 +399,7 @@
         $("#StoreUnitId").select2();
         $(CostCenterId).select2();
         invoicetype = @Model.invoiceType;
-        console.log(invoicetype);
+        //console.log(invoicetype);
         StoreUnitDropdown();
         CostCenterDropdown(CostCenterId);
         var now = new Date();
@@ -427,6 +460,34 @@
 
             var currentRow = e.target.closest("td");
             var nextRow = currentRow.nextElementSibling;
+            var nextInput = nextRow.querySelector("#ItemMeasureUnit");
+            //console.log("current row " + currentRow);
+            //console.log("reached " + nextInput);
+
+            if (nextInput) {
+                nextInput.focus();
+            }
+        }
+    }
+    function handleKeyDownUOM(eval, e) {
+        //console.log($(eval).val());
+        calculateAmt(e);
+
+        if (e.keyCode === 13) {
+            /*var currentTabIndex = e.target.tabIndex;
+            console.log("currentTabIndex is: "+currentTabIndex);
+            var nextTabIndex = currentTabIndex + 1;
+            var nextInput = document.querySelector("[tabIndex='" + nextTabIndex + "']");
+            if (nextInput) {
+                nextInput.focus();
+            }*/
+            e.preventDefault();
+
+            var val = $(eval).val();
+            if (val === "") return;
+
+            var currentRow = e.target.closest("td");
+            var nextRow = currentRow.nextElementSibling;
             var nextInput = nextRow.querySelector("#RequiredDate");
             //console.log("current row " + currentRow);
             //console.log("reached " + nextInput);
@@ -443,8 +504,22 @@
             var val = $(eval).val();
             if (val === "") return;
             var currentRow = e.target.closest("tr");
+            var nextInput = currentRow.querySelector("#DemandPerson");
+            if (nextInput) {
+                nextInput.focus();
+            }
+        }
+
+    }
+    function handleKeyDownReqPerson(eval, e) {
+        calculateAmt(e);
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            var val = $(eval).val();
+            if (val === "") return;
+            var currentRow = e.target.closest("tr");
             var nextInput = currentRow.querySelector("#btnrowadd");
-            console.log(currentRow);
+            //console.log(currentRow);
 
             if (nextInput) {
                 nextInput.focus();
@@ -452,6 +527,7 @@
         }
 
     }
+
     function handleKeyDownTax(eval, e) {
         calculateAmt(e);
         if (e.keyCode === 13) {
@@ -477,43 +553,6 @@
                     //console.log("next input td " + nextInput);
                 }
             }
-            if (nextInput) {
-                nextInput.focus();
-            }
-        }
-    }
-    function handleKeyDownAddTax(eval, e) {
-        calculateAmt(e);
-        if (e.keyCode === 13) {
-            e.preventDefault();
-            var val = $(eval).val();
-            if (val === "") return;
-            // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
-            //SEduty =8, SEdutyAmt =9, NetVal=10, BtnAdd = 11
-            var currentCell = e.target.closest("td");
-            var nextCell = currentCell.nextElementSibling.nextElementSibling;
-            var nextInput = nextCell.querySelector("#SExDutyRate");
-            if (nextInput.style.display === "none" || nextInput.style.display === "") {
-                nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
-                nextInput = nextCell.querySelector("#btnrowadd");
-                console.log("next input td " + nextInput);
-            }
-            if (nextInput) {
-                nextInput.focus();
-            }
-        }
-    }
-    function handleKeyDownAddSEd(eval,e) {
-        calculateAmt(e);
-        if (e.keyCode === 13) {
-            e.preventDefault();
-            var val = $(eval).val();
-            if (val === "") return;
-            // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
-            //SEduty =8, SEdutyAmt =9, NetVal=10, BtnAdd = 11
-            var currentCell = e.target.closest("td");
-            var nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling;
-            var nextInput = nextCell.querySelector("#btnrowadd");
             if (nextInput) {
                 nextInput.focus();
             }
@@ -646,6 +685,7 @@
 
     var AvgRateGet;
     var StockQtyGet;
+    var GrnIDGet;
     var GrnQtyGet;
     var GrnRateGet;
     var GrnDateGet;
@@ -692,8 +732,7 @@
         //var StoreUnitId = $("#StoreUnitId").val();
         var StoreUnitId= $("#StoreUnitId").val();
 
-        console.log("reached in fuction selecteitemval");
-        console.log(itemval + ' uint id ' + StoreUnitId);
+        //console.log(itemval + ' uint id ' + StoreUnitId);
         var val = name;
             $.ajax({
                 type: "GET",
@@ -709,15 +748,19 @@
                     //$("#CustomSearchLoader").show();
                 },
                 success: function (data) {
-                    if (!data["StockQty"]) {
+                    if (!data.ItemStockStatus["StockQty"]) {
                         $(AvgRateGet).val('0');
                         $(StockQtyGet).val('0');
                         return;
                     }
 
-                    $(AvgRateGet).val(data["AvgRate"]);
-                    $(StockQtyGet).val(data["StockQty"]);
-
+                    $(AvgRateGet).val(data.ItemStockStatus["AvgRate"]);
+                    $(StockQtyGet).val(data.ItemStockStatus["StockQty"]);
+                    $(GrnIDGet).val(data.lsgGRN["lstGRNID"]);
+                    $(GrnQtyGet).val(data.lsgGRN["lstQty"]);
+                    $(GrnRateGet).val(data.lsgGRN["lstRate"]);
+                    $(GrnDateGet).val(data.lsgGRN["lstGrnDateString"]);
+                    //console.log(typeof data.lsgGRN["lstGrnDate"]);
                     $(ItemSpecification).focus();
                     //$(Qtysearchtxtboxget).focus();
                     $(chnode).hide();

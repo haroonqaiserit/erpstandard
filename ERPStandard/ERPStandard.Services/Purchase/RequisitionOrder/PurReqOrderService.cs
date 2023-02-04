@@ -1,5 +1,6 @@
 ﻿using ERPStandard.DbEntities;
 using ERPStandard.ViewModels;
+using ERPStandard.ViewModels.Purchase.GoodReceptNote;
 using ERPStandard.ViewModels.Purchase.RquisitionOrder;
 using ERPStandard.ViewModels.Sales;
 using System;
@@ -597,6 +598,36 @@ namespace ERPStandard.Services
                 }
             }
             return flgCompany;
+        }
+        public lastGRNViewModel LastGRN(string ItemId)
+        {
+            lastGRNViewModel lstGRN = new lastGRNViewModel();
+            using (var context = new SairaIndEntities())
+            {
+                //here in the below query applied finncialyear check
+                //because gap needs to cover this in saira industry
+                if (!string.IsNullOrEmpty(ItemId))
+                {
+                    lstGRN = (from grn in context.RmGrns
+                                      join grnd in context.RmGrnDetails on grn.GRNID equals grnd.GRNID
+                                      where grn.CompNo == grnd.Compno
+                                      && grn.BranchNo == grn.BranchNo
+                                      && grn.GrnDate >= StandardVariables.FinYearFrom
+                                      && grn.CompNo == StandardVariables.CompNo
+                                      && grn.BranchNo == StandardVariables.BranchNo
+                                      select new lastGRNViewModel
+                                      {
+                                          lstGRNID= grn.GRNID,
+                                          lstQty=grnd.QtyAcc,
+                                          lstRate= grnd.Rate,
+                                          lstGrnDate= grn.GrnDate,
+                                          //lstGrnDateString = grn.GrnDate.ToString("dd-MMM-yyyy")
+                                      }).OrderByDescending(x => x.lstGrnDate)
+                                      .Take(1)
+                                      .FirstOrDefault();
+                }
+            }
+            return lstGRN;
         }
     }
 }

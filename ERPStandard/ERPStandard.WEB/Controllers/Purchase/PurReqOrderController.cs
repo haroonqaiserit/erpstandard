@@ -10,6 +10,8 @@ using System.Web.Mvc;
 using ClosedXML.Excel;
 using System.IO;
 using ERPStandard.ViewModels.Inventory;
+using ERPStandard.ViewModels.Purchase.GoodReceptNote;
+using ERPStandard.ViewModels.Purchase.RequisitionOrder;
 
 namespace ERPStandard.WEB.Controllers
 {
@@ -335,9 +337,14 @@ namespace ERPStandard.WEB.Controllers
             stockstatus.BranchNo = StandardVariables.BranchNo.ToString();
             stockstatus.GodownId = string.IsNullOrEmpty(stockstatus.GodownId) ? "" : stockstatus.GodownId;
             stockstatus.ToDate = string.IsNullOrEmpty(stockstatus.ToDate) ? "" : stockstatus.ToDate;
-
             itemStock = ItemService.Instance.StockStatus(stockstatus);
-            return Json(itemStock, JsonRequestBehavior.AllowGet);
+            lastGRNViewModel last = new lastGRNViewModel();
+            last = PurReqOrderService.Instance.LastGRN(stockstatus.ItemId);
+            last.lstGrnDateString = last.lstGrnDate.ToString("dd-MMM-yy");
+            PItemStockandGRNStatus pItem = new PItemStockandGRNStatus();
+            pItem.lsgGRN = last;
+            pItem.ItemStockStatus = itemStock;
+            return Json(pItem, JsonRequestBehavior.AllowGet);
         }
 
     }

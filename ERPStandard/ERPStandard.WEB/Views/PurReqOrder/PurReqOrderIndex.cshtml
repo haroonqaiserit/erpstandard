@@ -164,7 +164,7 @@
                 "input[name='RequiredQty']": {
                     required: true,
                 },
-                "input[name='Rate']": {
+                "input[name='DemandPerson']": {
                     required: true,
                 },
             },
@@ -176,39 +176,45 @@
             }
         });
 
-        var SaleQuotations = [];
-        var SaleQuotation = {};
-        var SaleQuotationDetails = [];
-        SaleQuotation.QuoteId = $("#QuoteId").val();
-        SaleQuotation.CustomerNo = $("#CustomerId").val();
+        var PurchaseRequisitionOrders = [];
+        var PurchaseRequisitionOrder = {};
+        var PurchaseRequisitionOrderDetails = [];
+        //PurchaseRequisitionOrder.RequisitionID = $("#RequisitionID").val();
+        PurchaseRequisitionOrder.StoreUnitId = $("#StoreUnitId").val();
 
-            if (SaleQuotation.SalesManId == "" || SaleQuotation.CustomerNo == "") {
+            if (PurchaseRequisitionOrder.StoreUnitId == "") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Dropdowns Error!',
-                    text: 'Please select the required dropdowns!',
+                    text: 'Please select the Store Unit dropdowns!',
                 })
                 return;
             }
-            SaleQuotation.QuoteDate = $("#QuoteDate").val();
-            SaleQuotation.QuoteValidDate = $("#QuoteValidDate").val();
-            SaleQuotation.Remarks = $("#Remarks").val();
-            SaleQuotation.SalesManId = $("#SalesManId").val();
-            SaleQuotation.CustomerNo = $("#CustomerId").val();
+            PurchaseRequisitionOrder.RequisitionDate = $("#RequisitionDate").val();
+            //PurchaseRequisitionOrder.QuoteValidDate = $("#QuoteValidDate").val();
+            PurchaseRequisitionOrder.Remarks = $("#Remarks").val();
+            PurchaseRequisitionOrder.StoreUnitId = $("#StoreUnitId").val();
 
         var i=0;
             // Master Detail Record Save
-            SaleQuotations.push(SaleQuotation);
+            PurchaseRequisitionOrders.push(PurchaseRequisitionOrder);
             var flgerr = false;
-            $('#tblQuotationDetail > tbody  > tr').each(function () {
-                var SaleQuotationDetail = {};
-                //var TableRow = e.target.closest('tr');
-                //var TableRow = this;
-                var SaleQuotationDetail = {};
-                SaleQuotationDetail.ItemID = $(this.querySelector('[name=ItemID]')).val();
+            $('#tblDocumentDetail > tbody  > tr').each(function () {
+                var PurchaseOrderDetail = {};
+                var PurchaseOrderDetail = {};
+                PurchaseOrderDetail.ItemID = $(this.querySelector('[name=ItemID]')).val();
+                PurchaseOrderDetail.CostCenterId = $(this.querySelector('[name=CostCenterId]')).val();
 
-                //SaleQuotationDetail.ItemID = $(this).find("td:eq(0) input[type='text']").val();
-                if (SaleQuotationDetail.ItemID == "") {
+                if (PurchaseOrderDetail.CostCenterId == "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Empty Field',
+                        text: "Cost Center selection error",
+                    })
+                    flgerr = true;
+                    return;
+                }
+                if (PurchaseOrderDetail.ItemID == "") {
                     Swal.fire({
                         icon: 'error',
                         title: 'Empty Field',
@@ -217,10 +223,20 @@
                     flgerr = true;
                     return;
                 }
-                SaleQuotationDetail.RequiredQty = $(this.querySelector('[name=RequiredQty]')).val();
-                SaleQuotationDetail.Rate = $(this.querySelector('[name=Rate]')).val();
-                console.log(SaleQuotationDetail.RequiredQty)
-                if (SaleQuotationDetail.RequiredQty == "" || SaleQuotationDetail.Rate == "") {
+                PurchaseOrderDetail.StockQty = $(this.querySelector('[name=StockQty]')).val();
+                PurchaseOrderDetail.ItemMeasureUnit = $(this.querySelector('[name=ItemMeasureUnit]')).val();
+                PurchaseOrderDetail.ItemSpecification = $(this.querySelector('[name=ItemSpecification]')).val();
+                PurchaseOrderDetail.RequiredQty = $(this.querySelector('[name=RequiredQty]')).val();
+                PurchaseOrderDetail.RequiredDate = $(this.querySelector('[name=RequiredDate]')).val();
+                PurchaseOrderDetail.GrnID = $(this.querySelector('[name=RequiredDate]')).val();
+                PurchaseOrderDetail.DemandPerson = $(this.querySelector('[name=DemandPerson]')).val();
+                console.log(PurchaseOrderDetail.RequiredQty)
+                if (PurchaseOrderDetail.RequiredQty == ""
+                    || PurchaseOrderDetail.RequiredDate == ""
+                    || PurchaseOrderDetail.ItemMeasureUnit == ""
+                    || PurchaseOrderDetail.RequiredDate == ""
+                    || PurchaseOrderDetail.DemandPerson == ""
+                ) {
                     Swal.fire({
                         icon: 'error',
                         title: 'Empty Field',
@@ -229,10 +245,7 @@
                     flgerr = true;
                     return;
                 }
-                SaleQuotationDetail.SaleTaxRate = $(this.querySelector('[name=SaleTaxRate]')).val();
-                SaleQuotationDetail.ASaleTaxRate = $(this.querySelector('[name=ASaleTaxRate]')).val();
-                SaleQuotationDetail.SExDutyRate = $(this.querySelector('[name=SExDutyRate]')).val();
-                SaleQuotationDetails.push(SaleQuotationDetail);
+                PurchaseRequisitionOrderDetails.push(PurchaseOrderDetail);
             });
         if (flgerr == false) {
 
@@ -250,8 +263,8 @@
                    url: savepath,
                    data: JSON.stringify(
                        {
-                           SaleQuotation: SaleQuotation,
-                           SaleQuotationDetail: SaleQuotationDetails
+                           PurReqOrder: PurchaseRequisitionOrder,
+                           PurReqOrderDetail: PurchaseRequisitionOrderDetails
                        }
                    ),
                    contentType: "application/json; charset=utf-8",
@@ -660,26 +673,29 @@
             var RequiredQty = TableRow.querySelector('[name=RequiredQty]')
             var StockQty = TableRow.querySelector('[name=StockQty]')
 
+            var lastGrnId = TableRow.querySelector('[id=lastGrnId]')
+            var lastGrnQty = TableRow.querySelector('[id=lastGrnQty]')
+            var lastGrnRate = TableRow.querySelector('[id=lastGrnRate]')
+            var lastGrnDate = TableRow.querySelector('[id=lastGrnDate]')
+
             searchtextboxget = TableRow.querySelector('[name=customsearchtext]')
-            chnode = TableRow.querySelector('[id=searchpartial]')
-            //console.log(chnode);
             idsearchtxtboxget = ItemID;
             Qtysearchtxtboxget = RequiredQty;
 
 
-            var lastGrnQty = TableRow.querySelector('[name=lastGrnQty]')
-            var lastGrnRate = TableRow.querySelector('[name=lastGrnRate]')
-            var lastGrnDate = TableRow.querySelector('[name=lastGrnDate]')
+            GrnIDGet = lastGrnId;
             GrnQtyGet = lastGrnQty;
             GrnRateGet = lastGrnRate;
             GrnDateGet = lastGrnDate;
             StockQtyGet = StockQty;
+            AvgRateGet = GrnRateGet;
 
             if (!$(ItemID).val()) {
                 $(RequiredQty).val('');
                 $(AvgRateGet).val('');
                 $(StockQtyGet).val('');
 
+                $(GrnIDGet).val('');
                 $(GrnQtyGet).val('');
                 $(GrnRateGet).val('');
                 $(GrnDateGet).val('');
