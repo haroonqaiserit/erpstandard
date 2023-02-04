@@ -190,10 +190,10 @@ namespace ERPStandard.WEB.Controllers
         #region Sales - Order
 
         [HttpGet]
-        public ActionResult Search(string query)
+        public ActionResult Search(string query, int itemclass)
         {
             // Retrieve items from database that match the query
-            var items = ItemService.Instance.All_List(query, 0, (int)ItemClass.FinishGoods);
+            var items = ItemService.Instance.All_List(query, 0, itemclass);
             return Json(items, JsonRequestBehavior.AllowGet);
         }
 

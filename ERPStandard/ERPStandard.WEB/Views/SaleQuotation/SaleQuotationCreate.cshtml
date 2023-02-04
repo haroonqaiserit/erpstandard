@@ -335,7 +335,9 @@
                 cleartextboxes();
             }
             results.style.display = "block";
-            fetch("/Salequotation/search?query=" + textbox.value)
+            var itemclass = 1;
+            fetch("/Salequotation/search?query=" + textbox.value + "&itemclass=" + itemclass)
+
                 .then(function (response) {
                     return response.json();
                 })

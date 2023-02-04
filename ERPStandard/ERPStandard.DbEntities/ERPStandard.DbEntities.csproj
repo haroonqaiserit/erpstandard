@@ -597,6 +597,9 @@
     <Compile Include="PurDellChallanMaster.cs">
       <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="QdItemTransaction.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="RawMaterial.cs">
       <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
     </Compile>
@@ -724,6 +727,9 @@
       <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SMainAcnt.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Sp_CurrentStock1_Result.cs">
       <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SReturn.cs">

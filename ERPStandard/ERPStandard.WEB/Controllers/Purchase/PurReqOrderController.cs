@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using ClosedXML.Excel;
 using System.IO;
+using ERPStandard.ViewModels.Inventory;
 
 namespace ERPStandard.WEB.Controllers
 {
@@ -326,5 +327,18 @@ namespace ERPStandard.WEB.Controllers
             return View();
         }
         #endregion
+        [HttpGet]
+        public  ActionResult ItemCurrentStock(ItemStockStatusViewModel stockstatus)
+        {
+            ItemStockStatusViewModel itemStock = new ItemStockStatusViewModel();
+            stockstatus.CompNo = StandardVariables.CompNo.ToString();
+            stockstatus.BranchNo = StandardVariables.BranchNo.ToString();
+            stockstatus.GodownId = string.IsNullOrEmpty(stockstatus.GodownId) ? "" : stockstatus.GodownId;
+            stockstatus.ToDate = string.IsNullOrEmpty(stockstatus.ToDate) ? "" : stockstatus.ToDate;
+
+            itemStock = ItemService.Instance.StockStatus(stockstatus);
+            return Json(itemStock, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

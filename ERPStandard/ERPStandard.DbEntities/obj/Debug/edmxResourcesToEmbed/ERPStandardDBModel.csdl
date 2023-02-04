@@ -5189,14 +5189,6 @@
       <End Role="SaleInvoice" EntitySet="SaleInvoices" />
       <End Role="SaleInvoiceDetail" EntitySet="SaleInvoiceDetails" />
     </AssociationSet>
-    <FunctionImport Name="Sp_CurrentStock">
-      <Parameter Name="Itemid" Mode="In" Type="String" />
-      <Parameter Name="CompNo" Mode="In" Type="String" />
-      <Parameter Name="BranchNo" Mode="In" Type="String" />
-      <Parameter Name="StoreUnitId" Mode="In" Type="String" />
-      <Parameter Name="GodownId" Mode="In" Type="String" />
-      <Parameter Name="toDate" Mode="In" Type="String" />
-    </FunctionImport>
     <EntitySet Name="SalesOrders" EntityType="SairaIndModel.SalesOrder" />
     <EntitySet Name="SalesOrderDetails" EntityType="SairaIndModel.SalesOrderDetail" />
     <EntitySet Name="Customers" EntityType="SairaIndModel.Customer" />
@@ -5245,6 +5237,23 @@
     </AssociationSet>
     <EntitySet Name="PurchaseRequisitionOrders" EntityType="SairaIndModel.PurchaseRequisitionOrder" />
     <EntitySet Name="PurchaseRequisitionOrderDetails" EntityType="SairaIndModel.PurchaseRequisitionOrderDetail" />
+    <EntitySet Name="QdItemTransactions" EntityType="SairaIndModel.QdItemTransaction" />
+    <FunctionImport Name="Sp_CurrentStock">
+      <Parameter Name="Itemid" Mode="In" Type="String" />
+      <Parameter Name="CompNo" Mode="In" Type="String" />
+      <Parameter Name="BranchNo" Mode="In" Type="String" />
+      <Parameter Name="StoreUnitId" Mode="In" Type="String" />
+      <Parameter Name="GodownId" Mode="In" Type="String" />
+      <Parameter Name="toDate" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="Sp_CurrentStock1" ReturnType="Collection(SairaIndModel.Sp_CurrentStock1_Result)">
+      <Parameter Name="Itemid" Mode="In" Type="String" />
+      <Parameter Name="CompNo" Mode="In" Type="String" />
+      <Parameter Name="BranchNo" Mode="In" Type="String" />
+      <Parameter Name="StoreUnitId" Mode="In" Type="String" />
+      <Parameter Name="GodownId" Mode="In" Type="String" />
+      <Parameter Name="toDate" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="SalesOrder">
     <Key>
@@ -5634,4 +5643,39 @@
     <Property Name="DemandPerson" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ApprovedStatus" Type="Boolean" />
   </EntityType>
+  <EntityType Name="QdItemTransaction">
+    <Key>
+      <PropertyRef Name="ItemId" />
+      <PropertyRef Name="Compno" />
+      <PropertyRef Name="BranchNo" />
+      <PropertyRef Name="OBQuantity" />
+      <PropertyRef Name="GRNQty" />
+      <PropertyRef Name="IssQty" />
+      <PropertyRef Name="CostCenterId" />
+      <PropertyRef Name="UnitName" />
+      <PropertyRef Name="Rate" />
+    </Key>
+    <Property Name="GodownId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ItemId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ItemName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="DocumentNo" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+    <Property Name="DocDate" Type="DateTime" Precision="3" />
+    <Property Name="Packing" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Compno" Type="Int32" Nullable="false" />
+    <Property Name="BranchNo" Type="Int32" Nullable="false" />
+    <Property Name="ItemClass" Type="Int32" />
+    <Property Name="OBQuantity" Type="Decimal" Nullable="false" Precision="3" Scale="2" />
+    <Property Name="GRNQty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="IssQty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="CostCenterId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CostCenterName" Type="String" MaxLength="456" FixedLength="false" Unicode="false" />
+    <Property Name="StoreUnitId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UnitName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+  </EntityType>
+  <ComplexType Name="Sp_CurrentStock1_Result">
+    <Property Type="Decimal" Name="StockQty" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="AvgRate" Nullable="true" Precision="18" Scale="2" />
+  </ComplexType>
 </Schema>

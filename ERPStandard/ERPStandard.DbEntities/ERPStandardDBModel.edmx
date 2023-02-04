@@ -5299,6 +5299,39 @@ warning 6002: The table/view 'SairaInd.dbo.Visite' does not have a primary key d
           <Property Name="VoucherActivity" Type="int" />
           <Property Name="VoucherTiming" Type="datetime" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SairaInd.dbo.QdItemTransaction' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="QdItemTransaction">
+          <Key>
+            <PropertyRef Name="ItemId" />
+            <PropertyRef Name="Compno" />
+            <PropertyRef Name="BranchNo" />
+            <PropertyRef Name="OBQuantity" />
+            <PropertyRef Name="GRNQty" />
+            <PropertyRef Name="IssQty" />
+            <PropertyRef Name="CostCenterId" />
+            <PropertyRef Name="UnitName" />
+            <PropertyRef Name="Rate" />
+          </Key>
+          <Property Name="GodownId" Type="varchar" MaxLength="50" />
+          <Property Name="ItemId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemName" Type="varchar" MaxLength="75" />
+          <Property Name="DocumentNo" Type="varchar" MaxLength="14" />
+          <Property Name="DocDate" Type="datetime" />
+          <Property Name="Packing" Type="varchar" MaxLength="50" />
+          <Property Name="Quantity" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="Compno" Type="int" Nullable="false" />
+          <Property Name="BranchNo" Type="int" Nullable="false" />
+          <Property Name="ItemClass" Type="int" />
+          <Property Name="OBQuantity" Type="numeric" Precision="3" Scale="2" Nullable="false" />
+          <Property Name="GRNQty" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IssQty" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CostCenterId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CostCenterName" Type="varchar" MaxLength="456" />
+          <Property Name="StoreUnitId" Type="varchar" MaxLength="50" />
+          <Property Name="UnitName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Rate" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
         <Association Name="FK_AdvanceAgainstBonus_EmployeePersonalInfo">
           <End Role="EmployeePersonalInfo" Type="Self.EmployeePersonalInfo" Multiplicity="1" />
           <End Role="AdvanceAgainstBonus" Type="Self.AdvanceAgainstBonus" Multiplicity="*" />
@@ -7637,6 +7670,28 @@ warning 6002: The table/view 'SairaInd.dbo.Visite' does not have a primary key d
     [Visite].[SaveDate] AS [SaveDate], 
     [Visite].[DeletionID] AS [DeletionID]
     FROM [dbo].[Visite] AS [Visite]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="QdItemTransaction" EntityType="Self.QdItemTransaction" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [QdItemTransaction].[GodownId] AS [GodownId], 
+    [QdItemTransaction].[ItemId] AS [ItemId], 
+    [QdItemTransaction].[ItemName] AS [ItemName], 
+    [QdItemTransaction].[DocumentNo] AS [DocumentNo], 
+    [QdItemTransaction].[DocDate] AS [DocDate], 
+    [QdItemTransaction].[Packing] AS [Packing], 
+    [QdItemTransaction].[Quantity] AS [Quantity], 
+    [QdItemTransaction].[Compno] AS [Compno], 
+    [QdItemTransaction].[BranchNo] AS [BranchNo], 
+    [QdItemTransaction].[ItemClass] AS [ItemClass], 
+    [QdItemTransaction].[OBQuantity] AS [OBQuantity], 
+    [QdItemTransaction].[GRNQty] AS [GRNQty], 
+    [QdItemTransaction].[IssQty] AS [IssQty], 
+    [QdItemTransaction].[CostCenterId] AS [CostCenterId], 
+    [QdItemTransaction].[CostCenterName] AS [CostCenterName], 
+    [QdItemTransaction].[StoreUnitId] AS [StoreUnitId], 
+    [QdItemTransaction].[UnitName] AS [UnitName], 
+    [QdItemTransaction].[Rate] AS [Rate]
+    FROM [dbo].[QdItemTransaction] AS [QdItemTransaction]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_AdvanceAgainstBonus_EmployeePersonalInfo" Association="Self.FK_AdvanceAgainstBonus_EmployeePersonalInfo">
             <End Role="EmployeePersonalInfo" EntitySet="EmployeePersonalInfo" />
@@ -12900,14 +12955,6 @@ warning 6002: The table/view 'SairaInd.dbo.Visite' does not have a primary key d
             <End Role="SaleInvoice" EntitySet="SaleInvoices" />
             <End Role="SaleInvoiceDetail" EntitySet="SaleInvoiceDetails" />
           </AssociationSet>
-          <FunctionImport Name="Sp_CurrentStock">
-            <Parameter Name="Itemid" Mode="In" Type="String" />
-            <Parameter Name="CompNo" Mode="In" Type="String" />
-            <Parameter Name="BranchNo" Mode="In" Type="String" />
-            <Parameter Name="StoreUnitId" Mode="In" Type="String" />
-            <Parameter Name="GodownId" Mode="In" Type="String" />
-            <Parameter Name="toDate" Mode="In" Type="String" />
-          </FunctionImport>
           <EntitySet Name="SalesOrders" EntityType="SairaIndModel.SalesOrder" />
           <EntitySet Name="SalesOrderDetails" EntityType="SairaIndModel.SalesOrderDetail" />
           <EntitySet Name="Customers" EntityType="SairaIndModel.Customer" />
@@ -12956,6 +13003,23 @@ warning 6002: The table/view 'SairaInd.dbo.Visite' does not have a primary key d
           </AssociationSet>
           <EntitySet Name="PurchaseRequisitionOrders" EntityType="SairaIndModel.PurchaseRequisitionOrder" />
           <EntitySet Name="PurchaseRequisitionOrderDetails" EntityType="SairaIndModel.PurchaseRequisitionOrderDetail" />
+          <EntitySet Name="QdItemTransactions" EntityType="SairaIndModel.QdItemTransaction" />
+          <FunctionImport Name="Sp_CurrentStock">
+            <Parameter Name="Itemid" Mode="In" Type="String" />
+            <Parameter Name="CompNo" Mode="In" Type="String" />
+            <Parameter Name="BranchNo" Mode="In" Type="String" />
+            <Parameter Name="StoreUnitId" Mode="In" Type="String" />
+            <Parameter Name="GodownId" Mode="In" Type="String" />
+            <Parameter Name="toDate" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Sp_CurrentStock1" ReturnType="Collection(SairaIndModel.Sp_CurrentStock1_Result)">
+            <Parameter Name="Itemid" Mode="In" Type="String" />
+            <Parameter Name="CompNo" Mode="In" Type="String" />
+            <Parameter Name="BranchNo" Mode="In" Type="String" />
+            <Parameter Name="StoreUnitId" Mode="In" Type="String" />
+            <Parameter Name="GodownId" Mode="In" Type="String" />
+            <Parameter Name="toDate" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="SalesOrder">
           <Key>
@@ -13345,6 +13409,41 @@ warning 6002: The table/view 'SairaInd.dbo.Visite' does not have a primary key d
           <Property Name="DemandPerson" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ApprovedStatus" Type="Boolean" />
         </EntityType>
+        <EntityType Name="QdItemTransaction">
+          <Key>
+            <PropertyRef Name="ItemId" />
+            <PropertyRef Name="Compno" />
+            <PropertyRef Name="BranchNo" />
+            <PropertyRef Name="OBQuantity" />
+            <PropertyRef Name="GRNQty" />
+            <PropertyRef Name="IssQty" />
+            <PropertyRef Name="CostCenterId" />
+            <PropertyRef Name="UnitName" />
+            <PropertyRef Name="Rate" />
+          </Key>
+          <Property Name="GodownId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="DocumentNo" Type="String" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="DocDate" Type="DateTime" Precision="3" />
+          <Property Name="Packing" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Compno" Type="Int32" Nullable="false" />
+          <Property Name="BranchNo" Type="Int32" Nullable="false" />
+          <Property Name="ItemClass" Type="Int32" />
+          <Property Name="OBQuantity" Type="Decimal" Nullable="false" Precision="3" Scale="2" />
+          <Property Name="GRNQty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IssQty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="CostCenterId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CostCenterName" Type="String" MaxLength="456" FixedLength="false" Unicode="false" />
+          <Property Name="StoreUnitId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UnitName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <ComplexType Name="Sp_CurrentStock1_Result">
+          <Property Type="Decimal" Name="StockQty" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="AvgRate" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -18000,7 +18099,6 @@ warning 6002: The table/view 'SairaInd.dbo.Visite' does not have a primary key d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="Sp_CurrentStock" FunctionName="SairaIndModel.Store.Sp_CurrentStock" />
           <EntitySetMapping Name="SalesOrders">
             <EntityTypeMapping TypeName="SairaIndModel.SalesOrder">
               <MappingFragment StoreEntitySet="SalesOrder">
@@ -18270,6 +18368,39 @@ warning 6002: The table/view 'SairaInd.dbo.Visite' does not have a primary key d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="QdItemTransactions">
+            <EntityTypeMapping TypeName="SairaIndModel.QdItemTransaction">
+              <MappingFragment StoreEntitySet="QdItemTransaction">
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+                <ScalarProperty Name="StoreUnitId" ColumnName="StoreUnitId" />
+                <ScalarProperty Name="CostCenterName" ColumnName="CostCenterName" />
+                <ScalarProperty Name="CostCenterId" ColumnName="CostCenterId" />
+                <ScalarProperty Name="IssQty" ColumnName="IssQty" />
+                <ScalarProperty Name="GRNQty" ColumnName="GRNQty" />
+                <ScalarProperty Name="OBQuantity" ColumnName="OBQuantity" />
+                <ScalarProperty Name="ItemClass" ColumnName="ItemClass" />
+                <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+                <ScalarProperty Name="Compno" ColumnName="Compno" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Packing" ColumnName="Packing" />
+                <ScalarProperty Name="DocDate" ColumnName="DocDate" />
+                <ScalarProperty Name="DocumentNo" ColumnName="DocumentNo" />
+                <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="GodownId" ColumnName="GodownId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Sp_CurrentStock" FunctionName="SairaIndModel.Store.Sp_CurrentStock" />
+          <FunctionImportMapping FunctionImportName="Sp_CurrentStock1" FunctionName="SairaIndModel.Store.Sp_CurrentStock">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SairaIndModel.Sp_CurrentStock1_Result">
+                <ScalarProperty Name="StockQty" ColumnName="StockQty" />
+                <ScalarProperty Name="AvgRate" ColumnName="AvgRate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

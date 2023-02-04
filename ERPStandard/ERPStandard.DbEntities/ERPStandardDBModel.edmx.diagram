@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8d1d3a606cf94bd78f5326557eefaa11" Name="Diagram1" ZoomLevel="72" DisplayType="true">
+      <Diagram DiagramId="8d1d3a606cf94bd78f5326557eefaa11" Name="Diagram1" ZoomLevel="100" DisplayType="true">
         <EntityTypeShape EntityType="SairaIndModel.AccountInfo" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.Account" Width="1.5" PointX="7.75" PointY="12.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.AccountsBackUp" Width="1.5" PointX="14.75" PointY="12.75" IsExpanded="true" />
@@ -264,6 +264,7 @@
         <AssociationConnector Association="SairaIndModel.FK_IncomeTaxDetail_IncomeTaxSetup" />
         <EntityTypeShape EntityType="SairaIndModel.PurchaseRequisitionOrder" Width="1.5" PointX="0.75" PointY="10.75" />
         <EntityTypeShape EntityType="SairaIndModel.PurchaseRequisitionOrderDetail" Width="3.375" PointX="54.25" PointY="48.625" />
+        <EntityTypeShape EntityType="SairaIndModel.QdItemTransaction" Width="1.5" PointX="3.375" PointY="10.75" />
         </Diagram>
       <Diagram DiagramId="3ce879e1bc8f4b728c1c78f8408c4829" Name="Diagram2" />
     </edmx:Diagrams>

@@ -33,8 +33,9 @@ namespace ERPStandard.Services
             var viewModel = new StoreUnitViewModel();
             using (var context = new SairaIndEntities())
             {
-                var comp = context.tblStoreUnits.Where(x => x.UnitName.Contains(dtSearch)
-                        );
+
+                var comp = context.tblStoreUnits
+                    .Where(x => x.UnitName.Contains(dtSearch));
 
                 int totalpage = comp.Select(x => x.CompNo).Count();
                 var pager = new Pager(totalpage, page, pageSize);

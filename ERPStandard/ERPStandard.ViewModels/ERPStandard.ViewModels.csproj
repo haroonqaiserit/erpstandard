@@ -54,6 +54,7 @@
     <Compile Include="ChartOfAccountViewModel.cs" />
     <Compile Include="General\Company1ViewModel.cs" />
     <Compile Include="General\StoreUnitListViewModel.cs" />
+    <Compile Include="Inventory\ItemStockStatusViewModel.cs" />
     <Compile Include="Inventory\ItemViewModelMaster.cs" />
     <Compile Include="InvoiceReportDetails.cs" />
     <Compile Include="InvoiceTemplateViewModel.cs" />

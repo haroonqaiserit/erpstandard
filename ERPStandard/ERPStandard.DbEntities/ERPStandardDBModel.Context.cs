@@ -269,6 +269,7 @@ namespace ERPStandard.DbEntities
         public virtual DbSet<IncomeTaxDetail> IncomeTaxDetails { get; set; }
         public virtual DbSet<PurchaseRequisitionOrder> PurchaseRequisitionOrders { get; set; }
         public virtual DbSet<PurchaseRequisitionOrderDetail> PurchaseRequisitionOrderDetails { get; set; }
+        public virtual DbSet<QdItemTransaction> QdItemTransactions { get; set; }
     
         public virtual int Sp_CurrentStock(string itemid, string compNo, string branchNo, string storeUnitId, string godownId, string toDate)
         {
@@ -297,6 +298,35 @@ namespace ERPStandard.DbEntities
                 new ObjectParameter("toDate", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("Sp_CurrentStock", itemidParameter, compNoParameter, branchNoParameter, storeUnitIdParameter, godownIdParameter, toDateParameter);
+        }
+    
+        public virtual ObjectResult<Sp_CurrentStock1_Result> Sp_CurrentStock1(string itemid, string compNo, string branchNo, string storeUnitId, string godownId, string toDate)
+        {
+            var itemidParameter = itemid != null ?
+                new ObjectParameter("Itemid", itemid) :
+                new ObjectParameter("Itemid", typeof(string));
+    
+            var compNoParameter = compNo != null ?
+                new ObjectParameter("CompNo", compNo) :
+                new ObjectParameter("CompNo", typeof(string));
+    
+            var branchNoParameter = branchNo != null ?
+                new ObjectParameter("BranchNo", branchNo) :
+                new ObjectParameter("BranchNo", typeof(string));
+    
+            var storeUnitIdParameter = storeUnitId != null ?
+                new ObjectParameter("StoreUnitId", storeUnitId) :
+                new ObjectParameter("StoreUnitId", typeof(string));
+    
+            var godownIdParameter = godownId != null ?
+                new ObjectParameter("GodownId", godownId) :
+                new ObjectParameter("GodownId", typeof(string));
+    
+            var toDateParameter = toDate != null ?
+                new ObjectParameter("toDate", toDate) :
+                new ObjectParameter("toDate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_CurrentStock1_Result>("Sp_CurrentStock1", itemidParameter, compNoParameter, branchNoParameter, storeUnitIdParameter, godownIdParameter, toDateParameter);
         }
     }
 }

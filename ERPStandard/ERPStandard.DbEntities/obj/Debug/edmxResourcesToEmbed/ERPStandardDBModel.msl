@@ -4650,7 +4650,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="Sp_CurrentStock" FunctionName="SairaIndModel.Store.Sp_CurrentStock" />
     <EntitySetMapping Name="SalesOrders">
       <EntityTypeMapping TypeName="SairaIndModel.SalesOrder">
         <MappingFragment StoreEntitySet="SalesOrder">
@@ -4920,5 +4919,38 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="QdItemTransactions">
+      <EntityTypeMapping TypeName="SairaIndModel.QdItemTransaction">
+        <MappingFragment StoreEntitySet="QdItemTransaction">
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="UnitName" ColumnName="UnitName" />
+          <ScalarProperty Name="StoreUnitId" ColumnName="StoreUnitId" />
+          <ScalarProperty Name="CostCenterName" ColumnName="CostCenterName" />
+          <ScalarProperty Name="CostCenterId" ColumnName="CostCenterId" />
+          <ScalarProperty Name="IssQty" ColumnName="IssQty" />
+          <ScalarProperty Name="GRNQty" ColumnName="GRNQty" />
+          <ScalarProperty Name="OBQuantity" ColumnName="OBQuantity" />
+          <ScalarProperty Name="ItemClass" ColumnName="ItemClass" />
+          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+          <ScalarProperty Name="Compno" ColumnName="Compno" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Packing" ColumnName="Packing" />
+          <ScalarProperty Name="DocDate" ColumnName="DocDate" />
+          <ScalarProperty Name="DocumentNo" ColumnName="DocumentNo" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="GodownId" ColumnName="GodownId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Sp_CurrentStock" FunctionName="SairaIndModel.Store.Sp_CurrentStock" />
+    <FunctionImportMapping FunctionImportName="Sp_CurrentStock1" FunctionName="SairaIndModel.Store.Sp_CurrentStock">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SairaIndModel.Sp_CurrentStock1_Result">
+          <ScalarProperty Name="StockQty" ColumnName="StockQty" />
+          <ScalarProperty Name="AvgRate" ColumnName="AvgRate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

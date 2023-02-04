@@ -161,7 +161,7 @@
                 "input[name='Remarks']": {
                     required: true,
                 },
-                "input[name='Qty']": {
+                "input[name='RequiredQty']": {
                     required: true,
                 },
                 "input[name='Rate']": {
@@ -217,14 +217,14 @@
                     flgerr = true;
                     return;
                 }
-                SaleQuotationDetail.Qty = $(this.querySelector('[name=Qty]')).val();
+                SaleQuotationDetail.RequiredQty = $(this.querySelector('[name=RequiredQty]')).val();
                 SaleQuotationDetail.Rate = $(this.querySelector('[name=Rate]')).val();
-                console.log(SaleQuotationDetail.Qty)
-                if (SaleQuotationDetail.Qty == "" || SaleQuotationDetail.Rate == "") {
+                console.log(SaleQuotationDetail.RequiredQty)
+                if (SaleQuotationDetail.RequiredQty == "" || SaleQuotationDetail.Rate == "") {
                     Swal.fire({
                         icon: 'error',
                         title: 'Empty Field',
-                        text: "Qty/Rate must required",
+                        text: "RequiredQty/Rate must required",
                     })
                     flgerr = true;
                     return;
@@ -657,60 +657,33 @@
         if (e) {
             var TableRow = e.target.closest('tr');
             var ItemID = TableRow.querySelector('[name=ItemID]')
-            var Qty = TableRow.querySelector('[name=Qty]')
+            var RequiredQty = TableRow.querySelector('[name=RequiredQty]')
+            var StockQty = TableRow.querySelector('[name=StockQty]')
 
             searchtextboxget = TableRow.querySelector('[name=customsearchtext]')
             chnode = TableRow.querySelector('[id=searchpartial]')
             //console.log(chnode);
             idsearchtxtboxget = ItemID;
-            Qtysearchtxtboxget = Qty;
+            Qtysearchtxtboxget = RequiredQty;
 
 
-            var Rate = TableRow.querySelector('[name=Rate]')
-            var Amt = TableRow.querySelector('[name=Amt]')
-            var SaleTaxRate = TableRow.querySelector('[name=SaleTaxRate]')
-            var SaleTaxAmt = TableRow.querySelector('[name=AmtSaleTaxAmt]')
-            var ASaleTaxRate = TableRow.querySelector('[name=ASaleTaxRate]')
-            var ASaleTaxAmt = TableRow.querySelector('[name=ASaleTaxAmt]')
-            var SExDutyRate = TableRow.querySelector('[name=SExDutyRate]')
-            var SExDutyAmt = TableRow.querySelector('[name=SExDutyAmt]')
-            var NetTotalAmt = TableRow.querySelector('[name=NetTotalAmt]')
-            RateGet = Rate;
-            SaleTaxRateGet = SaleTaxRate;
-            ASaleTaxRateGet = ASaleTaxRate;
-            SExDutyRateGet = SExDutyRate;
+            var lastGrnQty = TableRow.querySelector('[name=lastGrnQty]')
+            var lastGrnRate = TableRow.querySelector('[name=lastGrnRate]')
+            var lastGrnDate = TableRow.querySelector('[name=lastGrnDate]')
+            GrnQtyGet = lastGrnQty;
+            GrnRateGet = lastGrnRate;
+            GrnDateGet = lastGrnDate;
+            StockQtyGet = StockQty;
 
             if (!$(ItemID).val()) {
-                $(Qty).val('');
-                $(Rate).val('');
-                $(Amt).val('');
-                $(SaleTaxRate).val('');
-                $(SaleTaxAmt).val('');
-                $(ASaleTaxRate).val('');
-                $(ASaleTaxAmt).val('');
-                $(SExDutyRate).val('');
-                $(SExDutyAmt).val('');
-                $(NetTotalAmt).val('');
-                return null;
-            }
+                $(RequiredQty).val('');
+                $(AvgRateGet).val('');
+                $(StockQtyGet).val('');
 
-            if ($(Qty).val() > 0 && $(Rate).val()) {
-                var amount = $(Qty).val() * $(Rate).val()
-                var SaleTax_amount = amount * $(SaleTaxRate).val() / 100
-                var ASaleTax_amount = amount * $(ASaleTaxRate).val() / 100
-                var SExDuty_amount = amount * $(SExDutyRate).val() / 100
-                var NetTotal_amount = Math.round((amount + SaleTax_amount + ASaleTax_amount + SExDuty_amount) * 100) / 100;
-                $(Amt).val(amount);
-                $(SaleTaxAmt).val(SaleTax_amount);
-                $(ASaleTaxAmt).val(ASaleTax_amount);
-                $(SExDutyAmt).val(SExDuty_amount);
-                $(NetTotalAmt).val(NetTotal_amount);
-            }
-            else {
-                $(SaleTaxAmt).val('');
-                $(ASaleTaxAmt).val('');
-                $(SExDutyAmt).val('');
-                $(NetTotalAmt).val('');
+                $(GrnQtyGet).val('');
+                $(GrnRateGet).val('');
+                $(GrnDateGet).val('');
+                return null;
             }
         }
 

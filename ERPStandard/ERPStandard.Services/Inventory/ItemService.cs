@@ -3,6 +3,8 @@ using ERPStandard.ViewModels;
 using ERPStandard.ViewModels.Inventory;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -103,9 +105,17 @@ namespace ERPStandard.Services
             using (var context = new SairaIndEntities())
             {
                 var comp = context.ItemsStocks.Where(x => x.Dscr.Contains(dtSearch)
+                || x.ItemCode.Contains(dtSearch)
                         );
                 if (ItemClass.HasValue) { 
-                comp = comp.Where(x => x.ItemClass == ItemClass);
+                    if (ItemClass.Value == 2)
+                    {
+                        comp = comp.Where(x => x.ItemClass == 2 || x.ItemClass == 3);
+                    }
+                    else
+                    {
+                        comp = comp.Where(x => x.ItemClass == ItemClass);
+                    }
                 }
                 int totalpage = comp.Select(x => x.ItemID).Count();
 
@@ -246,6 +256,29 @@ namespace ERPStandard.Services
                 }
             }
             return flgCompany;
+        }
+
+
+        public ItemStockStatusViewModel StockStatus(ItemStockStatusViewModel ItemStock)
+        {
+            var currentStock = new ItemStockStatusViewModel();
+            using (var context = new SairaIndEntities())
+            {
+                currentStock = new ItemStockStatusViewModel
+                {
+                    ItemId = ItemStock.ItemId,
+                    CompNo = ItemStock.CompNo,
+                    BranchNo = ItemStock.BranchNo,
+                    StoreUnitId = ItemStock.StoreUnitId,
+                    GodownId = ItemStock.GodownId,
+                    ToDate = ItemStock.ToDate
+                };
+
+                var tResult = context.Sp_CurrentStock1(currentStock.ItemId, currentStock.CompNo, currentStock.BranchNo, currentStock.StoreUnitId, currentStock.GodownId, currentStock.ToDate).FirstOrDefault();
+                currentStock.StockQty= tResult.StockQty;
+                currentStock.AvgRate= tResult.AvgRate;
+            }
+            return currentStock;
         }
     }
 }
