@@ -39,14 +39,14 @@
             <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label for="RefDocId">Reference Number</label>
-                        <input type="text" id="RefDocId" required class="form-control" name="RefDocId">
+                        <label for="RefDocName">Document Name</label>
+                        <input type="text" id="RefDocName" required class="form-control" name="RefDocName">
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label for="RefDocName">Document Name</label>
-                        <input type="text" id="RefDocName" required class="form-control" name="RefDocName">
+                        <label for="RefDocId">Reference Number</label>
+                        <input type="text" id="RefDocId" required class="form-control" name="RefDocId">
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -437,6 +437,7 @@
         var validdaate = now.getFullYear() + "-" + (month) + "-" + (dayValid);
         $('#RequisitionDate').val(todaydate);
         $('#RequiredDate').val(todaydate);
+        $('#RefDocDate').val(todaydate);
         $("#Remarks").focus();
     });
     //var nudMax = document.getElementById("max").value;
