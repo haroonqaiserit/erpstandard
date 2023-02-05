@@ -4,6 +4,10 @@
     ViewBag.SubTitle = "Requisition";
 }
 <style>
+    .right-aligned-table {
+        float: right;
+        margin-left: 20px;
+    }
     .custom-input {
         text-align: right !important;
     }
@@ -26,10 +30,33 @@
 
 <div class="card-header">
     <h4 class="card-title">@ViewBag.SubTitle New</h4>
+
+
 </div>
 <div class="card-content">
     <div class="card-body">
         <form name="RequisitionForm" class="form">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="RefDocId">Reference Number</label>
+                        <input type="text" id="RefDocId" required class="form-control" name="RefDocId">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="RefDocName">Document Name</label>
+                        <input type="text" id="RefDocName" required class="form-control" name="RefDocName">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="RefDocName">Document Date</label>
+                        <input type="date" id="RefDocDate" required class="form-control" name="RefDocDate">
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">
