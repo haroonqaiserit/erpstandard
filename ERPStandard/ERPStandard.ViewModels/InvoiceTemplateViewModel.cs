@@ -97,7 +97,7 @@ namespace ERPStandard.ViewModels
             //Header 3 Setting
             header = new Header();
             header.title = "L Rate";  //3
-            header.dataKey = "Rate";
+            header.dataKey = "LRate";
             header.style = style;
             header_L.Add(header);
 
@@ -118,6 +118,12 @@ namespace ERPStandard.ViewModels
             header = new Header();
             header.title = "Unit"; //4
             header.dataKey = "UOM";
+            header.style = style;
+            header_L.Add(header);
+
+            header = new Header();
+            header.title = "E.Rate"; //4
+            header.dataKey = "EstRate";
             header.style = style;
             header_L.Add(header);
 

@@ -28,5 +28,6 @@ namespace ERPStandard.DbEntities
         public Nullable<int> DeletionID { get; set; }
         public string RefDocId { get; set; }
         public string RefDocName { get; set; }
+        public Nullable<System.DateTime> RefDocDate { get; set; }
     }
 }

@@ -16,10 +16,11 @@ namespace ERPStandard.DbEntities
     {
         public string ItemID { get; set; }
         public int ItemNo { get; set; }
+        public string Dscr { get; set; }
         public int ItemClass { get; set; }
+        public int ItemStore { get; set; }
         public bool SPD { get; set; }
         public decimal SPDRate { get; set; }
-        public string Dscr { get; set; }
         public string Packing { get; set; }
         public decimal Weight { get; set; }
         public string GodownId { get; set; }
@@ -39,10 +40,10 @@ namespace ERPStandard.DbEntities
         public int LahTransferId { get; set; }
         public string PartCode { get; set; }
         public string ItemCode { get; set; }
-        public int ItemStore { get; set; }
         public int ItemStoreCode { get; set; }
         public decimal StockMinQty { get; set; }
         public decimal StockMaxQty { get; set; }
         public decimal Rate { get; set; }
+        public int UOMId { get; set; }
     }
 }

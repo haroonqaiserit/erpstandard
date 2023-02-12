@@ -96,6 +96,27 @@ warning 6002: The table/view 'SairaInd.dbo.Account_Head_New' does not have a pri
           <Property Name="SaveDate" Type="datetime" />
           <Property Name="DeletionID" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.accountsLeadgerNew' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="accountsLeadgerNew">
+          <Property Name="AcntCode" Type="float" />
+          <Property Name="description" Type="nvarchar" MaxLength="255" />
+          <Property Name="MainAccount" Type="nvarchar" MaxLength="255" />
+          <Property Name="SubAccount" Type="nvarchar" MaxLength="255" />
+          <Property Name="ControlAccount" Type="nvarchar" MaxLength="255" />
+          <Property Name="AcntId" Type="nvarchar" MaxLength="255" />
+          <Property Name="AcntName" Type="nvarchar" MaxLength="255" />
+          <Property Name="vDate" Type="smalldatetime" />
+          <Property Name="vtype" Type="nvarchar" MaxLength="255" />
+          <Property Name="Vno" Type="nvarchar" MaxLength="255" />
+          <Property Name="ChequeDate" Type="nvarchar" MaxLength="255" />
+          <Property Name="ChequeNo" Type="nvarchar" MaxLength="255" />
+          <Property Name="Debit" Type="float" />
+          <Property Name="Credit" Type="float" />
+          <Property Name="Narration" Type="nvarchar" MaxLength="255" />
+          <Property Name="Posted" Type="nvarchar" MaxLength="255" />
+          <Property Name="JournalId" Type="varchar" MaxLength="150" />
+        </EntityType>-->
         <EntityType Name="AccountsOpeningBalance">
           <Key>
             <PropertyRef Name="OpeningBalanceID" />
@@ -163,6 +184,26 @@ warning 6002: The table/view 'SairaInd.dbo.Account_Head_New' does not have a pri
           <Property Name="SaveDate" Type="datetime" />
           <Property Name="DeletionID" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.Advance' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Advance">
+          <Property Name="AdvId" Type="nvarchar" MaxLength="255" />
+          <Property Name="AdvNum" Type="float" />
+          <Property Name="EmpId" Type="nvarchar" MaxLength="255" />
+          <Property Name="DesigId" Type="nvarchar" MaxLength="255" />
+          <Property Name="DeptId" Type="nvarchar" MaxLength="255" />
+          <Property Name="AppAuth" Type="nvarchar" MaxLength="255" />
+          <Property Name="RecomAuth" Type="nvarchar" MaxLength="255" />
+          <Property Name="AdvanceAmt" Type="money" />
+          <Property Name="NetSal" Type="money" />
+          <Property Name="AdvDate" Type="smalldatetime" />
+          <Property Name="BalSal" Type="money" />
+          <Property Name="CompNo" Type="int" />
+          <Property Name="BranchNo" Type="int" />
+          <Property Name="LahTransferId" Type="float" />
+          <Property Name="SaveDate" Type="smalldatetime" />
+          <Property Name="DeletionID" Type="float" />
+        </EntityType>-->
         <EntityType Name="AdvanceAgainstBonus">
           <Key>
             <PropertyRef Name="AdvanceAgainstBonusId" />
@@ -291,6 +332,19 @@ warning 6002: The table/view 'SairaInd.dbo.AgencyLeager' does not have a primary
           <Property Name="CustomerNo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CustomerName" Type="varchar" MaxLength="150" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.Aging' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Aging">
+          <Property Name="InvoiceId" Type="varchar" MaxLength="50" />
+          <Property Name="PartyNo" Type="int" />
+          <Property Name="DueDate" Type="datetime" />
+          <Property Name="C1to30" Type="money" />
+          <Property Name="C31to60" Type="money" />
+          <Property Name="C61to90" Type="money" />
+          <Property Name="C90Plus" Type="money" />
+          <Property Name="LahTransferId" Type="int" />
+          <Property Name="DeletionID" Type="int" />
+        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.AllPara' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AllPara">
@@ -515,6 +569,30 @@ warning 6002: The table/view 'SairaInd.dbo.BankChequeBookDetail' does not have a
           <Property Name="SaveDate" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.BankPaymentBook' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="BankPaymentBook">
+          <Property Name="JournalID" Type="varchar" MaxLength="50" />
+          <Property Name="LineNum" Type="int" />
+          <Property Name="TransDate" Type="datetime" />
+          <Property Name="DrAcntID" Type="varchar" MaxLength="50" />
+          <Property Name="DrAcntDscr" Type="varchar" MaxLength="100" />
+          <Property Name="CrAcntDscr" Type="varchar" MaxLength="100" />
+          <Property Name="CrAcntID" Type="varchar" MaxLength="50" />
+          <Property Name="OtherAcntId" Type="varchar" MaxLength="50" />
+          <Property Name="OtherAcntDscr" Type="varchar" MaxLength="100" />
+          <Property Name="OtherCr" Type="money" />
+          <Property Name="Dr" Type="money" />
+          <Property Name="Cr" Type="money" />
+          <Property Name="DrDscr" Type="varchar" MaxLength="100" />
+          <Property Name="VoucherNo" Type="int" />
+          <Property Name="VoucherTypeId" Type="varchar" MaxLength="50" />
+          <Property Name="CompNo" Type="int" />
+          <Property Name="BranchNo" Type="int" />
+          <Property Name="LahTransferId" Type="int" />
+          <Property Name="SaveDate" Type="datetime" />
+          <Property Name="DeletionID" Type="int" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.BankPaymentBookSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="BankPaymentBookSummary">
           <Key>
@@ -562,6 +640,27 @@ warning 6002: The table/view 'SairaInd.dbo.Bonus' does not have a primary key de
           <Property Name="SaveDate" Type="datetime" />
           <Property Name="DeletionID" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.Bonus_Amount' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Bonus_Amount">
+          <Property Name="EmpId" Type="varchar" MaxLength="255" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="FathName" Type="nvarchar" MaxLength="255" />
+          <Property Name="DesignDesc" Type="nvarchar" MaxLength="255" />
+          <Property Name="EmpTen" Type="float" />
+          <Property Name="Sal" Type="money" />
+          <Property Name="BonAmt" Type="money" />
+          <Property Name="BonDate" Type="smalldatetime" />
+          <Property Name="f1" Type="smalldatetime" />
+          <Property Name="t1" Type="smalldatetime" />
+          <Property Name="CompDesc" Type="nvarchar" MaxLength="255" />
+          <Property Name="DeptDesc" Type="nvarchar" MaxLength="255" />
+          <Property Name="CompNo" Type="int" />
+          <Property Name="BranchNo" Type="int" />
+          <Property Name="LahTransferId" Type="int" />
+          <Property Name="SaveDate" Type="datetime" />
+          <Property Name="DeletionID" Type="int" />
+        </EntityType>-->
         <EntityType Name="BonusCalculation">
           <Key>
             <PropertyRef Name="Id" />
@@ -1375,6 +1474,18 @@ warning 6002: The table/view 'SairaInd.dbo.EmpDeduction' does not have a primary
           <Property Name="DeletionID" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.EmployeeChild' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="EmployeeChild">
+          <Property Name="EmpID" Type="varchar" MaxLength="50" />
+          <Property Name="ChildName" Type="varchar" MaxLength="50" />
+          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="LahTransferId" Type="int" />
+          <Property Name="CompNo" Type="int" />
+          <Property Name="BranchNo" Type="int" />
+          <Property Name="SaveDate" Type="datetime" />
+          <Property Name="DeletionID" Type="int" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.EmployeeOfficialInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EmployeeOfficialInfo">
           <Key>
@@ -1546,6 +1657,20 @@ warning 6002: The table/view 'SairaInd.dbo.EmplyeePresAddress' does not have a p
           <Property Name="SaveDate" Type="datetime" />
           <Property Name="DeletionID" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.EmpPersPara' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="EmpPersPara">
+          <Property Name="EmpId" Type="varchar" MaxLength="50" />
+          <Property Name="DeptID" Type="varchar" MaxLength="50" />
+          <Property Name="cid" Type="int" />
+          <Property Name="fdate" Type="datetime" />
+          <Property Name="tdate" Type="datetime" />
+          <Property Name="medid" Type="int" />
+          <Property Name="dept" Type="varchar" MaxLength="50" />
+          <Property Name="LahTransferId" Type="int" />
+          <Property Name="SaveDate" Type="datetime" />
+          <Property Name="DeletionID" Type="int" />
+        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.EmpSalary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EmpSalary">
@@ -1993,6 +2118,15 @@ warning 6002: The table/view 'SairaInd.dbo.Halfday' does not have a primary key 
           <Property Name="DeletionID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.HolidayTemp' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="HolidayTemp">
+          <Property Name="EmpId" Type="varchar" MaxLength="50" />
+          <Property Name="HDate" Type="datetime" />
+          <Property Name="LahTransferId" Type="int" />
+          <Property Name="SaveDate" Type="datetime" />
+          <Property Name="DeletionID" Type="int" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.ImpGLInt' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ImpGLInt">
           <Key>
@@ -2198,6 +2332,16 @@ warning 6002: The table/view 'SairaInd.dbo.InsurancePolicy' does not have a prim
           <Property Name="SaveDate" Type="datetime" />
           <Property Name="DeletionID" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.InvoiceSelectedData' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="InvoiceSelectedData">
+          <Property Name="InvoiceId" Type="varchar" MaxLength="50" />
+          <Property Name="InvNo" Type="varchar" MaxLength="50" />
+          <Property Name="InvDate" Type="datetime" />
+          <Property Name="VoucherNum" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="SaveDate" Type="datetime" />
+          <Property Name="DeletionID" Type="int" />
+        </EntityType>-->
         <EntityType Name="InvoiceTerms">
           <Key>
             <PropertyRef Name="InvTermID" />
@@ -2320,6 +2464,34 @@ warning 6002: The table/view 'SairaInd.dbo.ItemRawMaterialRegister' does not hav
           <Property Name="Rate" Type="numeric" Precision="18" Scale="2" />
           <Property Name="Amount" Type="numeric" Precision="18" Scale="2" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.Items$' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Items$">
+          <Property Name="Saira Industries (Pvt) Limited" Type="nvarchar" MaxLength="255" />
+          <Property Name="F2" Type="float" />
+          <Property Name="F3" Type="float" />
+          <Property Name="F4" Type="nvarchar" MaxLength="255" />
+          <Property Name="F5" Type="nvarchar" MaxLength="255" />
+          <Property Name="F6" Type="float" />
+          <Property Name="F7" Type="nvarchar" MaxLength="255" />
+          <Property Name="F8" Type="nvarchar" MaxLength="255" />
+          <Property Name="F9" Type="float" />
+          <Property Name="F10" Type="nvarchar" MaxLength="255" />
+          <Property Name="F11" Type="nvarchar" MaxLength="255" />
+          <Property Name="F12" Type="nvarchar" MaxLength="255" />
+          <Property Name="F13" Type="nvarchar" MaxLength="255" />
+          <Property Name="F14" Type="float" />
+          <Property Name="F15" Type="float" />
+          <Property Name="F16" Type="nvarchar" MaxLength="255" />
+          <Property Name="F17" Type="float" />
+          <Property Name="F18" Type="float" />
+          <Property Name="F19" Type="smalldatetime" />
+          <Property Name="F20" Type="float" />
+          <Property Name="F21" Type="float" />
+          <Property Name="F22" Type="float" />
+          <Property Name="F23" Type="nvarchar" MaxLength="255" />
+          <Property Name="F24" Type="nvarchar" MaxLength="255" />
+        </EntityType>-->
         <EntityType Name="ItemsStock">
           <Key>
             <PropertyRef Name="ItemID" />
@@ -2354,7 +2526,20 @@ warning 6002: The table/view 'SairaInd.dbo.ItemRawMaterialRegister' does not hav
           <Property Name="StockMinQty" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="StockMaxQty" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="Rate" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UOMId" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.ItemStockToUpdate' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ItemStockToUpdate">
+          <Property Name="ItemID" Type="nvarchar" MaxLength="255" />
+          <Property Name="GodownName" Type="nvarchar" MaxLength="255" />
+          <Property Name="ItemName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Qty" Type="float" />
+          <Property Name="UnitRate" Type="float" />
+          <Property Name="RecordType" Type="nvarchar" MaxLength="255" />
+          <Property Name="GodownId" Type="varchar" MaxLength="50" />
+          <Property Name="statusclm" Type="int" />
+        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.ItemTransferToGodown' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ItemTransferToGodown">
@@ -2465,6 +2650,21 @@ warning 6002: The table/view 'SairaInd.dbo.ItemTransferToGodown' does not have a
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VNo" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.JournalsSelectedData' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="JournalsSelectedData">
+          <Property Name="JournalId" Type="nvarchar" MaxLength="255" />
+          <Property Name="JournalDate" Type="smalldatetime" />
+          <Property Name="VoucherNo" Type="float" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.JournalTest' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="JournalTest">
+          <Property Name="JournalId" Type="varchar" MaxLength="50" />
+          <Property Name="LineNo" Type="int" />
+          <Property Name="Dr" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Cr" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>-->
         <EntityType Name="LCBond">
           <Key>
             <PropertyRef Name="ID" />
@@ -2658,6 +2858,15 @@ warning 6002: The table/view 'SairaInd.dbo.LCType' does not have a primary key d
           <Property Name="DeletionID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.LeasePay' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="LeasePay">
+          <Property Name="dt" Type="datetime" />
+          <Property Name="EmpId" Type="nvarchar" MaxLength="10" />
+          <Property Name="LahTransferId" Type="int" />
+          <Property Name="SaveDate" Type="datetime" />
+          <Property Name="DeletionID" Type="int" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.LeaveApplication' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="LeaveApplication">
           <Key>
@@ -2708,6 +2917,18 @@ warning 6002: The table/view 'SairaInd.dbo.LeaveBal' does not have a primary key
           <Property Name="SaveDate" Type="datetime" />
           <Property Name="DeletionID" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.LeaveBalPara' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="LeaveBalPara">
+          <Property Name="EmpNo" Type="nvarchar" MaxLength="10" />
+          <Property Name="FromDate" Type="datetime" />
+          <Property Name="ToDate" Type="datetime" />
+          <Property Name="Dept" Type="int" />
+          <Property Name="cid" Type="int" />
+          <Property Name="LahTransferId" Type="int" />
+          <Property Name="SaveDate" Type="datetime" />
+          <Property Name="DeletionID" Type="int" />
+        </EntityType>-->
         <EntityType Name="LeaveEntitlement">
           <Key>
             <PropertyRef Name="LeaveEntitleid" />
@@ -2721,6 +2942,17 @@ warning 6002: The table/view 'SairaInd.dbo.LeaveBal' does not have a primary key
           <Property Name="CompNo" Type="int" />
           <Property Name="BranchNo" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.LeaveEntitlementDetail' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="LeaveEntitlementDetail">
+          <Property Name="LeaveEntitleid" Type="varchar" MaxLength="50" />
+          <Property Name="LeaveTypeID" Type="varchar" MaxLength="50" />
+          <Property Name="NoOfLeave" Type="char" MaxLength="10" />
+          <Property Name="AssignDate" Type="datetime" />
+          <Property Name="LahTransferId" Type="int" />
+          <Property Name="DeletionID" Type="int" />
+          <Property Name="SaveDate" Type="datetime" />
+        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.LeaveType' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="LeaveType">
@@ -2737,6 +2969,26 @@ warning 6002: The table/view 'SairaInd.dbo.LeaveType' does not have a primary ke
           <Property Name="SaveDate" Type="datetime" />
           <Property Name="DeletionID" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.LeavHisPara' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="LeavHisPara">
+          <Property Name="EmpNo" Type="nvarchar" MaxLength="10" />
+          <Property Name="Fdate" Type="datetime" />
+          <Property Name="Tdate" Type="datetime" />
+          <Property Name="DeptId" Type="int" />
+          <Property Name="LahTransferId" Type="int" />
+          <Property Name="SaveDate" Type="datetime" />
+          <Property Name="DeletionID" Type="int" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.Listofemppara' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Listofemppara">
+          <Property Name="fdate" Type="datetime" />
+          <Property Name="tdate" Type="datetime" />
+          <Property Name="LahTransferId" Type="int" />
+          <Property Name="SaveDate" Type="datetime" />
+          <Property Name="DeletionID" Type="int" />
+        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.Loan' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Loan">
@@ -3426,6 +3678,32 @@ warning 6002: The table/view 'SairaInd.dbo.Petrolcredit' does not have a primary
           <Property Name="DeletionID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.PriceListDetail' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PriceListDetail">
+          <Property Name="PLidDetail" Type="float" />
+          <Property Name="PLid" Type="nvarchar" MaxLength="255" />
+          <Property Name="ItemID" Type="nvarchar" MaxLength="255" />
+          <Property Name="ItemRate" Type="float" />
+          <Property Name="PriceDate" Type="smalldatetime" />
+          <Property Name="ApplicableDate" Type="smalldatetime" />
+          <Property Name="CompNo" Type="float" />
+          <Property Name="BranchNo" Type="float" />
+          <Property Name="SaveDate" Type="smalldatetime" />
+          <Property Name="DeletionID" Type="float" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.PricelistMaster' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="PricelistMaster">
+          <Property Name="PLid" Type="nvarchar" MaxLength="255" />
+          <Property Name="CustomerId" Type="nvarchar" MaxLength="255" />
+          <Property Name="CompNo" Type="float" />
+          <Property Name="BranchNo" Type="float" />
+          <Property Name="PriceListNum" Type="float" />
+          <Property Name="LahTransferId" Type="float" />
+          <Property Name="SaveDate" Type="smalldatetime" />
+          <Property Name="DeletionID" Type="float" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.Promotion' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Promotion">
           <Key>
@@ -3681,6 +3959,7 @@ warning 6002: The table/view 'SairaInd.dbo.PurchaseOrderDetail' does not have a 
           <Property Name="DeletionID" Type="int" />
           <Property Name="RefDocId" Type="varchar" MaxLength="50" />
           <Property Name="RefDocName" Type="varchar" MaxLength="50" />
+          <Property Name="RefDocDate" Type="datetime" />
         </EntityType>
         <EntityType Name="PurchaseRequisitionOrderDetail">
           <Key>
@@ -3700,16 +3979,17 @@ warning 6002: The table/view 'SairaInd.dbo.PurchaseOrderDetail' does not have a 
           <Property Name="RequiredQty" Type="numeric" Precision="18" Scale="4" />
           <Property Name="RequiredDate" Type="datetime" />
           <Property Name="BalanceQty" Type="numeric" Precision="18" Scale="4" />
+          <Property Name="EstRate" Type="numeric" Precision="18" Scale="4" />
           <Property Name="ItemClearedStatus" Type="int" />
           <Property Name="LahTransferId" Type="int" />
           <Property Name="SaveDate" Type="datetime" />
           <Property Name="DeletionID" Type="int" />
           <Property Name="GrnID" Type="varchar" MaxLength="50" />
-          <Property Name="GrnBalanceQty" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="GrnBalanceQty" Type="numeric" Precision="18" Scale="2" />
           <Property Name="GrnItemClearedStatus" Type="char" MaxLength="10" />
           <Property Name="GrnDate" Type="datetime" />
-          <Property Name="LstPurQty" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="GrnRate" Type="numeric" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="LstPurQty" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="GrnRate" Type="numeric" Precision="18" Scale="2" />
           <Property Name="CostCenterId" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CompNo" Type="int" Nullable="false" />
           <Property Name="BranchNo" Type="int" Nullable="false" />
@@ -3769,6 +4049,40 @@ warning 6002: The table/view 'SairaInd.dbo.PurchaseOrderDetail' does not have a 
           <Property Name="DeletionID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.RawMaterialGetId' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="RawMaterialGetId">
+          <Property Name="RMID" Type="varchar" MaxLength="50" />
+          <Property Name="RMNo" Type="varchar" MaxLength="50" />
+          <Property Name="CompNo" Type="int" />
+          <Property Name="BranchNo" Type="int" />
+          <Property Name="LahTransferId" Type="int" />
+          <Property Name="SaveDate" Type="datetime" />
+          <Property Name="DeletionID" Type="int" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.ReceiptBook' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ReceiptBook">
+          <Property Name="JournalID" Type="varchar" MaxLength="50" />
+          <Property Name="LineNum" Type="int" />
+          <Property Name="TransDate" Type="datetime" />
+          <Property Name="DrAcntID" Type="varchar" MaxLength="50" />
+          <Property Name="DrAcntDscr" Type="varchar" MaxLength="100" />
+          <Property Name="CrAcntDscr" Type="varchar" MaxLength="100" />
+          <Property Name="CrAcntID" Type="varchar" MaxLength="50" />
+          <Property Name="Dr" Type="money" />
+          <Property Name="Cr" Type="money" />
+          <Property Name="DrDscr" Type="varchar" MaxLength="100" />
+          <Property Name="VoucherNo" Type="int" />
+          <Property Name="VoucherTypeId" Type="varchar" MaxLength="50" />
+          <Property Name="CompNo" Type="int" />
+          <Property Name="BranchNo" Type="int" />
+          <Property Name="FromDate" Type="datetime" />
+          <Property Name="ToDate" Type="datetime" />
+          <Property Name="SaveDate" Type="datetime" />
+          <Property Name="LahTransferId" Type="int" />
+          <Property Name="DeletionID" Type="int" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.ReceiptBookSummary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ReceiptBookSummary">
           <Key>
@@ -3816,6 +4130,26 @@ warning 6002: The table/view 'SairaInd.dbo.ReceiptBookSummary' does not have a p
           <Property Name="RecType" Type="int" />
           <Property Name="BalanceAmount" Type="numeric" Precision="18" Scale="0" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.ReceiptsReport' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="ReceiptsReport">
+          <Property Name="SaleInvId" Type="varchar" MaxLength="50" />
+          <Property Name="SaleInvNo" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="SDate" Type="datetime" />
+          <Property Name="IrID" Type="varchar" MaxLength="50" />
+          <Property Name="IrDate" Type="datetime" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="100" />
+          <Property Name="Amount" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="fdate" Type="datetime" />
+          <Property Name="tdate" Type="datetime" />
+          <Property Name="CompNo" Type="int" />
+          <Property Name="BranchNo" Type="int" />
+          <Property Name="Company_Name" Type="varchar" MaxLength="50" />
+          <Property Name="BranchName" Type="varchar" MaxLength="50" />
+          <Property Name="CustomerID" Type="varchar" MaxLength="50" />
+          <Property Name="Type" Type="varchar" MaxLength="20" />
+          <Property Name="ChequeNo" Type="varchar" MaxLength="50" />
+        </EntityType>-->
         <EntityType Name="Recieved">
           <Key>
             <PropertyRef Name="RecId" />
@@ -3899,6 +4233,18 @@ warning 6002: The table/view 'SairaInd.dbo.Resign' does not have a primary key d
           <Property Name="SaveDate" Type="datetime" />
           <Property Name="DeletionID" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.resignpara' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="resignpara">
+          <Property Name="fdate" Type="datetime" />
+          <Property Name="tdate" Type="datetime" />
+          <Property Name="resignid" Type="int" />
+          <Property Name="dept" Type="int" />
+          <Property Name="cid" Type="int" />
+          <Property Name="LahTransferId" Type="int" />
+          <Property Name="SaveDate" Type="datetime" />
+          <Property Name="DeletionID" Type="int" />
+        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.RestDay' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RestDay">
@@ -4720,6 +5066,25 @@ warning 6002: The table/view 'SairaInd.dbo.SaleTaxDetail' does not have a primar
           <Property Name="SaveDate" Type="datetime" />
           <Property Name="DeletionID" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.SaleTaxGovtOfPak' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SaleTaxGovtOfPak">
+          <Property Name="CompNo" Type="int" />
+          <Property Name="TaxSupRegPerAWOST" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TaxSupRegPerRATE" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TaxSupRegPerAWOST2" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TaxSupRegPerRATE2" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TaxSupNonRegPerAWOST" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TaxSupNonRegPerRATE" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TaxSupNonRegPerAWOST2" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TaxSupNonRegPerRATE2" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ZeroRatedSupAWOST" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ZeroRatedSupRATE" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ExemptedSupplierAWOST" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ExemptedSupplierRate" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="FutherTaxRATE" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="TotalOutputTaxAWOST" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>-->
         <EntityType Name="SaleTaxSumup">
           <Key>
             <PropertyRef Name="Id" />
@@ -4809,6 +5174,22 @@ warning 6002: The table/view 'SairaInd.dbo.SReturnDetail' does not have a primar
           <Property Name="ExcDuty" Type="numeric" Precision="18" Scale="0" Nullable="false" />
           <Property Name="ExcDutyAmt" Type="numeric" Precision="18" Scale="0" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.Tax' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Tax">
+          <Property Name="fdate" Type="datetime" />
+          <Property Name="tdate" Type="datetime" />
+          <Property Name="DeptId" Type="int" />
+          <Property Name="CompId" Type="int" />
+          <Property Name="ChqNo" Type="varchar" MaxLength="80" />
+          <Property Name="Dt" Type="datetime" />
+          <Property Name="AccNo" Type="varchar" MaxLength="80" />
+          <Property Name="Bank" Type="varchar" MaxLength="80" />
+          <Property Name="Amt" Type="varchar" MaxLength="20" />
+          <Property Name="LahTransferId" Type="int" />
+          <Property Name="SaveDate" Type="datetime" />
+          <Property Name="DeletionID" Type="int" />
+        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.TaxIdentity' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TaxIdentity">
@@ -5061,6 +5442,23 @@ warning 6002: The table/view 'SairaInd.dbo.tblSupplierBuyer' does not have a pri
           <Property Name="BranchNo" Type="int" Nullable="false" />
           <Property Name="Reg" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblUOM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ConversionFactor" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUOMItemMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ItemId" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UOMId" Type="int" Nullable="false" />
+          <Property Name="ConversionFactor" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.TempAtt' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TempAtt">
@@ -5091,6 +5489,21 @@ warning 6002: The table/view 'SairaInd.dbo.TempAtt' does not have a primary key 
           <Property Name="DeletionID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.temporary' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="temporary">
+          <Property Name="fdate" Type="datetime" />
+          <Property Name="tdate" Type="datetime" />
+          <Property Name="DrTot" Type="int" />
+          <Property Name="CrTot" Type="int" />
+          <Property Name="PLosTot" Type="varchar" MaxLength="50" />
+          <Property Name="OpeningAmt" Type="int" />
+          <Property Name="ClosingAmt" Type="int" />
+          <Property Name="BalanceAmtStock" Type="numeric" Precision="18" Scale="2" />
+          <Property Name="LahTransferId" Type="int" />
+          <Property Name="BackupId" Type="int" />
+          <Property Name="Godown" Type="varchar" MaxLength="10" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.Test' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Test">
           <Key>
@@ -5105,6 +5518,12 @@ warning 6002: The table/view 'SairaInd.dbo.Test' does not have a primary key def
           <Property Name="LahTransferId" Type="int" />
           <Property Name="SaveDate" Type="datetime" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'SairaInd.dbo.TestTable' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TestTable">
+          <Property Name="a" Type="int" />
+          <Property Name="b" Type="int" />
+        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'SairaInd.dbo.TimeReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TimeReport">
@@ -5674,6 +6093,8 @@ warning 6002: The table/view 'SairaInd.dbo.QdItemTransaction' does not have a pr
           <EntitySet Name="SaleTax" EntityType="Self.SaleTax" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SaleTaxSumup" EntityType="Self.SaleTaxSumup" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblItemStockOpeningBalance" EntityType="Self.tblItemStockOpeningBalance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUOM" EntityType="Self.tblUOM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUOMItemMapping" EntityType="Self.tblUOMItemMapping" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Title" EntityType="Self.Title" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ToolsAndSpares" EntityType="Self.ToolsAndSpares" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
@@ -8897,41 +9318,6 @@ warning 6002: The table/view 'SairaInd.dbo.QdItemTransaction' does not have a pr
           <Property Name="LahTransferId" Type="Int32" />
           <Property Name="SaveDate" Type="DateTime" Precision="3" />
           <Property Name="DeletionID" Type="Int32" />
-        </EntityType>
-        <EntityType Name="ItemsStock">
-          <Key>
-            <PropertyRef Name="ItemID" />
-          </Key>
-          <Property Name="ItemID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ItemNo" Type="Int32" Nullable="false" />
-          <Property Name="ItemClass" Type="Int32" Nullable="false" />
-          <Property Name="SPD" Type="Boolean" Nullable="false" />
-          <Property Name="SPDRate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Dscr" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Packing" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Weight" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="GodownId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="BrandId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="STaxId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PuchaseAcntId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PuchaseRAcntId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CashSaleGlAcnt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreditSaleGlAcnt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OpeningRate" Type="Int32" />
-          <Property Name="OpeningQty" Type="Decimal" Precision="10" Scale="0" />
-          <Property Name="OpeningDate" Type="DateTime" Precision="3" />
-          <Property Name="CompNo" Type="Int32" Nullable="false" />
-          <Property Name="BranchNo" Type="Int32" Nullable="false" />
-          <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="DeletionID" Type="Int32" Nullable="false" />
-          <Property Name="LahTransferId" Type="Int32" Nullable="false" />
-          <Property Name="PartCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ItemStore" Type="Int32" Nullable="false" />
-          <Property Name="ItemStoreCode" Type="Int32" Nullable="false" />
-          <Property Name="StockMinQty" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="StockMaxQty" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="JournalDetail">
           <Key>
@@ -12756,7 +13142,6 @@ warning 6002: The table/view 'SairaInd.dbo.QdItemTransaction' does not have a pr
           <EntitySet Name="InvoiceTerms" EntityType="Self.InvoiceTerm" />
           <EntitySet Name="InvPayments" EntityType="Self.InvPayment" />
           <EntitySet Name="InvPaymentDetails" EntityType="Self.InvPaymentDetail" />
-          <EntitySet Name="ItemsStocks" EntityType="Self.ItemsStock" />
           <EntitySet Name="JournalDetails" EntityType="Self.JournalDetail" />
           <EntitySet Name="JournalDetail2" EntityType="Self.JournalDetail2" />
           <EntitySet Name="Journals" EntityType="Self.Journal" />
@@ -13020,6 +13405,9 @@ warning 6002: The table/view 'SairaInd.dbo.QdItemTransaction' does not have a pr
             <Parameter Name="GodownId" Mode="In" Type="String" />
             <Parameter Name="toDate" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="tblUOMItemMappings" EntityType="SairaIndModel.tblUOMItemMapping" />
+          <EntitySet Name="ItemsStocks" EntityType="SairaIndModel.ItemsStock" />
+          <EntitySet Name="tblUOMs" EntityType="SairaIndModel.tblUOM" />
         </EntityContainer>
         <EntityType Name="SalesOrder">
           <Key>
@@ -13374,6 +13762,7 @@ warning 6002: The table/view 'SairaInd.dbo.QdItemTransaction' does not have a pr
           <Property Name="DeletionID" Type="Int32" />
           <Property Name="RefDocId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RefDocName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RefDocDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="PurchaseRequisitionOrderDetail">
           <Key>
@@ -13398,16 +13787,17 @@ warning 6002: The table/view 'SairaInd.dbo.QdItemTransaction' does not have a pr
           <Property Name="SaveDate" Type="DateTime" Precision="3" />
           <Property Name="DeletionID" Type="Int32" />
           <Property Name="GrnID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="GrnBalanceQty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="GrnBalanceQty" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="GrnItemClearedStatus" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <Property Name="GrnDate" Type="DateTime" Precision="3" />
-          <Property Name="LstPurQty" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-          <Property Name="GrnRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="LstPurQty" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="GrnRate" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="CostCenterId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CompNo" Type="Int32" Nullable="false" />
           <Property Name="BranchNo" Type="Int32" Nullable="false" />
           <Property Name="DemandPerson" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ApprovedStatus" Type="Boolean" />
+          <Property Name="EstRate" Type="Decimal" Precision="18" Scale="4" />
         </EntityType>
         <EntityType Name="QdItemTransaction">
           <Key>
@@ -13444,6 +13834,59 @@ warning 6002: The table/view 'SairaInd.dbo.QdItemTransaction' does not have a pr
           <Property Type="Decimal" Name="StockQty" Nullable="true" Precision="18" Scale="2" />
           <Property Type="Decimal" Name="AvgRate" Nullable="true" Precision="18" Scale="2" />
         </ComplexType>
+        <EntityType Name="tblUOMItemMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UOMId" Type="Int32" Nullable="false" />
+          <Property Name="ConversionFactor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="ItemsStock">
+          <Key>
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <Property Name="ItemID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemNo" Type="Int32" Nullable="false" />
+          <Property Name="Dscr" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="ItemClass" Type="Int32" Nullable="false" />
+          <Property Name="ItemStore" Type="Int32" Nullable="false" />
+          <Property Name="SPD" Type="Boolean" Nullable="false" />
+          <Property Name="SPDRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Packing" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Weight" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="GodownId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BrandId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STaxId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PuchaseAcntId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PuchaseRAcntId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CashSaleGlAcnt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreditSaleGlAcnt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OpeningRate" Type="Int32" />
+          <Property Name="OpeningQty" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="OpeningDate" Type="DateTime" Precision="3" />
+          <Property Name="CompNo" Type="Int32" Nullable="false" />
+          <Property Name="BranchNo" Type="Int32" Nullable="false" />
+          <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DeletionID" Type="Int32" Nullable="false" />
+          <Property Name="LahTransferId" Type="Int32" Nullable="false" />
+          <Property Name="PartCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ItemStoreCode" Type="Int32" Nullable="false" />
+          <Property Name="StockMinQty" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="StockMaxQty" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="UOMId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUOM">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ConversionFactor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -14618,42 +15061,6 @@ warning 6002: The table/view 'SairaInd.dbo.QdItemTransaction' does not have a pr
                 <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
                 <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
                 <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ItemsStocks">
-            <EntityTypeMapping TypeName="SairaIndModel.ItemsStock">
-              <MappingFragment StoreEntitySet="ItemsStock">
-                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
-                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
-                <ScalarProperty Name="ItemClass" ColumnName="ItemClass" />
-                <ScalarProperty Name="SPD" ColumnName="SPD" />
-                <ScalarProperty Name="SPDRate" ColumnName="SPDRate" />
-                <ScalarProperty Name="Dscr" ColumnName="Dscr" />
-                <ScalarProperty Name="Packing" ColumnName="Packing" />
-                <ScalarProperty Name="Weight" ColumnName="Weight" />
-                <ScalarProperty Name="GodownId" ColumnName="GodownId" />
-                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
-                <ScalarProperty Name="STaxId" ColumnName="STaxId" />
-                <ScalarProperty Name="PuchaseAcntId" ColumnName="PuchaseAcntId" />
-                <ScalarProperty Name="PuchaseRAcntId" ColumnName="PuchaseRAcntId" />
-                <ScalarProperty Name="CashSaleGlAcnt" ColumnName="CashSaleGlAcnt" />
-                <ScalarProperty Name="CreditSaleGlAcnt" ColumnName="CreditSaleGlAcnt" />
-                <ScalarProperty Name="OpeningRate" ColumnName="OpeningRate" />
-                <ScalarProperty Name="OpeningQty" ColumnName="OpeningQty" />
-                <ScalarProperty Name="OpeningDate" ColumnName="OpeningDate" />
-                <ScalarProperty Name="CompNo" ColumnName="CompNo" />
-                <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
-                <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
-                <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
-                <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
-                <ScalarProperty Name="PartCode" ColumnName="PartCode" />
-                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-                <ScalarProperty Name="ItemStore" ColumnName="ItemStore" />
-                <ScalarProperty Name="ItemStoreCode" ColumnName="ItemStoreCode" />
-                <ScalarProperty Name="StockMinQty" ColumnName="StockMinQty" />
-                <ScalarProperty Name="StockMaxQty" ColumnName="StockMaxQty" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -18319,6 +18726,7 @@ warning 6002: The table/view 'SairaInd.dbo.QdItemTransaction' does not have a pr
           <EntitySetMapping Name="PurchaseRequisitionOrders">
             <EntityTypeMapping TypeName="SairaIndModel.PurchaseRequisitionOrder">
               <MappingFragment StoreEntitySet="PurchaseRequisitionOrder">
+                <ScalarProperty Name="RefDocDate" ColumnName="RefDocDate" />
                 <ScalarProperty Name="RefDocName" ColumnName="RefDocName" />
                 <ScalarProperty Name="RefDocId" ColumnName="RefDocId" />
                 <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
@@ -18339,6 +18747,7 @@ warning 6002: The table/view 'SairaInd.dbo.QdItemTransaction' does not have a pr
           <EntitySetMapping Name="PurchaseRequisitionOrderDetails">
             <EntityTypeMapping TypeName="SairaIndModel.PurchaseRequisitionOrderDetail">
               <MappingFragment StoreEntitySet="PurchaseRequisitionOrderDetail">
+                <ScalarProperty Name="EstRate" ColumnName="EstRate" />
                 <ScalarProperty Name="ApprovedStatus" ColumnName="ApprovedStatus" />
                 <ScalarProperty Name="DemandPerson" ColumnName="DemandPerson" />
                 <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
@@ -18401,6 +18810,62 @@ warning 6002: The table/view 'SairaInd.dbo.QdItemTransaction' does not have a pr
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="tblUOMItemMappings">
+            <EntityTypeMapping TypeName="SairaIndModel.tblUOMItemMapping">
+              <MappingFragment StoreEntitySet="tblUOMItemMapping">
+                <ScalarProperty Name="ConversionFactor" ColumnName="ConversionFactor" />
+                <ScalarProperty Name="UOMId" ColumnName="UOMId" />
+                <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemsStocks">
+            <EntityTypeMapping TypeName="SairaIndModel.ItemsStock">
+              <MappingFragment StoreEntitySet="ItemsStock">
+                <ScalarProperty Name="UOMId" ColumnName="UOMId" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="StockMaxQty" ColumnName="StockMaxQty" />
+                <ScalarProperty Name="StockMinQty" ColumnName="StockMinQty" />
+                <ScalarProperty Name="ItemStoreCode" ColumnName="ItemStoreCode" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="PartCode" ColumnName="PartCode" />
+                <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
+                <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+                <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+                <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+                <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+                <ScalarProperty Name="OpeningDate" ColumnName="OpeningDate" />
+                <ScalarProperty Name="OpeningQty" ColumnName="OpeningQty" />
+                <ScalarProperty Name="OpeningRate" ColumnName="OpeningRate" />
+                <ScalarProperty Name="CreditSaleGlAcnt" ColumnName="CreditSaleGlAcnt" />
+                <ScalarProperty Name="CashSaleGlAcnt" ColumnName="CashSaleGlAcnt" />
+                <ScalarProperty Name="PuchaseRAcntId" ColumnName="PuchaseRAcntId" />
+                <ScalarProperty Name="PuchaseAcntId" ColumnName="PuchaseAcntId" />
+                <ScalarProperty Name="STaxId" ColumnName="STaxId" />
+                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+                <ScalarProperty Name="GodownId" ColumnName="GodownId" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Packing" ColumnName="Packing" />
+                <ScalarProperty Name="SPDRate" ColumnName="SPDRate" />
+                <ScalarProperty Name="SPD" ColumnName="SPD" />
+                <ScalarProperty Name="ItemStore" ColumnName="ItemStore" />
+                <ScalarProperty Name="ItemClass" ColumnName="ItemClass" />
+                <ScalarProperty Name="Dscr" ColumnName="Dscr" />
+                <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUOMs">
+            <EntityTypeMapping TypeName="SairaIndModel.tblUOM">
+              <MappingFragment StoreEntitySet="tblUOM">
+                <ScalarProperty Name="ConversionFactor" ColumnName="ConversionFactor" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

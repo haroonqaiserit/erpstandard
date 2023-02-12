@@ -68,7 +68,6 @@
         <EntityTypeShape EntityType="SairaIndModel.InvoiceTerm" Width="1.5" PointX="30.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.InvPayment" Width="1.5" PointX="30.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.InvPaymentDetail" Width="1.5" PointX="11.75" PointY="30.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SairaIndModel.ItemsStock" Width="1.5" PointX="30.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.JournalDetail" Width="1.5" PointX="30.75" PointY="21.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.JournalDetail2" Width="1.5" PointX="30.75" PointY="26.75" IsExpanded="true" />
         <EntityTypeShape EntityType="SairaIndModel.Journal" Width="1.5" PointX="27.75" PointY="30.75" IsExpanded="true" />
@@ -265,6 +264,9 @@
         <EntityTypeShape EntityType="SairaIndModel.PurchaseRequisitionOrder" Width="1.5" PointX="0.75" PointY="10.75" />
         <EntityTypeShape EntityType="SairaIndModel.PurchaseRequisitionOrderDetail" Width="3.375" PointX="54.25" PointY="48.625" />
         <EntityTypeShape EntityType="SairaIndModel.QdItemTransaction" Width="1.5" PointX="3.375" PointY="10.75" />
+        <EntityTypeShape EntityType="SairaIndModel.tblUOMItemMapping" Width="1.5" PointX="53.375" PointY="7.75" />
+        <EntityTypeShape EntityType="SairaIndModel.ItemsStock" Width="1.5" PointX="7.375" PointY="53.75" />
+        <EntityTypeShape EntityType="SairaIndModel.tblUOM" Width="1.5" PointX="53.375" PointY="4.75" />
         </Diagram>
       <Diagram DiagramId="3ce879e1bc8f4b728c1c78f8408c4829" Name="Diagram2" />
     </edmx:Diagrams>

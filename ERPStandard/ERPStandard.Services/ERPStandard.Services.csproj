@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="General\tblUOMService.cs" />
     <Compile Include="General\CostCenterNewService.cs" />
     <Compile Include="General\StoreUnitService.cs" />
     <Compile Include="GL\AccountsServices.cs" />

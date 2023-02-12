@@ -149,47 +149,28 @@
         //addedit = 0 Add New Record
         //addedit = 1 Edit Record
         console.log(form);
-        var isValid = $(form).validate();
-        console.log(isValid.invalid);
-        if (!isValid) {
-            e.preventDefault(); //prevent the default action
-            return;
-        }
-
-        $(form).validate({
-            rules: {
-                "input[name='Remarks']": {
-                    required: true,
-                },
-                "input[name='RequiredQty']": {
-                    required: true,
-                },
-                "input[name='DemandPerson']": {
-                    required: true,
-                },
-            },
-            errorPlacement: function (error, element) {
-                error.appendTo(element.closest("td"));
-            },
-            submitHandler: function (form) {
-                // your ajax code here
-            }
-        });
+        //var isValid = $(form).validate();
+        //console.log(isValid.invalid);
+        if ($(form)[0].checkValidity()) {
+            //form.preventDefault(); //prevent the default action
+        //if (!isValid) {
+        //    e.preventDefault(); //prevent the default action
+        //    return;
+        //}
 
         var PurchaseRequisitionOrders = [];
         var PurchaseRequisitionOrder = {};
         var PurchaseRequisitionOrderDetails = [];
         //PurchaseRequisitionOrder.RequisitionID = $("#RequisitionID").val();
         PurchaseRequisitionOrder.StoreUnitId = $("#StoreUnitId").val();
-
-            if (PurchaseRequisitionOrder.StoreUnitId == "") {
+        if (PurchaseRequisitionOrder.StoreUnitId == "") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Dropdowns Error!',
                     text: 'Please select the Store Unit dropdowns!',
                 })
-                return;
-            }
+            return;
+        }
         PurchaseRequisitionOrder.RequisitionDate = $("#RefDocName").val();
         PurchaseRequisitionOrder.RequisitionDate = $("#RefDocId").val();
         PurchaseRequisitionOrder.RequisitionDate = $("#RefDocDate").val();
@@ -206,6 +187,7 @@
             $('#tblDocumentDetail > tbody  > tr').each(function () {
                 var PurchaseOrderDetail = {};
                 var PurchaseOrderDetail = {};
+                PurchaseOrderDetail.CostCenterId = $(this.querySelector('[name=CostCenterId]')).val();
                 PurchaseOrderDetail.ItemID = $(this.querySelector('[name=ItemID]')).val();
                 PurchaseOrderDetail.CostCenterId = $(this.querySelector('[name=CostCenterId]')).val();
 
@@ -233,6 +215,7 @@
                 PurchaseOrderDetail.RequiredQty = $(this.querySelector('[name=RequiredQty]')).val();
                 PurchaseOrderDetail.RequiredDate = $(this.querySelector('[name=RequiredDate]')).val();
                 PurchaseOrderDetail.GrnID = $(this.querySelector('[name=GrnID]')).val();
+                PurchaseOrderDetail.EstRate = $(this.querySelector('[name=EstRate]')).val();
                 PurchaseOrderDetail.DemandPerson = $(this.querySelector('[name=DemandPerson]')).val();
                 console.log(PurchaseOrderDetail.RequiredQty)
                 if (PurchaseOrderDetail.RequiredQty == ""
@@ -240,6 +223,7 @@
                     || PurchaseOrderDetail.ItemMeasureUnit == ""
                     || PurchaseOrderDetail.RequiredDate == ""
                     || PurchaseOrderDetail.DemandPerson == ""
+                    || PurchaseOrderDetail.EstRate == ""
                 ) {
                     Swal.fire({
                         icon: 'error',
@@ -281,7 +265,7 @@
                    },
                    success: function (response) {
                        //console.log(response);
-                       if (response.result == false) {
+                       if (response.result == "false") {
                            Swal.fire({
                                icon: 'error',
                                title: 'Error Message',
@@ -336,7 +320,29 @@
 
 
 // Master Detail Record Save
-    };
+        }
+        else {
+            flg = false;
+            $("form").addClass("was-validated");
+            $("form :input").each(function () {
+                if (!this.validity.valid) {
+                    console.log(this.name + " is not valid");
+                    console.log(this.validity);
+                }
+
+                // check the reason for invalid
+                if (this.validity.valueMissing) {
+                    console.log(this.name + " is required");
+                } else if (this.validity.typeMismatch) {
+                    console.log(this.name + " must be a valid email address");
+                } else if (this.validity.patternMismatch) {
+                    console.log(this.name + " must match the specified pattern");
+                }
+
+            });
+        }
+
+        };
     function onImport() {
             $.ajax({
                 url: '@Url.Action("SaleQuotationImport", "PurReqOrder")',
@@ -681,8 +687,9 @@
             var lastGrnQty = TableRow.querySelector('[id=lastGrnQty]')
             var lastGrnRate = TableRow.querySelector('[id=lastGrnRate]')
             var lastGrnDate = TableRow.querySelector('[id=lastGrnDate]')
+            var EstRateval = TableRow.querySelector('[id=EstRate]')
 
-            searchtextboxget = TableRow.querySelector('[name=customsearchtext]')
+            searchtextboxget = TableRow.querySelector('[name=searchTextbox]')
             idsearchtxtboxget = ItemID;
             Qtysearchtxtboxget = RequiredQty;
 
@@ -693,7 +700,7 @@
             GrnDateGet = lastGrnDate;
             StockQtyGet = StockQty;
             AvgRateGet = GrnRateGet;
-
+            EstRate = EstRateval;
             if (!$(ItemID).val()) {
                 $(RequiredQty).val('');
                 $(AvgRateGet).val('');
@@ -718,7 +725,7 @@
 
         $.ajax({
             type: "GET",
-            url: '@Url.Action("SaleQuotationPreview", "PurReqOrder")',
+            url: '@Url.Action("PurReqOrderPreview", "PurReqOrder")',
             data: {
                 Id: Id
             },
@@ -750,14 +757,13 @@
                 doc.setFontType('bold');
                 doc.text("Document No: ", rightStartCol1, tempY += lineSpacing.NormalSpacing);
                 doc.setFontType('normal');
-                doc.text(result.invoice.num, rightStartCol2, tempY);
+                doc.text(result.invoice.DocumentNum, rightStartCol2, tempY);
+
                 doc.setFontType('bold');
                 doc.text("Document Date: ", rightStartCol1, tempY += lineSpacing.NormalSpacing);
-                doc.setFontType('bold');
-                doc.text(result.invoice.invDate, rightStartCol2, tempY);
-                doc.text("Validity Date: ", rightStartCol1, tempY += lineSpacing.NormalSpacing);
                 doc.setFontType('normal');
-                doc.text(result.invoice.ValidDate, rightStartCol2, tempY);
+                doc.text(result.invoice.DocumentDate, rightStartCol2, tempY);
+
                 if (result.invoice.RefDocId != "") {
                     doc.setFontType('bold');
                     doc.text("Reference No: ", rightStartCol1, tempY += lineSpacing.NormalSpacing);
@@ -767,7 +773,7 @@
                 doc.setFontType('bold');
                 doc.text("Total: ", rightStartCol1, tempY += lineSpacing.NormalSpacing);
                 doc.setFontType('normal');
-                doc.text(result.DisplayCurrency + result.invoice.InvNetTotalAmnt, rightStartCol2, tempY);
+                doc.text(result.DisplayCurrency + result.invoice.DocumentNetlAmount, rightStartCol2, tempY);
                 //*************************
                 // End - Document Information on Top
                 startY = startY + 50; // setting the top for display line and document heading
@@ -777,7 +783,7 @@
                 doc.line(380, startY + lineSpacing.NormalSpacing, 580, startY + lineSpacing.NormalSpacing);
                 doc.setFontSize(fontSizes.Head2TitleFontSize);
                 doc.setFontType('bold');
-                doc.text("Sale Quotation", startX + 250, startY += lineSpacing.NormalSpacing + 2, null, null, 'center');
+                doc.text("Requisition", startX + 250, startY += lineSpacing.NormalSpacing + 2, null, null, 'center');
                 doc.setFontSize(fontSizes.NormalFontSize);
                 doc.setFontType('bold');
 
@@ -786,86 +792,18 @@
                 var startBilling = startY;
                 //-------Company/ Supplier Info Billing---------------------
                 //startY = startY + 10; // setting for the document display after heading
-                doc.setFontType('bold');
-                doc.text("Supplier Details,", startX, startY += lineSpacing.NormalSpacing);
-                doc.text(result.business.name, startX, startY += lineSpacing.NormalSpacing);
-                doc.setFontSize(fontSizes.NormalFontSize);
-                doc.text("STxReg: ", startX, startY += lineSpacing.NormalSpacing);
-                doc.setFontType('normal');
-                doc.text(result.business.STaxRegNo, 80, startY);
-                doc.setFontType('bold');
-                doc.text("Address: ", startX, startY += lineSpacing.NormalSpacing);
-                doc.setFontType('normal');
-
-                if (result.business.address.length > 30) {
-                    var line1 = result.business.address.substring(1, 30);
-                    var line2 = result.business.address.substring(30);
-                    doc.text(line1, 80, startY);
-                    doc.text(line2, 80, startY += lineSpacing.NormalSpacing);
-                }
-                else {
-                    doc.text(result.business.address, 80, startY);
-                    doc.text("", 80, startY += lineSpacing.NormalSpacing);
-                }
 
                 doc.setFontType('bold');
-                doc.text("City: ", startX, startY += lineSpacing.NormalSpacing);
+                doc.text("Unit: ", startX, startY += lineSpacing.NormalSpacing);
                 doc.setFontType('normal');
-                doc.text(result.business.City, 80, startY);
-                doc.setFontType('bold');
-                doc.text("Phone: ", startX, startY += lineSpacing.NormalSpacing);
-                doc.setFontType('normal');
-                doc.text(result.business.phone, 80, startY);
+                doc.text(result.invoice.UnitName, 100, startY);
 
-                if (result.business.email != "") {
-                    doc.setFontType('bold');
-                    doc.text("Email", startX, startY += lineSpacing.NormalSpacing);
-                    doc.setFontType('normal');
-                    doc.text(result.business.email, 80, startY);
-                }
+                doc.setFontType('bold');
+                doc.text("Purpose: ", startX, startY += lineSpacing.NormalSpacing);
+                doc.setFontType('normal');
+                doc.text(result.invoice.DocumentDesc, 100, startY);
 
                 //-------Customer Info Shipping---------------------
-                var rightcol1 = 340;
-                var rightcol2 = 400;
-                startY = startBilling;
-                doc.setFontType('bold');
-                doc.text("Customer Details,", rightcol1, startY += lineSpacing.NormalSpacing);
-                doc.text(result.contact.name, rightcol1, startY += lineSpacing.NormalSpacing);
-                doc.setFontSize(fontSizes.NormalFontSize);
-                doc.setFontType('bold');
-                doc.text("STxReg: ", rightcol1, startY += lineSpacing.NormalSpacing);
-                doc.setFontType('normal');
-                doc.text(result.contact.STaxRegNo, rightcol2, startY);
-                doc.setFontType('bold');
-                doc.text("Address: ", rightcol1, startY += lineSpacing.NormalSpacing);
-                doc.setFontType('normal');
-                if (result.contact.address.length > 30) {
-                    var line1 = result.contact.address.substring(1, 30);
-                    var line2 = result.contact.address.substring(30);
-                    doc.text(line1, rightcol2, startY);
-                    doc.text(line2, rightcol2, startY += lineSpacing.NormalSpacing);
-                }
-                else {
-                    doc.text(result.contact.address, rightcol2, startY);
-                    doc.text(result.contact.address, rightcol2, startY += lineSpacing.NormalSpacing);
-                }
-                doc.setFontType('bold');
-                doc.text("City: ", rightcol1, startY += lineSpacing.NormalSpacing);
-                doc.setFontType('normal');
-                doc.text(result.contact.City, rightcol2, startY);
-
-                doc.setFontType('bold');
-                doc.text("Phone: ", rightcol1, startY += lineSpacing.NormalSpacing);
-                doc.setFontType('normal');
-                doc.text(result.contact.phone, rightcol2, startY);
-
-                if (result.contact.email != "") {
-                    doc.setFontType('bold');
-                    doc.text("Email: ", rightcol1, startY += lineSpacing.NormalSpacing);
-                    doc.setFontType('normal');
-                    doc.text(result.contact.email, rightcol2, startY);
-                }
-
 
                 var header = function (data) {
                     doc.setFontSize(8);
@@ -888,13 +826,20 @@
                         fillColor: [178, 190, 181]
                     },
                     columnStyles: {
-                        0: { cellWidth: 'auto', halign: 'middle'},
+                        0: { cellWidth: 'auto', halign: 'middle', valign: 'middle'},
                         1: { cellWidth: 'auto', halign: 'left', valign: 'middle'},
-                        2: { cellWidth: 'auto' },
-                        3: { cellWidth: 'auto' },
-                        4: { cellWidth: 'auto' },
-                        5: { cellWidth: 'auto' },
-                        6: { cellWidth: 'auto' },
+                        2: { halign: 'left',valign: 'middle' },
+                        3: { cellWidth: 'auto', valign: 'middle'},
+                        4: { cellWidth: 'auto', valign: 'middle'},
+                        5: { cellWidth: 'auto', valign: 'middle'},
+                        6: { cellWidth: 'auto', valign: 'middle'},
+                        7: { cellWidth: 'auto', halign: 'left', valign: 'middle'},
+                        8: { cellWidth: 'auto', valign: 'middle'},
+                        9: { cellWidth: 'auto', valign: 'middle'},
+                        10: { cellWidth: 'auto', halign: 'left', valign: 'middle'},
+                        11: { cellWidth: 'auto',halign: 'left', valign: 'middle'},
+                        12: { cellWidth: 'auto',halign: 'left', valign: 'middle' },
+                        13: { cellWidth: 'auto',halign: 'left', valign: 'middle' },
                     },
                     headerStyles: {
                         textColor: 0,
@@ -902,7 +847,7 @@
                         halign: 'left',
                         2: { cellWidth: 'auto', hook: 'right' },
                     },
-                    startY: startY += 50
+                    startY: startY += 20
                 };
 
                 console.log(result.invoice);
@@ -945,24 +890,24 @@
                     doc.text(result.DisplayCurrency + result.invoice.SExDutyTotalAmnt + "/-", 150, startY);
                 }
 
-                doc.setFontType('bold');
-                if (result.invoice.SExDutyTotalAmnt == "" && result.invoice.AddSaleTaxTotalAmnt == "" && result.invoice.SaleTotalAmnt == "")
-                    doc.text("Net Invoice Amount : ", startX, startY += lineSpacing.NormalSpacing + 10);
-                else
-                    doc.text("Value Inclusive of Taxes : ", startX, startY += lineSpacing.NormalSpacing + 10);
-                doc.setFontType('normal');
-                doc.text(result.DisplayCurrency + result.invoice.InvNetTotalAmnt + "/-", 170, startY);
 
-                doc.setFontType('bold');
-                doc.text("Amount In Words : ", startX, startY += lineSpacing.NormalSpacing + 10);
-                doc.setFontType('normal');
-                doc.text(result.invoice.TotalAmntInWords, 130, startY);
+                doc.line(40, startY + lineSpacing.NormalSpacing, 140, startY + lineSpacing.NormalSpacing);
+                doc.line(240, startY + lineSpacing.NormalSpacing, 340, startY + lineSpacing.NormalSpacing);
+                doc.line(440, startY + lineSpacing.NormalSpacing, 540, startY + lineSpacing.NormalSpacing);
+
 
 
                 doc.setFontType('bold');
-                doc.text('For ' + result.business.name + ',', rightcol2, startY += lineSpacing.NormalSpacing + 25);
-                doc.line(420, startY + lineSpacing.NormalSpacing + 30, 580, startY + lineSpacing.NormalSpacing + 30);
-                doc.text('Authorised Signatory', rightcol2, startY += lineSpacing.NormalSpacing + 45);
+                //doc.line(80, startY + lineSpacing.NormalSpacing + 30, 580, startY + lineSpacing.NormalSpacing + 30);
+                doc.text("Prepared By", startX + 20, startY += lineSpacing.NormalSpacing + 10);
+
+                //doc.line(150, startY + lineSpacing.NormalSpacing + 30, 580, startY + lineSpacing.NormalSpacing + 30);
+                doc.text("Head of Department", startX += lineSpacing.NormalSpacing + 190, startY);
+
+                //doc.line(420, startY + lineSpacing.NormalSpacing + 30, 580, startY + lineSpacing.NormalSpacing + 30);
+                doc.text("Authorised By", startX += lineSpacing.NormalSpacing + 200, startY);
+                //doc.text('Authorised By', rightcol2, startY += lineSpacing.NormalSpacing + 45);
+
 
                 doc.setFont('helvetica', 'italic')
                 doc.setFontSize(8)

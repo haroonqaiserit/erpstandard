@@ -1132,41 +1132,6 @@
     <Property Name="SaveDate" Type="DateTime" Precision="3" />
     <Property Name="DeletionID" Type="Int32" />
   </EntityType>
-  <EntityType Name="ItemsStock">
-    <Key>
-      <PropertyRef Name="ItemID" />
-    </Key>
-    <Property Name="ItemID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="ItemNo" Type="Int32" Nullable="false" />
-    <Property Name="ItemClass" Type="Int32" Nullable="false" />
-    <Property Name="SPD" Type="Boolean" Nullable="false" />
-    <Property Name="SPDRate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="Dscr" Type="String" MaxLength="75" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Packing" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="Weight" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-    <Property Name="GodownId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="BrandId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="STaxId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="PuchaseAcntId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="PuchaseRAcntId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="CashSaleGlAcnt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="CreditSaleGlAcnt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="OpeningRate" Type="Int32" />
-    <Property Name="OpeningQty" Type="Decimal" Precision="10" Scale="0" />
-    <Property Name="OpeningDate" Type="DateTime" Precision="3" />
-    <Property Name="CompNo" Type="Int32" Nullable="false" />
-    <Property Name="BranchNo" Type="Int32" Nullable="false" />
-    <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="DeletionID" Type="Int32" Nullable="false" />
-    <Property Name="LahTransferId" Type="Int32" Nullable="false" />
-    <Property Name="PartCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="ItemStore" Type="Int32" Nullable="false" />
-    <Property Name="ItemStoreCode" Type="Int32" Nullable="false" />
-    <Property Name="StockMinQty" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="StockMaxQty" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-    <Property Name="Rate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-  </EntityType>
   <EntityType Name="JournalDetail">
     <Key>
       <PropertyRef Name="JournalId" />
@@ -4990,7 +4955,6 @@
     <EntitySet Name="InvoiceTerms" EntityType="Self.InvoiceTerm" />
     <EntitySet Name="InvPayments" EntityType="Self.InvPayment" />
     <EntitySet Name="InvPaymentDetails" EntityType="Self.InvPaymentDetail" />
-    <EntitySet Name="ItemsStocks" EntityType="Self.ItemsStock" />
     <EntitySet Name="JournalDetails" EntityType="Self.JournalDetail" />
     <EntitySet Name="JournalDetail2" EntityType="Self.JournalDetail2" />
     <EntitySet Name="Journals" EntityType="Self.Journal" />
@@ -5254,6 +5218,9 @@
       <Parameter Name="GodownId" Mode="In" Type="String" />
       <Parameter Name="toDate" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="tblUOMItemMappings" EntityType="SairaIndModel.tblUOMItemMapping" />
+    <EntitySet Name="ItemsStocks" EntityType="SairaIndModel.ItemsStock" />
+    <EntitySet Name="tblUOMs" EntityType="SairaIndModel.tblUOM" />
   </EntityContainer>
   <EntityType Name="SalesOrder">
     <Key>
@@ -5608,6 +5575,7 @@
     <Property Name="DeletionID" Type="Int32" />
     <Property Name="RefDocId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="RefDocName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RefDocDate" Type="DateTime" Precision="3" />
   </EntityType>
   <EntityType Name="PurchaseRequisitionOrderDetail">
     <Key>
@@ -5632,16 +5600,17 @@
     <Property Name="SaveDate" Type="DateTime" Precision="3" />
     <Property Name="DeletionID" Type="Int32" />
     <Property Name="GrnID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="GrnBalanceQty" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="GrnBalanceQty" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="GrnItemClearedStatus" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
     <Property Name="GrnDate" Type="DateTime" Precision="3" />
-    <Property Name="LstPurQty" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
-    <Property Name="GrnRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="LstPurQty" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="GrnRate" Type="Decimal" Precision="18" Scale="2" />
     <Property Name="CostCenterId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="CompNo" Type="Int32" Nullable="false" />
     <Property Name="BranchNo" Type="Int32" Nullable="false" />
     <Property Name="DemandPerson" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="ApprovedStatus" Type="Boolean" />
+    <Property Name="EstRate" Type="Decimal" Precision="18" Scale="4" />
   </EntityType>
   <EntityType Name="QdItemTransaction">
     <Key>
@@ -5678,4 +5647,57 @@
     <Property Type="Decimal" Name="StockQty" Nullable="true" Precision="18" Scale="2" />
     <Property Type="Decimal" Name="AvgRate" Nullable="true" Precision="18" Scale="2" />
   </ComplexType>
+  <EntityType Name="tblUOMItemMapping">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ItemId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UOMId" Type="Int32" Nullable="false" />
+    <Property Name="ConversionFactor" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="ItemsStock">
+    <Key>
+      <PropertyRef Name="ItemID" />
+    </Key>
+    <Property Name="ItemID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ItemNo" Type="Int32" Nullable="false" />
+    <Property Name="Dscr" Type="String" Nullable="false" MaxLength="75" FixedLength="false" Unicode="false" />
+    <Property Name="ItemClass" Type="Int32" Nullable="false" />
+    <Property Name="ItemStore" Type="Int32" Nullable="false" />
+    <Property Name="SPD" Type="Boolean" Nullable="false" />
+    <Property Name="SPDRate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="Packing" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Weight" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="GodownId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BrandId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="STaxId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PuchaseAcntId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PuchaseRAcntId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CashSaleGlAcnt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreditSaleGlAcnt" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OpeningRate" Type="Int32" />
+    <Property Name="OpeningQty" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="OpeningDate" Type="DateTime" Precision="3" />
+    <Property Name="CompNo" Type="Int32" Nullable="false" />
+    <Property Name="BranchNo" Type="Int32" Nullable="false" />
+    <Property Name="SaveDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DeletionID" Type="Int32" Nullable="false" />
+    <Property Name="LahTransferId" Type="Int32" Nullable="false" />
+    <Property Name="PartCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ItemStoreCode" Type="Int32" Nullable="false" />
+    <Property Name="StockMinQty" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="StockMaxQty" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Rate" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="UOMId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblUOM">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ConversionFactor" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+  </EntityType>
 </Schema>

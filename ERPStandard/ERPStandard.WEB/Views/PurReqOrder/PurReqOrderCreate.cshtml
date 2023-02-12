@@ -8,15 +8,19 @@
         float: right;
         margin-left: 20px;
     }
+
     .custom-input {
         text-align: right !important;
     }
-   .custom-input:disabled {
-       outline-color: blue;
-   }
+
+        .custom-input:disabled {
+            outline-color: blue;
+        }
+
     .select2 {
         width: 100% !important;
     }
+
     .select2-container .select2-selection--single {
         height: 34px !important;
     }
@@ -25,262 +29,279 @@
         border: 1px solid #ccc !important;
         border-radius: 0px !important;
     }
-
 </style>
 
 <div class="card-header">
     <h4 class="card-title">@ViewBag.SubTitle New</h4>
-
-
 </div>
 <div class="card-content">
     <div class="card-body">
         <form name="RequisitionForm" class="form">
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label for="RefDocName">Document Name</label>
-                        <input type="text" id="RefDocName" required class="form-control" name="RefDocName">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label for="RefDocId">Reference Number</label>
-                        <input type="text" id="RefDocId" required class="form-control" name="RefDocId">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label for="RefDocName">Document Date</label>
-                        <input type="date" id="RefDocDate" required class="form-control" name="RefDocDate">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label for="RequisitionDate">Date</label>
-                        <input type="date" id="RequisitionDate" required class="form-control" name="RequisitionDate">
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="StoreUnitId">Store Unit</label>
-                        <select class="choices form-select  select2" id="StoreUnitId" name="StoreUnitId" required>
-                            <option value='' selected disabled> --Select Store Unit--</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="Remarks">Remarks</label>
-                        <input type="text" id="Remarks" required minlength="3" maxlength="150" class="form-control" placeholder="Remarks" name="Remarks" onkeydown="handleKeyDownRemarks(event)">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <h6 danger>@ViewBag.SubTitle Details</h6>
-                    </div>
-                </div>
-            </div>
-            <!-- Table for Quotation Details -->
-            <div class="row">
-                <div class="col-md-offset-12 table-responsive">
-                    <table id="tblDocumentDetail" class="table dataTable-table table-bordered  form-control">
-                        <thead>
-                            <tr>
-                                <th colspan="8" class="bg-success text-white" style="text-align:center">R E Q U I S I T I O N &nbsp;&nbsp; D E T A I L</th>
-                                <th colspan="3" class="bg-success text-white" style="text-align:center">L A S T &nbsp;&nbsp; G R N</th>
-                                <th class="bg-success text-white text-center align-middle " rowspan="2">Action</th>
-                            </tr>
-
-                            <tr>
-                                <th class="col-md-2 bg-success text-white">Cost-Centre</th>
-                                <th style="display:none">ItemID</th>
-                                <th class="col-md-2 bg-success text-white">Item</th>
-                                <th class="bg-success text-white">Stock</th>
-                                <th class="bg-success text-white">Specs</th>
-                                <th class="bg-success text-white">Qty</th>
-                                <th class="bg-success text-white">UOM</th>
-                                <th class="bg-success text-white">Required Date</th>
-                                <th class="bg-success text-white">Request by</th>
-                                <th style="display:none">GRNID</th>
-                                <th class="bg-primary text-white text-center align-middle ">Qty</th>
-                                <th class="bg-primary text-white text-center align-middle ">Rate</th>
-                                <th class="bg-primary text-white text-center align-middle ">Date</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tblRowBody">
-                            <tr id="tblRow">
-                                <td class="col-md-2">
-                                    <div class="form-group">
-                                        <select class="form-control form-select  select2" id="CostCenterId" name="CostCenterId" required onclick="onClickSelect(this)">
-                                            <option value='' selected disabled> --Select CostCenter--</option>
-                                        </select>
-                                    </div>
-                                </td>
-                                <td style="display:none">
-                                    <div class="form-group">
-                                        <input type="text" id="CustomSearchID" readonly class="form-control" placeholder="Id" name="ItemID">
-                                    </div>
-                                </td>
-                                <td class="col-md-2">
-                                    <div class="form-group">
-                                        <input type="text" autocomplete="off" id="searchTextbox" onkeydown="handleKeyDown(event)" style="width: 100%" class="form-control" placeholder="Search Item">
-                                        <ul id="searchResults" name="searchResults" style="display: none; position: absolute; list-style: none; margin: 0; padding: 0;"></ul>
-                                    </div>
-                                </td>
-                                <td id="stockqty">
-                                    <div class="form-group">
-                                        <input type="text" id="StockQty" disabled minlength="3" maxlength="150" class="form-control  custom-input" placeholder="SQty" name="StockQty">
-                                    </div>
-                                </td>
-                                <td class="col-md-1">
-                                    <div class="form-group">
-                                        <input type="text" id="ItemSpecification" required minlength="3" maxlength="150" class="form-control" placeholder="Specification" name="ItemSpecification" onkeydown="handleKeyDownItemSpec(this, event)">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="number" id="RequiredQty" required minlength="3" maxlength="150" class="form-control" placeholder="Qty" name="RequiredQty" onkeydown="handleKeyDownQty(this,event)">
-                                    </div>
-                                </td>
-                                <td id="ItemMeasureUnit">
-                                    <div class="form-group">
-                                        <input type="text" id="ItemMeasureUnit" minlength="3" maxlength="10" class="form-control" placeholder="UOM" name="ItemMeasureUnit" onkeydown="handleKeyDownUOM(this,event)">
-                                    </div>
-                                </td>
-                                <td class="col-md-1">
-                                    <div class="form-group">
-                                        <input type="date" id="RequiredDate" required class="form-control" name="RequiredDate" onkeydown="handleKeyDownReqDate(this,event)">
-                                    </div>
-                                </td>
-                                <td class="col-md-1">
-                                    <div class="form-group">
-                                        <input type="text" id="DemandPerson" required class="form-control" name="DemandPerson" onkeydown="handleKeyDownReqPerson(this,event)">
-                                    </div>
-                                </td>
-                                <td style="display:none">
-                                    <div class="form-group">
-                                        <input type="text" id="lastGrnId" disabled class="form-control custom-input" placeholder="GrnID" name="GrnID">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" id="lastGrnQty" disabled class="form-control custom-input" placeholder="Qty" name="RequiredQty">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" id="lastGrnRate" disabled class="form-control custom-input" placeholder="Rate" name="RequiredQty">
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        <input type="text" id="lastGrnDate" disabled class="form-control text-center" placeholder="Date" name="RequiredQty">
-                                    </div>
-                                </td>
-                                <td class="col-md-1">
-                                    <button type="button" class="btn-success" id="btnrowadd" onclick="onAddRow()">Add</button>
-                                    <button type="button" class="btn-danger" onclick="onDeleteRow(this)">Delete</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="col-sm-12 d-flex justify-content-end">
-                        <button type="button" id="btnSave" class="btn btn-primary me-1 mb-1" onclick="onSave(this.form, '0')">Save</button>
-                        <button type="button" id="btnSaveAdd" class="btn btn-primary me-1 mb-1" onclick="onSave(this.form, '2')">Save (+)</button>
-                        <button type="button" class="btn btn-light-secondary me-1 mb-1" onclick="onLoad()">Cancel</button>
-                    </div>
-                </div>
-            </div>
-            <!-- This table used to add new row Template -->
-            <table hidden style="display: none">
-                @*<tr style="display: none" id="tblRowforCopy">*@
-
-                <tr style="display: none" id="tblRowforCopy">
-                    <td class="col-md-2">
+            <div class="Master">
+                <div class="row">
+                    <div class="col-md-2">
                         <div class="form-group">
-                            <select class="form-control form-select  select2" id="CostCenterId" name="CostCenterId" required onclick="onClickSelect(this)">
-                                <option value='' selected disabled> --Select CostCenter--</option>
+                            <label for="RefDocName">Document Name</label>
+                            <input type="text" id="RefDocName" class="form-control" name="RefDocName">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="RefDocId">Reference Number</label>
+                            <input type="text" id="RefDocId" class="form-control" name="RefDocId">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="RefDocName">Document Date</label>
+                            <input type="date" id="RefDocDate" class="form-control" name="RefDocDate">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="RequisitionDate">Date</label>
+                            <input type="date" id="RequisitionDate" required class="form-control" name="RequisitionDate">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="StoreUnitId">Store Unit</label>
+                            <select class="choices form-select  select2" id="StoreUnitId" name="StoreUnitId" required>
+                                <option value='' selected disabled> --Select Store Unit--</option>
                             </select>
                         </div>
-                    </td>
-                    <td style="display:none">
+                    </div>
+                    <div class="col-md-6">
                         <div class="form-group">
-                            <input type="text" id="CustomSearchID" readonly class="form-control" placeholder="Id" name="ItemID">
+                            <label for="Remarks">Remarks</label>
+                            <input type="text" id="Remarks" required minlength="3" maxlength="150" class="form-control" placeholder="Remarks" name="Remarks" onkeyup="handleKeyDownRemarks(event)">
                         </div>
-                    </td>
-                    <td class="col-md-2">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
                         <div class="form-group">
-                            <input type="text" autocomplete="off" id="searchTextbox" onkeydown="handleKeyDown(event)" style="width: 100%" class="form-control" placeholder="Search Item">
-                            <ul id="searchResults" name="searchResults" style="display: none; position: absolute; list-style: none; margin: 0; padding: 0;"></ul>
+                            <h6 danger>@ViewBag.SubTitle Details</h6>
                         </div>
-                    </td>
-                    <td id="stockqty">
-                        <div class="form-group">
-                            <input type="text" id="StockQty" disabled minlength="3" maxlength="150" class="form-control  custom-input" placeholder="SQty" name="StockQty">
-                        </div>
-                    </td>
-                    <td class="col-md-1">
-                        <div class="form-group">
-                            <input type="text" id="ItemSpecification" required minlength="3" maxlength="150" class="form-control" placeholder="Specification" name="ItemSpecification" onkeydown="handleKeyDownItemSpec(this, event)">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <input type="number" id="RequiredQty" required minlength="3" maxlength="150" class="form-control" placeholder="Qty" name="RequiredQty" onkeydown="handleKeyDownQty(this,event)">
-                        </div>
-                    </td>
-                    <td id="ItemMeasureUnit">
-                        <div class="form-group">
-                            <input type="text" id="ItemMeasureUnit" minlength="3" maxlength="10" class="form-control" placeholder="UOM" name="ItemMeasureUnit" onkeydown="handleKeyDownUOM(this,event)">
-                        </div>
-                    </td>
-                    <td class="col-md-1">
-                        <div class="form-group">
-                            <input type="date" id="RequiredDate" required class="form-control" name="RequiredDate" onkeydown="handleKeyDownReqDate(this,event)">
-                        </div>
-                    </td>
-                    <td class="col-md-1">
-                        <div class="form-group">
-                            <input type="text" id="DemandPerson" required class="form-control" name="DemandPerson" onkeydown="handleKeyDownReqPerson(this,event)">
-                        </div>
-                    </td>
-                    <td style="display:none">
-                        <div class="form-group">
-                            <input type="text" id="lastGrnId" disabled class="form-control custom-input" placeholder="GrnID" name="GrnID">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <input type="text" id="lastGrnQty" disabled class="form-control custom-input" placeholder="Qty" name="RequiredQty">
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <input type="text" id="lastGrnRate" disabled class="form-control custom-input" placeholder="Rate" name="RequiredQty">
-                        </div>
-                    </td>
-                    <td class="col-md-1">
-                        <div class="form-group">
-                            <input type="text" id="lastGrnDate" disabled class="form-control text-center" placeholder="Date" name="RequiredQty">
-                        </div>
-                    </td>
-                    <td class="col-md-1">
-                        <button type="button" class="btn-success" id="btnrowadd" onclick="onAddRow()">Add</button>
-                        <button type="button" class="btn-danger" onclick="onDeleteRow(this)">Delete</button>
-                    </td>
+                    </div>
+                </div>
+                <!-- Table for Quotation Details -->
+            </div>
+            <div class="Detail">
+                <!-- Table for Detail -->
+                <div class="row">
+                    <div class="col-md-offset-12 table-responsive">
+                        <table id="tblDocumentDetail" class="table dataTable-table table-bordered  form-control">
+                            <thead>
+                                <tr>
+                                    <th colspan="9" class="bg-success text-white" style="text-align:center">R E Q U I S I T I O N &nbsp;&nbsp; D E T A I L</th>
+                                    <th colspan="3" class="bg-success text-white" style="text-align:center">L A S T &nbsp;&nbsp; G R N</th>
+                                    <th class="bg-success text-white text-center align-middle " rowspan="2">Action</th>
+                                </tr>
 
-                </tr>
+                                <tr>
+                                    <th class="col-md-2 bg-success text-white">Cost-Centre</th>
+                                    <th style="display:none">ItemID</th>
+                                    <th class="col-md-2 bg-success text-white">Item</th>
+                                    <th class="bg-success text-white">Stock</th>
+                                    <th class="bg-success text-white">Specs</th>
+                                    <th class="bg-success text-white">Quantity</th>
+                                    <th class="bg-success text-white">UOM</th>
+                                    <th class="bg-success text-white">Required Date</th>
+                                    <th class="bg-success text-white">Est.Rate</th>
+                                    <th class="bg-success text-white">Request by</th>
+                                    <th style="display:none">GRNID</th>
+                                    <th class="bg-primary text-white text-center align-middle ">Qty</th>
+                                    <th class="bg-primary text-white text-center align-middle ">Rate</th>
+                                    <th class="bg-primary text-white text-center align-middle ">&nbsp;Last.Date&nbsp;</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblRowBody">
+                                <tr id="tblRow">
+                                    <td class="col-md-1">
+                                        <div class="form-group">
+                                            <select class="form-control form-select  select2" id="CostCenterId" name="CostCenterId" required>
+                                                <option value='' selected disabled> --Select CostCenter--</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td style="display:none">
+                                        <div class="form-group">
+                                            <input type="text" id="CustomSearchID" readonly class="form-control" placeholder="Id" name="ItemID">
+                                        </div>
+                                    </td>
+                                    <td class="col-md-1">
+                                        <div class="form-group">
+                                            <input type="text" autocomplete="off" id="searchTextbox" name="searchTextbox" onkeyup="handleKeyDown(event)" style="width: 100%" class="form-control" placeholder="Search Item">
+                                            <ul id="searchResults" name="searchResults" style="display: none; position: absolute; list-style: none; margin: 0; padding: 0;"></ul>
+                                        </div>
+                                    </td>
+                                    <td id="stockqty">
+                                        <div class="form-group">
+                                            <input type="text" id="StockQty" disabled minlength="3" maxlength="150" class="form-control  custom-input" placeholder="SQty" name="StockQty">
+                                        </div>
+                                    </td>
+                                    <td class="col-md-1">
+                                        <div class="form-group">
+                                            <input type="text" id="ItemSpecification" required minlength="3" maxlength="150" class="form-control" placeholder="Specification" name="ItemSpecification" onkeyup="handleKeyDownItemSpec(event)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input type="number" id="RequiredQty" required minlength="1" maxlength="9999999" class="form-control  custom-input" placeholder="Qty" name="RequiredQty" onkeyup="handleKeyDownQty(event)">
+                                        </div>
+                                    </td>
+                                    <td class="col-md-1">
+                                        <div class="form-group">
+                                            <select class="form-control form-select" id="ItemMeasureUnit" name="ItemMeasureUnit" required onselect="onSelectUOM(this)">
+                                                <option value='' selected disabled> - UOM -</option>
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-1">
+                                        <div class="form-group">
+                                            <input type="date" id="RequiredDate" required class="form-control" name="RequiredDate" onkeyup="handleKeyDownReqDate(event)">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input type="text" id="EstRate" class="form-control custom-input" placeholder="Rate" onkeyup="handleKeyDownEstRate(event)" name="EstRate">
+                                        </div>
+                                    </td>
+                                    <td class="col-md-1">
+                                        <div class="form-group">
+                                            <input type="text" id="DemandPerson" required class="form-control" name="DemandPerson" onkeyup="handleKeyDownReqPerson(event)">
+                                        </div>
+                                    </td>
+                                    <td style="display:none">
+                                        <div class="form-group">
+                                            <input type="text" id="lastGrnId" disabled class="form-control custom-input" placeholder="GrnID" name="GrnID">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input type="text" id="lastGrnQty" disabled class="form-control" placeholder="Qty" name="lastGrnQty">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input type="text" id="lastGrnRate" disabled class="form-control custom-input" placeholder="Rate" name="lastGrnRate">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input type="text" id="lastGrnDate" disabled class="form-control text-center" placeholder="Date" name="lastGrnDate">
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @*<button type="button" class="btn-success" id="btnrowadd" onclick="onAddRow()">Add</button>
+                                        <button type="button" class="btn-danger" onclick="onDeleteRow(this)">Delete</button>*@
+                                        <div class="btn-group form-group">
+                                            <button type="button" class="btn-outline-success" id="btnrowadd" onclick="onAddRow()" title="Edit"><i class="fa fa-plus"></i></button>
+                                            <button type="button" class="btn-outline-danger" onclick="onDeleteRow(this)" title="Delete"><i class="fa fa-trash"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="col-sm-12 d-flex justify-content-end">
+                            <button type="button" id="btnSave" class="btn btn-primary me-1 mb-1" onclick="onSave(this.form, '0')">Save</button>
+                            <button type="button" id="btnSaveAdd" class="btn btn-primary me-1 mb-1" onclick="onSave(this.form, '2')">Save (+)</button>
+                            <button type="button" class="btn btn-light-secondary me-1 mb-1" onclick="onLoad()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- This table used to add new row Template -->
+                <table hidden style="display: none">
+                    @*<tr style="display: none" id="tblRowforCopy">*@
 
-
-            </table>
-            <!-- Table for Quotation Detail -->
+                    <tr style="display: none" id="tblRowforCopy">
+                        <td class="col-md-1">
+                            <div class="form-group">
+                                <select class="form-control form-select  select2" id="CostCenterId" name="CostCenterId"  onkeypress="handleCCenterKeyPress(event)">
+                                    <option value='' selected disabled> --Select CostCenter--</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td style="display:none">
+                            <div class="form-group">
+                                <input type="text" id="CustomSearchID" readonly class="form-control" placeholder="Id" name="ItemID">
+                            </div>
+                        </td>
+                        <td class="col-md-1">
+                            <div class="form-group">
+                                <input type="text" autocomplete="off" id="searchTextbox" name="searchTextbox" onkeyup="handleKeyDown(event)" style="width: 100%" class="form-control" placeholder="Search Item">
+                                <ul id="searchResults" name="searchResults" style="display: none; position: absolute; list-style: none; margin: 0; padding: 0;"></ul>
+                            </div>
+                        </td>
+                        <td id="stockqty">
+                            <div class="form-group">
+                                <input type="text" id="StockQty" disabled minlength="3" maxlength="150" class="form-control  custom-input" placeholder="SQty" name="StockQty">
+                            </div>
+                        </td>
+                        <td class="col-md-1">
+                            <div class="form-group">
+                                <input type="text" id="ItemSpecification"  minlength="3" maxlength="150" class="form-control" placeholder="Specification" name="ItemSpecification" onkeyup="handleKeyDownItemSpec(event)">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <input type="number" id="Qty"  minlength="1" maxlength="9999999" class="form-control custom-input" placeholder="Qty" name="Qty" onkeyup="handleKeyDownQty(event)">
+                            </div>
+                        </td>
+                        <td class="col-md-1">
+                            <div class="form-group">
+                                <select class="form-control form-select" id="ItemMeasureUnit" name="ItemMeasureUnit"  onselect="onSelectUOM(this)">
+                                    <option value='' selected disabled> - UOM -</option>
+                                </select>
+                            </div>
+                        </td>
+                        <td class="col-md-1">
+                            <div class="form-group">
+                                <input type="date" id="RequiredDate"  class="form-control" name="RequiredDate" onkeyup="handleKeyDownReqDate(event)">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <input type="text" id="EstRate" class="form-control custom-input" placeholder="Rate" onkeyup="handleKeyDownEstRate(event)" name="EstRate">
+                            </div>
+                        </td>
+                        <td class="col-md-1">
+                            <div class="form-group">
+                                <input type="text" id="DemandPerson"  class="form-control" name="DemandPerson" onkeyup="handleKeyDownReqPerson(event)">
+                            </div>
+                        </td>
+                        <td style="display:none">
+                            <div class="form-group">
+                                <input type="text" id="lastGrnId" disabled class="form-control custom-input" placeholder="GrnID" name="GrnID">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <input type="text" id="lastGrnQty" disabled class="form-control custom-input" placeholder="Qty" name="Qty">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <input type="text" id="lastGrnRate" disabled class="form-control custom-input" placeholder="Rate" name="Qty">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                <input type="text" id="lastGrnDate" disabled class="form-control text-center" placeholder="Date" name="Qty">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="btn-group form-group">
+                                <button type="button" class="btn-outline-success" id="btnrowadd" onclick="onAddRow()" title="Edit"><i class="fa fa-plus"></i></button>
+                                <button type="button" class="btn-outline-danger" onclick="onDeleteRow(this)" title="Delete"><i class="fa fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </form>
     </div>
 </div>
@@ -290,7 +311,6 @@
     function handleKeyDown(event) {
         var key = event.key;
         var textbox = event.target;
-        //console.log(key);
         calculateAmt(event);
 
         var TableRow = event.target.closest('tr');
@@ -313,61 +333,77 @@
             }
             results.style.display = "block";
             var itemclass = 2;
-            fetch("/Salequotation/search?query=" + textbox.value + "&itemclass=" + itemclass)
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
-                    results.innerHTML = "";
-                    for (var i = 0; i < data.length && i < 5; i++) {
-                        var item = data[i].Dscr;
-                        var li = document.createElement("li");
-                        li.setAttribute("data-id", data[i].ItemID);
-                        li.innerHTML = item;
-                        li.tabIndex = 0;
-                        li.style.backgroundColor = "white";
-                        li.style.padding = "5px";
-                        li.style.whiteSpace = "wrap"
-                        li.onmouseover = function () {
-                            this.style.backgroundColor = "lightgray";
-                        };
-                        li.onmouseout = function () {
-                            this.style.backgroundColor = "white";
-                        };
-                        li.onclick = function () {
+
+        $.ajax({
+            type: "Get",
+            url: '@Url.Action("search", "Salequotation")',
+            data: {
+                itemclass: itemclass,
+                query: textbox.value
+            },
+            dataType: "json",
+            beforeSend: function () {
+                //$("#CustomSearchLoader").show();
+            },
+            complete: function () {
+                //$("#CustomSearchLoader").hide();
+            },
+            success: function (data) {
+                //console.log(data);
+                results.innerHTML = "";
+                for (var i = 0; i < data.length && i < 5; i++) {
+                    var item = data[i].Dscr;
+                    var li = document.createElement("li");
+                    li.setAttribute("data-id", data[i].ItemID);
+                    li.innerHTML = item;
+                    li.tabIndex = 0;
+                    li.style.backgroundColor = "white";
+                    li.style.padding = "5px";
+                    li.style.whiteSpace = "wrap"
+                    li.onmouseover = function () {
+                        this.style.backgroundColor = "lightgray";
+                    };
+                    li.onmouseout = function () {
+                        this.style.backgroundColor = "white";
+                    };
+                    li.onclick = function () {
+                        textbox.value = this.innerHTML;
+                        ItemID.value = this.getAttribute("data-id");
+                        selectitemval(ItemID.value, textbox.value);
+                        results.style.display = "none";
+                        ItemSpecification.focus();
+                    };
+                    li.onkeydown = function (event) {
+                        if (event.key === "ArrowDown") {
+                            event.preventDefault();
+                            var next = this.nextSibling;
+                            if (next) {
+                                next.focus();
+                            }
+                        } else if (event.key === "ArrowUp") {
+                            event.preventDefault();
+                            var previous = this.previousSibling;
+                            if (previous) {
+                                previous.focus();
+                            }
+                        } else if (event.key === "Enter") {
                             textbox.value = this.innerHTML;
                             ItemID.value = this.getAttribute("data-id");
                             selectitemval(ItemID.value, textbox.value);
                             results.style.display = "none";
                             ItemSpecification.focus();
-                        };
-                        li.onkeydown = function (event) {
-                            if (event.key === "ArrowDown") {
-                                event.preventDefault();
-                                var next = this.nextSibling;
-                                if (next) {
-                                    next.focus();
-                                }
-                            } else if (event.key === "ArrowUp") {
-                                event.preventDefault();
-                                var previous = this.previousSibling;
-                                if (previous) {
-                                    previous.focus();
-                                }
-                            } else if (event.key === "Enter") {
-                                textbox.value = this.innerHTML;
-                                ItemID.value = this.getAttribute("data-id");
-                                selectitemval(ItemID.value, textbox.value);
-                                results.style.display = "none";
-                                ItemSpecification.focus();
-                            }
-                        };
-                        results.appendChild(li);
-                    }
-                });
+                        }
+                    };
+                    results.appendChild(li);
+                }
+            }
+        })
         }
     }
+</script>
 
+
+<script>
     function cleartextboxes() {
         AvgRateGet.val = "";
         Qtysearchtxtboxget.val = "";
@@ -376,6 +412,8 @@
         GrnQtyGet.val = "";
         GrnRateGet.val = "";
         GrnDateGet.val = "";
+        EstRate = "";
+
     }
 
     $(document).on('keydown', function (event) {
@@ -423,12 +461,14 @@
     $(document).ready(function () {
         //setComboSelection();
         var CostCenterId = document.getElementById("CostCenterId");
+        var ItemMeasureUnit = document.getElementById("ItemMeasureUnit");
         $("#StoreUnitId").select2();
         $(CostCenterId).select2();
         invoicetype = @Model.invoiceType;
-        //console.log(invoicetype);
+        console.log(ItemMeasureUnit);
         StoreUnitDropdown();
         CostCenterDropdown(CostCenterId);
+        UOMDropdown(ItemMeasureUnit);
         var now = new Date();
         var day = ("0" + now.getDate()).slice(-2);
         var month = ("0" + (now.getMonth() + 1)).slice(-2);
@@ -442,6 +482,7 @@
     });
     //var nudMax = document.getElementById("max").value;
 
+
     function handleKeyDownRemarks(e) {
         if (e.keyCode === 13) {
             e.preventDefault();
@@ -450,18 +491,13 @@
         }
     }
 
-    function handleKeyDownItemSpec(eval, e) {
+    function handleKeyDownItemSpec(e) {
         if (e.keyCode === 13) {
             e.preventDefault();
-            var val = $(eval).val();
-            if (val === "") return;
-
+            if (e.target.value === "") return;
             var currentRow = e.target.closest("td");
             var nextRow = currentRow.nextElementSibling;
             var nextInput = nextRow.querySelector("#RequiredQty");
-            //console.log("current row " + currentRow);
-            //console.log("reached " + nextInput);
-
             if (nextInput) {
                 nextInput.focus();
             }
@@ -469,68 +505,38 @@
     }
 
 
-    function handleKeyDownQty(eval, e) {
-        //console.log($(eval).val());
+    function handleKeyDownQty(e) {
         calculateAmt(e);
-
         if (e.keyCode === 13) {
-            /*var currentTabIndex = e.target.tabIndex;
-            console.log("currentTabIndex is: "+currentTabIndex);
-            var nextTabIndex = currentTabIndex + 1;
-            var nextInput = document.querySelector("[tabIndex='" + nextTabIndex + "']");
-            if (nextInput) {
-                nextInput.focus();
-            }*/
             e.preventDefault();
-
-            var val = $(eval).val();
-            if (val === "") return;
-
+            if (e.target.value === "") return;
             var currentRow = e.target.closest("td");
             var nextRow = currentRow.nextElementSibling;
             var nextInput = nextRow.querySelector("#ItemMeasureUnit");
-            //console.log("current row " + currentRow);
-            //console.log("reached " + nextInput);
-
             if (nextInput) {
                 nextInput.focus();
             }
         }
     }
-    function handleKeyDownUOM(eval, e) {
-        //console.log($(eval).val());
+    function handleKeyDownUOM(ee) {
         calculateAmt(e);
-
         if (e.keyCode === 13) {
-            /*var currentTabIndex = e.target.tabIndex;
-            console.log("currentTabIndex is: "+currentTabIndex);
-            var nextTabIndex = currentTabIndex + 1;
-            var nextInput = document.querySelector("[tabIndex='" + nextTabIndex + "']");
-            if (nextInput) {
-                nextInput.focus();
-            }*/
             e.preventDefault();
-
-            var val = $(eval).val();
-            if (val === "") return;
-
+            if (e.target.value === "") return;
             var currentRow = e.target.closest("td");
             var nextRow = currentRow.nextElementSibling;
             var nextInput = nextRow.querySelector("#RequiredDate");
-            //console.log("current row " + currentRow);
-            //console.log("reached " + nextInput);
-
             if (nextInput) {
                 nextInput.focus();
             }
         }
     }
-    function handleKeyDownReqDate(eval, e) {
+    function handleKeyDownEstRate(e) {
         calculateAmt(e);
         if (e.keyCode === 13) {
             e.preventDefault();
-            var val = $(eval).val();
-            if (val === "") return;
+            console.log('valis: ' + e.target.value);
+            if (e.target.value === "") return;
             var currentRow = e.target.closest("tr");
             var nextInput = currentRow.querySelector("#DemandPerson");
             if (nextInput) {
@@ -539,46 +545,47 @@
         }
 
     }
-    function handleKeyDownReqPerson(eval, e) {
+    function handleKeyDownReqDate(e) {
         calculateAmt(e);
         if (e.keyCode === 13) {
             e.preventDefault();
-            var val = $(eval).val();
-            if (val === "") return;
+            //var val = $(eval).val();
+            if (e.target.value === "") return;
             var currentRow = e.target.closest("tr");
-            var nextInput = currentRow.querySelector("#btnrowadd");
-            //console.log(currentRow);
-
+            var nextInput = currentRow.querySelector("#EstRate");
             if (nextInput) {
                 nextInput.focus();
             }
         }
 
     }
-
-    function handleKeyDownTax(eval, e) {
+    function handleKeyDownReqPerson(e) {
         calculateAmt(e);
         if (e.keyCode === 13) {
             e.preventDefault();
-            var val = $(eval).val();
-            if (val === "") return;
-            // qty =1, Rate = 2, Amt =3, tax=4, taxamt = 5, AStax = 6, AStaxAmt = 7
-            //SEduty =8, SEdutyAmt =9, NetVal=10, BtnAdd = 11
+            if (e.target.valueval === "") return;
+            var currentRow = e.target.closest("tr");
+            var nextInput = currentRow.querySelector("#btnrowadd");
+            if (nextInput) {
+                nextInput.focus();
+            }
+        }
+    }
+
+    function handleKeyDownTax(e) {
+        calculateAmt(e);
+        if (e.keyCode === 13) {
+            e.preventDefault();
+            if (e.target.value === "") return;
             var currentCell = e.target.closest("td");
             var nextCell = currentCell.nextElementSibling.nextElementSibling;
             var nextInput = nextCell.querySelector("#ASaleTaxRate");
-            //console.log("next input td " + nextInput);
-            //console.log("display style " + nextInput.style.display);
-
             if (!nextInput.className.includes("focus")) {
-                //console.log("next input td with none style " + nextInput);
-
                 nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
                 nextInput = nextCell.querySelector("#SExDutyRate");
                 if (!nextInput.className.includes("focus")) {
                     nextCell = currentCell.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling.nextElementSibling
                     nextInput = nextCell.querySelector("#btnrowadd");
-                    //console.log("next input td " + nextInput);
                 }
             }
             if (nextInput) {
@@ -598,6 +605,7 @@
         //var rowOuterHtml = row[row.length - 1].rowOuterHtml;
         //var newRow = table.insertRow();
         //newRow.innerHTML = rowOuterHtml;
+        
 
         var table = document.getElementById('tblDocumentDetail');
         var row = document.getElementById('tblRowforCopy');
@@ -616,11 +624,13 @@
         var SaleTaxRate = newRow.find('[name=SaleTaxRate]')
         var CostCenterId = newRow.find('[name=CostCenterId]')
         var RequiredDate = newRow.find('[name=RequiredDate]')
+        var ItemMeasureUnit = newRow.find('[name=ItemMeasureUnit]')
 
         $(RequiredDate).val(todaydate);
 
         //setComboSelection();
         CostCenterDropdown(CostCenterId);
+        UOMDropdown(ItemMeasureUnit);
         $(CostCenterId).select2();
         qty_input.attr("required", "");
         rate_input.attr("required", "");
@@ -636,9 +646,10 @@
         $(CostCenterId).focus();
     };
     function onDeleteRow(ev) {
-        var p = ev.parentNode.parentNode;
-        if (p.id != "tblRow") {
-            p.parentNode.removeChild(p);
+        var TableRow = ev.closest('tr');
+
+        if (TableRow.id != "tblRow") {
+            TableRow.remove();
         }
     }
     function StoreUnitDropdown() {
@@ -702,6 +713,32 @@
             }
         });
     };
+    function UOMDropdown(ItemMeasureUnit) {
+        $.ajax({
+            type: "GET",
+            url: '@Url.Action("UOMDropdown", "Combofill")',
+            dataType: "json",
+            beforeSend: function () {
+                $("#CustomSearchLoader").show();
+            },
+            complete: function () {
+                $("#CustomSearchLoader").hide();
+            },
+            success: function (result) {
+                $.each(result, function (i, item) {
+                    var rows;
+                    //console.log(item);
+                    if (item.Id == 1) {
+                        rows = "<option selected value='" + item.Id + "'>" + item.Name + "</option>";
+                    }
+                    else {
+                        rows = "<option value='" + item.Id + "'>" + item.Name + "</option>";
+                    }
+                    $(ItemMeasureUnit).append(rows);
+                });
+            }
+        });
+    };
 
     var searchflg = false;
     var chnode;
@@ -717,6 +754,7 @@
     var GrnQtyGet;
     var GrnRateGet;
     var GrnDateGet;
+    var EstRate;
 
 
 
@@ -777,16 +815,23 @@
                 },
                 success: function (data) {
                     if (!data.ItemStockStatus["StockQty"]) {
-                        $(AvgRateGet).val('0');
-                        $(StockQtyGet).val('0');
+                        $(AvgRateGet).val('');
+                        $(StockQtyGet).val('');
+                        $(GrnIDGet).val('');
+                        $(GrnQtyGet).val('');
+                        $(GrnRateGet).val('');
+                        $(EstRate).val('');
+                        $(GrnDateGet).val('');
                         return;
                     }
-
+                    console.log(itemval);
+                    console.log(data.lsgGRN["lstGRNID"]);
                     $(AvgRateGet).val(data.ItemStockStatus["AvgRate"]);
                     $(StockQtyGet).val(data.ItemStockStatus["StockQty"]);
                     $(GrnIDGet).val(data.lsgGRN["lstGRNID"]);
                     $(GrnQtyGet).val(data.lsgGRN["lstQty"]);
                     $(GrnRateGet).val(data.lsgGRN["lstRate"]);
+                    $(EstRate).val(data.lsgGRN["lstRate"]);
                     $(GrnDateGet).val(data.lsgGRN["lstGrnDateString"]);
                     //console.log(typeof data.lsgGRN["lstGrnDate"]);
                     $(ItemSpecification).focus();

@@ -768,6 +768,12 @@
     <Compile Include="tblSupplierBuyer.cs">
       <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblUOM.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblUOMItemMapping.cs">
+      <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TempAtt.cs">
       <DependentUpon>ERPStandardDBModel.tt</DependentUpon>
     </Compile>

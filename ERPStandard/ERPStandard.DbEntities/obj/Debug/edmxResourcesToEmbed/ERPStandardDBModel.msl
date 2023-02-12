@@ -1172,42 +1172,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="ItemsStocks">
-      <EntityTypeMapping TypeName="SairaIndModel.ItemsStock">
-        <MappingFragment StoreEntitySet="ItemsStock">
-          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
-          <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
-          <ScalarProperty Name="ItemClass" ColumnName="ItemClass" />
-          <ScalarProperty Name="SPD" ColumnName="SPD" />
-          <ScalarProperty Name="SPDRate" ColumnName="SPDRate" />
-          <ScalarProperty Name="Dscr" ColumnName="Dscr" />
-          <ScalarProperty Name="Packing" ColumnName="Packing" />
-          <ScalarProperty Name="Weight" ColumnName="Weight" />
-          <ScalarProperty Name="GodownId" ColumnName="GodownId" />
-          <ScalarProperty Name="BrandId" ColumnName="BrandId" />
-          <ScalarProperty Name="STaxId" ColumnName="STaxId" />
-          <ScalarProperty Name="PuchaseAcntId" ColumnName="PuchaseAcntId" />
-          <ScalarProperty Name="PuchaseRAcntId" ColumnName="PuchaseRAcntId" />
-          <ScalarProperty Name="CashSaleGlAcnt" ColumnName="CashSaleGlAcnt" />
-          <ScalarProperty Name="CreditSaleGlAcnt" ColumnName="CreditSaleGlAcnt" />
-          <ScalarProperty Name="OpeningRate" ColumnName="OpeningRate" />
-          <ScalarProperty Name="OpeningQty" ColumnName="OpeningQty" />
-          <ScalarProperty Name="OpeningDate" ColumnName="OpeningDate" />
-          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
-          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
-          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
-          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
-          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
-          <ScalarProperty Name="PartCode" ColumnName="PartCode" />
-          <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
-          <ScalarProperty Name="ItemStore" ColumnName="ItemStore" />
-          <ScalarProperty Name="ItemStoreCode" ColumnName="ItemStoreCode" />
-          <ScalarProperty Name="StockMinQty" ColumnName="StockMinQty" />
-          <ScalarProperty Name="StockMaxQty" ColumnName="StockMaxQty" />
-          <ScalarProperty Name="Rate" ColumnName="Rate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="JournalDetails">
       <EntityTypeMapping TypeName="SairaIndModel.JournalDetail">
         <MappingFragment StoreEntitySet="JournalDetail">
@@ -4870,6 +4834,7 @@
     <EntitySetMapping Name="PurchaseRequisitionOrders">
       <EntityTypeMapping TypeName="SairaIndModel.PurchaseRequisitionOrder">
         <MappingFragment StoreEntitySet="PurchaseRequisitionOrder">
+          <ScalarProperty Name="RefDocDate" ColumnName="RefDocDate" />
           <ScalarProperty Name="RefDocName" ColumnName="RefDocName" />
           <ScalarProperty Name="RefDocId" ColumnName="RefDocId" />
           <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
@@ -4890,6 +4855,7 @@
     <EntitySetMapping Name="PurchaseRequisitionOrderDetails">
       <EntityTypeMapping TypeName="SairaIndModel.PurchaseRequisitionOrderDetail">
         <MappingFragment StoreEntitySet="PurchaseRequisitionOrderDetail">
+          <ScalarProperty Name="EstRate" ColumnName="EstRate" />
           <ScalarProperty Name="ApprovedStatus" ColumnName="ApprovedStatus" />
           <ScalarProperty Name="DemandPerson" ColumnName="DemandPerson" />
           <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
@@ -4952,5 +4918,61 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="tblUOMItemMappings">
+      <EntityTypeMapping TypeName="SairaIndModel.tblUOMItemMapping">
+        <MappingFragment StoreEntitySet="tblUOMItemMapping">
+          <ScalarProperty Name="ConversionFactor" ColumnName="ConversionFactor" />
+          <ScalarProperty Name="UOMId" ColumnName="UOMId" />
+          <ScalarProperty Name="ItemId" ColumnName="ItemId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ItemsStocks">
+      <EntityTypeMapping TypeName="SairaIndModel.ItemsStock">
+        <MappingFragment StoreEntitySet="ItemsStock">
+          <ScalarProperty Name="UOMId" ColumnName="UOMId" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="StockMaxQty" ColumnName="StockMaxQty" />
+          <ScalarProperty Name="StockMinQty" ColumnName="StockMinQty" />
+          <ScalarProperty Name="ItemStoreCode" ColumnName="ItemStoreCode" />
+          <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+          <ScalarProperty Name="PartCode" ColumnName="PartCode" />
+          <ScalarProperty Name="LahTransferId" ColumnName="LahTransferId" />
+          <ScalarProperty Name="DeletionID" ColumnName="DeletionID" />
+          <ScalarProperty Name="SaveDate" ColumnName="SaveDate" />
+          <ScalarProperty Name="BranchNo" ColumnName="BranchNo" />
+          <ScalarProperty Name="CompNo" ColumnName="CompNo" />
+          <ScalarProperty Name="OpeningDate" ColumnName="OpeningDate" />
+          <ScalarProperty Name="OpeningQty" ColumnName="OpeningQty" />
+          <ScalarProperty Name="OpeningRate" ColumnName="OpeningRate" />
+          <ScalarProperty Name="CreditSaleGlAcnt" ColumnName="CreditSaleGlAcnt" />
+          <ScalarProperty Name="CashSaleGlAcnt" ColumnName="CashSaleGlAcnt" />
+          <ScalarProperty Name="PuchaseRAcntId" ColumnName="PuchaseRAcntId" />
+          <ScalarProperty Name="PuchaseAcntId" ColumnName="PuchaseAcntId" />
+          <ScalarProperty Name="STaxId" ColumnName="STaxId" />
+          <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+          <ScalarProperty Name="GodownId" ColumnName="GodownId" />
+          <ScalarProperty Name="Weight" ColumnName="Weight" />
+          <ScalarProperty Name="Packing" ColumnName="Packing" />
+          <ScalarProperty Name="SPDRate" ColumnName="SPDRate" />
+          <ScalarProperty Name="SPD" ColumnName="SPD" />
+          <ScalarProperty Name="ItemStore" ColumnName="ItemStore" />
+          <ScalarProperty Name="ItemClass" ColumnName="ItemClass" />
+          <ScalarProperty Name="Dscr" ColumnName="Dscr" />
+          <ScalarProperty Name="ItemNo" ColumnName="ItemNo" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUOMs">
+      <EntityTypeMapping TypeName="SairaIndModel.tblUOM">
+        <MappingFragment StoreEntitySet="tblUOM">
+          <ScalarProperty Name="ConversionFactor" ColumnName="ConversionFactor" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

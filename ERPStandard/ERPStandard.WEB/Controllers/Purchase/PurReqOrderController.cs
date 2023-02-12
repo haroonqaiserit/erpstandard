@@ -290,7 +290,7 @@ namespace ERPStandard.WEB.Controllers
         [HttpGet]
         public ActionResult PurReqOrderPreview(string Id)
         {
-            var root = PurReqOrderService.Instance.InvoiceReport<InvoiceDetails_ISTAX_ISExDuty>(Id);
+            var root = PurReqOrderService.Instance.InvoiceReport<PurReqOrderDetails>(Id);
             if (root != null)
             {
                 return Json(root, JsonRequestBehavior.AllowGet);
@@ -338,6 +338,7 @@ namespace ERPStandard.WEB.Controllers
             stockstatus.GodownId = string.IsNullOrEmpty(stockstatus.GodownId) ? "" : stockstatus.GodownId;
             stockstatus.ToDate = string.IsNullOrEmpty(stockstatus.ToDate) ? "" : stockstatus.ToDate;
             itemStock = ItemService.Instance.StockStatus(stockstatus);
+            
             lastGRNViewModel last = new lastGRNViewModel();
             last = PurReqOrderService.Instance.LastGRN(stockstatus.ItemId);
             last.lstGrnDateString = last.lstGrnDate.ToString("dd-MMM-yy");

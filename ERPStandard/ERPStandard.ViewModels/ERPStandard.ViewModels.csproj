@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="General\UOMListViewModel.cs" />
+    <Compile Include="General\tblUOMViewModel.cs" />
     <Compile Include="General\CostCenterListViewModel.cs" />
     <Compile Include="General\CostCenterViewModel.cs" />
     <Compile Include="General\StoreUnitViewModel.cs" />

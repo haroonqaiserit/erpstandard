@@ -52,7 +52,8 @@ namespace ERPStandard.Services
                         DeletionID = o.DeletionID,
                         SaveDate = o.SaveDate,
                         RefDocId = o.RefDocId,
-                        RefDocName = o.RefDocName
+                        RefDocName = o.RefDocName,
+                        RefDocDate = o.RefDocDate.Value
                     }
                 ).Where(x => x.RequisitionID.Contains(dtSearch)
                         || x.Remarks.Contains(dtSearch)
@@ -112,7 +113,8 @@ namespace ERPStandard.Services
                         DeletionID = o.DeletionID,
                         SaveDate = o.SaveDate,
                         RefDocId = o.RefDocId,
-                        RefDocName = o.RefDocName
+                        RefDocName = o.RefDocName,
+                        RefDocDate = o.RefDocDate.Value
                     }
                 ).Where(x => x.RequisitionID.Contains(dtSearch)
                         || x.Remarks.Contains(dtSearch)
@@ -208,11 +210,49 @@ namespace ERPStandard.Services
 
                 invoice.header = invoiceHeaders.invoiceListHeaders();
 
+                var inv_detail = (from m in context.PurchaseRequisitionOrders
+                    where m.CompNo == StandardVariables.CompNo
+                        && m.BranchNo == StandardVariables.BranchNo
+                        && m.RequisitionID == Id
+                    join su in context.tblStoreUnits on m.StoreUnitId equals su.StoreUnitId
+                    where su.CompNo == m.CompNo
+                        && su.BranchNo == m.BranchNo
+                    join d in context.PurchaseRequisitionOrderDetails on m.RequisitionID equals d.RequisitionID
+                    where d.CompNo == m.CompNo
+                        && d.BranchNo == m.BranchNo
+                    join cc in context.CostCenterNews on d.CostCenterId equals cc.CostCenterId
+                    where cc.CompNo == d.CompNo
+                        && cc.BranchNo == d.BranchNo
+                    join itm in context.ItemsStocks on d.ItemId equals itm.ItemID
+                    where itm.CompNo == d.CompNo
+                        && itm.BranchNo == d.BranchNo
+                    join uom in context.tblUOMs on d.ItemMeasureUnit equals uom.ID into uomJoin
+                    from uomJ in uomJoin.DefaultIfEmpty()
+                    select new PurReqOrderDetails
+                    {
+                        serialnum = 1,
+                        GRNID = d.GrnID,
+                        ItemID = itm.ItemID,
+                        Item = itm.Dscr + Environment.NewLine + d.ItemSpecification,
+                        StockQty = d.StockQty,
+                        Qty = d.RequiredQty.Value,
+                        EstRate = d.EstRate,
+                        UOM = uomJ.Name?? d.ItemMeasureUnit,
+                        Amount = Math.Round(d.RequiredQty.Value * d.EstRate??1, 0),
+                        UnitName = su.UnitName,
+                        Required_Date = d.RequiredDate,
+                        DemandPerson = d.DemandPerson,
+                        ApprovedStatus = d.ApprovedStatus==true?"Approved":"Reject"
+                    });
+                var t = inv_detail.ToList();
+                var GRNID = t.Select(x => x.GRNID).FirstOrDefault();
                 var grnRec = (from grn in context.RmGrns
                               join grnd in context.RmGrnDetails on grn.GRNID equals grnd.GRNID
                               where grn.CompNo == grnd.Compno && grn.BranchNo == grnd.Branchno
+                              && grn.GRNID == GRNID
                               && grnd.RepairItem == 0
-                              select new {
+                              select new
+                              {
                                   grn.GRNID,
                                   grn.GrnDate,
                                   grn.StoreUnitId,
@@ -221,51 +261,42 @@ namespace ERPStandard.Services
                                   grnd.Rate,
                                   grn.CompNo,
                                   grn.BranchNo
-                              }).Where(x=> x.CompNo == StandardVariables.CompNo && x.BranchNo == StandardVariables.BranchNo);
+                              }).Where(x => x.CompNo == StandardVariables.CompNo && x.BranchNo == StandardVariables.BranchNo).ToList();
 
-                var inv_detail = (from m in context.PurchaseRequisitionOrders
-                    where m.CompNo == StandardVariables.CompNo
-                        && m.BranchNo == StandardVariables.BranchNo
-                    join d in context.PurchaseRequisitionOrderDetails on m.RequisitionID equals d.RequisitionID
-                    where d.CompNo == m.CompNo
-                        && d.BranchNo == m.BranchNo
-                        && m.RequisitionID == Id
-                    join itm in context.ItemsStocks on d.ItemId equals itm.ItemID
-                    where itm.CompNo == d.CompNo
-                        && itm.BranchNo == d.BranchNo
-                    join su in context.tblStoreUnits on m.StoreUnitId equals su.StoreUnitId
-                    where itm.CompNo == d.CompNo
-                        && itm.BranchNo == d.BranchNo
-                    join e in context.EmployeePersonalInfoes on d.DemandPerson equals e.EmpNo
-                    where itm.CompNo == d.CompNo
-                        && itm.BranchNo == d.BranchNo
-                    join grn in grnRec on d.ItemId equals grn.ItemId into grn_rec
-                    from grn in grn_rec.DefaultIfEmpty()
-                    select new PurReqOrderDetails
+
+                foreach (var item in t)
+                {
+                    var lstGRNItemId = grnRec.Where(x => x.ItemId == item.ItemID).Select(x => x.ItemId).FirstOrDefault();
+                    if (lstGRNItemId != null) { 
+                    item.LDate = grnRec.Where(x => x.ItemId == item.ItemID).Select(x => x.GrnDate).FirstOrDefault().ToString("dd-MMM-yy");
+                    item.LQty = grnRec.Where(x => x.ItemId == item.ItemID).Select(x => x.QtyAcc).FirstOrDefault();
+                    item.LRate = grnRec.Where(x => x.ItemId == item.ItemID).Select(x => x.Rate).FirstOrDefault();
+                    }
+
+                    if (item.Required_Date.Value.Date == inv_Master.master.RequisitionDate.Date)
                     {
-                        serialnum = 1,
-                        Item = itm.Dscr,
-                        LDate = grn.GrnDate==null ?"" : grn.GrnDate.ToString("dd-MMM-yyyy"),
-                        LQty = grn.QtyAcc,
-                        Rate = grn.Rate,
-                        StockQty = d.StockQty,
-                        Qty = d.RequiredQty.Value,
-                        UOM = d.ItemMeasureUnit,
-                        Amount = cal(d.RequiredQty.Value * grn.Rate, 0),
-                        UnitName = su.UnitName,
-                        RequiredDate = d.RequiredDate.Value.ToString("dd-MMM-yyyy"),
-                        DemandPerson = e.Name,
-                        ApprovedStatus = d.ApprovedStatus==true?"Approved":"Reject"
-                    });
-                    var t = inv_detail.ToList();
+                        item.RequiredDate = "Urgent";
+                    }
+                    else
+                    {
+                        item.RequiredDate = item.Required_Date.Value.ToString("dd-MMM-yy");
+                    }
+
+
+                    //item.RequiredDate = item.Required_Date.Value.ToString("dd-MMM-yy");
+                };
+
+
                     var count = 1;
                     foreach (var x in t) x.serialnum = count++;
                     TotalAmnt = (int)Math.Round((double)t.Sum(n => n.Amount), 0);
+                    var ReqQty = (int)Math.Round((double)t.Sum(n => n.Qty), 0);
                     InvNetTotalAmnt = TotalAmnt;
                     PurReqOrderDetails TotalRow = new PurReqOrderDetails
                     {
                         serialnum = null,
                         Item = "TOTAL",
+                        Qty = ReqQty,
                         Amount = TotalAmnt
                     };
                     t.Add(TotalRow);
@@ -273,7 +304,7 @@ namespace ERPStandard.Services
                     invoice.table = invoice_report_details;
             }
             invoice.TotalAmntInWords = StandardVariables.ConvertNumberToWords(InvNetTotalAmnt);
-
+            invoice.DocumentNetlAmount = InvNetTotalAmnt;
             root.invoice = invoice;
             return root;
         }
@@ -344,7 +375,8 @@ namespace ERPStandard.Services
                             DeletionID = o.DeletionID,
                             SaveDate = o.SaveDate,
                             RefDocId = o.RefDocId,
-                            RefDocName = o.RefDocName
+                            RefDocName = o.RefDocName,
+                            RefDocDate = o.RefDocDate.Value
                         })
                 .Where(x => x.RequisitionID==Id
                         && x.CompNo == StandardVariables.CompNo
@@ -364,7 +396,7 @@ namespace ERPStandard.Services
                                   grnd.QtyAcc,
                                   grnd.Rate,
                                   grn.CompNo,
-                                  grn.BranchNo
+                                  grn.BranchNo,
                               }).Where(x => x.CompNo == StandardVariables.CompNo && x.BranchNo == StandardVariables.BranchNo);
 
 
@@ -435,7 +467,8 @@ namespace ERPStandard.Services
                             DeletionID = o.DeletionID,
                             SaveDate = o.SaveDate,
                             RefDocId = o.RefDocId,
-                            RefDocName = o.RefDocName
+                            RefDocName = o.RefDocName,
+                            RefDocDate = o.RefDocDate.Value
                         })
                 .Where(x => x.CompNo == StandardVariables.CompNo
                         && x.BranchNo == StandardVariables.BranchNo
@@ -526,9 +559,9 @@ namespace ERPStandard.Services
             using (var context = new SairaIndEntities())
             {
                 
-                //int compno = (int)context.PurchaseRequisitionOrders.Select(x => x.RequisitionOrderNo).Max() + 1;
-                //PurchaseRequisitionOrder.RequisitionOrderNo = compno;
-                PurchaseRequisitionOrder.RequisitionID = PurchaseRequisitionOrder.RequisitionOrderNo.ToString().PadLeft(4, '0') + '-' + StandardVariables.BLetter; ;
+                int compno = (int)context.PurchaseRequisitionOrders.Select(x => x.RequisitionOrderNo).Max() + 1;
+                PurchaseRequisitionOrder.RequisitionOrderNo = compno;
+                PurchaseRequisitionOrder.RequisitionID = PurchaseRequisitionOrder.RequisitionOrderNo.ToString().PadLeft(4, '0') + '-' + StandardVariables.BLetter;
                 PurchaseRequisitionOrder.DeletionID = 0;
                 PurchaseRequisitionOrder.LahTransferId = 0;
                 PurchaseRequisitionOrder.SaveDate = DateTime.Now;
@@ -537,6 +570,8 @@ namespace ERPStandard.Services
                 //PurchaseRequisitionOrderDetails saledetail = new PurchaseRequisitionOrderDetails();
                 foreach (var item in PurchaseRequisitionOrderDetails)
                 {
+                    item.RequisitionDate = PurchaseRequisitionOrder.RequisitionDate;
+                    item.StoreUnitId = PurchaseRequisitionOrder.StoreUnitId;
                     item.RequisitionID = PurchaseRequisitionOrder.RequisitionID;
                     item.DeletionID = 0;
                     item.LahTransferId = 0;
@@ -615,7 +650,8 @@ namespace ERPStandard.Services
                                       && grn.GrnDate >= StandardVariables.FinYearFrom
                                       && grn.CompNo == StandardVariables.CompNo
                                       && grn.BranchNo == StandardVariables.BranchNo
-                                      select new lastGRNViewModel
+                                      && grnd.ItemId == ItemId
+                              select new lastGRNViewModel
                                       {
                                           lstGRNID= grn.GRNID,
                                           lstQty=grnd.QtyAcc,

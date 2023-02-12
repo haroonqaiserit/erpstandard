@@ -90,7 +90,6 @@ namespace ERPStandard.DbEntities
         public virtual DbSet<InvoiceTerm> InvoiceTerms { get; set; }
         public virtual DbSet<InvPayment> InvPayments { get; set; }
         public virtual DbSet<InvPaymentDetail> InvPaymentDetails { get; set; }
-        public virtual DbSet<ItemsStock> ItemsStocks { get; set; }
         public virtual DbSet<JournalDetail> JournalDetails { get; set; }
         public virtual DbSet<JournalDetail2> JournalDetail2 { get; set; }
         public virtual DbSet<Journal> Journals { get; set; }
@@ -270,6 +269,9 @@ namespace ERPStandard.DbEntities
         public virtual DbSet<PurchaseRequisitionOrder> PurchaseRequisitionOrders { get; set; }
         public virtual DbSet<PurchaseRequisitionOrderDetail> PurchaseRequisitionOrderDetails { get; set; }
         public virtual DbSet<QdItemTransaction> QdItemTransactions { get; set; }
+        public virtual DbSet<tblUOMItemMapping> tblUOMItemMappings { get; set; }
+        public virtual DbSet<ItemsStock> ItemsStocks { get; set; }
+        public virtual DbSet<tblUOM> tblUOMs { get; set; }
     
         public virtual int Sp_CurrentStock(string itemid, string compNo, string branchNo, string storeUnitId, string godownId, string toDate)
         {

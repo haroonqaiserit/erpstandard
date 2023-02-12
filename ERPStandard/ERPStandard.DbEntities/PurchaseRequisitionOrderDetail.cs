@@ -30,15 +30,16 @@ namespace ERPStandard.DbEntities
         public Nullable<System.DateTime> SaveDate { get; set; }
         public Nullable<int> DeletionID { get; set; }
         public string GrnID { get; set; }
-        public decimal GrnBalanceQty { get; set; }
+        public Nullable<decimal> GrnBalanceQty { get; set; }
         public string GrnItemClearedStatus { get; set; }
         public Nullable<System.DateTime> GrnDate { get; set; }
-        public decimal LstPurQty { get; set; }
-        public decimal GrnRate { get; set; }
+        public Nullable<decimal> LstPurQty { get; set; }
+        public Nullable<decimal> GrnRate { get; set; }
         public string CostCenterId { get; set; }
         public int CompNo { get; set; }
         public int BranchNo { get; set; }
         public string DemandPerson { get; set; }
         public Nullable<bool> ApprovedStatus { get; set; }
+        public Nullable<decimal> EstRate { get; set; }
     }
 }

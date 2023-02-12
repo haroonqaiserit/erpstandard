@@ -94,16 +94,21 @@ namespace ERPStandard.ViewModels
     public class PurReqOrderDetails
     {
         public int? serialnum { get; set; }
+        public string ItemID { get; set; }
         public string Item { get; set; }
+        public string GRNID { get; set; }
         public string LDate { get; set; }
+        public DateTime? L_Date { get; set; }
         public decimal? LQty { get; set; }
-        public decimal? Rate { get; set; }
+        public decimal? LRate { get; set; }
+        public decimal? EstRate { get; set; }
         public decimal? StockQty { get; set; }
         public decimal Qty { get; set; }
         public string UOM { get; set; }
         public decimal? Amount { get; set; }
         public string UnitName { get; set; }
         public string RequiredDate { get; set; }
+        public DateTime? Required_Date { get; set; }
         public string DemandPerson { get; set; }
         public string ApprovedStatus { get; set; }
             }

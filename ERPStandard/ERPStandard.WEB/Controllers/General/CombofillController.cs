@@ -78,6 +78,12 @@ namespace ERPStandard.WEB.Controllers
         {
             var ddlData = ItemService.Instance.All_List(Search,0, ItemClass);
             return PartialView("ItemDropdown", ddlData);
+        }        
+        [HttpGet]
+        public ActionResult UOMDropdown()
+        {
+            var ddlData = tblUOMService.Instance.All_List();
+            return Json(ddlData, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult SingleFirstRec(DateTime? docdate,string Search)
